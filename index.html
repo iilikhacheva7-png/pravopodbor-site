@@ -395,6 +395,34 @@
     border-color: var(--accent);
     transform: translateY(-4px);
   }
+  .review-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .review-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .review-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .review-topic {
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-top: 2px;
+  }
   .review-stars {
     color: var(--accent);
     font-size: 14px;
@@ -405,13 +433,7 @@
     font-size: 13.5px;
     color: var(--ink-soft);
     line-height: 1.7;
-    margin-bottom: 16px;
     flex-grow: 1;
-  }
-  .review-author {
-    font-size: 12.5px;
-    font-weight: 700;
-    color: var(--ink);
   }
 
   /* FAQ */
@@ -850,19 +872,37 @@
     <p class="section-sub">Реальные истории людей, которым мы помогли найти специалиста</p>
     <div class="reviews-grid">
       <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:#3B5BA5;">М</div>
+          <div>
+            <div class="review-name">Марина, 36 лет</div>
+            <div class="review-topic">Семейное право · Екатеринбург</div>
+          </div>
+        </div>
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Подавала на алименты и одновременно хотела развестись — было страшно, что замучают звонками из разных фирм. Здесь всё было спокойно: создали общий чат, сразу предложили двух юристов с разным ценником, я задала вопросы обеим, выбрала ту, с кем было комфортнее. В итоге дело уже идёт, а меня всё это время сопровождали и отвечали на любые вопросы.</p>
-        <div class="review-author">Марина, 36 лет — семейное право</div>
       </div>
       <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:#2E7D5E;">И</div>
+          <div>
+            <div class="review-name">Игорь, 41 год</div>
+            <div class="review-topic">Банкротство физлица · Москва</div>
+          </div>
+        </div>
         <div class="review-stars">★★★★★</div>
         <p class="review-text">Долг копился несколько лет, дошло до судов с банками. Боялся, что любой юрист по банкротству будет «впаривать» услуги подороже. Мне подобрали специалиста, объяснили честно весь процесс и реальные сроки, в чате отвечали на любые вопросы, даже когда я просто паниковал. Сейчас процедура идёт, и я наконец перестал бояться звонков от банков.</p>
-        <div class="review-author">Игорь, 41 год — банкротство физлица</div>
       </div>
       <div class="review-card">
+        <div class="review-header">
+          <div class="review-avatar" style="background:#7B3FA0;">С</div>
+          <div>
+            <div class="review-name">Светлана, 29 лет</div>
+            <div class="review-topic">ДТП и страхование · Казань</div>
+          </div>
+        </div>
         <div class="review-stars">★★★★★</div>
         <p class="review-text">После ДТП страховая предложила смешную сумму, а виновник вообще не отвечал. Не знала, к кому обращаться — юристов по ДТП море, и все обещают золотые горы. Тут предложили специалиста именно по моей ситуации, в личном чате объяснили, что реально можно получить, и всё время держали в курсе. В итоге выплату пересчитали в разы больше первоначальной.</p>
-        <div class="review-author">Светлана, 29 лет — ДТП и страхование</div>
       </div>
     </div>
   </section>
@@ -943,14 +983,11 @@
         <a class="contact-link contact-tg" href="https://t.me/ElenaIvonina" target="_blank">Telegram: @ElenaIvonina</a>
       </div>
     </div>
-    <div class="map-wrap">
-      <iframe src="https://yandex.ru/map-widget/v1/?ll=60.597400%2C56.838000&z=14&pt=60.597400,56.838000,pm2rdm" width="100%" height="320" frameborder="0" loading="lazy" allowfullscreen></iframe>
-    </div>
-    <p class="map-caption">Екатеринбург, центр города (район Высоцкого) — работаем очно и онлайн по всей России</p>
+    <p class="map-caption" style="margin-top:24px;">📍 Екатеринбург — работаем очно и онлайн по всей России</p>
   </section>
 
   <footer>
-    © 2026 По рекомендации · Бесплатный подбор юристов и адвокатов · Екатеринбург
+    © 2026 По рекомендации · Бесплатный подбор юристов и адвокатов · Екатеринбург · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink-soft)'">Политика конфиденциальности</a>
     <div class="footer-disclaimer">Instagram — продукт компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории РФ.</div>
   </footer>
 
@@ -964,6 +1001,9 @@
     <p class="modal-sub">Заполните форму — мы бесплатно подберём юриста под вашу ситуацию и свяжемся с вами.</p>
     <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'client')">
       <input type="hidden" name="form_type" value="Заявка клиента">
+      <label>Ваше имя
+        <input type="text" name="Имя" required placeholder="Как вас зовут?">
+      </label>
       <label>Тема вопроса
         <select name="Тема" required>
           <option value="">Выберите тему</option>
@@ -993,6 +1033,12 @@
       <label>Как с вами связаться?
         <input type="text" name="Контакт" required placeholder="Номер телефона, Telegram, email — как удобно">
       </label>
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;">
+        <input type="checkbox" id="consent-client" name="Согласие" required style="margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;">
+        <label for="consent-client" style="font-size:13px;color:var(--ink-soft);line-height:1.5;font-weight:400;">
+          Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--accent);">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных
+        </label>
+      </div>
       <button type="submit" class="btn modal-submit">Отправить заявку</button>
     </form>
     <div class="modal-success" id="success-client">
@@ -1010,9 +1056,18 @@
     <p class="modal-sub">Оставьте номер — мы сами позвоним и поможем подобрать юриста.</p>
     <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'callback')">
       <input type="hidden" name="form_type" value="Запрос обратного звонка">
+      <label>Ваше имя
+        <input type="text" name="Имя" required placeholder="Как вас зовут?">
+      </label>
       <label>Номер телефона
         <input type="tel" name="Телефон" required placeholder="+7 ...">
       </label>
+      <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;">
+        <input type="checkbox" id="consent-callback" name="Согласие" required style="margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;">
+        <label for="consent-callback" style="font-size:13px;color:var(--ink-soft);line-height:1.5;font-weight:400;">
+          Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--accent);">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных
+        </label>
+      </div>
       <button type="submit" class="btn modal-submit">Жду звонка</button>
     </form>
     <div class="modal-success" id="success-callback">
@@ -1020,6 +1075,14 @@
       <p>Спасибо! Мы перезвоним вам в ближайшее время.</p>
     </div>
   </div>
+</div>
+
+<!-- Cookie-баннер -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#16243B;border-top:1px solid rgba(255,255,255,0.08);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="font-size:13px;color:#A9B4C7;margin:0;max-width:700px;">
+    Мы используем файлы cookie для корректной работы сайта и аналитики. Продолжая использовать сайт, вы соглашаетесь с их использованием в соответствии с нашей <a href="/privacy-policy.html" target="_blank" style="color:#C9A24B;">Политикой конфиденциальности</a>.
+  </p>
+  <button id="cookie-accept" style="background:#C9A24B;color:#1A1306;border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;flex-shrink:0;">Принять</button>
 </div>
 
 <script>
@@ -1081,6 +1144,17 @@
       }
     });
   });
+
+  // Cookie-баннер
+  (function() {
+    if (!localStorage.getItem('cookie_consent')) {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      localStorage.setItem('cookie_consent', '1');
+      document.getElementById('cookie-banner').style.display = 'none';
+    });
+  })();
 </script>
 
 </body>
