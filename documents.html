@@ -113,8 +113,17 @@
   .form-success h3 { font-size:20px; font-weight:800; margin-bottom:8px; }
   .form-success p { color:var(--ink-soft); font-size:14px; }
 
-  /* SBP */
-  .sbp-block { background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:20px 24px; margin-top:20px; display:flex; align-items:center; gap:16px; }
+  /* FAQ */
+  .faq { margin-bottom: 48px; }
+  .faq-list { display:flex; flex-direction:column; gap:8px; }
+  .faq-item { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); overflow:hidden; transition:border-color .2s; }
+  .faq-item:hover, .faq-item.open { border-color:var(--accent); }
+  .faq-question { width:100%; background:none; border:none; color:var(--ink); font-size:15px; font-weight:600; padding:18px 20px; text-align:left; cursor:pointer; display:flex; justify-content:space-between; align-items:center; gap:12px; font-family:inherit; }
+  .faq-arrow { color:var(--accent); font-size:18px; transition:transform .3s; flex-shrink:0; }
+  .faq-item.open .faq-arrow { transform:rotate(180deg); }
+  .faq-answer { display:none; padding:0 20px 18px; }
+  .faq-answer p { font-size:14px; color:var(--ink-soft); line-height:1.7; }
+  .faq-answer a { color:var(--accent); } background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:20px 24px; margin-top:20px; display:flex; align-items:center; gap:16px; }
   .sbp-icon { font-size:32px; flex-shrink:0; }
   .sbp-title { font-size:14px; font-weight:700; margin-bottom:4px; }
   .sbp-desc { font-size:13px; color:var(--ink-soft); }
@@ -206,6 +215,7 @@
               <li>Инструкция по самостоятельному заполнению</li>
               <li>Отправка в течение 2 часов</li>
             </ul>
+            <a href="/sample_500.zip" target="_blank" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;border:1px solid rgba(201,162,75,0.3);border-radius:999px;padding:4px 12px;width:fit-content;">📥 Скачать пример</a>
           </label>
           <label class="tariff-card" id="t2" onclick="selectTariff(this, 1000)">
             <input type="radio" name="tariff" value="1000">
@@ -216,6 +226,7 @@
               <li>Проверка на ошибки</li>
               <li>Отправка в течение 4 часов</li>
             </ul>
+            <a href="/sample_1000.zip" target="_blank" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;border:1px solid rgba(201,162,75,0.3);border-radius:999px;padding:4px 12px;width:fit-content;">📥 Скачать пример</a>
           </label>
           <label class="tariff-card" id="t3" onclick="selectTariff(this, 1500)">
             <input type="radio" name="tariff" value="1500">
@@ -225,6 +236,7 @@
               <li>Заполненный документ по вашим данным</li>
               <li>Пошаговая инструкция куда и как подать</li>
             </ul>
+            <a href="/sample_1500.zip" target="_blank" onclick="event.stopPropagation()" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;color:var(--accent);text-decoration:none;border:1px solid rgba(201,162,75,0.3);border-radius:999px;padding:4px 12px;width:fit-content;">📥 Скачать пример</a>
           </label>
         </div>
       </div>
@@ -339,6 +351,67 @@
     </div>
   </section>
 
+  <section class="faq reveal" style="animation-delay:0.4s;">
+    <h2 class="section-title">Частые вопросы</h2>
+    <p class="section-sub">То, что чаще всего спрашивают перед заказом</p>
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Что именно я получу за 500 ₽?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>Архив из двух файлов: готовый шаблон документа с пустыми полями для заполнения + инструкция по заполнению с пояснениями что писать в каждом поле. Вы заполняете документ сами по инструкции. Пример можно скачать прямо в калькуляторе выше — кнопка «📥 Скачать пример» под карточкой тарифа.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Что входит в пакет за 1 000 ₽?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>Архив из двух файлов: документ, заполненный по вашим данным (имя, адрес, суть ситуации) + инструкция по заполнению на случай если нужно что-то скорректировать. Вам остаётся только распечатать и подать. Пример пакета можно скачать в калькуляторе выше.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Что входит в пакет за 1 500 ₽?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>Архив из трёх файлов: заполненный документ по вашим данным + инструкция по заполнению + отдельная инструкция куда и как подать документ (адрес, способы подачи, что взять с собой, сроки рассмотрения). Самый полный пакет — ничего искать не нужно. Пример можно скачать в калькуляторе выше.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Как быстро я получу документ?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>Шаблон (500 ₽) — в течение 2 часов после оплаты. Заполненный документ (1 000 и 1 500 ₽) — в течение 4 часов. Отправляем в мессенджер, который вы укажете в заявке.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Гарантируете ли вы результат?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>Мы гарантируем качество оформления документа — он будет составлен грамотно и по вашим данным. Результат рассмотрения документа государственным органом или судом зависит от множества факторов, которые мы не можем контролировать. Если ситуация сложная — рекомендуем обратиться к профессиональному юристу. Мы подберём его бесплатно на <a href="/">главной странице</a>.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question" onclick="toggleFaq(this)">
+          <span>Как происходит оплата?</span>
+          <span class="faq-arrow">⌄</span>
+        </button>
+        <div class="faq-answer">
+          <p>После того как вы оставите заявку, мы свяжемся с вами и уточним детали. Оплата — через СБП по номеру +7 992 001-19-95 (Т-Банк). После оплаты вы получите чек самозанятого и готовый документ в мессенджер.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <footer>
     © 2026 По рекомендации · <a href="/" style="color:var(--ink-soft);">rekoyur.ru</a> · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;">Политика конфиденциальности</a>
     <div class="footer-disclaimer">Instagram — продукт компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории РФ.</div>
@@ -433,6 +506,20 @@
     document.getElementById('f-doc').value = docVal;
 
     document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function toggleFaq(btn) {
+    const item = btn.parentElement;
+    const answer = item.querySelector('.faq-answer');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => {
+      i.classList.remove('open');
+      i.querySelector('.faq-answer').style.display = 'none';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.display = 'block';
+    }
   }
 
   function handleSubmit(e) {
