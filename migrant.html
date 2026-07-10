@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Помощь мигрантам с документами — По рекомендации</title>
+<style>
+  :root {
+    --bg: #0F1A2B;
+    --bg-card: #16243B;
+    --ink: #F4F1EA;
+    --ink-soft: #A9B4C7;
+    --accent: #C9A24B;
+    --accent-soft: rgba(201,162,75,0.12);
+    --green: #6FBF8B;
+    --border: rgba(255,255,255,0.08);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .reveal { opacity:0; animation: fadeUp 0.7s ease forwards; }
+
+  /* Header */
+  header { display:flex; justify-content:space-between; align-items:center; padding:24px 0; flex-wrap:wrap; gap:16px; }
+  .logo-block { display:flex; flex-direction:column; gap:4px; }
+  .logo { font-size:20px; font-weight:800; letter-spacing:-0.5px; }
+  .logo span { color:var(--accent); }
+  .logo-tagline { font-size:12px; color:var(--ink-soft); padding-left:2px; }
+  .header-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#1A1306; border:none; border-radius:999px; padding:10px 22px; font-weight:700; font-size:14px; cursor:pointer; text-decoration:none; transition:opacity .2s; }
+  .btn:hover { opacity:.85; }
+  .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--border); }
+  .btn-outline:hover { border-color:var(--accent); color:var(--accent); opacity:1; }
+
+  /* Lang switcher */
+  .lang-switch { display:flex; gap:8px; margin-bottom:0; }
+  .lang-btn { background:transparent; border:1.5px solid var(--border); color:var(--ink-soft); border-radius:999px; padding:6px 16px; font-size:13px; font-weight:600; cursor:pointer; transition:all .2s; }
+  .lang-btn.active { background:var(--accent); color:#1A1306; border-color:var(--accent); }
+
+  /* Hero */
+  .hero { padding:48px 0 32px; }
+  .eyebrow { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:14px; }
+  .hero h1 { font-size:36px; font-weight:900; line-height:1.15; margin-bottom:16px; }
+  .hero p { font-size:16px; color:var(--ink-soft); max-width:620px; margin-bottom:28px; }
+  .hero-flags { font-size:28px; margin-bottom:20px; }
+
+  /* Disclaimer */
+  .disclaimer { background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:16px 20px; margin-bottom:40px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+  .disclaimer strong { color:var(--accent); }
+
+  /* Docs grid */
+  .section-title { font-size:24px; font-weight:800; margin-bottom:8px; }
+  .section-sub { color:var(--ink-soft); font-size:14px; margin-bottom:28px; }
+  .docs-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-bottom:48px; }
+  .doc-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; transition:border-color .2s; }
+  .doc-card:hover { border-color:var(--accent); }
+  .doc-icon { font-size:28px; margin-bottom:10px; }
+  .doc-title { font-size:15px; font-weight:700; margin-bottom:6px; }
+  .doc-desc { font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+  /* Tariffs */
+  .tariffs { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; }
+  .tariff-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:24px; display:flex; flex-direction:column; gap:12px; }
+  .tariff-card.featured { border-color:var(--accent); position:relative; }
+  .tariff-badge { position:absolute; top:-12px; left:50%; transform:translateX(-50%); background:var(--accent); color:#1A1306; font-size:11px; font-weight:800; padding:3px 12px; border-radius:999px; white-space:nowrap; }
+  .tariff-name { font-size:14px; font-weight:700; color:var(--accent); }
+  .tariff-price { font-size:28px; font-weight:900; }
+  .tariff-price span { font-size:14px; font-weight:400; color:var(--ink-soft); }
+  .tariff-features { list-style:none; display:flex; flex-direction:column; gap:8px; flex-grow:1; }
+  .tariff-features li { font-size:13px; color:var(--ink-soft); padding-left:18px; position:relative; }
+  .tariff-features li::before { content:'✓'; position:absolute; left:0; color:var(--green); font-weight:700; }
+
+  /* How */
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; }
+  .step-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
+  .step-num { width:32px; height:32px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+  .step-title { font-size:14px; font-weight:700; margin-bottom:6px; }
+  .step-desc { font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+  /* Lawyer referral */
+  .lawyer-block { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; margin-bottom:48px; display:flex; gap:20px; align-items:flex-start; }
+  .lawyer-icon { font-size:36px; flex-shrink:0; }
+  .lawyer-title { font-size:17px; font-weight:800; margin-bottom:8px; }
+  .lawyer-desc { font-size:14px; color:var(--ink-soft); line-height:1.6; }
+
+  /* Form */
+  .form-section { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; margin-bottom:48px; }
+  .form-title { font-size:20px; font-weight:800; margin-bottom:6px; }
+  .form-sub { font-size:14px; color:var(--ink-soft); margin-bottom:24px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-group { display:flex; flex-direction:column; gap:6px; }
+  .form-group.full { grid-column:1/-1; }
+  label { font-size:13px; font-weight:600; color:var(--ink-soft); }
+  input, select, textarea { background:#0F1A2B; border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--ink); font-size:14px; font-family:inherit; width:100%; transition:border-color .2s; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--accent); }
+  select option { background:#16243B; }
+  textarea { resize:vertical; min-height:80px; }
+  .consent-row { display:flex; align-items:flex-start; gap:10px; margin-top:4px; }
+  .consent-row input[type=checkbox] { margin-top:3px; accent-color:var(--accent); width:16px; height:16px; flex-shrink:0; }
+  .consent-row label { font-size:13px; color:var(--ink-soft); line-height:1.5; font-weight:400; }
+  .consent-row a { color:var(--accent); }
+  .form-success { display:none; text-align:center; padding:32px; }
+  .form-success .big { font-size:48px; margin-bottom:12px; }
+  .form-success h3 { font-size:20px; font-weight:800; margin-bottom:8px; }
+  .form-success p { color:var(--ink-soft); font-size:14px; }
+
+  /* SBP block */
+  .sbp-block { background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:20px 24px; margin-top:20px; display:flex; align-items:center; gap:16px; }
+  .sbp-icon { font-size:32px; flex-shrink:0; }
+  .sbp-title { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .sbp-desc { font-size:13px; color:var(--ink-soft); }
+
+  /* Footer */
+  footer { border-top:1px solid var(--border); padding:30px 0; text-align:center; color:var(--ink-soft); font-size:13px; }
+  .footer-disclaimer { margin-top:10px; font-size:11px; opacity:.6; max-width:600px; margin-left:auto; margin-right:auto; }
+
+  /* Mobile */
+  @media (max-width:720px) {
+    .hero h1 { font-size:26px; }
+    .docs-grid, .tariffs, .steps { grid-template-columns:1fr; }
+    .form-grid { grid-template-columns:1fr; }
+    .lawyer-block { flex-direction:column; }
+    header { justify-content:center; text-align:center; }
+    .header-actions { justify-content:center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="reveal" style="animation-delay:0s;">
+    <div class="logo-block">
+      <div class="logo"><span>⚖</span> По рекомендации</div>
+      <div class="logo-tagline">Сервис подбора проверенных юристов</div>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="btn btn-outline">← На главную</a>
+      <button class="btn" onclick="scrollToForm()">Оставить заявку</button>
+    </div>
+  </header>
+
+  <!-- Lang switcher -->
+  <div class="lang-switch reveal" style="animation-delay:0.05s; margin-bottom:32px;">
+    <button class="lang-btn active" onclick="setLang('ru')">🇷🇺 Русский</button>
+    <button class="lang-btn" onclick="setLang('tj')">🇹🇯 Тоҷикӣ</button>
+  </div>
+
+  <!-- RUSSIAN CONTENT -->
+  <div id="content-ru">
+
+    <section class="hero reveal" style="animation-delay:0.1s;">
+      <div class="hero-flags">🇹🇯 🇷🇺</div>
+      <span class="eyebrow">Помощь мигрантам</span>
+      <h1>Поможем оформить документы для жизни и работы в России</h1>
+      <p>Заполним заявления, объясним куда подавать и что делать дальше. Без очередей и переплат посредникам.</p>
+    </section>
+
+    <div class="disclaimer reveal" style="animation-delay:0.15s;">
+      <strong>Важно:</strong> Мы помогаем заполнить и оформить документы — это не юридическая консультация. Мы не несём ответственности за результат рассмотрения документов государственными органами. Если вам нужна юридическая помощь (запрет на въезд, депортация, судебные споры) — мы бесплатно подберём проверенного миграционного юриста.
+    </div>
+
+    <section class="reveal" style="animation-delay:0.2s;">
+      <h2 class="section-title">С какими документами помогаем</h2>
+      <p class="section-sub">Самые востребованные документы для мигрантов из Таджикистана и других стран СНГ</p>
+      <div class="docs-grid">
+        <div class="doc-card">
+          <div class="doc-icon">📋</div>
+          <div class="doc-title">Патент на работу</div>
+          <div class="doc-desc">Заявление и полный пакет документов для получения трудового патента. Проверим комплектность перед подачей.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🏠</div>
+          <div class="doc-title">Миграционный учёт</div>
+          <div class="doc-desc">Уведомление о прибытии, постановка на учёт по месту пребывания. Объясним сроки и куда обращаться.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📄</div>
+          <div class="doc-title">РВП (разрешение на временное проживание)</div>
+          <div class="doc-desc">Заявление и перечень документов для получения РВП. Поможем заполнить без ошибок.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🪪</div>
+          <div class="doc-title">ВНЖ (вид на жительство)</div>
+          <div class="doc-desc">Подготовка заявления и сопроводительных документов для получения вида на жительство.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">💰</div>
+          <div class="doc-title">Декларация 3-НДФЛ</div>
+          <div class="doc-desc">Заполнение декларации для уплаты авансового платежа по патенту или возврата налога.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">✉️</div>
+          <div class="doc-title">Жалобы и обращения</div>
+          <div class="doc-desc">Жалоба работодателю, в трудовую инспекцию, прокуратуру — если не платят зарплату или нарушают права.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🏥</div>
+          <div class="doc-title">Доиммиграционная подготовка</div>
+          <div class="doc-desc">С 2026 года медосмотр и биометрия сдаются в Таджикистане до въезда. Объясним новый порядок и поможем с документами.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📝</div>
+          <div class="doc-title">Другой документ</div>
+          <div class="doc-desc">Напишите нам — разберёмся с любым заявлением, справкой или обращением в госорган.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" style="animation-delay:0.25s;">
+      <h2 class="section-title">Выберите формат помощи</h2>
+      <p class="section-sub">Три варианта — под любую ситуацию</p>
+      <div class="tariffs">
+        <div class="tariff-card">
+          <div class="tariff-name">Шаблон</div>
+          <div class="tariff-price">500 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Готовый шаблон нужного документа</li>
+            <li>Инструкция по самостоятельному заполнению</li>
+            <li>Отправка в течение 2 часов</li>
+          </ul>
+        </div>
+        <div class="tariff-card featured">
+          <div class="tariff-badge">Популярный</div>
+          <div class="tariff-name">Заполненный документ</div>
+          <div class="tariff-price">1 000 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Документ заполнен по вашим данным</li>
+            <li>Проверка на ошибки</li>
+            <li>Отправка в течение 4 часов</li>
+          </ul>
+        </div>
+        <div class="tariff-card">
+          <div class="tariff-name">Документ + инструкция</div>
+          <div class="tariff-price">1 500 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Заполненный документ по вашим данным</li>
+            <li>Пошаговая инструкция куда и как подать</li>
+            <li>Ответы на вопросы после получения</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" style="animation-delay:0.3s;">
+      <h2 class="section-title">Как это работает</h2>
+      <p class="section-sub">Три простых шага</p>
+      <div class="steps">
+        <div class="step-card">
+          <div class="step-num">1</div>
+          <div class="step-title">Оставьте заявку</div>
+          <div class="step-desc">Укажите какой документ нужен, ваши данные и выберите формат помощи.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">2</div>
+          <div class="step-title">Оплата и подготовка</div>
+          <div class="step-desc">После оплаты через СБП мы готовим документ и отправляем вам в мессенджер.</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">3</div>
+          <div class="step-title">Подаёте сами</div>
+          <div class="step-desc">Вы подаёте готовый документ. При тарифе «Документ + инструкция» — объясняем куда идти и что говорить.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="lawyer-block reveal" style="animation-delay:0.35s;">
+      <div class="lawyer-icon">⚖️</div>
+      <div>
+        <div class="lawyer-title">Нужна юридическая помощь?</div>
+        <div class="lawyer-desc">Если у вас запрет на въезд, депортация, судебный спор или другая серьёзная ситуация — это требует профессионального юриста. Мы бесплатно подберём проверенного миграционного специалиста под вашу ситуацию и бюджет. Просто напишите нам.</div>
+      </div>
+    </div>
+
+    <section class="form-section reveal" style="animation-delay:0.4s;" id="form-section">
+      <div class="form-title">Оставить заявку</div>
+      <div class="form-sub">Опишите ситуацию — свяжемся в течение часа</div>
+      <form action="https://formspree.io/f/mnjkedlw" method="POST" onsubmit="return handleSubmit(event)">
+        <input type="hidden" name="form_type" value="Заявка мигранта">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Ваше имя</label>
+            <input type="text" name="Имя" required placeholder="Как вас зовут?">
+          </div>
+          <div class="form-group">
+            <label>Как связаться</label>
+            <input type="text" name="Контакт" required placeholder="Телефон, Telegram или WhatsApp">
+          </div>
+          <div class="form-group">
+            <label>Какой документ нужен</label>
+            <select name="Документ" required>
+              <option value="">Выберите...</option>
+              <option>Патент на работу</option>
+              <option>Миграционный учёт</option>
+              <option>РВП</option>
+              <option>ВНЖ</option>
+              <option>Декларация 3-НДФЛ</option>
+              <option>Жалоба / обращение</option>
+              <option>Доиммиграционная подготовка</option>
+              <option>Другой документ</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Формат помощи</label>
+            <select name="Тариф">
+              <option value="">Выберите...</option>
+              <option>Шаблон — 500 ₽</option>
+              <option>Заполненный документ — 1 000 ₽</option>
+              <option>Документ + инструкция — 1 500 ₽</option>
+              <option>Нужна консультация юриста (бесплатно)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Опишите ситуацию (необязательно)</label>
+            <textarea name="Ситуация" placeholder="Кратко — что происходит и что нужно сделать"></textarea>
+          </div>
+          <div class="form-group full">
+            <div class="consent-row">
+              <input type="checkbox" id="consent" name="Согласие" required>
+              <label for="consent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn" style="margin-top:20px;width:100%;justify-content:center;padding:14px;">Отправить заявку</button>
+      </form>
+      <div class="form-success" id="form-success">
+        <div class="big">✅</div>
+        <h3>Заявка принята!</h3>
+        <p>Свяжемся с вами в течение часа. Пожалуйста, будьте на связи.</p>
+      </div>
+
+      <div class="sbp-block">
+        <div class="sbp-icon">💳</div>
+        <div>
+          <div class="sbp-title">Оплата через СБП</div>
+          <div class="sbp-desc">После подтверждения заявки вышлем реквизиты для оплаты через СБП по номеру +7 992 001-19-95 (Т-Банк). Чек самозанятого выдаётся автоматически.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- TAJIK CONTENT -->
+  <div id="content-tj" style="display:none;">
+
+    <section class="hero reveal" style="animation-delay:0.1s;">
+      <div class="hero-flags">🇹🇯 🇷🇺</div>
+      <span class="eyebrow">Ёрии муҳоҷирон</span>
+      <h1>Ба шумо дар расмӣ кардани ҳуҷҷатҳо барои зиндагӣ ва кор дар Россия кӯмак мекунем</h1>
+      <p>Аризаҳоро пур мекунем, мефаҳмонем ки куҷо бурдан ва баъд чӣ кор кардан. Бе навбат ва бе пардохти зиёд ба воситагарон.</p>
+    </section>
+
+    <div class="disclaimer reveal" style="animation-delay:0.15s;">
+      <strong>Муҳим:</strong> Мо дар пур кардан ва расмӣ кардани ҳуҷҷатҳо ёрӣ медиҳем — ин машваратии ҳуқуқӣ нест. Мо барои натиҷаи баррасии ҳуҷҷатҳо дар мақомоти давлатӣ масъулиятро ба ӯҳда намегирем. Агар ба шумо кӯмаки ҳуқуқӣ лозим бошад (манъи вуруд, депортатсия, баҳсҳои судӣ) — мо ройгон як ҳуқуқшиноси муҳоҷиратии санҷидашударо интихоб мекунем.
+    </div>
+
+    <section class="reveal" style="animation-delay:0.2s;">
+      <h2 class="section-title">Бо кадом ҳуҷҷатҳо кӯмак мекунем</h2>
+      <p class="section-sub">Маъмултарин ҳуҷҷатҳо барои муҳоҷирон аз Тоҷикистон ва дигар кишварҳои ИДМ</p>
+      <div class="docs-grid">
+        <div class="doc-card">
+          <div class="doc-icon">📋</div>
+          <div class="doc-title">Патент барои кор</div>
+          <div class="doc-desc">Ариза ва маҷмӯи пурраи ҳуҷҷатҳо барои гирифтани патенти меҳнатӣ. Пеш аз супоридан комплектнокиро тафтиш мекунем.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🏠</div>
+          <div class="doc-title">Ҳисобгирии муҳоҷиратӣ</div>
+          <div class="doc-desc">Огоҳинома дар бораи расидан, гузоштан ба ҳисоб аз рӯи ҷои зист. Мӯҳлатҳо ва куҷо мурофиа кардан мефаҳмонем.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📄</div>
+          <div class="doc-title">РВП (иҷозати истиқомати муваққатӣ)</div>
+          <div class="doc-desc">Ариза ва рӯйхати ҳуҷҷатҳо барои гирифтани РВП. Бе хато пур кардан кӯмак мекунем.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🪪</div>
+          <div class="doc-title">ВНЖ (иҷозати истиқомат)</div>
+          <div class="doc-desc">Омодасозии ариза ва ҳуҷҷатҳои ҳамроҳ барои гирифтани иҷозати истиқомат.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">💰</div>
+          <div class="doc-title">Декларатсияи 3-НДФЛ</div>
+          <div class="doc-desc">Пур кардани декларатсия барои пардохти пешакии патент ё баргардонидани андоз.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">✉️</div>
+          <div class="doc-title">Шикоятҳо ва мурофиаҳо</div>
+          <div class="doc-desc">Шикоят ба корфармо, ба инспексияи меҳнатӣ, прокуратура — агар музд надиҳанд ё ҳуқуқро вайрон кунанд.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">🏥</div>
+          <div class="doc-title">Омодасозии пеш аз муҳоҷират</div>
+          <div class="doc-desc">Аз соли 2026 муоина ва биометрия дар Тоҷикистон пеш аз вуруд гузаронида мешавад. Тартиби навро мефаҳмонем.</div>
+        </div>
+        <div class="doc-card">
+          <div class="doc-icon">📝</div>
+          <div class="doc-title">Ҳуҷҷати дигар</div>
+          <div class="doc-desc">Ба мо нависед — бо ҳар ариза, маълумотнома ё мурофиа ба мақомоти давлатӣ кӯмак мекунем.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="reveal" style="animation-delay:0.25s;">
+      <h2 class="section-title">Намуди кӯмакро интихоб кунед</h2>
+      <p class="section-sub">Се вариант — барои ҳар вазъият</p>
+      <div class="tariffs">
+        <div class="tariff-card">
+          <div class="tariff-name">Намуна</div>
+          <div class="tariff-price">500 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Намунаи омодаи ҳуҷҷати лозимӣ</li>
+            <li>Дастур оид ба пур кардани мустақил</li>
+            <li>Фиристодан дар давоми 2 соат</li>
+          </ul>
+        </div>
+        <div class="tariff-card featured">
+          <div class="tariff-badge">Маъмул</div>
+          <div class="tariff-name">Ҳуҷҷати пуркардашуда</div>
+          <div class="tariff-price">1 000 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Ҳуҷҷат тибқи маълумоти шумо пур карда мешавад</li>
+            <li>Тафтиш барои хатоҳо</li>
+            <li>Фиристодан дар давоми 4 соат</li>
+          </ul>
+        </div>
+        <div class="tariff-card">
+          <div class="tariff-name">Ҳуҷҷат + дастур</div>
+          <div class="tariff-price">1 500 <span>₽</span></div>
+          <ul class="tariff-features">
+            <li>Ҳуҷҷати пуркардашуда тибқи маълумоти шумо</li>
+            <li>Дастури қадамбақадам куҷо ва чӣ тавр супоридан</li>
+            <li>Ҷавоб ба саволҳо пас аз гирифтан</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <div class="lawyer-block reveal" style="animation-delay:0.35s;">
+      <div class="lawyer-icon">⚖️</div>
+      <div>
+        <div class="lawyer-title">Кӯмаки ҳуқуқӣ лозим аст?</div>
+        <div class="lawyer-desc">Агар шумо манъи вуруд, депортатсия, баҳси судӣ ё вазъияти дигари ҷиддӣ дошта бошед — ин ба мутахассиси касбӣ ниёз дорад. Мо ройгон як ҳуқуқшиноси муҳоҷиратии санҷидашударо интихоб мекунем. Танҳо ба мо нависед.</div>
+      </div>
+    </div>
+
+    <section class="form-section reveal" style="animation-delay:0.4s;">
+      <div class="form-title">Ариза гузоред</div>
+      <div class="form-sub">Вазъиятро тавсиф кунед — дар давоми як соат бо шумо алоқа мегирем</div>
+      <form action="https://formspree.io/f/mnjkedlw" method="POST" onsubmit="return handleSubmit(event)">
+        <input type="hidden" name="form_type" value="Заявка мигранта (тоҷикӣ)">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Номи шумо</label>
+            <input type="text" name="Имя" required placeholder="Номи шумо чист?">
+          </div>
+          <div class="form-group">
+            <label>Чӣ тавр алоқа гирифтан</label>
+            <input type="text" name="Контакт" required placeholder="Телефон, Telegram ё WhatsApp">
+          </div>
+          <div class="form-group">
+            <label>Кадом ҳуҷҷат лозим аст</label>
+            <select name="Документ" required>
+              <option value="">Интихоб кунед...</option>
+              <option>Патент барои кор</option>
+              <option>Ҳисобгирии муҳоҷиратӣ</option>
+              <option>РВП</option>
+              <option>ВНЖ</option>
+              <option>Декларатсияи 3-НДФЛ</option>
+              <option>Шикоят / мурофиа</option>
+              <option>Омодасозии пеш аз муҳоҷират</option>
+              <option>Ҳуҷҷати дигар</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Намуди кӯмак</label>
+            <select name="Тариф">
+              <option value="">Интихоб кунед...</option>
+              <option>Намуна — 500 ₽</option>
+              <option>Ҳуҷҷати пуркардашуда — 1 000 ₽</option>
+              <option>Ҳуҷҷат + дастур — 1 500 ₽</option>
+              <option>Машваратии ҳуқуқшинос лозим аст (ройгон)</option>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label>Вазъиятро тавсиф кунед (ихтиёрӣ)</label>
+            <textarea name="Ситуация" placeholder="Мухтасар — чӣ рӯй медиҳад ва чӣ кор кардан лозим аст"></textarea>
+          </div>
+          <div class="form-group full">
+            <div class="consent-row">
+              <input type="checkbox" id="consent-tj" name="Согласие" required>
+              <label for="consent-tj">Ман бо <a href="/privacy-policy.html" target="_blank">Сиёсати махфият</a> розӣ ҳастам ва розигии коркарди маълумоти шахсиамро медиҳам</label>
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn" style="margin-top:20px;width:100%;justify-content:center;padding:14px;">Ариза фиристодан</button>
+      </form>
+      <div class="form-success" id="form-success-tj" style="display:none;">
+        <div class="big">✅</div>
+        <h3>Ариза қабул шуд!</h3>
+        <p>Дар давоми як соат бо шумо алоқа мегирем. Лутфан дастрас бошед.</p>
+      </div>
+
+      <div class="sbp-block">
+        <div class="sbp-icon">💳</div>
+        <div>
+          <div class="sbp-title">Пардохт тавассути СБП</div>
+          <div class="sbp-desc">Пас аз тасдиқи ариза реквизитҳоро барои пардохт тавассути СБП ба рақами +7 992 001-19-95 (Т-Банк) мефиристем.</div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    © 2026 По рекомендации · <a href="/" style="color:var(--ink-soft);">rekoyur.ru</a> · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;">Политика конфиденциальности</a>
+    <div class="footer-disclaimer">Instagram — продукт компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории РФ.</div>
+  </footer>
+
+</div>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#16243B;border-top:1px solid rgba(255,255,255,0.08);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="font-size:13px;color:#A9B4C7;margin:0;max-width:700px;">Мы используем файлы cookie. <a href="/privacy-policy.html" target="_blank" style="color:#C9A24B;">Политика конфиденциальности</a>.</p>
+  <button id="cookie-accept" style="background:#C9A24B;color:#1A1306;border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;">Принять</button>
+</div>
+
+<script>
+  function setLang(lang) {
+    document.getElementById('content-ru').style.display = lang === 'ru' ? 'block' : 'none';
+    document.getElementById('content-tj').style.display = lang === 'tj' ? 'block' : 'none';
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+  }
+
+  function scrollToForm() {
+    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(r => {
+      if (r.ok) {
+        form.style.display = 'none';
+        const successId = form.closest('#content-tj') ? 'form-success-tj' : 'form-success';
+        document.getElementById(successId).style.display = 'block';
+      } else {
+        alert('Не удалось отправить. Напишите нам в Telegram: @a_likhacheva2026');
+      }
+    }).catch(() => {
+      alert('Не удалось отправить. Напишите нам в Telegram: @a_likhacheva2026');
+    });
+    return false;
+  }
+
+  // Cookie
+  (function() {
+    if (!localStorage.getItem('cookie_consent')) {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      localStorage.setItem('cookie_consent', '1');
+      document.getElementById('cookie-banner').style.display = 'none';
+    });
+  })();
+</script>
+</body>
+</html>
