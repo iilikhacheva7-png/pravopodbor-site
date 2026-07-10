@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Оформить документ — По рекомендации</title>
+<style>
+  :root {
+    --bg: #0F1A2B;
+    --bg-card: #16243B;
+    --ink: #F4F1EA;
+    --ink-soft: #A9B4C7;
+    --accent: #C9A24B;
+    --accent-soft: rgba(201,162,75,0.12);
+    --green: #6FBF8B;
+    --border: rgba(255,255,255,0.08);
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.6; }
+  .container { max-width: 960px; margin: 0 auto; padding: 0 20px; }
+  @keyframes fadeUp { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+  .reveal { opacity:0; animation: fadeUp 0.7s ease forwards; }
+
+  /* Header */
+  header { display:flex; justify-content:space-between; align-items:center; padding:24px 0; flex-wrap:wrap; gap:16px; }
+  .logo-block { display:flex; flex-direction:column; gap:4px; }
+  .logo { font-size:20px; font-weight:800; letter-spacing:-0.5px; }
+  .logo span { color:var(--accent); }
+  .logo-tagline { font-size:12px; color:var(--ink-soft); padding-left:2px; }
+  .header-actions { display:flex; gap:10px; flex-wrap:wrap; }
+  .btn { display:inline-flex; align-items:center; gap:8px; background:var(--accent); color:#1A1306; border:none; border-radius:999px; padding:10px 22px; font-weight:700; font-size:14px; cursor:pointer; text-decoration:none; transition:opacity .2s; }
+  .btn:hover { opacity:.85; }
+  .btn-outline { background:transparent; color:var(--ink); border:1.5px solid var(--border); }
+  .btn-outline:hover { border-color:var(--accent); color:var(--accent); opacity:1; }
+
+  /* Hero */
+  .hero { padding:48px 0 32px; }
+  .eyebrow { font-size:12px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--accent); display:block; margin-bottom:14px; }
+  .hero h1 { font-size:36px; font-weight:900; line-height:1.15; margin-bottom:16px; }
+  .hero p { font-size:16px; color:var(--ink-soft); max-width:620px; margin-bottom:28px; }
+
+  /* Disclaimer */
+  .disclaimer { background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:16px 20px; margin-bottom:40px; font-size:13.5px; color:var(--ink-soft); line-height:1.6; }
+  .disclaimer strong { color:var(--accent); }
+
+  /* Calculator */
+  .calc { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; margin-bottom:48px; }
+  .calc-title { font-size:20px; font-weight:800; margin-bottom:6px; }
+  .calc-sub { font-size:14px; color:var(--ink-soft); margin-bottom:28px; }
+  .calc-steps { display:flex; flex-direction:column; gap:20px; }
+  .calc-step { display:flex; flex-direction:column; gap:8px; }
+  .calc-step label { font-size:13px; font-weight:700; color:var(--ink-soft); display:flex; align-items:center; gap:8px; }
+  .calc-step label span { width:22px; height:22px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-size:12px; font-weight:800; display:inline-flex; align-items:center; justify-content:center; flex-shrink:0; }
+  select.calc-select { background:#0F1A2B; border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--ink); font-size:14px; font-family:inherit; width:100%; transition:border-color .2s; cursor:pointer; }
+  select.calc-select:focus { outline:none; border-color:var(--accent); }
+  select.calc-select option { background:#16243B; }
+  input.calc-input { background:#0F1A2B; border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--ink); font-size:14px; font-family:inherit; width:100%; transition:border-color .2s; }
+  input.calc-input:focus { outline:none; border-color:var(--accent); }
+  input.calc-input::placeholder { color:var(--ink-soft); }
+
+  /* Tariff cards */
+  .tariffs { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; margin-top:24px; }
+  .tariff-card { background:#0F1A2B; border:2px solid var(--border); border-radius:var(--radius); padding:20px; cursor:pointer; transition:border-color .2s; position:relative; }
+  .tariff-card:hover { border-color:rgba(201,162,75,0.4); }
+  .tariff-card.selected { border-color:var(--accent); }
+  .tariff-card input[type=radio] { position:absolute; opacity:0; }
+  .tariff-name { font-size:13px; font-weight:700; color:var(--accent); margin-bottom:8px; }
+  .tariff-price { font-size:26px; font-weight:900; margin-bottom:10px; }
+  .tariff-price span { font-size:14px; font-weight:400; color:var(--ink-soft); }
+  .tariff-features { list-style:none; display:flex; flex-direction:column; gap:6px; }
+  .tariff-features li { font-size:12.5px; color:var(--ink-soft); padding-left:16px; position:relative; line-height:1.4; }
+  .tariff-features li::before { content:'✓'; position:absolute; left:0; color:var(--green); font-weight:700; }
+
+  /* Result */
+  .calc-result { margin-top:24px; padding:20px; background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); display:none; }
+  .calc-result-title { font-size:14px; color:var(--ink-soft); margin-bottom:4px; }
+  .calc-result-price { font-size:32px; font-weight:900; color:var(--accent); margin-bottom:12px; }
+
+  /* How */
+  .section-title { font-size:24px; font-weight:800; margin-bottom:8px; }
+  .section-sub { color:var(--ink-soft); font-size:14px; margin-bottom:28px; }
+  .steps { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:48px; }
+  .step-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:22px; }
+  .step-num { width:32px; height:32px; border-radius:50%; background:var(--accent-soft); color:var(--accent); font-weight:800; font-size:14px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+  .step-title { font-size:14px; font-weight:700; margin-bottom:6px; }
+  .step-desc { font-size:13px; color:var(--ink-soft); line-height:1.5; }
+
+  /* Lawyer referral */
+  .lawyer-block { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:28px; margin-bottom:48px; display:flex; gap:20px; align-items:flex-start; }
+  .lawyer-icon { font-size:36px; flex-shrink:0; }
+  .lawyer-title { font-size:17px; font-weight:800; margin-bottom:8px; }
+  .lawyer-desc { font-size:14px; color:var(--ink-soft); line-height:1.6; }
+
+  /* Form */
+  .form-section { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--radius); padding:32px; margin-bottom:48px; }
+  .form-title { font-size:20px; font-weight:800; margin-bottom:6px; }
+  .form-sub { font-size:14px; color:var(--ink-soft); margin-bottom:24px; }
+  .form-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+  .form-group { display:flex; flex-direction:column; gap:6px; }
+  .form-group.full { grid-column:1/-1; }
+  label { font-size:13px; font-weight:600; color:var(--ink-soft); }
+  input, select, textarea { background:#0F1A2B; border:1.5px solid var(--border); border-radius:10px; padding:12px 14px; color:var(--ink); font-size:14px; font-family:inherit; width:100%; transition:border-color .2s; }
+  input:focus, select:focus, textarea:focus { outline:none; border-color:var(--accent); }
+  select option { background:#16243B; }
+  textarea { resize:vertical; min-height:80px; }
+  .consent-row { display:flex; align-items:flex-start; gap:10px; margin-top:4px; }
+  .consent-row input[type=checkbox] { margin-top:3px; accent-color:var(--accent); width:16px; height:16px; flex-shrink:0; }
+  .consent-row label { font-size:13px; color:var(--ink-soft); line-height:1.5; font-weight:400; }
+  .consent-row a { color:var(--accent); }
+  .form-success { display:none; text-align:center; padding:32px; }
+  .form-success .big { font-size:48px; margin-bottom:12px; }
+  .form-success h3 { font-size:20px; font-weight:800; margin-bottom:8px; }
+  .form-success p { color:var(--ink-soft); font-size:14px; }
+
+  /* SBP */
+  .sbp-block { background:var(--accent-soft); border:1px solid rgba(201,162,75,0.3); border-radius:var(--radius); padding:20px 24px; margin-top:20px; display:flex; align-items:center; gap:16px; }
+  .sbp-icon { font-size:32px; flex-shrink:0; }
+  .sbp-title { font-size:14px; font-weight:700; margin-bottom:4px; }
+  .sbp-desc { font-size:13px; color:var(--ink-soft); }
+
+  /* Footer */
+  footer { border-top:1px solid var(--border); padding:30px 0; text-align:center; color:var(--ink-soft); font-size:13px; }
+  .footer-disclaimer { margin-top:10px; font-size:11px; opacity:.6; max-width:600px; margin-left:auto; margin-right:auto; }
+
+  /* Mobile */
+  @media (max-width:720px) {
+    .hero h1 { font-size:26px; }
+    .tariffs, .steps { grid-template-columns:1fr; }
+    .form-grid { grid-template-columns:1fr; }
+    .lawyer-block { flex-direction:column; }
+    header { justify-content:center; text-align:center; }
+    .header-actions { justify-content:center; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header class="reveal" style="animation-delay:0s;">
+    <div class="logo-block">
+      <div class="logo"><span>⚖</span> По рекомендации</div>
+      <div class="logo-tagline">Сервис подбора проверенных юристов</div>
+    </div>
+    <div class="header-actions">
+      <a href="/" class="btn btn-outline">← На главную</a>
+      <button class="btn" onclick="document.getElementById('form-section').scrollIntoView({behavior:'smooth'})">Оставить заявку</button>
+    </div>
+  </header>
+
+  <section class="hero reveal" style="animation-delay:0.1s;">
+    <span class="eyebrow">Оформление документов</span>
+    <h1>Составим заявление, жалобу или претензию за вас</h1>
+    <p>Выберите инстанцию и тип документа — рассчитаем стоимость и оформим всё правильно.</p>
+  </section>
+
+  <div class="disclaimer reveal" style="animation-delay:0.15s;">
+    <strong>Важно:</strong> Мы помогаем оформить документы — это не юридическая консультация и не представление интересов в суде. Мы не несём ответственности за результат рассмотрения документов. Если нужна профессиональная юридическая помощь — бесплатно подберём специалиста.
+  </div>
+
+  <!-- Калькулятор -->
+  <div class="calc reveal" style="animation-delay:0.2s;">
+    <div class="calc-title">Рассчитать стоимость</div>
+    <div class="calc-sub">Выберите куда подаёте и какой документ нужен</div>
+    <div class="calc-steps">
+
+      <div class="calc-step">
+        <label><span>1</span> Куда подаёте документ</label>
+        <select class="calc-select" id="inst-select" onchange="updateDocs()">
+          <option value="">Выберите инстанцию...</option>
+          <option value="employer">Работодатель / трудовая инспекция</option>
+          <option value="court">Суд</option>
+          <option value="bank">Банк / МФО</option>
+          <option value="insurance">Страховая компания</option>
+          <option value="shop">Магазин / исполнитель услуг</option>
+          <option value="rospotreb">Роспотребнадзор</option>
+          <option value="prosecutor">Прокуратура</option>
+          <option value="zhkh">ЖКХ / управляющая компания</option>
+          <option value="fssp">Приставы (ФССП)</option>
+          <option value="gibdd">ГИБДД</option>
+          <option value="other">Другое</option>
+        </select>
+      </div>
+
+      <div class="calc-step" id="doc-step" style="display:none;">
+        <label><span>2</span> Какой документ нужен</label>
+        <select class="calc-select" id="doc-select" onchange="showTariffs()">
+          <option value="">Выберите документ...</option>
+        </select>
+      </div>
+
+      <div class="calc-step" id="other-step" style="display:none;">
+        <label><span>2</span> Опишите что нужно</label>
+        <input type="text" class="calc-input" id="other-input" placeholder="Например: жалоба в Минздрав на врача" oninput="showTariffs()">
+      </div>
+
+      <div class="calc-step" id="tariff-step" style="display:none;">
+        <label><span>3</span> Выберите формат</label>
+        <div class="tariffs">
+          <label class="tariff-card" id="t1" onclick="selectTariff(this, 500)">
+            <input type="radio" name="tariff" value="500">
+            <div class="tariff-name">Шаблон</div>
+            <div class="tariff-price">500 <span>₽</span></div>
+            <ul class="tariff-features">
+              <li>Готовый шаблон документа</li>
+              <li>Инструкция по самостоятельному заполнению</li>
+              <li>Отправка в течение 2 часов</li>
+            </ul>
+          </label>
+          <label class="tariff-card" id="t2" onclick="selectTariff(this, 1000)">
+            <input type="radio" name="tariff" value="1000">
+            <div class="tariff-name">Заполненный документ</div>
+            <div class="tariff-price">1 000 <span>₽</span></div>
+            <ul class="tariff-features">
+              <li>Документ заполнен по вашим данным</li>
+              <li>Проверка на ошибки</li>
+              <li>Отправка в течение 4 часов</li>
+            </ul>
+          </label>
+          <label class="tariff-card" id="t3" onclick="selectTariff(this, 1500)">
+            <input type="radio" name="tariff" value="1500">
+            <div class="tariff-name">Документ + инструкция</div>
+            <div class="tariff-price">1 500 <span>₽</span></div>
+            <ul class="tariff-features">
+              <li>Заполненный документ по вашим данным</li>
+              <li>Пошаговая инструкция куда и как подать</li>
+            </ul>
+          </label>
+        </div>
+      </div>
+
+      <div class="calc-result" id="calc-result">
+        <div class="calc-result-title">Стоимость оформления</div>
+        <div class="calc-result-price" id="result-price">—</div>
+        <button class="btn" onclick="fillForm()" style="width:100%;justify-content:center;padding:14px;">Оставить заявку на этот документ →</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Как работает -->
+  <section class="reveal" style="animation-delay:0.25s;">
+    <h2 class="section-title">Как это работает</h2>
+    <p class="section-sub">Три простых шага</p>
+    <div class="steps">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-title">Выберите документ</div>
+        <div class="step-desc">Укажите инстанцию, тип документа и формат помощи в калькуляторе выше.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-title">Оплата и подготовка</div>
+        <div class="step-desc">После оплаты через СБП мы готовим документ и отправляем вам в мессенджер.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-title">Подаёте сами</div>
+        <div class="step-desc">Вы подаёте готовый документ. При тарифе «Документ + инструкция» объясняем куда идти.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Юрист -->
+  <div class="lawyer-block reveal" style="animation-delay:0.3s;">
+    <div class="lawyer-icon">⚖️</div>
+    <div>
+      <div class="lawyer-title">Нужна юридическая помощь?</div>
+      <div class="lawyer-desc">Если ваша ситуация требует профессионального юриста — судебное представительство, сложный спор, уголовное дело — мы бесплатно подберём проверенного специалиста под вашу задачу и бюджет. Просто напишите нам на главной странице.</div>
+    </div>
+  </div>
+
+  <!-- Форма -->
+  <section class="form-section reveal" style="animation-delay:0.35s;" id="form-section">
+    <div class="form-title">Оставить заявку</div>
+    <div class="form-sub">Опишите что нужно — свяжемся в течение часа</div>
+    <form action="https://formspree.io/f/xykqqnqp" method="POST" onsubmit="return handleSubmit(event)">
+      <input type="hidden" name="form_type" value="Заявка на документ">
+      <div class="form-grid">
+        <div class="form-group">
+          <label>Ваше имя</label>
+          <input type="text" name="Имя" id="f-name" required placeholder="Как вас зовут?">
+        </div>
+        <div class="form-group">
+          <label>Как связаться</label>
+          <input type="text" name="Контакт" required placeholder="Телефон, Telegram или email">
+        </div>
+        <div class="form-group">
+          <label>Куда подаёте документ</label>
+          <select name="Инстанция" id="f-inst">
+            <option value="">Выберите...</option>
+            <option>Работодатель / трудовая инспекция</option>
+            <option>Суд</option>
+            <option>Банк / МФО</option>
+            <option>Страховая компания</option>
+            <option>Магазин / исполнитель услуг</option>
+            <option>Роспотребнадзор</option>
+            <option>Прокуратура</option>
+            <option>ЖКХ / управляющая компания</option>
+            <option>Приставы (ФССП)</option>
+            <option>ГИБДД</option>
+            <option>Другое</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Формат помощи</label>
+          <select name="Тариф" id="f-tariff">
+            <option value="">Выберите...</option>
+            <option>Шаблон — 500 ₽</option>
+            <option>Заполненный документ — 1 000 ₽</option>
+            <option>Документ + инструкция — 1 500 ₽</option>
+          </select>
+        </div>
+        <div class="form-group full">
+          <label>Какой документ нужен и кратко ситуация</label>
+          <textarea name="Ситуация" id="f-doc" placeholder="Например: претензия в магазин за некачественный товар, купил телефон 2 недели назад, перестал работать"></textarea>
+        </div>
+        <div class="form-group full">
+          <div class="consent-row">
+            <input type="checkbox" id="consent" name="Согласие" required>
+            <label for="consent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных</label>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="btn" style="margin-top:20px;width:100%;justify-content:center;padding:14px;">Отправить заявку</button>
+    </form>
+    <div class="form-success" id="form-success">
+      <div class="big">✅</div>
+      <h3>Заявка принята!</h3>
+      <p>Свяжемся с вами в течение часа. Пожалуйста, будьте на связи.</p>
+    </div>
+
+    <div class="sbp-block">
+      <div class="sbp-icon">💳</div>
+      <div>
+        <div class="sbp-title">Оплата через СБП</div>
+        <div class="sbp-desc">После подтверждения заявки вышлем реквизиты для оплаты через СБП по номеру +7 992 001-19-95 (Т-Банк). Чек самозанятого выдаётся автоматически.</div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 По рекомендации · <a href="/" style="color:var(--ink-soft);">rekoyur.ru</a> · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;">Политика конфиденциальности</a>
+    <div class="footer-disclaimer">Instagram — продукт компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории РФ.</div>
+  </footer>
+
+</div>
+
+<!-- Cookie banner -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#16243B;border-top:1px solid rgba(255,255,255,0.08);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="font-size:13px;color:#A9B4C7;margin:0;max-width:700px;">Мы используем файлы cookie. <a href="/privacy-policy.html" target="_blank" style="color:#C9A24B;">Политика конфиденциальности</a>.</p>
+  <button id="cookie-accept" style="background:#C9A24B;color:#1A1306;border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;">Принять</button>
+</div>
+
+<script>
+  const docs = {
+    employer: ['Жалоба на невыплату зарплаты','Жалоба на незаконное увольнение','Претензия работодателю','Заявление в трудовую инспекцию'],
+    court: ['Исковое заявление','Заявление о выдаче судебного приказа','Ходатайство','Апелляционная жалоба'],
+    bank: ['Претензия в банк','Заявление на реструктуризацию долга','Жалоба в ЦБ РФ'],
+    insurance: ['Претензия в страховую компанию','Жалоба в РСА (по ОСАГО)'],
+    shop: ['Претензия о возврате товара','Претензия о некачественной услуге','Требование о расторжении договора'],
+    rospotreb: ['Жалоба на магазин / торговую точку','Жалоба на некачественную услугу'],
+    prosecutor: ['Жалоба в прокуратуру'],
+    zhkh: ['Претензия в управляющую компанию','Жалоба в жилищную инспекцию'],
+    fssp: ['Жалоба на действия пристава','Заявление об ознакомлении с материалами дела'],
+    gibdd: ['Жалоба на постановление ГИБДД','Ходатайство о восстановлении срока обжалования'],
+  };
+
+  function updateDocs() {
+    const inst = document.getElementById('inst-select').value;
+    const docStep = document.getElementById('doc-step');
+    const otherStep = document.getElementById('other-step');
+    const tariffStep = document.getElementById('tariff-step');
+    const result = document.getElementById('calc-result');
+    tariffStep.style.display = 'none';
+    result.style.display = 'none';
+    document.querySelectorAll('.tariff-card').forEach(c => c.classList.remove('selected'));
+
+    if (!inst) { docStep.style.display = 'none'; otherStep.style.display = 'none'; return; }
+
+    if (inst === 'other') {
+      docStep.style.display = 'none';
+      otherStep.style.display = 'flex';
+    } else {
+      otherStep.style.display = 'none';
+      const sel = document.getElementById('doc-select');
+      sel.innerHTML = '<option value="">Выберите документ...</option>';
+      (docs[inst] || []).forEach(d => {
+        const opt = document.createElement('option');
+        opt.value = d; opt.textContent = d;
+        sel.appendChild(opt);
+      });
+      docStep.style.display = 'flex';
+    }
+  }
+
+  function showTariffs() {
+    const inst = document.getElementById('inst-select').value;
+    const docVal = inst === 'other'
+      ? document.getElementById('other-input').value.trim()
+      : document.getElementById('doc-select').value;
+    const tariffStep = document.getElementById('tariff-step');
+    if (docVal) {
+      tariffStep.style.display = 'flex';
+    } else {
+      tariffStep.style.display = 'none';
+      document.getElementById('calc-result').style.display = 'none';
+    }
+  }
+
+  function selectTariff(card, price) {
+    document.querySelectorAll('.tariff-card').forEach(c => c.classList.remove('selected'));
+    card.classList.add('selected');
+    const result = document.getElementById('calc-result');
+    document.getElementById('result-price').textContent = price.toLocaleString('ru-RU') + ' ₽';
+    result.style.display = 'block';
+    // Предзаполняем тариф в форме
+    const tariffMap = {500:'Шаблон — 500 ₽', 1000:'Заполненный документ — 1 000 ₽', 1500:'Документ + инструкция — 1 500 ₽'};
+    const sel = document.getElementById('f-tariff');
+    for (let opt of sel.options) { if (opt.value === tariffMap[price]) { sel.value = tariffMap[price]; break; } }
+    for (let opt of sel.options) { if (opt.text === tariffMap[price]) { sel.value = opt.value; break; } }
+  }
+
+  function fillForm() {
+    const inst = document.getElementById('inst-select');
+    const instText = inst.options[inst.selectedIndex]?.text || '';
+    const fInst = document.getElementById('f-inst');
+    for (let opt of fInst.options) { if (opt.text === instText) { fInst.value = opt.value; break; } }
+
+    const docVal = inst.value === 'other'
+      ? document.getElementById('other-input').value
+      : document.getElementById('doc-select').value;
+    document.getElementById('f-doc').value = docVal;
+
+    document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(r => {
+      if (r.ok) {
+        form.style.display = 'none';
+        document.getElementById('form-success').style.display = 'block';
+      } else {
+        alert('Не удалось отправить. Напишите нам в Telegram: @a_likhacheva2026');
+      }
+    }).catch(() => {
+      alert('Не удалось отправить. Напишите нам в Telegram: @a_likhacheva2026');
+    });
+    return false;
+  }
+
+  // Cookie
+  (function() {
+    if (!localStorage.getItem('cookie_consent')) {
+      document.getElementById('cookie-banner').style.display = 'flex';
+    }
+    document.getElementById('cookie-accept').addEventListener('click', function() {
+      localStorage.setItem('cookie_consent', '1');
+      document.getElementById('cookie-banner').style.display = 'none';
+    });
+  })();
+</script>
+</body>
+</html>
