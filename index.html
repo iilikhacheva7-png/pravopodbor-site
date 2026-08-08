@@ -1048,11 +1048,11 @@
       </div>
 
     </div>
-    <p class="map-caption" style="margin-top:24px;">📍 Екатеринбург — работаем очно и онлайн по всей России</p>
+    <p class="map-caption" style="margin-top:24px;">📍 Екатеринбург — работаю онлайн по всей России</p>
   </section>
 
   <footer>
-    © 2026 По рекомендации · Бесплатный подбор юристов и адвокатов · Екатеринбург · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink-soft)'">Политика конфиденциальности</a>
+    © 2026 По рекомендации · Документы и подбор юристов · Екатеринбург · <a href="/privacy-policy.html" style="color:var(--ink-soft);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--ink-soft)'">Политика конфиденциальности</a>
     <div class="footer-disclaimer">Instagram — продукт компании Meta Platforms Inc., деятельность которой признана экстремистской и запрещена на территории РФ.</div>
   </footer>
 
@@ -1062,28 +1062,24 @@
 <div class="modal-overlay" id="modal-client">
   <div class="modal">
     <button class="modal-close" onclick="closeModal('client')">&times;</button>
-    <h3>Оставить заявку</h3>
-    <p class="modal-sub">Заполните форму — мы бесплатно подберём юриста под вашу ситуацию и свяжемся с вами.</p>
+    <h3>Получить помощь</h3>
+    <p class="modal-sub">Опишите ситуацию — помогу с документом или подберу юриста бесплатно.</p>
     <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'client')">
       <input type="hidden" name="form_type" value="Заявка клиента">
       <label>Ваше имя
         <input type="text" name="Имя" required placeholder="Как вас зовут?">
       </label>
-      <label>Тема вопроса
-        <select name="Тема" required>
-          <option value="">Выберите тему</option>
-          <option>Семейное право</option>
-          <option>Банкротство и долги</option>
-          <option>Уголовные дела</option>
-          <option>Трудовые споры</option>
-          <option>Наследство и имущество</option>
-          <option>Бизнес и компании</option>
-          <option>Арбитраж и взыскания</option>
-          <option>ДТП и страхование</option>
-          <option>Медицина и услуги</option>
-          <option>Миграция и документы</option>
-          <option>Госорганы и жалобы</option>
-          <option>Другой вопрос</option>
+      <label>Что нужно сделать?
+        <select name="Тип помощи" required>
+          <option value="">Выберите вариант</option>
+          <option>Составить заявление или жалобу</option>
+          <option>Написать претензию</option>
+          <option>Подготовить исковое заявление</option>
+          <option>Семейные документы (алименты, развод, опека)</option>
+          <option>Жилищный спор (УК, соседи, застройщик)</option>
+          <option>Трудовой спор</option>
+          <option>Другой документ</option>
+          <option>Подобрать юриста</option>
         </select>
       </label>
       <label>Опишите вашу ситуацию
@@ -1091,9 +1087,6 @@
       </label>
       <label>Город
         <input type="text" name="Город" required placeholder="Ваш город">
-      </label>
-      <label>Бюджет
-        <input type="text" name="Бюджет" placeholder="Например: 50 000 или «не знаю»">
       </label>
       <label>Как с вами связаться?
         <input type="text" name="Контакт" required placeholder="Номер телефона, Telegram, email — как удобно">
@@ -1108,7 +1101,7 @@
     </form>
     <div class="modal-success" id="success-client">
       <div class="modal-success-icon">✅</div>
-      <p>Спасибо! Ваша заявка принята.<br>Мы подберём подходящего юриста и свяжемся с вами в ближайшее время.<br>Это бесплатно и без обязательств.</p>
+      <p>Спасибо! Заявка принята.<br>Я свяжусь с вами в ближайшее время и помогу разобраться в ситуации.</p>
     </div>
   </div>
 </div>
@@ -1118,7 +1111,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('callback')">&times;</button>
     <h3>Перезвоните мне</h3>
-    <p class="modal-sub">Оставьте номер — мы сами позвоним и поможем подобрать юриста.</p>
+    <p class="modal-sub">Оставьте номер — позвоню сама и разберёмся в вашей ситуации.</p>
     <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'callback')">
       <input type="hidden" name="form_type" value="Запрос обратного звонка">
       <label>Ваше имя
@@ -1137,7 +1130,7 @@
     </form>
     <div class="modal-success" id="success-callback">
       <div class="modal-success-icon">✅</div>
-      <p>Спасибо! Мы перезвоним вам в ближайшее время.</p>
+      <p>Спасибо! Перезвоню вам в ближайшее время.</p>
     </div>
   </div>
 </div>
