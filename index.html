@@ -1086,7 +1086,7 @@
           <option value="">Выберите способ</option>
           <option>Telegram</option>
           <option>WhatsApp</option>
-          <option>ВКонтакте</option>
+          <option>Email</option>
           <option>Позвоните мне</option>
         </select>
       </label>
@@ -1113,7 +1113,7 @@
   <div class="modal">
     <button class="modal-close" onclick="closeModal('callback')">&times;</button>
     <h3>Свяжитесь со мной</h3>
-    <p class="modal-sub">Оставьте контакт — напишу или позвоню, как вам удобно.</p>
+    <p class="modal-sub">Оставьте контакт — свяжусь удобным для вас способом.</p>
     <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'callback')">
       <input type="hidden" name="form_type" value="Запрос обратного звонка">
       <label>Ваше имя
@@ -1124,7 +1124,7 @@
           <option value="">Выберите способ</option>
           <option>Telegram</option>
           <option>WhatsApp</option>
-          <option>ВКонтакте</option>
+          <option>Email</option>
           <option>Позвоните мне</option>
         </select>
       </label>
@@ -1137,7 +1137,7 @@
           Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--accent);">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных
         </label>
       </div>
-      <button type="submit" class="btn modal-submit">Жду звонка</button>
+      <button type="submit" class="btn modal-submit">Отправить</button>
     </form>
     <div class="modal-success" id="success-callback">
       <div class="modal-success-icon">✅</div>
