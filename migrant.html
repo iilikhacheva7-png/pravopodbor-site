@@ -276,8 +276,18 @@
             <input type="text" name="Имя" required placeholder="Как вас зовут?">
           </div>
           <div class="form-group">
-            <label>Как связаться</label>
-            <input type="text" name="Контакт" required placeholder="Телефон, Telegram или WhatsApp">
+            <label>Как с вами удобно общаться?</label>
+            <select name="Мессенджер" required>
+              <option value="">Выберите способ...</option>
+              <option>Telegram</option>
+              <option>WhatsApp</option>
+              <option>Email</option>
+              <option>Позвоните мне</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Ваш контакт (номер или логин)</label>
+            <input type="text" name="Контакт" required placeholder="Телефон, @username или email">
           </div>
           <div class="form-group">
             <label>Какой документ нужен</label>
@@ -412,8 +422,18 @@
             <input type="text" name="Имя" required placeholder="Номи шумо чист?">
           </div>
           <div class="form-group">
-            <label>Чӣ тавр алоқа гирифтан</label>
-            <input type="text" name="Контакт" required placeholder="Телефон, Telegram ё WhatsApp">
+            <label>Чӣ тавр алоқа гирифтан мехоҳед?</label>
+            <select name="Мессенджер" required>
+              <option value="">Интихоб кунед...</option>
+              <option>Telegram</option>
+              <option>WhatsApp</option>
+              <option>Email</option>
+              <option>Занг занед</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Алоқаи шумо (рақам ё логин)</label>
+            <input type="text" name="Контакт" required placeholder="Телефон, @username ё email">
           </div>
           <div class="form-group">
             <label>Кадом ҳуҷҷат лозим аст</label>
@@ -528,3 +548,4 @@
 </script>
 </body>
 </html>
+
