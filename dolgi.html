@@ -219,21 +219,7 @@ function detectPhoneInfo(raw){
   let found=phoneRegionMap.find(x=>x.re.test(prefix));
   return found || {region:'Не определён автоматически', operator:'Не определён автоматически'};
 }
-const phoneInput=document.getElementById('phoneInput');
-if(phoneInput){
-  phoneInput.addEventListener('input',()=>{
-    const formatted=normalizeRuPhone(phoneInput.value);
-    phoneInput.value=formatted;
-    const info=detectPhoneInfo(formatted);
-    document.getElementById('fPhoneRegion').value=info.region;
-    document.getElementById('fPhoneOperator').value=info.operator;
-  });
-  phoneInput.addEventListener('blur',()=>{
-    const info=detectPhoneInfo(phoneInput.value);
-    document.getElementById('fPhoneRegion').value=info.region;
-    document.getElementById('fPhoneOperator').value=info.operator;
-  });
-}
+
 
 document.getElementById('debtForm').addEventListener('submit',async e=>{
   e.preventDefault(); const form=e.target; if(phoneInput){const info=detectPhoneInfo(phoneInput.value);document.getElementById('fPhoneRegion').value=info.region;document.getElementById('fPhoneOperator').value=info.operator;}
