@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Не платят алименты? Бесплатный разбор ситуации — По рекомендации</title>
+<meta name="description" content="Не платят алименты, накопился долг или пристав не действует? Ответьте на несколько вопросов и получите бесплатный первичный разбор ситуации онлайн.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Алименты назначены, а денег всё равно нет?">
+<meta property="og:description" content="Бесплатно разберём вашу ситуацию и объясним, какие варианты стоит рассмотреть.">
+<style>
+:root{--navy:#0f1a2b;--navy2:#16243b;--paper:#f6f1e8;--paper2:#eee6d8;--ink:#152033;--muted:#667085;--gold:#c9a24b;--line:#ded5c7;--white:#fff;--green:#557763;--radius:18px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+a{color:inherit;text-decoration:none}.wrap{max-width:1100px;margin:auto;padding:0 24px}
+
+/* HEADER */
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:19px;color:var(--navy)}.logo span{color:var(--gold)}
+.headnote{font-size:13px;color:var(--muted)}
+
+/* HERO */
+.hero{padding:60px 0 72px;background:var(--paper)}
+.hero-inner{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#8b6b27;margin-bottom:18px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(36px,4.8vw,60px);line-height:1.06;letter-spacing:-.03em;margin:0 0 20px;color:var(--navy)}
+.lead{font-size:17px;color:#465166;line-height:1.6;margin:0 0 28px;max-width:560px}
+.actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer;font-size:15px;text-decoration:none;transition:opacity .15s}
+.btn:hover{opacity:.86}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.micro{font-size:12px;color:var(--muted)}
+
+/* HERO ILLUSTRATION */
+.hero-visual{display:flex;flex-direction:column;gap:14px;padding:8px 0}
+.doc-card{background:#fffdf8;border:1px solid #ddd2c2;border-radius:12px;padding:22px 24px;box-shadow:0 8px 28px rgba(21,32,51,.08)}
+.doc-card-label{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--muted);margin-bottom:12px}
+.doc-lines{display:flex;flex-direction:column;gap:8px}
+.doc-line{height:6px;background:#e7e1d7;border-radius:4px}
+.doc-line.w80{width:80%}.doc-line.w65{width:65%}.doc-line.w90{width:90%}.doc-line.w50{width:50%}
+.doc-amount{font-family:Georgia,serif;font-size:22px;color:var(--navy);margin-top:14px;font-weight:500}
+.doc-amount small{display:block;font-size:11px;font-family:"Segoe UI",sans-serif;color:var(--muted);margin-top:2px;font-weight:400}
+.status-row{display:flex;gap:10px}
+.status-chip{flex:1;background:#fff;border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-size:13px;color:var(--ink)}
+.status-chip span{display:block;font-size:10px;color:var(--muted);margin-bottom:3px;letter-spacing:.08em;text-transform:uppercase}
+.status-chip b{color:var(--navy);font-size:14px}
+.status-chip.warn b{color:#b94a2c}
+
+/* SECTION GENERIC */
+.section{padding:72px 0}
+.section.white{background:#fff}
+.section.dark{background:var(--navy);color:#fff}
+.section h2{font:500 clamp(28px,3.5vw,44px)/1.1 Georgia;margin:0 0 14px;letter-spacing:-.02em}
+.section-sub{font-size:17px;color:var(--muted);max-width:680px;margin:0 0 36px;line-height:1.6}
+.dark .section-sub{color:#b8c1cf}
+
+/* CARDS GRID */
+.cards-6{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.card{background:rgba(255,255,255,.55);border:1px solid var(--line);border-radius:var(--radius);padding:22px}
+.card-num{font:500 22px Georgia;color:var(--gold);margin-bottom:14px}
+.card h3{font-size:15px;font-weight:700;margin:0 0 6px;color:var(--navy)}
+.card p{font-size:13px;color:var(--muted);margin:0;line-height:1.55}
+.cards-note{margin-top:22px;font-size:14px;color:var(--muted);max-width:720px;line-height:1.6}
+
+/* BOLD BLOCK */
+.bold-block{background:var(--navy2);border-radius:24px;padding:48px 44px;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center}
+.bold-block h2{font:500 clamp(24px,3vw,38px)/1.15 Georgia;color:#fff;margin:0 0 14px}
+.bold-block p{font-size:16px;color:#b8c1cf;margin:0;line-height:1.65;max-width:560px}
+
+/* STEPS */
+.steps{display:flex;flex-direction:column;gap:0;max-width:680px}
+.step{display:flex;gap:22px;position:relative}
+.step:not(:last-child)::before{content:'';position:absolute;left:19px;top:44px;bottom:-16px;width:2px;background:var(--line)}
+.step-num{width:40px;height:40px;border-radius:50%;background:rgba(201,162,75,.15);border:2px solid var(--gold);color:var(--gold);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.step-body{padding:5px 0 32px}
+.step-body h3{font-size:16px;font-weight:700;margin:0 0 4px;color:var(--navy)}
+.step-body p{font-size:14px;color:var(--muted);margin:0;line-height:1.55}
+
+/* TOPICS */
+.topics{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;max-width:860px}
+.topic{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:16px 18px;font-size:14px;color:#d6dde8;display:flex;align-items:center;gap:10px}
+.topic::before{content:'→';color:var(--gold);font-size:16px;flex-shrink:0}
+
+/* QUIZ */
+.quiz-shell{display:grid;grid-template-columns:.65fr 1.35fr;gap:44px;align-items:start}
+.quiz-copy{position:sticky;top:24px}
+.quiz{background:#fff;border:1px solid var(--line);border-radius:24px;padding:32px;box-shadow:0 16px 48px rgba(21,32,51,.07)}
+.progress-bar{height:3px;background:#ece7df;border-radius:3px;overflow:hidden;margin-bottom:26px}
+.progress-bar i{display:block;height:100%;background:var(--gold);width:14.28%;transition:.3s}
+.step-q{display:none}.step-q.active{display:block}
+.step-label{font-size:11px;color:#8b6b27;font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.step-q h3{font:500 24px/1.25 Georgia;margin:8px 0 20px;color:var(--navy)}
+.options{display:grid;gap:9px}
+.option{border:1px solid #ddd6ca;border-radius:12px;padding:13px 15px;cursor:pointer;background:#fff;text-align:left;font:inherit;font-size:14px;color:var(--ink);transition:border-color .15s,background .15s}
+.option:hover,.option.selected{border-color:var(--gold);background:#fbf7ef}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:22px}
+.back-btn{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:14px}
+.success-block{display:none;text-align:center;padding:32px 8px}
+.success-tick{font-size:38px;color:var(--green);margin-bottom:12px}
+.success-block h3{font:500 22px Georgia;color:var(--navy);margin:0 0 10px}
+.success-block p{font-size:14px;color:var(--muted);line-height:1.6;margin:0}
+
+/* CONTACT FIELDS */
+.field-label{display:block;font-size:13px;color:var(--muted);margin-bottom:4px;font-weight:600}
+.field-input{width:100%;padding:13px 15px;border:1px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;margin-bottom:10px;outline:none;transition:border-color .15s}
+.field-input:focus{border-color:var(--gold)}
+.consent-row{display:flex;gap:10px;align-items:flex-start;margin:12px 0 18px}
+.consent-row input[type=checkbox]{width:15px;height:15px;margin-top:3px;flex-shrink:0;accent-color:var(--gold)}
+.consent-row label{font-size:12px;color:var(--muted);line-height:1.5}
+.consent-row a{color:var(--gold)}
+
+/* NOTE */
+.note{padding:16px 18px;border-left:2px solid var(--gold);background:#f1eadf;border-radius:0 8px 8px 0;font-size:13px;color:#5f6878;line-height:1.55;margin-top:22px}
+
+/* FOOTER */
+footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot span,.foot a{font-size:12px;color:#7b8494}
+.foot a:hover{color:var(--gold)}
+
+/* WIDGET */
+#float-widget{position:fixed;bottom:24px;right:24px;z-index:200}
+#float-widget button.trigger{width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:21px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(201,162,75,.4);display:flex;align-items:center;justify-content:center}
+#widget-menu{display:none;position:absolute;bottom:62px;right:0;background:var(--navy2);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:8px;width:196px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+#widget-menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:#f4f1ea;text-decoration:none}
+#widget-menu a:hover{background:rgba(255,255,255,.07)}
+
+/* COOKIE */
+#cookie-banner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);border-top:1px solid rgba(255,255,255,.1);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#cookie-banner p{font-size:13px;color:#a9b4c7;margin:0;max-width:700px}
+#cookie-accept{background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  .hero-inner{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .cards-6{grid-template-columns:1fr 1fr}
+  .bold-block{grid-template-columns:1fr;gap:24px}
+  .quiz-shell{grid-template-columns:1fr}
+  .quiz-copy{position:static}
+  .topics{grid-template-columns:1fr}
+}
+@media(max-width:520px){
+  .wrap{padding:0 16px}
+  header{height:62px}
+  .hero{padding:40px 0 52px}
+  h1{font-size:34px}
+  .lead{font-size:16px}
+  .cards-6{grid-template-columns:1fr}
+  .bold-block{padding:30px 22px}
+  .section{padding:52px 0}
+  .quiz{padding:22px 16px}
+}
+</style>
+
+<!-- Яндекс.Метрика -->
+<script type="text/javascript">
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+</script>
+</head>
+<body>
+
+<div class="wrap"><header>
+  <a class="logo" href="/"><span>По</span> рекомендации</a>
+  <div class="headnote">Юридическая помощь · онлайн по России</div>
+</header></div>
+
+<main>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="kicker">Алименты · Бесплатный разбор</div>
+      <h1>Алименты назначены, а денег всё равно нет?</h1>
+      <p class="lead">Неважно, в чём проблема: второй родитель не платит, скрывает доход, перечисляет слишком мало или пристав месяцами ничего не делает. Бесплатно разберём вашу ситуацию и объясним, какие варианты стоит рассмотреть.</p>
+      <div class="actions">
+        <a class="btn btn-gold" href="#quiz">Разобрать мою ситуацию</a>
+      </div>
+      <p class="micro" style="margin-top:12px;">Бесплатно · Онлайн по всей России · Без обязательства нанимать юриста</p>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="doc-card">
+        <div class="doc-card-label">Исполнительный лист</div>
+        <div class="doc-lines">
+          <div class="doc-line w90"></div>
+          <div class="doc-line w80"></div>
+          <div class="doc-line w65"></div>
+          <div class="doc-line w50"></div>
+        </div>
+        <div class="doc-amount">
+          Задолженность
+          <small>накапливается — нужно действовать</small>
+        </div>
+      </div>
+      <div class="status-row">
+        <div class="status-chip">
+          <span>Статус производства</span>
+          <b>Возбуждено</b>
+        </div>
+        <div class="status-chip warn">
+          <span>Последнее действие</span>
+          <b>6+ месяцев назад</b>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- УЗНАЁТЕ СИТУАЦИЮ -->
+<section class="section white">
+  <div class="wrap">
+    <h2>Узнаёте свою ситуацию?</h2>
+    <p class="section-sub">Люди часто годами живут в одной из этих ситуаций, не зная, что можно сделать иначе.</p>
+    <div class="cards-6">
+      <div class="card">
+        <div class="card-num">01</div>
+        <h3>Алименты вообще не платит</h3>
+        <p>Есть решение суда, судебный приказ или соглашение, но деньги не поступают.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">02</div>
+        <h3>Платит слишком мало</h3>
+        <p>Доход может быть занижен, нестабилен или официально показывается только его часть.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">03</div>
+        <h3>Пристав ничего не делает</h3>
+        <p>Исполнительное производство есть, но задолженность растёт, а реальных действий не видно.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">04</div>
+        <h3>Работает неофициально</h3>
+        <p>Доход есть, но его трудно подтвердить или он постоянно меняется.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">05</div>
+        <h3>Накопился большой долг</h3>
+        <p>Нужно понять, что уже можно требовать и какие действия имеет смысл предпринимать.</p>
+      </div>
+      <div class="card">
+        <div class="card-num">06</div>
+        <h3>Алименты ещё не назначены</h3>
+        <p>Человек не знает, с чего начать и какой порядок действий выбрать.</p>
+      </div>
+    </div>
+    <p class="cards-note">Даже если проблема длится давно, это не значит, что вариантов больше нет. Сначала нужно понять, что уже сделано и где именно сейчас «застряла» ситуация.</p>
+  </div>
+</section>
+
+<!-- СМЫСЛОВОЙ БЛОК -->
+<section class="section">
+  <div class="wrap">
+    <div class="bold-block">
+      <div>
+        <h2>«Он нигде официально не работает» — не значит «ничего нельзя сделать».</h2>
+        <p>Размер алиментов, задолженность, действия пристава и возможные требования зависят от конкретных обстоятельств. Сначала важно разобраться в документах и фактах — и только потом решать, нужна ли платная юридическая помощь.</p>
+      </div>
+      <div style="flex-shrink:0">
+        <a class="btn" style="background:var(--gold);color:var(--navy);white-space:nowrap" href="#quiz">Получить бесплатный разбор</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ШАГИ -->
+<section class="section white">
+  <div class="wrap">
+    <h2>Сначала разберёмся.<br>Потом решим, нужна ли платная помощь.</h2>
+    <p class="section-sub" style="margin-bottom:36px;">Никакого давления. Только понимание ситуации.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <h3>Разберём ситуацию</h3>
+          <p>Что уже взыскано, какие документы есть, сколько реально поступает и есть ли задолженность.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <h3>Определим возможные направления</h3>
+          <p>Объясним простым языком, что в вашей ситуации имеет смысл проверять и куда двигаться дальше.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <h3>Если можно решить вопрос самостоятельно</h3>
+          <p>Можно отдельно помочь с заявлением, жалобой или другим юридическим документом без покупки дорогого сопровождения.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <h3>Если нужен юрист</h3>
+          <p>Можно подключить профильного специалиста по семейному праву под конкретную задачу и бюджет.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ТЕМЫ -->
+<section class="section dark">
+  <div class="wrap">
+    <h2>С какими ситуациями чаще всего приходится разбираться</h2>
+    <p class="section-sub">Каждый случай индивидуален. Ниже — наиболее типичные вопросы.</p>
+    <div class="topics">
+      <div class="topic">Алименты ещё не взысканы</div>
+      <div class="topic">Алименты в долях от дохода</div>
+      <div class="topic">Алименты в твёрдой денежной сумме</div>
+      <div class="topic">Задолженность по алиментам</div>
+      <div class="topic">Бездействие судебного пристава</div>
+      <div class="topic">Изменение размера алиментов</div>
+      <div class="topic">Нерегулярный или скрываемый доход</div>
+      <div class="topic">Вопросы по исполнительному производству</div>
+    </div>
+    <div class="note" style="margin-top:28px;background:rgba(255,255,255,.05);color:#bdc6d2;border-left-color:var(--gold)">
+      Страница не содержит юридических обещаний и не заменяет анализ конкретной ситуации. Бесплатный разбор — первый шаг к пониманию возможных вариантов.
+    </div>
+  </div>
+</section>
+
+<!-- КВИЗ -->
+<section class="section" id="quiz">
+  <div class="wrap quiz-shell">
+    <div class="quiz-copy">
+      <div class="kicker">Мини-разбор</div>
+      <h2>Ответьте на 6 вопросов о ситуации</h2>
+      <p class="section-sub">Займёт около минуты. Ответы помогут сразу понять, с чего начать разбор.</p>
+      <div class="note">На этом этапе не нужны паспортные данные, номера договоров и реквизиты судебных решений.</div>
+    </div>
+    <div class="quiz">
+      <div class="progress-bar"><i id="alBar"></i></div>
+      <form id="alimentyForm" action="https://formspree.io/f/xpqekrvz" method="POST">
+        <input type="hidden" name="form_type" value="Анкета: алименты">
+        <input type="hidden" name="Ситуация с алиментами" id="fSit">
+        <input type="hidden" name="Взысканы ли алименты" id="fDoc">
+        <input type="hidden" name="Получаемая сумма в месяц" id="fSum">
+        <input type="hidden" name="Задолженность" id="fDebt">
+        <input type="hidden" name="Исполнительное производство" id="fFSSP">
+        <input type="hidden" name="Доход второго родителя" id="fIncome">
+        <input type="hidden" name="Регион номера" id="fPhoneRegion">
+        <input type="hidden" name="Оператор номера" id="fPhoneOperator">
+
+        <!-- Шаг 1 -->
+        <div class="step-q active" data-step="1">
+          <div class="step-label">Вопрос 1 из 7</div>
+          <h3>Что сейчас происходит с алиментами?</h3>
+          <div class="options" data-field="fSit">
+            <button type="button" class="option">Ещё не взыскивала / не взыскивал</button>
+            <button type="button" class="option">Не платит совсем</button>
+            <button type="button" class="option">Платит нерегулярно</button>
+            <button type="button" class="option">Платит слишком мало</button>
+            <button type="button" class="option">Есть большой долг</button>
+            <button type="button" class="option">Пристав ничего не делает</button>
+            <button type="button" class="option">Другая ситуация</button>
+          </div>
+        </div>
+
+        <!-- Шаг 2 -->
+        <div class="step-q" data-step="2">
+          <div class="step-label">Вопрос 2 из 7</div>
+          <h3>Алименты уже взысканы?</h3>
+          <div class="options" data-field="fDoc">
+            <button type="button" class="option">Да, есть решение суда / судебный приказ</button>
+            <button type="button" class="option">Есть нотариальное соглашение</button>
+            <button type="button" class="option">Нет</button>
+            <button type="button" class="option">Не знаю</button>
+          </div>
+          <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+        </div>
+
+        <!-- Шаг 3 -->
+        <div class="step-q" data-step="3">
+          <div class="step-label">Вопрос 3 из 7</div>
+          <h3>Сколько примерно вы получаете сейчас в месяц?</h3>
+          <div class="options" data-field="fSum">
+            <button type="button" class="option">0 ₽</button>
+            <button type="button" class="option">До 5 000 ₽</button>
+            <button type="button" class="option">5 000–10 000 ₽</button>
+            <button type="button" class="option">10 000–20 000 ₽</button>
+            <button type="button" class="option">Более 20 000 ₽</button>
+            <button type="button" class="option">Сумма постоянно меняется</button>
+          </div>
+          <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+        </div>
+
+        <!-- Шаг 4 -->
+        <div class="step-q" data-step="4">
+          <div class="step-label">Вопрос 4 из 7</div>
+          <h3>Есть задолженность по алиментам?</h3>
+          <div class="options" data-field="fDebt">
+            <button type="button" class="option">Нет</button>
+            <button type="button" class="option">До 100 000 ₽</button>
+            <button type="button" class="option">100 000–500 000 ₽</button>
+            <button type="button" class="option">Более 500 000 ₽</button>
+            <button type="button" class="option">Не знаю</button>
+          </div>
+          <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+        </div>
+
+        <!-- Шаг 5 -->
+        <div class="step-q" data-step="5">
+          <div class="step-label">Вопрос 5 из 7</div>
+          <h3>Есть исполнительное производство у приставов?</h3>
+          <div class="options" data-field="fFSSP">
+            <button type="button" class="option">Да</button>
+            <button type="button" class="option">Нет</button>
+            <button type="button" class="option">Не знаю</button>
+          </div>
+          <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+        </div>
+
+        <!-- Шаг 6 -->
+        <div class="step-q" data-step="6">
+          <div class="step-label">Вопрос 6 из 7</div>
+          <h3>Что известно о доходах второго родителя?</h3>
+          <div class="options" data-field="fIncome">
+            <button type="button" class="option">Работает официально</button>
+            <button type="button" class="option">Работает неофициально</button>
+            <button type="button" class="option">ИП / самозанятый</button>
+            <button type="button" class="option">Доход нестабильный</button>
+            <button type="button" class="option">Не знаю</button>
+          </div>
+          <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+        </div>
+
+        <!-- Шаг 7 — контакты -->
+        <div class="step-q" data-step="7">
+          <div class="step-label">Последний шаг</div>
+          <h3>Куда передать результат первичного разбора?</h3>
+          <label class="field-label">Ваше имя</label>
+          <input class="field-input" type="text" name="Имя" required placeholder="Как вас зовут?">
+          <label class="field-label">Телефон</label>
+          <input class="field-input" type="tel" name="Телефон" id="alPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00">
+          <div class="consent-row">
+            <input type="checkbox" id="alConsent" required>
+            <label for="alConsent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и передачей указанных данных специалисту для первичного разбора ситуации.</label>
+          </div>
+          <div class="quiz-nav">
+            <button type="button" class="back-btn">← Назад</button>
+            <button type="submit" class="btn btn-gold">Получить бесплатный разбор</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="success-block" id="alSuccess">
+        <div class="success-tick">✓</div>
+        <h3>Заявка отправлена</h3>
+        <p>Спасибо. Ответы сохранены — при связи уже будет понятно, с чего начать разбор вашей ситуации.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 По рекомендации · Екатеринбург · онлайн по России</span>
+    <span><a href="/privacy-policy.html">Политика конфиденциальности</a></span>
+  </div>
+</footer>
+
+<!-- FLOATING WIDGET -->
+<div id="float-widget">
+  <button class="trigger" aria-label="Задать вопрос">💬</button>
+  <div id="widget-menu">
+    <a href="https://t.me/a_likhacheva2026" target="_blank">✈️ Написать в Telegram</a>
+    <a href="https://wa.me/79920011995" target="_blank">💬 Написать в WhatsApp</a>
+  </div>
+</div>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p>Мы используем файлы cookie для корректной работы сайта и аналитики. Продолжая использовать сайт, вы соглашаетесь с их использованием в соответствии с нашей <a href="/privacy-policy.html" target="_blank" style="color:var(--gold)">Политикой конфиденциальности</a>.</p>
+  <button id="cookie-accept">Принять</button>
+</div>
+
+<script>
+// ── КВИЗ ──────────────────────────────────────────────────────
+var alCurrent = 1;
+var alTotal = 7;
+
+function alShowStep(n) {
+  alCurrent = n;
+  document.querySelectorAll('#alimentyForm .step-q').forEach(function(s) {
+    s.classList.toggle('active', +s.dataset.step === n);
+  });
+  document.getElementById('alBar').style.width = (n / alTotal * 100) + '%';
+}
+
+// Одиночный выбор — автопереход
+document.querySelectorAll('#alimentyForm .options').forEach(function(box) {
+  var field = document.getElementById(box.dataset.field);
+  box.querySelectorAll('.option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      box.querySelectorAll('.option').forEach(function(x) { x.classList.remove('selected'); });
+      btn.classList.add('selected');
+      if (field) field.value = btn.textContent.trim();
+      if (alCurrent < alTotal) alShowStep(alCurrent + 1);
+    });
+  });
+});
+
+document.querySelectorAll('#alimentyForm .back-btn').forEach(function(b) {
+  b.addEventListener('click', function() { alShowStep(Math.max(1, alCurrent - 1)); });
+});
+
+// ── ТЕЛЕФОН ───────────────────────────────────────────────────
+var phoneRegionMap = [
+  {re:/^(912|922|932|982)/, region:'Свердловская область / Урал', operator:'МТС / МегаФон / Tele2 (по диапазону)'},
+  {re:/^(900|901|902|904|908|950|951|952|953)/, region:'Россия, мобильная сеть (регион может отличаться)', operator:'Tele2 / другие (по диапазону)'},
+  {re:/^(903|905|906|909|960|961|962|963|964|965|966|967|968)/, region:'Россия, мобильная сеть (регион может отличаться)', operator:'Билайн (по диапазону)'},
+  {re:/^(910|915|916|917|919|980|981|983|985|986|987|988|989)/, region:'Россия, мобильная сеть (регион может отличаться)', operator:'МТС (по диапазону)'},
+  {re:/^(920|921|923|924|925|926|927|928|929|930|931|933|934|936|937|938|939|999)/, region:'Россия, мобильная сеть (регион может отличаться)', operator:'МегаФон / другие (по диапазону)'},
+  {re:/^(991|992|993|994|995|996|997|998)/, region:'Россия, мобильная сеть (регион может отличаться)', operator:'Мобильный оператор (по диапазону)'}
+];
+
+function formatRuPhone(value) {
+  var digits = String(value || '').replace(/\D/g, '');
+  if (!digits) return '';
+  if (digits[0] === '8') digits = '7' + digits.slice(1);
+  else if (digits[0] !== '7') digits = '7' + digits;
+  digits = digits.slice(0, 11);
+  var out = '+7';
+  if (digits.length > 1) out += ' (' + digits.slice(1, 4);
+  if (digits.length >= 4) out += ')';
+  if (digits.length > 4) out += ' ' + digits.slice(4, 7);
+  if (digits.length > 7) out += '-' + digits.slice(7, 9);
+  if (digits.length > 9) out += '-' + digits.slice(9, 11);
+  return out;
+}
+
+function detectPhoneInfo(raw) {
+  var d = (raw || '').replace(/\D/g, '');
+  if (d[0] === '8') d = '7' + d.slice(1);
+  if (d[0] !== '7') d = '7' + d;
+  var prefix = d.slice(1, 4);
+  var found = phoneRegionMap.find(function(x) { return x.re.test(prefix); });
+  return found || {region: 'Не определён автоматически', operator: 'Не определён автоматически'};
+}
+
+var alPhone = document.getElementById('alPhone');
+if (alPhone) {
+  alPhone.addEventListener('focus', function() { if (!alPhone.value) alPhone.value = '+7 '; });
+  alPhone.addEventListener('input', function() { alPhone.value = formatRuPhone(alPhone.value); });
+  alPhone.addEventListener('paste', function(e) {
+    e.preventDefault();
+    var pasted = (e.clipboardData || window.clipboardData).getData('text');
+    alPhone.value = formatRuPhone(pasted);
+  });
+  alPhone.addEventListener('blur', function() { if (alPhone.value.trim() === '+7') alPhone.value = ''; });
+}
+
+// ── ОТПРАВКА ФОРМЫ ────────────────────────────────────────────
+document.getElementById('alimentyForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  var form = e.target;
+
+  // Проверяем, что все шаги заполнены
+  var required = ['fSit','fDoc','fSum','fDebt','fFSSP','fIncome'];
+  for (var i = 0; i < required.length; i++) {
+    if (!document.getElementById(required[i]).value) {
+      alert('Пожалуйста, заполните все шаги анкеты');
+      return;
+    }
+  }
+
+  // Определяем регион/оператор телефона
+  if (alPhone) {
+    var info = detectPhoneInfo(alPhone.value);
+    document.getElementById('fPhoneRegion').value = info.region;
+    document.getElementById('fPhoneOperator').value = info.operator;
+  }
+
+  try {
+    var r = await fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: {Accept: 'application/json'}
+    });
+    if (!r.ok) throw new Error();
+
+    // Успех
+    var progressEl = document.querySelector('#alimentyForm .progress-bar');
+    if (progressEl) progressEl.style.display = 'none';
+    form.style.display = 'none';
+    document.getElementById('alSuccess').style.display = 'block';
+
+    // Метрика — после рендера
+    console.log('Formspree OK — sending Yandex goal: alimenty_form_submit');
+    setTimeout(function() {
+      if (typeof ym === 'function') {
+        ym(110730303, 'reachGoal', 'alimenty_form_submit');
+        console.log('Yandex goal sent: alimenty_form_submit');
+      } else {
+        console.warn('ym not available');
+      }
+    }, 0);
+
+  } catch(err) {
+    alert('Не удалось отправить форму. Попробуйте ещё раз или напишите в Telegram.');
+  }
+});
+
+// ── ВИДЖЕТ ────────────────────────────────────────────────────
+document.querySelector('#float-widget .trigger').addEventListener('click', function() {
+  var m = document.getElementById('widget-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+});
+document.addEventListener('click', function(e) {
+  var w = document.getElementById('float-widget');
+  var m = document.getElementById('widget-menu');
+  if (w && m && !w.contains(e.target)) m.style.display = 'none';
+});
+
+// ── COOKIE ────────────────────────────────────────────────────
+(function() {
+  if (!localStorage.getItem('cookie_consent')) {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function() {
+    localStorage.setItem('cookie_consent', '1');
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+})();
+</script>
+</body>
+</html>
