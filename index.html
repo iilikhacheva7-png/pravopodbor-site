@@ -705,6 +705,10 @@
         accurateTrackBounce:true,
         trackLinks:true
    });
+
+  function ymSafe(goal) {
+    if (typeof ym === 'function') ym(110730303, 'reachGoal', goal);
+  }
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/110730303" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->
@@ -848,16 +852,16 @@
     <h2 class="section-title">Нужен юрист? Подберу бесплатно</h2>
     <p class="section-sub">Выберите направление — найду проверенного специалиста под вашу ситуацию и бюджет</p>
     <div class="catalog">
-      <div class="catalog-card reveal" style="animation-delay: 0.05s;">
-        <div class="icon">💔</div>
-        <h4>Семейное право</h4>
-        <p>Развод, алименты, раздел имущества, опека</p>
-      </div>
-      <div class="catalog-card reveal" style="animation-delay: 0.1s;">
+      <a href="/alimenty.html" class="catalog-card reveal" style="animation-delay: 0.05s;text-decoration:none;display:block;" onclick="ymSafe('main_alimenty_click')">
+        <div class="icon">👨‍👩‍👧</div>
+        <h4>Алименты</h4>
+        <p>Не платят, растёт задолженность или пристав не действует? Разберём ситуацию.</p>
+      </a>
+      <a href="/dolgi.html" class="catalog-card reveal" style="animation-delay: 0.1s;text-decoration:none;display:block;" onclick="ymSafe('main_dolgi_click')">
         <div class="icon">📉</div>
-        <h4>Банкротство и долги</h4>
-        <p>Списание долгов, споры с банками и МФО</p>
-      </div>
+        <h4>Долги и банкротство</h4>
+        <p>Кредиты стали неподъёмными? Разберём долги, имущество и риски.</p>
+      </a>
       <div class="catalog-card reveal" style="animation-delay: 0.15s;">
         <div class="icon">⚖️</div>
         <h4>Уголовные дела</h4>
@@ -888,10 +892,10 @@
         <h4>ДТП и страхование</h4>
         <p>Споры со страховыми, ущерб, штрафы</p>
       </div>
-      <a href="/vozvrat.html" class="catalog-card reveal" style="animation-delay: 0.15s;text-decoration:none;cursor:pointer;">
+      <a href="/vozvrat.html" class="catalog-card reveal" style="animation-delay: 0.15s;text-decoration:none;display:block;" onclick="ymSafe('main_vozvrat_click')">
         <div class="icon">💳</div>
-        <h4>Страховки и допуслуги по кредитам</h4>
-        <p>Навязали страховку, сертификат или допуслуги при оформлении кредита? Проверим, что можно вернуть.</p>
+        <h4>Страховки и допуслуги</h4>
+        <p>Оформили кредит со страховкой или допуслугами? Проверим, что можно вернуть.</p>
       </a>
       <div class="catalog-card reveal" style="animation-delay: 0.2s;">
         <div class="icon">🩺</div>
