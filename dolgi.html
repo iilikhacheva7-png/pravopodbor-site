@@ -232,4 +232,51 @@ document.getElementById('debtForm').addEventListener('submit',async e=>{
   }catch(err){alert('Не удалось отправить форму. Попробуйте ещё раз или напишите в Telegram.');}
 });
 </script>
+
+<!-- FLOATING WIDGET -->
+<div id="float-widget" style="position:fixed;bottom:24px;right:24px;z-index:200;">
+  <button onclick="document.getElementById('widget-menu').classList.toggle('open')"
+    style="width:52px;height:52px;border-radius:50%;background:#c9a24b;color:#1a1306;font-size:22px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(201,162,75,.45);display:flex;align-items:center;justify-content:center;"
+    aria-label="Задать вопрос">💬</button>
+  <div id="widget-menu" style="display:none;position:absolute;bottom:62px;right:0;background:#16243b;border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:8px;width:196px;box-shadow:0 8px 32px rgba(0,0,0,.4);">
+    <a href="https://t.me/a_likhacheva2026" target="_blank"
+      style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:#f4f1ea;text-decoration:none;">✈️ Написать в Telegram</a>
+    <a href="https://wa.me/79920011995" target="_blank"
+      style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:#f4f1ea;text-decoration:none;">💬 Написать в WhatsApp</a>
+  </div>
+</div>
+
+<!-- COOKIE BANNER — z-index выше виджета -->
+<div id="cookie-banner" style="display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#0f1a2b;border-top:1px solid rgba(255,255,255,.1);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">
+  <p style="font-size:13px;color:#a9b4c7;margin:0;max-width:700px;">
+    Мы используем файлы cookie для корректной работы сайта и аналитики. Продолжая использовать сайт, вы соглашаетесь с их использованием в соответствии с нашей
+    <a href="/privacy-policy.html" target="_blank" style="color:#c9a24b;">Политикой конфиденциальности</a>.
+  </p>
+  <button id="cookie-accept" style="background:#c9a24b;color:#1a1306;border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap;">Принять</button>
+</div>
+
+<script>
+// Widget toggle
+document.addEventListener('click', function(e) {
+  var w = document.getElementById('float-widget');
+  var m = document.getElementById('widget-menu');
+  if (w && m && !w.contains(e.target)) m.style.display = 'none';
+});
+document.getElementById('widget-menu') && document.querySelector('#float-widget button').addEventListener('click', function() {
+  var m = document.getElementById('widget-menu');
+  m.style.display = m.style.display === 'block' ? 'none' : 'block';
+});
+
+// Cookie
+(function() {
+  if (!localStorage.getItem('cookie_consent')) {
+    document.getElementById('cookie-banner').style.display = 'flex';
+  }
+  document.getElementById('cookie-accept').addEventListener('click', function() {
+    localStorage.setItem('cookie_consent', '1');
+    document.getElementById('cookie-banner').style.display = 'none';
+  });
+})();
+</script>
+
 </body></html>
