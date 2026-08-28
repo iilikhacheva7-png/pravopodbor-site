@@ -227,6 +227,7 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
   /* ── Messenger success block ── */
   .msng-block { margin-top:24px; text-align:center; }
   .msng-title { font-size:19px; font-weight:700; margin:0 0 8px; }
+  .msng-cmd   { font-size:15px; font-weight:800; color:#0f1a2b; margin:0 0 6px; display:block; }
   .msng-sub   { font-size:13px; opacity:.8; line-height:1.6; margin:0 0 20px; }
   .msng-btns  { display:flex; flex-direction:column; gap:10px; max-width:300px; margin:0 auto; }
   .msng-btn   { display:flex; align-items:center; gap:9px; justify-content:center;
@@ -512,7 +513,8 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
       <div class="success-block" id="vzSuccess">
         <div class="msng-block">
   <p class="msng-title">Заявка отправлена ✓</p>
-  <p class="msng-sub">Теперь обязательно напишите мне.<br>Выберите удобный мессенджер и отправьте сообщение: <strong>«Я оставила заявку»</strong>.</p>
+  <span class="msng-cmd">Теперь обязательно напишите мне.</span>
+  <p class="msng-sub">Выберите удобный мессенджер и отправьте сообщение: <strong>«Я оставила заявку»</strong>.</p>
   <p class="msng-docs">Если у вас есть документы по ситуации&nbsp;— сразу прикрепите их к сообщению. Это поможет мне точнее разобраться в вашем вопросе.</p>
   <div class="msng-btns">
     <a class="msng-btn msng-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener" onclick="ymSafeMsg('max','vozvrat')"><svg width="20" height="20" viewBox="0 0 24 24"><text x="1" y="17" font-size="12" font-weight="bold" fill="white" font-family="Arial,sans-serif">MAX</text></svg> Написать в MAX</a>
@@ -649,8 +651,8 @@ function vzShowStep(n) {
   var titleEl = document.getElementById('vzTitle');
   var subEl = document.getElementById('vzSub');
   var kickerEl = document.getElementById('vzKicker');
-  if (titleEl) titleEl.textContent = isLast ? 'Готово. Осталось оставить контакты' : 'Проверьте, что можно сделать в вашей ситуации';
-  if (subEl) subEl.textContent = isLast ? 'Ответы сохранены. Свяжемся с вами для первичного разбора.' : 'Ответьте на несколько вопросов. Это поможет быстрее разобраться в документах.';
+  if (titleEl) titleEl.textContent = isLast ? 'Готово. Осталось написать мне' : 'Проверьте, что можно сделать в вашей ситуации';
+  if (subEl) subEl.textContent = isLast ? 'Ответы сохранены. Выберите удобный мессенджер — и я смогу начать разбор вашей ситуации.' : 'Ответьте на несколько вопросов. Это поможет быстрее разобраться в документах.';
   if (kickerEl) kickerEl.textContent = isLast ? '' : 'Проверка ситуации';
 
   // Фиксация начала квиза
