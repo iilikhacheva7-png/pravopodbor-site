@@ -635,6 +635,15 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 </div>
 
 <script>
+
+// ── Формирование URL Яндекс Формы ─────────────────────────────
+function buildYaFormUrl(leadTopic, quizAnswers) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe', '1');
+  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
+  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  return u.toString();
+}
 // ── УТИЛИТА ym ────────────────────────────────────────────────
 function ymSafe(goal) {
   if (typeof ym === 'function') ym(110730303, 'reachGoal', goal);
@@ -664,9 +673,7 @@ function vzShowStep(n) {
       ].filter(Boolean).join(' | ');
       var vzIframe = document.getElementById('vz-yform');
       if(vzIframe && !vzIframe.src) {
-        vzIframe.src = 'https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1'
-          + '&lead_topic=' + encodeURIComponent('Возврат страховок и допуслуг')
-          + '&quiz_answers=' + encodeURIComponent(vzAnswers);
+        vzIframe.src=buildYaFormUrl('Возврат страховок и допуслуг',vzAnswers);
       }
     }
   var titleEl = document.getElementById('vzTitle');
@@ -798,11 +805,8 @@ document.getElementById('vozvratForm').addEventListener('submit', async function
     if (progressEl) progressEl.style.display = 'none';
     form.style.display = 'none';
     document.getElementById('vzSuccess').style.display = 'block';
-
-    console.log('Form submitted — sending Yandex goal: vozvrat_form_submit');
     setTimeout(function() {
       ymSafe('vozvrat_form_submit');
-      console.log('Yandex goal sent: vozvrat_form_submit');
     }, 0);
 
   } catch(err) {
