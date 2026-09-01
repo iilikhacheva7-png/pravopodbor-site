@@ -520,6 +520,15 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 </div>
 
 <script>
+
+// ── Формирование URL Яндекс Формы ─────────────────────────────
+function buildYaFormUrl(leadTopic, quizAnswers) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe', '1');
+  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
+  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  return u.toString();
+}
 // ── КВИЗ ──────────────────────────────────────────────────────
 var alCurrent = 1;
 var alTotal = 6;
@@ -547,10 +556,7 @@ function alShowStep(n) {
 
     var alIframe = document.getElementById('al-yform');
     if (alIframe && !alIframe.src) {
-      var alBase = 'https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1';
-      alIframe.src = alBase
-        + '&lead_topic=' + encodeURIComponent('Алименты')
-        + '&quiz_answers=' + encodeURIComponent(alAnswers);
+      alIframe.src = buildYaFormUrl('Алименты', alAnswers);
     }
   }
 
@@ -570,9 +576,8 @@ document.querySelectorAll('#alimentyForm .options').forEach(function(box) {
       box.querySelectorAll('.option').forEach(function(x) { x.classList.remove('selected'); });
       btn.classList.add('selected');
       var rawVal = btn.textContent.trim();
-      // Нейтрализация вариантов вопроса 6 (сведения о третьем лице)
-      var sensAl = ["Работает неофициально", "ИП / самозанятый", "Заработок есть, но постоянно меняется"];
-      var safeVal = sensAl.indexOf(rawVal) !== -1 ? 'Есть обстоятельства, требующие индивидуального обсуждения в мессенджере' : rawVal;
+      // Вопрос 6 — доходы второго родителя: нейтрализуем целиком
+      var safeVal = (alCurrent === alTotal) ? 'Сведения о доходах требуют индивидуального обсуждения' : rawVal;
       if (field) field.value = safeVal;
       if (alCurrent <= alTotal) alShowStep(alCurrent + 1);
     });
