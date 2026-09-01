@@ -334,6 +334,27 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
       <p class="section-sub" id="quizCopySub">Займёт около минуты. Ответы помогут сразу понять, с чего начать разбор.</p>
       <div class="note" id="quizCopyNote">На этом этапе не нужны паспортные данные, номера договоров и реквизиты судебных решений.</div>
     </div>
+
+  <!-- ── Экран предварительного согласия ────────────────────── -->
+  <div id="consent-screen" style="display:none;padding:32px 20px;max-width:680px;margin:0 auto;text-align:center;">
+    <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;">
+      Перед началом теста подтвердите согласие на обработку персональных данных.
+    </p>
+    <iframe
+      id="al-consent-iframe"
+      frameborder="0"
+      name="ya-form-6a968358f47e73036be3a17c"
+      style="width:100%;min-height:420px;border:0;"
+      scrolling="no">
+    </iframe>
+    <noscript>
+      <p style="margin-top:16px;font-size:13px;color:var(--ink-soft,#a9b4c7);">
+        Для работы теста включите JavaScript или
+        <a href="mailto:alikhacheva7@yandex.ru" style="color:#c9a84c;">напишите нам напрямую</a>.
+      </p>
+    </noscript>
+  </div>
+
     <div class="quiz">
       <div class="progress-bar"><i id="alBar"></i></div>
       <div id="alimentyForm">
@@ -346,7 +367,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         <input type="hidden" name="Доход второго родителя" id="fIncome">
 
         <!-- Шаг 1 -->
-        <div class="step-q active" data-step="1">
+        <div class="step-q" data-step="1">
           <div class="step-label">Вопрос 1 из 6</div>
           <h3>Что сейчас происходит с алиментами?</h3>
           <div class="options" data-field="fSit">
@@ -437,7 +458,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           <div id="al-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
             <iframe
               id="al-yform"
-              src=""
               frameborder="0"
               name="ya-form-6a966ca9f47e73fef3e3a154"
               style="width:100%;min-height:520px;border:0;"
@@ -525,13 +545,41 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <script>
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic) {
-  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
-  u.searchParams.set('iframe', '1');
-  if (leadTopic) {
-    u.searchParams.set('lead_topic', leadTopic);
+// ── Генерация request_id ──────────────────────────────────────
+function generateRequestId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
   }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+
+// ── URL формы предварительного согласия ───────────────────────
+function buildConsentFormUrl(requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a968358f47e73036be3a17c/');
+  u.searchParams.set('iframe', '1');
+  u.searchParams.set('request_id', requestId);
   return u.toString();
+}
+
+// ── URL итоговой формы ─────────────────────────────────────────
+function buildFinalFormUrl(leadTopic, quizAnswers, requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe',       '1');
+  u.searchParams.set('lead_topic',   leadTopic);
+  u.searchParams.set('quiz_answers', quizAnswers);
+  u.searchParams.set('request_id',   requestId);
+  return u.toString();
+}
+
+// ── Сборка quiz_answers ────────────────────────────────────────
+function buildQuizAnswers(fields) {
+  return fields.map(function(f) {
+    var el = document.getElementById(f.id);
+    return el && el.value ? (f.label + ': ' + el.value) : null;
+  }).filter(Boolean).join('\n');
 }
 // ── КВИЗ ──────────────────────────────────────────────────────
 var alCurrent = 1;
@@ -547,11 +595,20 @@ function alShowStep(n) {
   // Меняем левую колонку на последнем шаге
   var isLast = (n === alTotal + 1);
 
-  // При переходе на шаг 7 — строим src Яндекс Формы
+  // При переходе на шаг 7 — строим URL итоговой формы
   if (isLast) {
     var alIframe = document.getElementById('al-yform');
-    if (alIframe && !alIframe.src) {
-      alIframe.src = buildYaFormUrl('Алименты');
+    if (alIframe && !alIframe.getAttribute('src')) {
+      var alFinalId = sessionStorage.getItem('rekoyur_request_id:/alimenty.html') || '';
+      var alAnswers = buildQuizAnswers([
+        {label: 'Ситуация с алиментами',   id: 'fSit'},
+        {label: 'Алименты взысканы',        id: 'fDoc'},
+        {label: 'Сумма в месяц',            id: 'fSum'},
+        {label: 'Задолженность',            id: 'fDebt'},
+        {label: 'ИП у приставов',           id: 'fFSSP'},
+        {label: 'Доходы второго родителя',  id: 'fIncome'}
+      ]);
+      alIframe.setAttribute('src', buildFinalFormUrl('Алименты', alAnswers, alFinalId));
     }
   }
 
@@ -572,6 +629,7 @@ document.querySelectorAll('#alimentyForm .options').forEach(function(box) {
       btn.classList.add('selected');
       var rawVal = btn.textContent.trim();
       // Вопрос 6 — доходы второго родителя: нейтрализуем целиком
+      // Вопрос 6 (fIncome) — доходы второго родителя: нейтрализуем все варианты
       var safeVal = (alCurrent === alTotal) ? 'Сведения о доходах требуют индивидуального обсуждения' : rawVal;
       if (field) field.value = safeVal;
       if (alCurrent <= alTotal) alShowStep(alCurrent + 1);
@@ -631,6 +689,38 @@ if (alPhone) {
 
 // ── ОТПРАВКА ФОРМЫ ────────────────────────────────────────────
 // Отправка через Яндекс Форму (iframe)
+
+// ── ИНИЦИАЛИЗАЦИЯ СОГЛАСИЯ ───────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var QUIZ_PATH = '/alimenty.html';
+  var KEY_RID   = 'rekoyur_request_id:'        + QUIZ_PATH;
+  var KEY_CDONE = 'rekoyur_consent_completed:' + QUIZ_PATH;
+
+  var storedId    = sessionStorage.getItem(KEY_RID);
+  var consentDone = sessionStorage.getItem(KEY_CDONE);
+  var consentOk   = !!(storedId && consentDone && consentDone === storedId);
+
+  var consentScreen = document.getElementById('consent-screen');
+  var quizDiv       = document.querySelector('.quiz');
+
+  if (consentOk) {
+    if (consentScreen) consentScreen.style.display = 'none';
+    if (quizDiv) quizDiv.style.display = '';
+    // Показываем первый шаг
+    var step1 = document.querySelector('#alimentyForm .step-q[data-step="1"]');
+    if (step1) step1.classList.add('active');
+  } else {
+    if (consentScreen) consentScreen.style.display = '';
+    if (quizDiv) quizDiv.style.display = 'none';
+    var requestId = generateRequestId();
+    sessionStorage.setItem('rekoyur_pending_return_path', QUIZ_PATH);
+    sessionStorage.setItem('rekoyur_pending_request_id',  requestId);
+    var ci = document.getElementById('al-consent-iframe');
+    if (ci && !ci.getAttribute('src')) {
+      ci.setAttribute('src', buildConsentFormUrl(requestId));
+    }
+  }
+});
 
 // ── ВИДЖЕТ ────────────────────────────────────────────────────
 document.querySelector('#float-widget .trigger').addEventListener('click', function() {
