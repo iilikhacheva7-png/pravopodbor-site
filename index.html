@@ -1144,42 +1144,12 @@
     <button class="modal-close" onclick="closeModal('client')">&times;</button>
     <h3>Получить помощь</h3>
     <p class="modal-sub">Опишите ситуацию — помогу с документом или подберу юриста бесплатно.</p>
-    <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'client')">
-      <input type="hidden" name="form_type" value="Заявка клиента">
-      <label>Ваше имя
-        <input type="text" name="Имя" required placeholder="Как вас зовут?">
-      </label>
-      <label>Что нужно сделать?
-        <select name="Тип помощи" required>
-          <option value="">Выберите вариант</option>
-          <option>Составить заявление или жалобу</option>
-          <option>Написать претензию</option>
-          <option>Подготовить исковое заявление</option>
-          <option>Семейные документы (алименты, развод, опека)</option>
-          <option>Жилищный спор (УК, соседи, застройщик)</option>
-          <option>Трудовой спор</option>
-          <option>Другой документ</option>
-          <option>Подобрать юриста</option>
-        </select>
-      </label>
-      <label>Опишите вашу ситуацию
-        <textarea name="Описание" rows="3" required placeholder="Что произошло и что вы хотите сделать?"></textarea>
-      </label>
-      <label>Город
-        <input type="text" name="Город" required placeholder="Ваш город">
-      </label>
-
-      <label>Ваш контакт (телефон или логин)
-        <input type="text" name="Контакт" required placeholder="Например: +7 999 000-00-00 или @логин">
-      </label>
-      <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;">
-        <input type="checkbox" id="consent-client" name="Согласие" required style="margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;">
-        <label for="consent-client" style="font-size:13px;color:var(--ink-soft);line-height:1.5;font-weight:400;">
-          Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--accent);">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных, включая переданные мной сведения для подготовки документа (паспортные данные, сведения о семейном и имущественном положении и иные данные по существу запроса)
-        </label>
-      </div>
-      <button type="submit" class="btn modal-submit">Отправить заявку</button>
-    </form>
+    <div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
+</div>
     <div class="modal-success" id="success-client">
       <div class="msng-block">
   <p class="msng-title">Заявка отправлена ✓</p>
@@ -1205,23 +1175,12 @@
     <button class="modal-close" onclick="closeModal('callback')">&times;</button>
     <h3>Свяжитесь со мной</h3>
     <p class="modal-sub">Оставьте контакт — свяжусь удобным для вас способом.</p>
-    <form action="https://formspree.io/f/xpqekrvz" method="POST" onsubmit="return handleSubmit(event, 'callback')">
-      <input type="hidden" name="form_type" value="Запрос обратного звонка">
-      <label>Ваше имя
-        <input type="text" name="Имя" required placeholder="Как вас зовут?">
-      </label>
-
-      <label>Ваш контакт (телефон или логин)
-        <input type="tel" name="Контакт" required placeholder="Например: +7 999 000-00-00 или @логин">
-      </label>
-      <div style="display:flex;align-items:flex-start;gap:10px;margin-top:4px;">
-        <input type="checkbox" id="consent-callback" name="Согласие" required style="margin-top:3px;accent-color:var(--accent);width:16px;height:16px;flex-shrink:0;">
-        <label for="consent-callback" style="font-size:13px;color:var(--ink-soft);line-height:1.5;font-weight:400;">
-          Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--accent);">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных
-        </label>
-      </div>
-      <button type="submit" class="btn modal-submit">Отправить</button>
-    </form>
+    <div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
+</div>
     <div class="modal-success" id="success-callback">
       <div class="msng-block">
   <p class="msng-title">Заявка отправлена ✓</p>
