@@ -564,6 +564,21 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
       <p class="section-sub" id="rbSub">Ответьте на несколько вопросов — так мы быстрее поймём суть ситуации.</p>
       <div class="note">Документы не нужны прямо сейчас. Сначала опишите ситуацию — уточним детали при связи.</div>
     </div>
+
+  <!-- ── Экран предварительного согласия ────────────────────── -->
+  <div id="consent-screen" style="display:none;padding:32px 20px;max-width:680px;margin:0 auto;text-align:center;">
+    <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;">
+      Перед началом теста подтвердите согласие на обработку персональных данных.
+    </p>
+    <iframe id="rb-consent-iframe" frameborder="0" name="ya-form-6a968358f47e73036be3a17c"
+      style="width:100%;min-height:420px;border:0;" scrolling="no"></iframe>
+    <noscript>
+      <p style="margin-top:16px;font-size:13px;color:var(--ink-soft,#a9b4c7);">
+        Включите JavaScript или <a href="mailto:alikhacheva7@yandex.ru" style="color:#c9a84c;">напишите напрямую</a>.
+      </p>
+    </noscript>
+  </div>
+
     <div class="quiz">
       <div class="progress-bar"><i id="rbBar"></i></div>
       <div id="rabotaForm">
@@ -576,7 +591,7 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
         <input type="hidden" name="Оператор номера" id="fPhoneOperator">
 
         <!-- Шаг 1 -->
-        <div class="step-q active" data-step="1">
+        <div class="step-q" data-step="1">
           <div class="step-label">Вопрос 1 из 4</div>
           <h3>Что произошло?</h3>
           <div class="options" data-field="fWhat" data-mode="single">
@@ -644,7 +659,6 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
           <div id="rb-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
             <iframe
               id="rb-yform"
-              src=""
               frameborder="0"
               name="ya-form-6a966ca9f47e73fef3e3a154"
               style="width:100%;min-height:520px;border:0;"
@@ -768,14 +782,63 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 <script>
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic) {
-  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
-  u.searchParams.set('iframe', '1');
-  if (leadTopic) {
-    u.searchParams.set('lead_topic', leadTopic);
+// ── Генерация request_id ──────────────────────────────────────
+function generateRequestId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
   }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+function buildConsentFormUrl(requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a968358f47e73036be3a17c/');
+  u.searchParams.set('iframe', '1');
+  u.searchParams.set('request_id', requestId);
   return u.toString();
 }
+function buildFinalFormUrl(leadTopic, quizAnswers, requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe',       '1');
+  u.searchParams.set('lead_topic',   leadTopic);
+  u.searchParams.set('quiz_answers', quizAnswers);
+  u.searchParams.set('request_id',   requestId);
+  return u.toString();
+}
+function buildQuizAnswers(fields) {
+  return fields.map(function(f) {
+    var el = document.getElementById(f.id);
+    return el && el.value ? (f.label + ': ' + el.value) : null;
+  }).filter(Boolean).join('\n');
+}
+// ── ИНИЦИАЛИЗАЦИЯ СОГЛАСИЯ ───────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var QUIZ_PATH = '/rabota.html';
+  var KEY_RID   = 'rekoyur_request_id:'        + QUIZ_PATH;
+  var KEY_CDONE = 'rekoyur_consent_completed:' + QUIZ_PATH;
+  var storedId    = sessionStorage.getItem(KEY_RID);
+  var consentDone = sessionStorage.getItem(KEY_CDONE);
+  var consentOk   = !!(storedId && consentDone && consentDone === storedId);
+  var consentScreen = document.getElementById('consent-screen');
+  var quizDiv       = document.querySelector('.quiz');
+  if (consentOk) {
+    if (consentScreen) consentScreen.style.display = 'none';
+    if (quizDiv) quizDiv.style.display = '';
+    var step1 = document.querySelector('#rabotaForm .step-q[data-step="1"]');
+    if (step1) step1.classList.add('active');
+  } else {
+    if (consentScreen) consentScreen.style.display = '';
+    if (quizDiv) quizDiv.style.display = 'none';
+    var requestId = generateRequestId();
+    sessionStorage.setItem('rekoyur_pending_return_path', QUIZ_PATH);
+    sessionStorage.setItem('rekoyur_pending_request_id',  requestId);
+    var ci = document.getElementById('rb-consent-iframe');
+    if (ci && !ci.getAttribute('src')) {
+      ci.setAttribute('src', buildConsentFormUrl(requestId));
+    }
+  }
+});
 // ── УТИЛИТА YM ────────────────────────────────────────────────
 function ymSafe(goal) {
   if (typeof ym === 'function') ym(110730303, 'reachGoal', goal);
@@ -798,8 +861,15 @@ function rbShowStep(n) {
     // Встраивание Яндекс Формы на последнем шаге
     if(isLast) {
       var rbIframe = document.getElementById('rb-yform');
-      if(rbIframe && !rbIframe.src) {
-        rbIframe.src=buildYaFormUrl('Трудовой спор');
+      if(rbIframe && !rbIframe.getAttribute('src')) {
+        var rbFinalId = sessionStorage.getItem('rekoyur_request_id:/rabota.html') || '';
+      var rbAnswers = buildQuizAnswers([
+        {label:'Что произошло',   id:'fWhat'},
+        {label:'Статус',          id:'fStatus'},
+        {label:'Доказательства',  id:'fProof'},
+        {label:'Когда произошло', id:'fWhen'}
+      ]);
+      rbIframe.setAttribute('src', buildFinalFormUrl('Трудовой спор', rbAnswers, rbFinalId));
       }
       }
     }
