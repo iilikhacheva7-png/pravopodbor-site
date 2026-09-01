@@ -769,78 +769,12 @@ function ymSafeMsg(messenger, page) {
     </div>
 
     <section class="form-section reveal" style="animation-delay:0.4s;" id="form-section">
-      <div class="form-title">Оставить заявку</div>
-      <div class="form-sub">Опишите ситуацию — свяжемся в течение часа</div>
-      <form action="https://formspree.io/f/mnjkedlw" method="POST" onsubmit="return handleSubmit(event)">
-        <input type="hidden" name="form_type" value="Заявка мигранта">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Ваше имя</label>
-            <input type="text" name="Имя" required placeholder="Как вас зовут?">
-          </div>
-
-          <div class="form-group">
-            <label>Ваш контакт (номер или логин)</label>
-            <input type="text" name="Контакт" required placeholder="Телефон, @username или email">
-          </div>
-          <div class="form-group">
-            <label>Какой документ нужен</label>
-            <select name="Документ" required>
-              <option value="">Выберите...</option>
-              <option>Патент на работу</option>
-              <option>Миграционный учёт</option>
-              <option>РВП</option>
-              <option>ВНЖ</option>
-              <option>Декларация 3-НДФЛ</option>
-              <option>Жалоба / обращение</option>
-              <option>Доиммиграционная подготовка</option>
-              <option>Другой документ</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Что нужно</label>
-            <select name="Тариф">
-              <option value="">Выберите...</option>
-              <option>Шаблон для самостоятельного заполнения</option>
-              <option>Заполненный документ по моим данным</option>
-              <option>Нужна помощь юриста</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>Опишите ситуацию (необязательно)</label>
-            <textarea name="Ситуация" placeholder="Кратко — что происходит и что нужно сделать"></textarea>
-          </div>
-          <div class="form-group full">
-            <div class="consent-row">
-              <input type="checkbox" id="consent" name="Согласие" required>
-              <label for="consent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных</label>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn" style="margin-top:20px;width:100%;justify-content:center;padding:14px;">Отправить заявку</button>
-      </form>
-      <div class="form-success" id="form-success">
-      <div class="msng-block">
-  <p class="msng-title">Заявка отправлена ✓</p>
-  <span class="msng-cmd">Теперь обязательно напишите мне.</span>
-  <p class="msng-sub">Выберите удобный мессенджер и отправьте сообщение: <strong>«Я оставила заявку»</strong>.</p>
-  <p class="msng-docs">Если у вас есть документы по ситуации&nbsp;— сразу прикрепите их к сообщению. Это поможет мне точнее разобраться в вашем вопросе.</p>
-  <div class="msng-btns">
-    <a class="msng-btn msng-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener" onclick="ymSafeMsg('max','migrant')"><svg width="20" height="20" viewBox="0 0 24 24"><text x="1" y="17" font-size="12" font-weight="bold" fill="white" font-family="Arial,sans-serif">MAX</text></svg> Написать в MAX</a>
-    <a class="msng-btn msng-tg" href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener" onclick="ymSafeMsg('tg','migrant')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.77-1.9 8.96c-.14.63-.51.79-.99.49l-2.72-2-1.31 1.27c-.15.14-.27.26-.55.26l.19-2.77 5-4.52c.22-.19-.05-.3-.34-.11l-6.17 3.88-2.65-.83c-.58-.18-.59-.58.12-.85l10.33-3.98c.48-.17.91.12.79.1z" fill="white"/></svg> Написать в Telegram</a>
-    <a class="msng-btn msng-wa" href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener" onclick="ymSafeMsg('wa','migrant')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.52 3.66 1.43 5.18L2 22l4.95-1.4A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.18 14.12c-.22.62-1.28 1.18-1.77 1.25-.46.07-1.04.1-1.67-.1a15.2 15.2 0 01-1.51-.56C10.04 15.76 8.5 13.5 8.37 13.33c-.13-.17-1.07-1.42-1.07-2.71s.68-1.93.92-2.19c.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.17.01.4-.06.62.48.22.55.76 1.85.83 1.98.07.13.11.29.02.47-.09.18-.13.29-.26.45-.13.16-.27.36-.39.48-.13.13-.27.28-.11.54.16.26.7 1.15 1.5 1.86.97.87 1.8 1.14 2.06 1.27.26.13.41.11.56-.07.15-.18.65-.76.82-1.02.17-.26.35-.22.59-.13.24.09 1.52.72 1.78.85.26.13.43.19.49.3.07.11.07.63-.15 1.25z" fill="white"/></svg> Написать в WhatsApp</a>
-  </div>
-  <p style="font-size:12px;color:var(--muted, #888);margin-top:16px;">Анкету повторно заполнять не нужно — я уже получила ваши ответы.</p>
+<div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
 </div>
-      </div>
-
-      <div class="sbp-block">
-        <div class="sbp-icon">💳</div>
-        <div>
-          <div class="sbp-title">Оплата через СБП</div>
-          <div class="sbp-desc">После подтверждения заявки вышлем реквизиты для оплаты через СБП по номеру +7 992 001-19-95 (Т-Банк). Чек самозанятого выдаётся автоматически.</div>
-        </div>
-      </div>
     </section>
 
   </div>
@@ -915,78 +849,12 @@ function ymSafeMsg(messenger, page) {
     </div>
 
     <section class="form-section reveal" style="animation-delay:0.4s;">
-      <div class="form-title">Ариза гузоред</div>
-      <div class="form-sub">Вазъиятро тавсиф кунед — дар давоми як соат бо шумо алоқа мегирем</div>
-      <form action="https://formspree.io/f/mnjkedlw" method="POST" onsubmit="return handleSubmit(event)">
-        <input type="hidden" name="form_type" value="Заявка мигранта (тоҷикӣ)">
-        <div class="form-grid">
-          <div class="form-group">
-            <label>Номи шумо</label>
-            <input type="text" name="Имя" required placeholder="Номи шумо чист?">
-          </div>
-
-          <div class="form-group">
-            <label>Алоқаи шумо (рақам ё логин)</label>
-            <input type="text" name="Контакт" required placeholder="Телефон, @username ё email">
-          </div>
-          <div class="form-group">
-            <label>Кадом ҳуҷҷат лозим аст</label>
-            <select name="Документ" required>
-              <option value="">Интихоб кунед...</option>
-              <option>Патент барои кор</option>
-              <option>Ҳисобгирии муҳоҷиратӣ</option>
-              <option>РВП</option>
-              <option>ВНЖ</option>
-              <option>Декларатсияи 3-НДФЛ</option>
-              <option>Шикоят / мурофиа</option>
-              <option>Омодасозии пеш аз муҳоҷират</option>
-              <option>Ҳуҷҷати дигар</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Чӣ лозим аст</label>
-            <select name="Тариф">
-              <option value="">Интихоб кунед...</option>
-              <option>Намуна барои пур кардани мустақил</option>
-              <option>Ҳуҷҷати пуркардашуда тибқи маълумоти ман</option>
-              <option>Кӯмаки ҳуқуқшинос лозим аст</option>
-            </select>
-          </div>
-          <div class="form-group full">
-            <label>Вазъиятро тавсиф кунед (ихтиёрӣ)</label>
-            <textarea name="Ситуация" placeholder="Мухтасар — чӣ рӯй медиҳад ва чӣ кор кардан лозим аст"></textarea>
-          </div>
-          <div class="form-group full">
-            <div class="consent-row">
-              <input type="checkbox" id="consent-tj" name="Согласие" required>
-              <label for="consent-tj">Ман бо <a href="/privacy-policy.html" target="_blank">Сиёсати махфият</a> розӣ ҳастам ва розигии коркарди маълумоти шахсиамро медиҳам</label>
-            </div>
-          </div>
-        </div>
-        <button type="submit" class="btn" style="margin-top:20px;width:100%;justify-content:center;padding:14px;">Ариза фиристодан</button>
-      </form>
-      <div class="form-success" id="form-success-tj" style="display:none;">
-      <div class="msng-block">
-  <p class="msng-title">Заявка отправлена ✓</p>
-  <span class="msng-cmd">Теперь обязательно напишите мне.</span>
-  <p class="msng-sub">Выберите удобный мессенджер и отправьте сообщение: <strong>«Я оставила заявку»</strong>.</p>
-  <p class="msng-docs">Если у вас есть документы по ситуации&nbsp;— сразу прикрепите их к сообщению. Это поможет мне точнее разобраться в вашем вопросе.</p>
-  <div class="msng-btns">
-    <a class="msng-btn msng-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener" onclick="ymSafeMsg('max','migrant_tj')"><svg width="20" height="20" viewBox="0 0 24 24"><text x="1" y="17" font-size="12" font-weight="bold" fill="white" font-family="Arial,sans-serif">MAX</text></svg> Написать в MAX</a>
-    <a class="msng-btn msng-tg" href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener" onclick="ymSafeMsg('tg','migrant_tj')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.93 6.77-1.9 8.96c-.14.63-.51.79-.99.49l-2.72-2-1.31 1.27c-.15.14-.27.26-.55.26l.19-2.77 5-4.52c.22-.19-.05-.3-.34-.11l-6.17 3.88-2.65-.83c-.58-.18-.59-.58.12-.85l10.33-3.98c.48-.17.91.12.79.1z" fill="white"/></svg> Написать в Telegram</a>
-    <a class="msng-btn msng-wa" href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener" onclick="ymSafeMsg('wa','migrant_tj')"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.52 3.66 1.43 5.18L2 22l4.95-1.4A9.96 9.96 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2zm5.18 14.12c-.22.62-1.28 1.18-1.77 1.25-.46.07-1.04.1-1.67-.1a15.2 15.2 0 01-1.51-.56C10.04 15.76 8.5 13.5 8.37 13.33c-.13-.17-1.07-1.42-1.07-2.71s.68-1.93.92-2.19c.24-.26.53-.33.7-.33.18 0 .35 0 .5.01.17.01.4-.06.62.48.22.55.76 1.85.83 1.98.07.13.11.29.02.47-.09.18-.13.29-.26.45-.13.16-.27.36-.39.48-.13.13-.27.28-.11.54.16.26.7 1.15 1.5 1.86.97.87 1.8 1.14 2.06 1.27.26.13.41.11.56-.07.15-.18.65-.76.82-1.02.17-.26.35-.22.59-.13.24.09 1.52.72 1.78.85.26.13.43.19.49.3.07.11.07.63-.15 1.25z" fill="white"/></svg> Написать в WhatsApp</a>
-  </div>
-  <p style="font-size:12px;color:var(--muted, #888);margin-top:16px;">Анкету повторно заполнять не нужно — я уже получила ваши ответы.</p>
+<div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Бо мо тамос гиред</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Барои муроҷиати аввалия ба почтаи электронӣ нависед. Вазъиятро кӯтоҳ тавсиф кунед ва усули муносиби алоқаро нишон диҳед.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Ба email нависед</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">Дар паёми аввал маълумоти шиносномавӣ, ҳуҷҷатҳо ва дигар иттилооти махфиро нафиристед.</p>
 </div>
-      </div>
-
-      <div class="sbp-block">
-        <div class="sbp-icon">💳</div>
-        <div>
-          <div class="sbp-title">Пардохт тавассути СБП</div>
-          <div class="sbp-desc">Пас аз тасдиқи ариза реквизитҳоро барои пардохт тавассути СБП ба рақами +7 992 001-19-95 (Т-Банк) мефиристем.</div>
-        </div>
-      </div>
     </section>
 
   </div>
