@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Переход к тесту — По рекомендации</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f1623; color: #e0e6f0;
+      min-height: 100vh; display: flex;
+      align-items: center; justify-content: center; padding: 32px 20px;
+    }
+    .wrap { max-width: 520px; text-align: center; }
+    h1 { font-size: 22px; font-weight: 700; color: #ffffff; margin-bottom: 14px; }
+    p  { font-size: 15px; color: #a9b4c7; line-height: 1.7; margin-bottom: 24px; }
+    .btn {
+      display: inline-block; background: #c9a24b; color: #1a1306;
+      text-decoration: none; padding: 12px 28px; border-radius: 999px;
+      font-weight: 700; font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+<div class="wrap" id="msg-ok" style="display:none;">
+  <p style="color:#a9b4c7;font-size:14px;">Переходим к тесту…</p>
+</div>
+<div class="wrap" id="msg-err" style="display:none;">
+  <h1>Не удалось определить тест</h1>
+  <p>Вернитесь на страницу нужной услуги и начните заново.</p>
+  <a href="/" class="btn">Вернуться на главную</a>
+</div>
+
+<script>
+(function() {
+  var ALLOWED = ['/alimenty.html', '/dolgi.html', '/vozvrat.html', '/rabota.html'];
+  var UUID_RE = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
+
+  function showError() {
+    document.getElementById('msg-err').style.display = '';
+  }
+
+  function safeTopReplace(path) {
+    try {
+      if (window.top && window.top !== window) {
+        window.top.location.replace(path);
+      } else {
+        window.location.replace(path);
+      }
+    } catch(e) {
+      window.location.replace(path);
+    }
+  }
+
+  // Читаем временные ключи — они записаны квиз-страницей
+  var returnPath = sessionStorage.getItem('rekoyur_pending_return_path');
+  var requestId  = sessionStorage.getItem('rekoyur_pending_request_id');
+
+  var validPath = returnPath && ALLOWED.indexOf(returnPath) !== -1;
+  var validId   = requestId  && UUID_RE.test(requestId);
+
+  if (!validPath || !validId) {
+    showError();
+    return;
+  }
+
+  // Записываем постоянные ключи
+  sessionStorage.setItem('rekoyur_request_id:'        + returnPath, requestId);
+  sessionStorage.setItem('rekoyur_consent_completed:' + returnPath, requestId);
+
+  // Удаляем временные
+  sessionStorage.removeItem('rekoyur_pending_return_path');
+  sessionStorage.removeItem('rekoyur_pending_request_id');
+
+  document.getElementById('msg-ok').style.display = '';
+  safeTopReplace(returnPath);
+})();
+</script>
+</body>
+</html>
