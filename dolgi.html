@@ -147,6 +147,9 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 </div><div class="quiz-nav"><button type="button" class="back">← Назад</button><button type="button" class="btn next">Дальше</button></div></div>
 
 <div class="step" data-step="6">
+<p style="font-size:13px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;max-width:500px;margin-left:auto;margin-right:auto;text-align:center;">
+    Анкета нужна, чтобы сопоставить заявку с вашим сообщением. Подробности ситуации и документы не указывайте в форме — их можно обсудить после того, как вы самостоятельно напишете нам в мессенджере.
+  </p>
 <div id="dg-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
   <iframe
     id="dg-yform"
@@ -192,11 +195,12 @@ document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.
 let current=1; const total=6;
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic, quizAnswers) {
+function buildYaFormUrl(leadTopic) {
   var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
   u.searchParams.set('iframe', '1');
-  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
-  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  if (leadTopic) {
+    u.searchParams.set('lead_topic', leadTopic);
+  }
   return u.toString();
 }
 function showStep(n){
@@ -204,16 +208,9 @@ function showStep(n){
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
   document.getElementById('bar').style.width=(n/total*100)+'%';
   if(n===6){
-    var dgAnswers=[
-      document.getElementById('fDebt')?document.getElementById('fDebt').value:'',
-      document.getElementById('fTypes')?document.getElementById('fTypes').value:'',
-      document.getElementById('fPay')?document.getElementById('fPay').value:'',
-      document.getElementById('fIncome')?document.getElementById('fIncome').value:'',
-      document.getElementById('fProperty')?document.getElementById('fProperty').value:''
-    ].filter(Boolean).join(' | ');
     var dgIframe=document.getElementById('dg-yform');
     if(dgIframe&&!dgIframe.src){
-      dgIframe.src=buildYaFormUrl('Долги / банкротство',dgAnswers);
+      dgIframe.src=buildYaFormUrl('Долги и банкротство');
     }
   }
 }
