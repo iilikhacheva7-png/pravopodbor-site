@@ -261,7 +261,7 @@ document.getElementById('debtForm').addEventListener('submit',async e=>{
     if(progressEl) progressEl.style.display='none';
     form.style.display='none';
     document.getElementById('success').style.display='block';
-    console.log('Formspree OK — sending Yandex goal: debt_form_submit');
+    console.log('Form submitted — sending Yandex goal: debt_form_submit');
     setTimeout(function(){
       if(typeof ym === 'function'){
         ym(110730303,'reachGoal','debt_form_submit');
