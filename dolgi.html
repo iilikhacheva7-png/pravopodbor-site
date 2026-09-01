@@ -114,6 +114,21 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
 <section class="section" id="quiz"><div class="wrap quiz-shell">
 <div class="quiz-copy"><div class="kicker">Мини-разбор</div><h2>Ответьте на 5 вопросов о долгах</h2><p class="section-intro">Это займёт около минуты. Ответы придут вместе с заявкой и помогут специалисту быстрее понять вашу ситуацию.</p><div class="note">На этом этапе не нужны паспортные данные, номера договоров или точные остатки по каждому кредиту.</div></div>
+
+  <!-- ── Экран предварительного согласия ────────────────────── -->
+  <div id="consent-screen" style="display:none;padding:32px 20px;max-width:680px;margin:0 auto;text-align:center;">
+    <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;">
+      Перед началом теста подтвердите согласие на обработку персональных данных.
+    </p>
+    <iframe id="dg-consent-iframe" frameborder="0" name="ya-form-6a968358f47e73036be3a17c"
+      style="width:100%;min-height:420px;border:0;" scrolling="no"></iframe>
+    <noscript>
+      <p style="margin-top:16px;font-size:13px;color:var(--ink-soft,#a9b4c7);">
+        Включите JavaScript или <a href="mailto:alikhacheva7@yandex.ru" style="color:#c9a84c;">напишите напрямую</a>.
+      </p>
+    </noscript>
+  </div>
+
 <div class="quiz">
 <div class="progress"><i id="bar"></i></div>
 <div id="debtForm">
@@ -126,7 +141,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <input type="hidden" name="Регион номера" id="fPhoneRegion">
 <input type="hidden" name="Оператор номера" id="fPhoneOperator">
 
-<div class="step active" data-step="1"><div class="step-count">Вопрос 1 из 6</div><h3>Какая у вас примерно общая сумма долгов?</h3><div class="options" data-field="fDebt">
+<div class="step" data-step="1"><div class="step-count">Вопрос 1 из 6</div><h3>Какая у вас примерно общая сумма долгов?</h3><div class="options" data-field="fDebt">
 <button type="button" class="option">до 300 000 ₽</button><button type="button" class="option">300 000–500 000 ₽</button><button type="button" class="option">500 000–1 000 000 ₽</button><button type="button" class="option">1–3 млн ₽</button><button type="button" class="option">более 3 млн ₽</button><button type="button" class="option">не знаю точно</button>
 </div></div>
 
@@ -153,7 +168,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <div id="dg-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
   <iframe
     id="dg-yform"
-    src=""
     frameborder="0"
     name="ya-form-6a966ca9f47e73fef3e3a154"
     style="width:100%;min-height:520px;border:0;"
@@ -195,13 +209,35 @@ document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.
 let current=1; const total=6;
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic) {
-  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
-  u.searchParams.set('iframe', '1');
-  if (leadTopic) {
-    u.searchParams.set('lead_topic', leadTopic);
+// ── Генерация request_id ──────────────────────────────────────
+function generateRequestId() {
+  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
+    return crypto.randomUUID();
   }
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0;
+    return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);
+  });
+}
+function buildConsentFormUrl(requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a968358f47e73036be3a17c/');
+  u.searchParams.set('iframe', '1');
+  u.searchParams.set('request_id', requestId);
   return u.toString();
+}
+function buildFinalFormUrl(leadTopic, quizAnswers, requestId) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe',       '1');
+  u.searchParams.set('lead_topic',   leadTopic);
+  u.searchParams.set('quiz_answers', quizAnswers);
+  u.searchParams.set('request_id',   requestId);
+  return u.toString();
+}
+function buildQuizAnswers(fields) {
+  return fields.map(function(f) {
+    var el = document.getElementById(f.id);
+    return el && el.value ? (f.label + ': ' + el.value) : null;
+  }).filter(Boolean).join('\n');
 }
 function showStep(n){
   current=n;
@@ -209,8 +245,16 @@ function showStep(n){
   document.getElementById('bar').style.width=(n/total*100)+'%';
   if(n===6){
     var dgIframe=document.getElementById('dg-yform');
-    if(dgIframe&&!dgIframe.src){
-      dgIframe.src=buildYaFormUrl('Долги и банкротство');
+    if(dgIframe && !dgIframe.getAttribute('src')) {
+      var dgFinalId = sessionStorage.getItem('rekoyur_request_id:/dolgi.html') || '';
+      var dgAnswers = buildQuizAnswers([
+        {label:'Сумма долгов',   id:'fDebt'},
+        {label:'Виды долгов',    id:'fTypes'},
+        {label:'Платёж в месяц', id:'fPay'},
+        {label:'Доход',          id:'fIncome'},
+        {label:'Имущество',      id:'fProperty'}
+      ]);
+      dgIframe.setAttribute('src', buildFinalFormUrl('Долги и банкротство', dgAnswers, dgFinalId));
     }
   }
 }
@@ -288,6 +332,34 @@ function detectPhoneInfo(raw){
   return found || {region:'Не определён автоматически', operator:'Не определён автоматически'};
 }
 
+
+// ── ИНИЦИАЛИЗАЦИЯ СОГЛАСИЯ ───────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var QUIZ_PATH = '/dolgi.html';
+  var KEY_RID   = 'rekoyur_request_id:'        + QUIZ_PATH;
+  var KEY_CDONE = 'rekoyur_consent_completed:' + QUIZ_PATH;
+  var storedId    = sessionStorage.getItem(KEY_RID);
+  var consentDone = sessionStorage.getItem(KEY_CDONE);
+  var consentOk   = !!(storedId && consentDone && consentDone === storedId);
+  var consentScreen = document.getElementById('consent-screen');
+  var quizDiv       = document.querySelector('.quiz');
+  if (consentOk) {
+    if (consentScreen) consentScreen.style.display = 'none';
+    if (quizDiv) quizDiv.style.display = '';
+    var step1 = document.querySelector('#debtForm .step[data-step="1"]');
+    if (step1) step1.classList.add('active');
+  } else {
+    if (consentScreen) consentScreen.style.display = '';
+    if (quizDiv) quizDiv.style.display = 'none';
+    var requestId = generateRequestId();
+    sessionStorage.setItem('rekoyur_pending_return_path', QUIZ_PATH);
+    sessionStorage.setItem('rekoyur_pending_request_id',  requestId);
+    var ci = document.getElementById('dg-consent-iframe');
+    if (ci && !ci.getAttribute('src')) {
+      ci.setAttribute('src', buildConsentFormUrl(requestId));
+    }
+  }
+});
 
 document.getElementById('debtForm').addEventListener('submit',async e=>{
   e.preventDefault(); const form=e.target; if(phoneInput){const info=detectPhoneInfo(phoneInput.value);document.getElementById('fPhoneRegion').value=info.region;document.getElementById('fPhoneOperator').value=info.operator;}
