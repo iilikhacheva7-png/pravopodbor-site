@@ -335,7 +335,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
     </div>
     <div class="quiz">
       <div class="progress-bar"><i id="alBar"></i></div>
-      <form id="alimentyForm" action="https://formspree.io/f/xpqekrvz" method="POST">
+      <div id="alimentyForm">
         <input type="hidden" name="form_type" value="Анкета: алименты">
         <input type="hidden" name="Ситуация с алиментами" id="fSit">
         <input type="hidden" name="Взысканы ли алименты" id="fDoc">
@@ -343,8 +343,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         <input type="hidden" name="Задолженность" id="fDebt">
         <input type="hidden" name="Исполнительное производство" id="fFSSP">
         <input type="hidden" name="Доход второго родителя" id="fIncome">
-        <input type="hidden" name="Регион номера" id="fPhoneRegion">
-        <input type="hidden" name="Оператор номера" id="fPhoneOperator">
 
         <!-- Шаг 1 -->
         <div class="step-q active" data-step="1">
@@ -432,23 +430,14 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
         <!-- Шаг 7 — контакты -->
         <div class="step-q" data-step="7">
-          <div class="step-label">Последний шаг</div>
-          <h3>Оставьте контакты для бесплатного разбора</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 16px;line-height:1.55">Мы посмотрим ответы и свяжемся с вами, чтобы уточнить детали ситуации.</p>
-          <label class="field-label">Ваше имя</label>
-          <input class="field-input" type="text" name="Имя" required placeholder="Как вас зовут?">
-          <label class="field-label">Телефон</label>
-          <input class="field-input" type="tel" name="Телефон" id="alPhone" inputmode="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00">
-          <div class="consent-row">
-            <input type="checkbox" id="alConsent" required>
-            <label for="alConsent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и передачей указанных данных специалисту для первичного разбора ситуации.</label>
-          </div>
-          <div class="quiz-nav">
-            <button type="button" class="back-btn">← Назад</button>
-            <button type="submit" class="btn btn-gold">Получить бесплатный разбор</button>
-          </div>
+<div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
+</div>
         </div>
-      </form>
+      </div>
 
       <div class="success-block" id="alSuccess">
         <div class="msng-block">
