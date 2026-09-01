@@ -94,6 +94,7 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3
 .msng-btn{display:flex;align-items:center;gap:9px;justify-content:center;padding:14px 12px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;color:#fff;border:none;cursor:pointer;font-family:inherit;transition:opacity .15s;width:100%}
 .msng-btn:hover{opacity:.88}
 .msng-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.msng-btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed;pointer-events:none}
 .msng-tg{background:#2AABEE}.msng-wa{background:#25D366}.msng-max{background:#5B4FCF}.msng-ph{background:var(--navy)}
 
 /* PHONE INPUT */
@@ -325,33 +326,23 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
               <svg width="18" height="18" viewBox="0 0 20 20"><text x="0" y="14" font-size="11" font-weight="bold" fill="white" font-family="Arial,sans-serif">MAX</text></svg>
               MAX
             </a>
-            <button class="msng-btn msng-ph" id="btn-ph" type="button">
+            <a class="msng-btn msng-ph" href="tel:+79920011995" id="btn-ph" aria-label="Позвонить самостоятельно: +7 992 001-19-95">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1C9.61 21 3 14.39 3 6c0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.21 2.2z" fill="white"/></svg>
-              По телефону
-            </button>
+              Позвонить
+            </a>
           </div>
 
-          <!-- Телефонная форма (скрыта по умолчанию) -->
-          <div id="phone-block" style="display:none;margin-top:16px">
-            <div class="phone-form">
-              <label for="phoneInput">Ваш номер телефона</label>
-              <div class="phone-row">
-                <input type="tel" id="phoneInput" class="phone-input" placeholder="+7 (999) 000-00-00" autocomplete="tel" aria-label="Номер телефона">
-                <button type="button" class="phone-send" id="phoneSendBtn">Отправить</button>
-              </div>
-            </div>
-            <div id="phone-sent-msg" style="display:none;margin-top:10px;font-size:14px;color:var(--green);font-weight:600">✓ Спасибо! Свяжемся в ближайшее время.</div>
+          <div class="consent-check-row" style="display:flex;align-items:flex-start;gap:10px;margin-top:16px;text-align:left;">
+            <input type="checkbox" id="consentCheck" style="width:16px;height:16px;margin-top:2px;flex-shrink:0;accent-color:var(--gold);" aria-required="true">
+            <label for="consentCheck" style="font-size:12px;color:var(--muted);line-height:1.55;cursor:pointer;">
+              Я ознакомилась с
+              <a href="/privacy-policy.html" target="_blank" style="color:var(--gold);">Политикой обработки данных</a>
+              и <a href="/consent-personal-data.html" target="_blank" style="color:var(--gold);">Согласием на обработку ПД</a>
+              и даю согласие на обработку персональных данных в целях, указанных в документах.
+            </label>
           </div>
-
-          <div class="divider-or">или</div>
-          <p style="font-size:13px;color:var(--muted);margin:0 0 8px">Напишите напрямую на почту:</p>
-          <a href="mailto:alikhacheva7@yandex.ru?subject=Заявка с сайта «По рекомендации»" style="color:var(--gold);font-size:14px">alikhacheva7@yandex.ru</a>
-
-          <p class="consent-note">
-            Нажимая кнопку, вы подтверждаете согласие на обработку персональных данных в соответствии с
-            <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>
-            и <a href="/consent-personal-data.html" target="_blank">Согласием на обработку ПД</a>.
-            Мы не передаём ваши данные третьим лицам.
+          <p style="font-size:11px;color:var(--muted);margin:6px 0 0;text-align:center;">
+            Данные не передаются третьим лицам. Версия согласия&nbsp;v1-2026.
           </p>
         </div>
       </div><!-- /финал -->
@@ -495,8 +486,10 @@ function showStep(n) {
   // Финал
   if (isFinal && !quizDone) {
     quizDone = true;
-    ymGoal('quiz_complete');
+    var cats = getAnswerCategories();
+    ymGoal('quiz_complete', {quiz_completed: true, categories: cats});
     buildMessengerLinks();
+    applyConsentState();
   }
 
   // Аналитика шага
@@ -514,23 +507,50 @@ function showStep(n) {
   document.getElementById('quiz-card').scrollIntoView({behavior:'smooth', block:'nearest'});
 }
 
+// Категории ответов (обезличенные индексы для аналитики — без текста)
+var STEP_KEYS = ['fSit','fDoc','fFSSP','fDebt'];
+var consentGiven = false;
+
+function getAnswerCategories() {
+  // Передаём только номера выбранных вариантов, не текст
+  var cats = {};
+  STEP_KEYS.forEach(function(k, idx) {
+    if (answers[k]) {
+      // Находим индекс варианта среди кнопок шага
+      var stepNum = idx + 1;
+      var opts = document.querySelectorAll('.step-q[data-step="' + stepNum + '"] .option');
+      var chosen = -1;
+      opts.forEach(function(btn, i) { if (answers[k] && btn.dataset.val === answers[k] || btn.textContent.trim() === answers[k]) chosen = i + 1; });
+      cats['q' + stepNum] = chosen > 0 ? chosen : 1;
+    }
+  });
+  return cats;
+}
+
 function buildMessengerLinks() {
-  // Собираем текст ответов (без чувствительных данных)
-  var summaryLines = [
-    'Обращение с сайта rekoyur.ru',
-    'Тема: Алименты',
-    answers.fSit  ? 'Ситуация: ' + answers.fSit : null,
-    answers.fDoc  ? 'Документы: ' + answers.fDoc : null,
-    answers.fFSSP ? 'Приставы: ' + answers.fFSSP : null,
-    answers.fDebt ? 'Долг/доходы: ' + answers.fDebt : null,
-    'Код обращения: ' + quizId
-  ].filter(Boolean).join('\n');
+  // Текст для мессенджера: только код обращения — персональных данных нет
+  var msg = 'Добрый день! Я прошла тест на сайте rekoyur.ru по теме алиментов.\n' +
+            'Код обращения: ' + quizId + '\n' +
+            'Прошу рассмотреть мою ситуацию.';
 
-  var tgText = encodeURIComponent(summaryLines);
-  var waText = encodeURIComponent(summaryLines);
+  var tgText = encodeURIComponent(msg);
+  var waText = encodeURIComponent(msg);
 
-  document.getElementById('btn-tg').href  = 'https://t.me/a_likhacheva2026?text=' + tgText;
-  document.getElementById('btn-wa').href  = 'https://wa.me/79920011995?text=' + waText;
+  document.getElementById('btn-tg').setAttribute('data-href', 'https://t.me/a_likhacheva2026?text=' + tgText);
+  document.getElementById('btn-wa').setAttribute('data-href', 'https://wa.me/79920011995?text=' + waText);
+}
+
+function applyConsentState() {
+  var blocked = !consentGiven;
+  ['btn-tg','btn-wa','btn-max'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (!el) return;
+    el.setAttribute('aria-disabled', blocked ? 'true' : 'false');
+    if (!blocked && el.dataset.href) {
+      el.href = el.dataset.href;
+    }
+    if (!blocked) el.removeAttribute('aria-disabled');
+  });
 }
 
 // Обработчики кнопок вариантов
@@ -556,7 +576,7 @@ document.querySelectorAll('.option').forEach(function(btn) {
     btn.closest('.options').querySelectorAll('.option').forEach(function(x){ x.classList.remove('selected'); });
     btn.classList.add('selected');
 
-    ymGoal('quiz_answer', {step: currentStep});
+    ymGoal('quiz_answer', {step: currentStep});  // текст ответа не передаётся
 
     // Автопереход
     setTimeout(function() { showStep(currentStep + 1); }, 200);
@@ -578,39 +598,44 @@ document.getElementById('hero-cta').addEventListener('click', function(e) {
   setTimeout(function(){ showStep(1); if (!quizStarted){ quizStarted=true; ymGoal('quiz_start'); } }, 300);
 });
 
-// Кнопка телефона
-document.getElementById('btn-ph').addEventListener('click', function() {
-  var pb = document.getElementById('phone-block');
-  pb.style.display = pb.style.display === 'none' ? 'block' : 'none';
-  ymGoal('contact_channel_click', {channel: 'phone'});
-});
+// Согласие чекбокс
+var consentCheckEl = document.getElementById('consentCheck');
+if (consentCheckEl) {
+  // Блокируем кнопки сразу
+  applyConsentState();
+  consentCheckEl.addEventListener('change', function() {
+    consentGiven = this.checked;
+    // Сохраняем только факт согласия и версию — не данные
+    if (consentGiven) {
+      try { sessionStorage.setItem('rekoyur_consent_given', 'v1-2026'); } catch(e) {}
+    } else {
+      try { sessionStorage.removeItem('rekoyur_consent_given'); } catch(e) {}
+    }
+    applyConsentState();
+  });
+}
 
-// Аналитика мессенджеров
+// Кнопки мессенджеров (разблокируются после согласия)
 ['btn-tg','btn-wa','btn-max'].forEach(function(id) {
   var el = document.getElementById(id);
   if (!el) return;
-  el.addEventListener('click', function() {
+  el.addEventListener('click', function(e) {
+    if (!consentGiven) { e.preventDefault(); consentCheckEl && consentCheckEl.focus(); return; }
     var ch = id.replace('btn-','');
-    ymGoal('contact_channel_click', {channel: ch});
+    // Обезличенные параметры: channel + категории ответов
+    ymGoal('contact_channel_click', {channel: ch, quiz_completed: true, consent_given: true});
     ymGoal('messenger_open', {channel: ch});
+    ymGoal('lead_submit', {channel: ch, quiz_completed: true, consent_given: true});
   });
 });
 
-// Отправка телефона
-document.getElementById('phoneSendBtn').addEventListener('click', function() {
-  var ph = document.getElementById('phoneInput').value.trim();
-  if (!ph || ph.replace(/\D/g,'').length < 10) {
-    document.getElementById('phoneInput').focus();
-    return;
-  }
-  // Защита от повторной отправки
-  this.disabled = true;
-  ymGoal('lead_submit', {channel: 'phone'});
-  // Формируем ссылку mailto с телефоном (не отправляем напрямую — ручная обработка)
-  document.getElementById('phone-sent-msg').style.display = 'block';
-  document.getElementById('phoneInput').style.display = 'none';
-  this.style.display = 'none';
-});
+// Кнопка tel: — аналитика без персональных данных
+var btnPh = document.getElementById('btn-ph');
+if (btnPh) {
+  btnPh.addEventListener('click', function() {
+    ymGoal('contact_channel_click', {channel: 'phone_direct', quiz_completed: true, consent_given: consentGiven});
+  });
+}
 
 // ══ COOKIE ═════════════════════════════════════════════════════
 (function() {
