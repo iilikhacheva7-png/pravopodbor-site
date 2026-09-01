@@ -190,6 +190,15 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <script>
 document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
 let current=1; const total=6;
+
+// ── Формирование URL Яндекс Формы ─────────────────────────────
+function buildYaFormUrl(leadTopic, quizAnswers) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe', '1');
+  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
+  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  return u.toString();
+}
 function showStep(n){
   current=n;
   document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
@@ -204,9 +213,7 @@ function showStep(n){
     ].filter(Boolean).join(' | ');
     var dgIframe=document.getElementById('dg-yform');
     if(dgIframe&&!dgIframe.src){
-      dgIframe.src='https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1'
-        +'&lead_topic='+encodeURIComponent('Долги / банкротство')
-        +'&quiz_answers='+encodeURIComponent(dgAnswers);
+      dgIframe.src=buildYaFormUrl('Долги / банкротство',dgAnswers);
     }
   }
 }
@@ -295,13 +302,10 @@ document.getElementById('debtForm').addEventListener('submit',async e=>{
     if(progressEl) progressEl.style.display='none';
     form.style.display='none';
     document.getElementById('success').style.display='block';
-    console.log('Form submitted — sending Yandex goal: debt_form_submit');
     setTimeout(function(){
       if(typeof ym === 'function'){
         ym(110730303,'reachGoal','debt_form_submit');
-        console.log('Yandex goal sent: debt_form_submit');
       } else {
-        console.warn('ym not available — goal NOT sent');
       }
     }, 0);
   }catch(err){alert('Не удалось отправить форму. Попробуйте ещё раз или напишите в Telegram.');}
