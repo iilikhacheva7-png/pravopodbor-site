@@ -50,8 +50,9 @@ footer{padding:34px 0;color:#7b8494;font-size:12px;background:#0b1320}.foot{disp
 m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
 (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
 </script>
+<script src="https://forms.yandex.ru/_static/embed.js"></script>
 </head>
 <body>
 <div class="wrap"><header><a class="logo" href="/">По <span>рекомендации</span></a><div class="headnote">Юридическая помощь · онлайн по России</div></header></div>
@@ -146,15 +147,24 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 </div><div class="quiz-nav"><button type="button" class="back">← Назад</button><button type="button" class="btn next">Дальше</button></div></div>
 
 <div class="step" data-step="6">
-<div style="text-align:center;padding:24px 20px;">
-  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
-  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
-  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
-  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
-  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:10px;">
+<div id="dg-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
+  <iframe
+    id="dg-yform"
+    src=""
+    frameborder="0"
+    name="ya-form-6a966ca9f47e73fef3e3a154"
+    style="width:100%;min-height:520px;border:0;"
+    scrolling="no">
+  </iframe>
+</div>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:10px;text-align:center;">
     <a href="/privacy-policy.html" style="color:#c9a84c;">Политика обработки персональных данных</a>
     &nbsp;·&nbsp;
     <a href="/consent-personal-data.html" style="color:#c9a84c;">Согласие на обработку персональных данных</a>
+  </p>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:8px;text-align:center;">
+    Или напишите напрямую:
+    <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="color:#c9a84c;">alikhacheva7@yandex.ru</a>
   </p>
 </div>
 </div>
@@ -180,7 +190,26 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <script>
 document.querySelectorAll('.faq-q').forEach(b=>b.addEventListener('click',()=>b.parentElement.classList.toggle('open')));
 let current=1; const total=6;
-function showStep(n){current=n;document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));document.getElementById('bar').style.width=(n/total*100)+'%';}
+function showStep(n){
+  current=n;
+  document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
+  document.getElementById('bar').style.width=(n/total*100)+'%';
+  if(n===6){
+    var dgAnswers=[
+      document.getElementById('fDebt')?document.getElementById('fDebt').value:'',
+      document.getElementById('fTypes')?document.getElementById('fTypes').value:'',
+      document.getElementById('fPay')?document.getElementById('fPay').value:'',
+      document.getElementById('fIncome')?document.getElementById('fIncome').value:'',
+      document.getElementById('fProperty')?document.getElementById('fProperty').value:''
+    ].filter(Boolean).join(' | ');
+    var dgIframe=document.getElementById('dg-yform');
+    if(dgIframe&&!dgIframe.src){
+      dgIframe.src='https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1'
+        +'&lead_topic='+encodeURIComponent('Долги / банкротство')
+        +'&quiz_answers='+encodeURIComponent(dgAnswers);
+    }
+  }
+}
 function selectedValues(box){return [...box.querySelectorAll('.option.selected')].map(b=>b.textContent.trim()).join(', ')}
 document.querySelectorAll('.options').forEach(box=>{
   const multi=box.classList.contains('multi'), field=document.getElementById(box.dataset.field);
