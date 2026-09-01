@@ -626,7 +626,7 @@ document.getElementById('alimentyForm').addEventListener('submit', async functio
     document.getElementById('alSuccess').style.display = 'block';
 
     // Метрика — после рендера
-    console.log('Formspree OK — sending Yandex goal: alimenty_form_submit');
+    console.log('Form submitted — sending Yandex goal: alimenty_form_submit');
     setTimeout(function() {
       if (typeof ym === 'function') {
         ym(110730303, 'reachGoal', 'alimenty_form_submit');
