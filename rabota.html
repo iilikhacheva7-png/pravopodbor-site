@@ -765,6 +765,15 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 </div>
 
 <script>
+
+// ── Формирование URL Яндекс Формы ─────────────────────────────
+function buildYaFormUrl(leadTopic, quizAnswers) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe', '1');
+  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
+  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  return u.toString();
+}
 // ── УТИЛИТА YM ────────────────────────────────────────────────
 function ymSafe(goal) {
   if (typeof ym === 'function') ym(110730303, 'reachGoal', goal);
@@ -794,9 +803,7 @@ function rbShowStep(n) {
       ].filter(Boolean).join(' | ');
       var rbIframe = document.getElementById('rb-yform');
       if(rbIframe && !rbIframe.src) {
-        rbIframe.src = 'https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1'
-          + '&lead_topic=' + encodeURIComponent('Трудовой спор')
-          + '&quiz_answers=' + encodeURIComponent(rbAnswers);
+        rbIframe.src=buildYaFormUrl('Трудовой спор',rbAnswers);
       }
     }
   var titleEl = document.getElementById('rbTitle');
@@ -924,11 +931,8 @@ document.getElementById('rabotaForm').addEventListener('submit', async function(
     if (progressEl) progressEl.style.display = 'none';
     form.style.display = 'none';
     document.getElementById('rbSuccess').style.display = 'block';
-
-    console.log('Form submitted — sending Yandex goal: rabota_form_submit');
     setTimeout(function() {
       ymSafe('rabota_form_submit');
-      console.log('Yandex goal sent: rabota_form_submit');
     }, 0);
 
   } catch(err) {
