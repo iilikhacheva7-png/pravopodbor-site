@@ -298,8 +298,8 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           <button type="button" class="option" data-field="fDebt" data-val="Долга нет, работает официально">Долга нет, работает официально</button>
           <button type="button" class="option" data-field="fDebt" data-val="Есть долг до 100 000 ₽">Есть долг до 100 000 ₽</button>
           <button type="button" class="option" data-field="fDebt" data-val="Есть долг более 100 000 ₽">Есть долг более 100 000 ₽</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют обсуждения">Доходы скрывает / работает неофициально</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют обсуждения">Не знаю / сложная ситуация</button>
+          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют индивидуального обсуждения">Доходы скрывает / работает неофициально</button>
+          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют индивидуального обсуждения">Не знаю / сложная ситуация</button>
         </div>
         <div class="quiz-nav">
           <button type="button" class="back-btn" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
@@ -564,11 +564,7 @@ document.querySelectorAll('.option').forEach(function(btn) {
     var fid = btn.dataset.field;
     var val = btn.dataset.val;
 
-    // Для вопроса о доходах (шаг 4, fDebt) — всегда нейтральный текст для чувствительных вариантов
-    // Варианты с "скрывает / неофициально" и "Не знаю" → нейтрализуем
-    if (fid === 'fDebt' && (val === 'Доходы и долг требуют обсуждения')) {
-      val = 'Доходы и долг требуют индивидуального обсуждения';
-    }
+    // Шаг 4: нейтральные варианты уже заданы в data-val атрибутах HTML
 
     answers[fid] = val;
 
