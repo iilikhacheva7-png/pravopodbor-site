@@ -1129,7 +1129,8 @@
     <button class="modal-close" onclick="closeModal('client')">&times;</button>
     <h3>Получить помощь</h3>
     <p class="modal-sub">Опишите ситуацию — помогу с документом или подберу юриста бесплатно.</p>
-    <div style="width:100%;max-width:650px;margin:0 auto 16px;">
+    <p style="font-size:13px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;max-width:500px;margin-left:auto;margin-right:auto;text-align:center;">Анкета нужна, чтобы сопоставить заявку с вашим сообщением. Подробности ситуации и документы не указывайте в форме — их можно обсудить после того, как вы самостоятельно напишете нам в мессенджере.</p>
+<div style="width:100%;max-width:650px;margin:0 auto 16px;">
   <iframe
     src="https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1"
     frameborder="0"
@@ -1181,7 +1182,8 @@
     <button class="modal-close" onclick="closeModal('callback')">&times;</button>
     <h3>Свяжитесь со мной</h3>
     <p class="modal-sub">Оставьте контакт — свяжусь удобным для вас способом.</p>
-    <div style="width:100%;max-width:650px;margin:0 auto 16px;">
+    <p style="font-size:13px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;max-width:500px;margin-left:auto;margin-right:auto;text-align:center;">Анкета нужна, чтобы сопоставить заявку с вашим сообщением. Подробности ситуации и документы не указывайте в форме — их можно обсудить после того, как вы самостоятельно напишете нам в мессенджере.</p>
+<div style="width:100%;max-width:650px;margin:0 auto 16px;">
   <iframe
     src="https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1"
     frameborder="0"
@@ -1317,11 +1319,12 @@ function ymSafeMsg(messenger, page) {
 
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic, quizAnswers) {
+function buildYaFormUrl(leadTopic) {
   var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
   u.searchParams.set('iframe', '1');
-  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
-  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  if (leadTopic) {
+    u.searchParams.set('lead_topic', leadTopic);
+  }
   return u.toString();
 }
 </script>
