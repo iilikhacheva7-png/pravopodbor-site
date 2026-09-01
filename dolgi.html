@@ -115,7 +115,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <div class="quiz-copy"><div class="kicker">Мини-разбор</div><h2>Ответьте на 5 вопросов о долгах</h2><p class="section-intro">Это займёт около минуты. Ответы придут вместе с заявкой и помогут специалисту быстрее понять вашу ситуацию.</p><div class="note">На этом этапе не нужны паспортные данные, номера договоров или точные остатки по каждому кредиту.</div></div>
 <div class="quiz">
 <div class="progress"><i id="bar"></i></div>
-<form id="debtForm" action="https://formspree.io/f/xpqekrvz" method="POST">
+<div id="debtForm">
 <input type="hidden" name="form_type" value="Мини-анкета: долги / банкротство">
 <input type="hidden" name="Сумма долгов" id="fDebt">
 <input type="hidden" name="Виды долгов" id="fTypes">
@@ -145,13 +145,15 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <button type="button" class="option">Единственное жильё</button><button type="button" class="option">Ипотечное жильё</button><button type="button" class="option">Автомобиль</button><button type="button" class="option">Другое имущество</button><button type="button" class="option">Имущества нет</button>
 </div><div class="quiz-nav"><button type="button" class="back">← Назад</button><button type="button" class="btn next">Дальше</button></div></div>
 
-<div class="step" data-step="6"><div class="step-count">Последний шаг</div><h3>Куда передать результат первичного разбора?</h3>
-<label>Ваше имя<input type="text" name="Имя" required placeholder="Как вас зовут?"></label>
-<label>Телефон<input type="tel" name="Телефон" id="phone" inputmode="tel" autocomplete="tel" required placeholder="+7 (999) 000-00-00"></label>
-<div class="checkrow"><input type="checkbox" id="consent" required><label for="consent">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и передачей указанных мной данных юридическому специалисту для связи и первичного разбора ситуации.</label></div>
-<div class="quiz-nav"><button type="button" class="back">← Назад</button><button type="submit" class="btn">Получить бесплатный разбор</button></div>
+<div class="step" data-step="6">
+<div style="text-align:center;padding:24px 20px;">
+  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
+  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
+  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
+  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
 </div>
-</form>
+</div>
+</div>
 <div class="success" id="success"><div class="msng-block">
   <p class="msng-title">Заявка отправлена ✓</p>
   <span class="msng-cmd">Теперь обязательно напишите мне.</span>
