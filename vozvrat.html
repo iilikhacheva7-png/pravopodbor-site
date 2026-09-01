@@ -492,6 +492,7 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 
         <!-- Шаг 5 — контакты -->
                 <div class="step-q" data-step="5">
+          <p style="font-size:13px;color:var(--ink-soft,#a9b4c7);margin-bottom:16px;line-height:1.65;max-width:500px;margin-left:auto;margin-right:auto;text-align:center;">Анкета нужна, чтобы сопоставить заявку с вашим сообщением. Подробности ситуации и документы не указывайте в форме — их можно обсудить после того, как вы самостоятельно напишете нам в мессенджере.</p>
           <div id="vz-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
             <iframe
               id="vz-yform"
@@ -637,11 +638,12 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 <script>
 
 // ── Формирование URL Яндекс Формы ─────────────────────────────
-function buildYaFormUrl(leadTopic, quizAnswers) {
+function buildYaFormUrl(leadTopic) {
   var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
   u.searchParams.set('iframe', '1');
-  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
-  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  if (leadTopic) {
+    u.searchParams.set('lead_topic', leadTopic);
+  }
   return u.toString();
 }
 // ── УТИЛИТА ym ────────────────────────────────────────────────
@@ -665,15 +667,10 @@ function vzShowStep(n) {
 
     // Встраивание Яндекс Формы на последнем шаге
     if(isLast) {
-      var vzAnswers = [
-        document.getElementById('fType')?document.getElementById('fType').value:''
-    document.getElementById('fWhen')?document.getElementById('fWhen').value:''
-    document.getElementById('fWhat')?document.getElementById('fWhat').value:''
-    document.getElementById('fRefund')?document.getElementById('fRefund').value:''
-      ].filter(Boolean).join(' | ');
       var vzIframe = document.getElementById('vz-yform');
       if(vzIframe && !vzIframe.src) {
-        vzIframe.src=buildYaFormUrl('Возврат страховок и допуслуг',vzAnswers);
+        vzIframe.src=buildYaFormUrl('Возврат страховок и дополнительных услуг');
+      }
       }
     }
   var titleEl = document.getElementById('vzTitle');
