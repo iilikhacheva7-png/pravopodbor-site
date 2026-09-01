@@ -176,8 +176,9 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
 k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
 (window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
-ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:true});
+ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
 </script>
+<script src="https://forms.yandex.ru/_static/embed.js"></script>
 </head>
 <body>
 
@@ -430,17 +431,25 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
         <!-- Шаг 7 — контакты -->
         <div class="step-q" data-step="7">
-<div style="text-align:center;padding:24px 20px;">
-  <h3 style="font-size:18px;font-weight:700;margin-bottom:10px;">Связаться с нами</h3>
-  <p style="font-size:14px;color:var(--ink-soft,#a9b4c7);margin-bottom:18px;line-height:1.6;">Для бесплатного первичного разбора напишите на электронную почту. Кратко опишите вопрос и оставьте удобный способ связи.</p>
-  <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="display:inline-block;background:var(--accent,#c9a24b);color:#1a1306;font-weight:700;font-size:15px;padding:13px 28px;border-radius:999px;text-decoration:none;">Написать на email</a>
-  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:14px;max-width:440px;margin-left:auto;margin-right:auto;line-height:1.6;">В первом сообщении не отправляйте паспортные данные, документы, сведения о здоровье, данные детей и другую конфиденциальную информацию. Если такие сведения потребуются, мы отдельно сообщим порядок их безопасной передачи.</p>
-  <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:10px;">
-    <a href="/privacy-policy.html" style="color:#c9a84c;">Политика обработки персональных данных</a>
-    &nbsp;·&nbsp;
-    <a href="/consent-personal-data.html" style="color:#c9a84c;">Согласие на обработку персональных данных</a>
-  </p>
-</div>
+          <div id="al-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
+            <iframe
+              id="al-yform"
+              src=""
+              frameborder="0"
+              name="ya-form-6a966ca9f47e73fef3e3a154"
+              style="width:100%;min-height:520px;border:0;"
+              scrolling="no">
+            </iframe>
+          </div>
+          <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:10px;text-align:center;">
+            <a href="/privacy-policy.html" style="color:#c9a84c;">Политика обработки персональных данных</a>
+            &nbsp;·&nbsp;
+            <a href="/consent-personal-data.html" style="color:#c9a84c;">Согласие на обработку персональных данных</a>
+          </p>
+          <p style="font-size:12px;color:var(--ink-soft,#a9b4c7);margin-top:8px;text-align:center;">
+            Или напишите напрямую:
+            <a href="mailto:alikhacheva7@yandex.ru?subject=%D0%97%D0%B0%D1%8F%D0%B2%D0%BA%D0%B0%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0%20%C2%AB%D0%9F%D0%BE%20%D1%80%D0%B5%D0%BA%D0%BE%D0%BC%D0%B5%D0%BD%D0%B4%D0%B0%D1%86%D0%B8%D0%B8%C2%BB" style="color:#c9a84c;">alikhacheva7@yandex.ru</a>
+          </p>
         </div>
       </div>
 
@@ -524,6 +533,27 @@ function alShowStep(n) {
   document.getElementById('alBar').style.width = pct + '%';
   // Меняем левую колонку на последнем шаге
   var isLast = (n === alTotal + 1);
+
+  // При переходе на шаг 7 — строим src Яндекс Формы
+  if (isLast) {
+    var alAnswers = [
+      document.getElementById('fSit') ? document.getElementById('fSit').value : '',
+      document.getElementById('fDoc') ? document.getElementById('fDoc').value : '',
+      document.getElementById('fSum') ? document.getElementById('fSum').value : '',
+      document.getElementById('fDebt') ? document.getElementById('fDebt').value : '',
+      document.getElementById('fFSSP') ? document.getElementById('fFSSP').value : '',
+      document.getElementById('fIncome') ? document.getElementById('fIncome').value : ''
+    ].filter(Boolean).join(' | ');
+
+    var alIframe = document.getElementById('al-yform');
+    if (alIframe && !alIframe.src) {
+      var alBase = 'https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/?iframe=1';
+      alIframe.src = alBase
+        + '&lead_topic=' + encodeURIComponent('Алименты')
+        + '&quiz_answers=' + encodeURIComponent(alAnswers);
+    }
+  }
+
   var titleEl = document.getElementById('quizCopyTitle');
   var subEl = document.getElementById('quizCopySub');
   var kickerEl = document.getElementById('quizCopyKicker');
@@ -539,7 +569,11 @@ document.querySelectorAll('#alimentyForm .options').forEach(function(box) {
     btn.addEventListener('click', function() {
       box.querySelectorAll('.option').forEach(function(x) { x.classList.remove('selected'); });
       btn.classList.add('selected');
-      if (field) field.value = btn.textContent.trim();
+      var rawVal = btn.textContent.trim();
+      // Нейтрализация вариантов вопроса 6 (сведения о третьем лице)
+      var sensAl = ["Работает неофициально", "ИП / самозанятый", "Заработок есть, но постоянно меняется"];
+      var safeVal = sensAl.indexOf(rawVal) !== -1 ? 'Есть обстоятельства, требующие индивидуального обсуждения в мессенджере' : rawVal;
+      if (field) field.value = safeVal;
       if (alCurrent <= alTotal) alShowStep(alCurrent + 1);
     });
   });
@@ -596,55 +630,7 @@ if (alPhone) {
 }
 
 // ── ОТПРАВКА ФОРМЫ ────────────────────────────────────────────
-document.getElementById('alimentyForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  var form = e.target;
-
-  // Проверяем, что все шаги заполнены
-  var required = ['fSit','fDoc','fSum','fDebt','fFSSP','fIncome'];
-  for (var i = 0; i < required.length; i++) {
-    if (!document.getElementById(required[i]).value) {
-      alert('Пожалуйста, заполните все шаги анкеты');
-      return;
-    }
-  }
-
-  // Определяем регион/оператор телефона
-  if (alPhone) {
-    var info = detectPhoneInfo(alPhone.value);
-    document.getElementById('fPhoneRegion').value = info.region;
-    document.getElementById('fPhoneOperator').value = info.operator;
-  }
-
-  try {
-    var r = await fetch(form.action, {
-      method: 'POST',
-      body: new FormData(form),
-      headers: {Accept: 'application/json'}
-    });
-    if (!r.ok) throw new Error();
-
-    // Успех
-    var progressEl = document.querySelector('#alimentyForm .progress-bar');
-    if (progressEl) progressEl.style.display = 'none';
-    form.style.display = 'none';
-    document.getElementById('alSuccess').style.display = 'block';
-
-    // Метрика — после рендера
-    console.log('Form submitted — sending Yandex goal: alimenty_form_submit');
-    setTimeout(function() {
-      if (typeof ym === 'function') {
-        ym(110730303, 'reachGoal', 'alimenty_form_submit');
-        console.log('Yandex goal sent: alimenty_form_submit');
-      } else {
-        console.warn('ym not available');
-      }
-    }, 0);
-
-  } catch(err) {
-    alert('Не удалось отправить форму. Попробуйте ещё раз или напишите в Telegram.');
-  }
-});
+// Отправка через Яндекс Форму (iframe)
 
 // ── ВИДЖЕТ ────────────────────────────────────────────────────
 document.querySelector('#float-widget .trigger').addEventListener('click', function() {
