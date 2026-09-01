@@ -769,7 +769,7 @@ document.getElementById('vozvratForm').addEventListener('submit', async function
     form.style.display = 'none';
     document.getElementById('vzSuccess').style.display = 'block';
 
-    console.log('Formspree OK — sending Yandex goal: vozvrat_form_submit');
+    console.log('Form submitted — sending Yandex goal: vozvrat_form_submit');
     setTimeout(function() {
       ymSafe('vozvrat_form_submit');
       console.log('Yandex goal sent: vozvrat_form_submit');
