@@ -758,7 +758,6 @@
       <a href="vozvrat.html" class="btn btn-outline">Страховки по кредитам</a>
       <a href="dolgi.html" class="btn btn-outline">Списание долгов</a>
       <a href="partners.html" class="btn btn-outline">Юристам и адвокатам</a>
-      <a href="migrant.html" class="btn btn-outline">Помощь мигрантам</a>
       <a href="documents.html" class="btn btn-outline">Оформить документ</a>
       <a href="#" class="btn" onclick="openModal('client'); return false;">Подобрать юриста</a>
     </div>
@@ -949,22 +948,7 @@
     <a href="#" class="btn btn-outline" onclick="openModal('callback'); return false;">Перезвоните мне</a>
   </div>
 
-  <!-- Блок для мигрантов -->
-  <section class="reveal" style="margin-bottom:48px;">
-    <a href="/migrant.html" style="text-decoration:none;">
-      <div style="background:linear-gradient(135deg,#16243B 0%,#1e3a5f 100%);border:1.5px solid var(--accent);border-radius:var(--radius);padding:32px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;transition:opacity .2s;" onmouseover="this.style.opacity='.9'" onmouseout="this.style.opacity='1'">
-        <div style="font-size:48px;flex-shrink:0;">🇹🇯 🇷🇺</div>
-        <div style="flex:1;min-width:220px;">
-          <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:8px;">Для мигрантов · Барои муҳоҷирон</div>
-          <div style="font-size:20px;font-weight:800;color:var(--ink);margin-bottom:8px;">Помощь с документами для жизни и работы в России</div>
-          <div style="font-size:14px;color:var(--ink-soft);line-height:1.6;">Патент, миграционный учёт, РВП, ВНЖ, декларация 3-НДФЛ — заполним за вас. Стоимость индивидуальная. Страница доступна на русском и таджикском языках.</div>
-        </div>
-        <div style="flex-shrink:0;">
-          <span style="background:var(--accent);color:#1A1306;border-radius:999px;padding:10px 22px;font-weight:700;font-size:14px;white-space:nowrap;">Подробнее →</span>
-        </div>
-      </div>
-    </a>
-  </section>
+  
 
   <section class="reviews reveal">
     <h2 class="section-title">Что говорят клиенты</h2>
@@ -1331,6 +1315,15 @@ function ymSafeMsg(messenger, page) {
   }, 0);
 }
 
+
+// ── Формирование URL Яндекс Формы ─────────────────────────────
+function buildYaFormUrl(leadTopic, quizAnswers) {
+  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
+  u.searchParams.set('iframe', '1');
+  if (leadTopic) u.searchParams.set('lead_topic', leadTopic);
+  if (quizAnswers) u.searchParams.set('quiz_answers', quizAnswers);
+  return u.toString();
+}
 </script>
 
 
