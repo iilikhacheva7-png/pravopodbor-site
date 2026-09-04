@@ -363,24 +363,32 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         </div>
       </div>
 
-      <!-- ШАГ 5: Описание + форма -->
+      <!-- ШАГ 5: Подробное описание -->
       <div class="step-q" data-step="5" id="pl-sq5">
-        <div id="pl-form-header">
-          <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Подробно опишите ситуацию</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 14px;line-height:1.6;">Что произошло, когда вы об этом узнали, какой размер алиментов установлен, какая задолженность указана, платили ли вы алименты самостоятельно, что уже сделал пристав или суд и какого результата вы хотите добиться.</p>
-          <textarea
-            id="pl-description"
-            class="textarea-field"
-            placeholder="Опишите вашу ситуацию как можно подробнее — это поможет разобраться и предложить подходящие варианты..."
-            rows="5"
-          ></textarea>
-          <p style="font-size:12px;color:var(--muted);margin:6px 0 20px;line-height:1.5;">Чем подробнее — тем точнее разбор.</p>
-
-          <div style="height:1px;background:var(--line);margin:0 0 20px;"></div>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 16px;line-height:1.6;">Оставьте имя и номер — найду вашу заявку, когда напишете в мессенджер.</p>
+        <h3>Подробно опишите ситуацию</h3>
+        <p style="font-size:14px;color:var(--muted);margin:-10px 0 14px;line-height:1.6;">Что произошло, когда вы об этом узнали, какой размер алиментов установлен, какая задолженность указана, платили ли вы алименты самостоятельно, что уже сделал пристав или суд и какого результата вы хотите добиться.</p>
+        <textarea
+          id="pl-description"
+          class="textarea-field"
+          placeholder="Опишите вашу ситуацию как можно подробнее — это поможет разобраться и предложить подходящие варианты..."
+          rows="6"
+        ></textarea>
+        <p style="font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.5;">Чем подробнее — тем точнее разбор.</p>
+        <div class="quiz-nav" style="margin-top:20px;">
+          <button type="button" class="back-btn" data-target="4">← Назад</button>
+          <button type="button" id="pl-desc-next"
+            style="min-height:44px;padding:0 24px;border-radius:999px;background:var(--navy);color:#fff;border:none;font:700 14px/1 inherit;cursor:pointer;font-family:inherit;transition:opacity .15s;">
+            Далее →
+          </button>
         </div>
+      </div>
 
+      <!-- ШАГ 6: Контактные данные -->
+      <div class="step-q" data-step="6" id="pl-sq6">
         <div id="pl-contact-form">
+          <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Куда отправить результат разбора?</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Оставьте имя и номер телефона — я найду вашу заявку, когда напишете в мессенджер.</p>
+
           <!-- Honeypot -->
           <input type="text" id="pl-honeypot" tabindex="-1" autocomplete="off"
             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
@@ -393,6 +401,25 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
             <div class="form-field">
               <label for="pl-contact" class="form-label">Номер телефона *</label>
               <input type="tel" id="pl-contact" name="contact" autocomplete="tel" maxlength="18" required placeholder="+7 (___) ___-__-__">
+            </div>
+          </div>
+
+          <!-- Предпочтительный мессенджер -->
+          <div style="margin-bottom:16px;">
+            <p style="font-size:13px;font-weight:600;color:var(--muted);margin:0 0 8px;">Предпочтительный мессенджер</p>
+            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
+              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
+                <input type="radio" name="pl-messenger" value="MAX" style="display:none;">
+                <span style="font-size:18px;">✉️</span> MAX
+              </label>
+              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
+                <input type="radio" name="pl-messenger" value="Telegram" style="display:none;">
+                <span style="font-size:18px;">✈️</span> Telegram
+              </label>
+              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
+                <input type="radio" name="pl-messenger" value="WhatsApp" style="display:none;">
+                <span style="font-size:18px;">💬</span> WhatsApp
+              </label>
             </div>
           </div>
 
@@ -414,7 +441,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           <!-- Кнопка -->
           <button type="button" id="pl-submit-btn"
             style="width:100%;min-height:50px;background:var(--navy);color:#fff;border:none;border-radius:12px;font:700 15px/1 inherit;cursor:pointer;transition:opacity .15s;font-family:inherit;">
-            Отправить заявку
+            Отправить на бесплатный разбор
           </button>
           <p style="font-size:11px;color:var(--muted);text-align:center;margin:10px 0 0;line-height:1.5;">Данные передаются защищённо. Ответим в течение рабочего дня.</p>
         </div>
@@ -507,7 +534,7 @@ function collectUtm() {
 }
 
 // ══ КВИЗ — СОСТОЯНИЕ ══════════════════════════════════════════════
-var TOTAL_STEPS = 5;
+var TOTAL_STEPS = 6;
 var currentStep = 1;
 var answers     = {};
 var showDebtQuestion = false; // показывать ли шаг 2 (сумма долга)
@@ -516,13 +543,13 @@ var quizDone    = false;
 var submitInProgress = false;
 
 function getVisualStep(logicStep) {
-  // Если не показываем шаг 2 — "сжимаем" шаги
+  // Если не показываем шаг 2 — сжимаем счётчик на 1
   if (!showDebtQuestion && logicStep > 2) return logicStep - 1;
   return logicStep;
 }
 
 function getTotalVisible() {
-  return showDebtQuestion ? 5 : 4;
+  return showDebtQuestion ? 6 : 5;
 }
 
 function showStep(n) {
@@ -552,9 +579,9 @@ function showStep(n) {
   var pct = isFinal ? 100 : Math.round(visStep / total * 100);
   document.getElementById('plBar').style.width = pct + '%';
   document.getElementById('pl-prog-label').textContent =
-    isFinal ? 'Готово!' : 'Шаг ' + visStep + ' из ' + total;
+    isFinal ? 'Последний шаг' : 'Шаг ' + visStep + ' из ' + total;
   document.getElementById('pl-prog-fraction').textContent =
-    isFinal ? '✓' : visStep + ' / ' + total;
+    isFinal ? '→' : visStep + ' / ' + total;
 
   var widget = document.getElementById('chat-widget');
   if (widget) widget.classList.toggle('quiz-active', n > 1 && !isFinal);
@@ -616,21 +643,42 @@ document.querySelectorAll('#pl-quiz-card .back-btn').forEach(function(b) {
   });
 });
 
-// Назад с финального шага
+// Назад с финального шага (шаг 6) — возврат на шаг 5 (textarea)
 var backFromForm = document.getElementById('pl-back-from-form');
 if (backFromForm) {
   backFromForm.addEventListener('click', function() {
+    // Если уже показан success — нельзя вернуться
     var ss = document.getElementById('pl-success-screen');
-    var cf = document.getElementById('pl-contact-form');
-    if (ss && ss.style.display !== 'none') {
-      ss.style.display = 'none';
-      if (cf) cf.style.display = '';
-      return;
-    }
+    if (ss && ss.style.display !== 'none') return;
     ymGoal('quiz_p_back', {step: currentStep});
-    showStep(4);
+    showStep(5);
   });
 }
+
+// Кнопка «Далее» на шаге 5 (textarea)
+var descNext = document.getElementById('pl-desc-next');
+if (descNext) {
+  descNext.addEventListener('click', function() {
+    // Сохраняем текст описания в скрытое поле
+    var desc = document.getElementById('pl-description');
+    var fDesc = document.getElementById('fDescription');
+    if (desc && fDesc) fDesc.value = desc.value;
+    ymGoal('quiz_p_answer', {step: 5});
+    showStep(6);
+  });
+}
+
+// Подсветка выбранного мессенджера
+document.querySelectorAll('input[name="pl-messenger"]').forEach(function(radio) {
+  radio.addEventListener('change', function() {
+    document.querySelectorAll('input[name="pl-messenger"]').forEach(function(r) {
+      r.closest('label').style.borderColor = '#ddd6ca';
+      r.closest('label').style.background = '';
+    });
+    radio.closest('label').style.borderColor = 'var(--gold)';
+    radio.closest('label').style.background = '#fbf7ef';
+  });
+});
 
 // CTA → квиз
 function scrollToQuiz() {
@@ -666,6 +714,8 @@ if (submitBtn) {
     var consent  = (document.getElementById('pl-consent-chk') || {}).checked;
     var honeypot = (document.getElementById('pl-honeypot')    || {}).value || '';
     var descr    = (document.getElementById('pl-description') || {}).value || '';
+    var messengerEl = document.querySelector('input[name="pl-messenger"]:checked');
+    var messenger = messengerEl ? messengerEl.value : '';
 
     var digits = rawPhone.replace(/\D/g, '');
     if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
@@ -705,6 +755,7 @@ if (submitBtn) {
         docs:        answers['fDocs']       || '',
         description: descr.trim()
       },
+      messenger: messenger,
       utm:          collectUtm(),
       consent:      true,
       website:      honeypot,
@@ -726,10 +777,8 @@ if (submitBtn) {
         ymGoal('quiz_p_complete');
         ymGoal('lead_p_sent');
         var cf = document.getElementById('pl-contact-form');
-        var fh = document.getElementById('pl-form-header');
         var ss = document.getElementById('pl-success-screen');
         if (cf) cf.style.display = 'none';
-        if (fh) fh.style.display = 'none';
         if (ss) ss.style.display = '';
         var bf = document.getElementById('pl-back-from-form');
         if (bf) bf.style.display = 'none';
@@ -776,10 +825,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  // Textarea — сохранить в hidden при потере фокуса
-  var desc = document.getElementById('pl-description');
-  if (desc) {
-    desc.addEventListener('input', function() {
+  // Textarea — дублируем значение в hidden field при вводе
+  var descField = document.getElementById('pl-description');
+  if (descField) {
+    descField.addEventListener('input', function() {
       var el = document.getElementById('fDescription');
       if (el) el.value = this.value;
     });
@@ -802,3 +851,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
