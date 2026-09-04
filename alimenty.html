@@ -316,8 +316,10 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
       <!-- ФИНАЛЬНЫЙ ШАГ — нативная форма -->
       <div class="step-q" data-step="5" id="sq5">
-        <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Почти готово!</h3>
-        <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Оставьте имя и номер телефона, чтобы я могла найти вашу заявку после сообщения в мессенджере.</p>
+        <div id="al-form-header">
+          <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Почти готово!</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Оставьте имя и номер телефона, чтобы я могла найти вашу заявку после сообщения в мессенджере.</p>
+        </div>
 
         <!-- Нативная форма заявки -->
         <div id="al-contact-form">
@@ -366,10 +368,9 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
         <!-- Экран успеха -->
         <div id="al-success-screen" style="display:none;text-align:center;padding:8px 0;">
-          <div style="font-size:40px;margin-bottom:12px;">✅</div>
-          <h3 style="font:500 22px/1.2 Georgia;color:var(--navy);margin:0 0 10px;">Заявка отправлена!</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 6px;line-height:1.6;">Чтобы получить бесплатный разбор, напишите мне в любом удобном мессенджере. Я увижу вашу заявку и продолжу общение там.</p>
-          <div id="al-req-id" style="font-size:12px;color:var(--muted);margin-bottom:20px;"></div>
+          <div style="font-size:40px;margin-bottom:16px;">✅</div>
+          <h3 style="font:500 26px/1.2 Georgia;color:var(--navy);margin:0 0 12px;">Напишите мне, чтобы получить бесплатный разбор</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;">Заявку я уже получила. Выберите удобный мессенджер и напишите мне — я найду вашу заявку по номеру телефона.</p>
           <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
             <a id="ss-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
@@ -384,7 +385,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
               💬 Написать в WhatsApp
             </a>
           </div>
-          <p style="font-size:12px;color:var(--muted);line-height:1.55;">Напишите «Я отправил заявку» — и я сразу увижу ваше обращение.</p>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Не знаете, что написать? Просто отправьте: «Я отправила заявку» — и я сразу пойму, откуда вы.</p>
         </div><!-- /al-success-screen -->
 
         <div class="quiz-nav" style="margin-top:20px;">
@@ -682,14 +683,12 @@ if (submitBtn) {
       if (data && data.ok) {
         ymGoal('quiz_complete');
         ymGoal('lead_sent');
-        // Показываем success-screen
+        // Показываем success-screen, скрываем форму и заголовок шага
         var cf = document.getElementById('al-contact-form');
+        var fh = document.getElementById('al-form-header');
         var ss = document.getElementById('al-success-screen');
-        var ri = document.getElementById('al-req-id');
         if (cf) cf.style.display = 'none';
-        if (ri && data.request_id) {
-          ri.textContent = 'Номер заявки: ' + data.request_id;
-        }
+        if (fh) fh.style.display = 'none';
         if (ss) ss.style.display = '';
         // Скрыть кнопку «Назад» после успеха
         var bf = document.getElementById('al-back-from-form');
