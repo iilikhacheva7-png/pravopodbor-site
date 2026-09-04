@@ -114,6 +114,12 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3
 .divider-or::before,.divider-or::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--line)}
 .divider-or::before{left:0}.divider-or::after{right:0}
 
+/* NATIVE FORM INPUTS */
+#al-contact-form input[type="text"]:focus,
+#al-contact-form textarea:focus{border-color:var(--gold)}
+#al-submit-btn:hover{opacity:.86}
+#al-submit-btn:disabled{opacity:.5;cursor:not-allowed}
+
 /* BELOW QUIZ */
 .below-quiz{padding:56px 0}
 .prices-block{background:var(--navy2);border-radius:20px;padding:36px 32px;margin-bottom:36px}
@@ -232,28 +238,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 
 <!-- КВИЗ -->
 
-  <!-- ── Экран предварительного согласия ──────────────────────── -->
-  <div id="al-consent-screen" style="display:none;padding:32px 20px;max-width:680px;margin:40px auto;">
-    <div style="text-align:center;margin-bottom:20px;">
-      <p style="font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:16px;">
-        Перед началом теста подтвердите согласие на обработку персональных данных.
-      </p>
-    </div>
-    <iframe
-      id="al-consent-iframe"
-      frameborder="0"
-      name="ya-form-6a968358f47e73036be3a17c"
-      style="width:100%;min-height:460px;border:0;"
-      scrolling="no">
-    </iframe>
-    <noscript>
-      <p style="font-size:14px;color:var(--muted);text-align:center;margin-top:16px;">
-        Для работы теста включите JavaScript или
-        <a href="mailto:alikhacheva7@yandex.ru" style="color:var(--gold);">напишите напрямую</a>.
-      </p>
-    </noscript>
-  </div>
-
 <section class="quiz-section" id="quiz">
   <div class="quiz-wrap">
     <div class="quiz-heading">
@@ -330,35 +314,82 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         </div>
       </div>
 
-      <!-- ФИНАЛЬНЫЙ ЭКРАН — итоговая Яндекс Форма -->
+      <!-- ФИНАЛЬНЫЙ ШАГ — нативная форма -->
       <div class="step-q" data-step="5" id="sq5">
-        <div style="text-align:center;margin-bottom:16px;">
-          <div style="font-size:28px;margin-bottom:8px;">✅</div>
-          <h3 style="font-size:20px;font-weight:600;color:var(--navy);margin:0 0 8px;">Ситуация понятна!</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 16px;line-height:1.6;">
-            Заполните анкету — укажите имя и контакт. Мы свяжемся для бесплатного первичного разбора.
-          </p>
-          <p style="font-size:12px;color:var(--muted);margin:0 0 16px;">
-            <a href="/privacy-policy.html" target="_blank" style="color:var(--gold);">Политика конфиденциальности</a>
-            &nbsp;·&nbsp;
-            <a href="/consent-personal-data.html" target="_blank" style="color:var(--gold);">Согласие на обработку ПД</a>
-          </p>
-        </div>
-        <div id="al-yform-wrap" style="width:100%;max-width:650px;margin:0 auto;">
-          <iframe
-            id="al-yform"
-            frameborder="0"
-            name="ya-form-6a966ca9f47e73fef3e3a154"
-            style="width:100%;min-height:520px;border:0;"
-            scrolling="no">
-          </iframe>
-        </div>
-        <p style="font-size:12px;color:var(--muted);margin-top:12px;text-align:center;">
-          Или напишите напрямую:
-          <a href="mailto:alikhacheva7@yandex.ru?subject=Заявка с сайта «По рекомендации»" style="color:var(--gold);">alikhacheva7@yandex.ru</a>
-        </p>
-        <div class="quiz-nav" style="margin-top:16px;">
-          <button type="button" class="back-btn" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
+        <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Почти готово!</h3>
+        <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Укажите имя и контакт, и подробно опишите вашу ситуацию — это поможет разобраться быстрее.</p>
+
+        <!-- Нативная форма заявки -->
+        <div id="al-contact-form">
+          <!-- Honeypot — не заполнять -->
+          <input type="text" name="website" id="al-honeypot" tabindex="-1" autocomplete="off"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+          <div style="display:grid;gap:12px;margin-bottom:16px;">
+            <div>
+              <label for="al-name" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;">Ваше имя *</label>
+              <input type="text" id="al-name" name="name" autocomplete="given-name" maxlength="100" required
+                placeholder="Как вас зовут?"
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box;">
+            </div>
+            <div>
+              <label for="al-contact" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;">Контакт — телефон или Telegram *</label>
+              <input type="text" id="al-contact" name="contact" autocomplete="off" maxlength="100" required
+                placeholder="+7 900 000-00-00 или @username"
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box;">
+            </div>
+            <div>
+              <label for="al-desc" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;">Опишите вашу ситуацию подробно *</label>
+              <textarea id="al-desc" name="description" maxlength="2000" required rows="5"
+                placeholder="Расскажите детали: сколько лет ребёнку, когда перестали платить, что уже предпринимали, есть ли решение суда — любая подробность поможет."
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;resize:vertical;box-sizing:border-box;line-height:1.5;"></textarea>
+            </div>
+          </div>
+
+          <!-- Согласие на ПД -->
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
+            <input type="checkbox" id="al-consent-chk" name="consent"
+              style="margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer;">
+            <label for="al-consent-chk" style="font-size:12px;color:var(--muted);line-height:1.55;cursor:pointer;">
+              Я соглашаюсь с
+              <a href="/privacy-policy.html" target="_blank" style="color:var(--gold);">Политикой конфиденциальности</a>,
+              даю <a href="/consent-personal-data.html" target="_blank" style="color:var(--gold);">согласие на обработку персональных данных</a>
+              и принимаю условия <a href="/offer.html" target="_blank" style="color:var(--gold);">публичной оферты</a>.
+            </label>
+          </div>
+
+          <!-- Сообщение об ошибке -->
+          <div id="al-error-msg" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:12px 14px;font-size:13px;color:#b91c1c;margin-bottom:12px;line-height:1.5;"></div>
+
+          <!-- Кнопка отправки -->
+          <button type="button" id="al-submit-btn"
+            style="width:100%;min-height:50px;background:var(--navy);color:#fff;border:none;border-radius:12px;font:700 15px/1 inherit;cursor:pointer;transition:opacity .15s;">
+            Отправить заявку
+          </button>
+          <p style="font-size:11px;color:var(--muted);text-align:center;margin:10px 0 0;line-height:1.5;">Данные передаются защищённо. Ответим в течение рабочего дня.</p>
+        </div><!-- /al-contact-form -->
+
+        <!-- Экран успеха -->
+        <div id="al-success-screen" style="display:none;text-align:center;padding:8px 0;">
+          <div style="font-size:40px;margin-bottom:12px;">✅</div>
+          <h3 style="font:500 22px/1.2 Georgia;color:var(--navy);margin:0 0 10px;">Заявка отправлена!</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 6px;line-height:1.6;">Для получения бесплатного разбора ситуации напишите мне напрямую:</p>
+          <div id="al-req-id" style="font-size:12px;color:var(--muted);margin-bottom:20px;"></div>
+          <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
+            <a href="https://max.ru/id166969150_gos" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;">
+              ✉️ Написать в MAX
+            </a>
+            <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;">
+              ✈️ Написать в Telegram
+            </a>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.55;">Напишите «Я отправил заявку» — и я сразу увижу ваше обращение.</p>
+        </div><!-- /al-success-screen -->
+
+        <div class="quiz-nav" style="margin-top:20px;">
+          <button type="button" class="back-btn" id="al-back-from-form" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
         </div>
       </div><!-- /финал -->
 
@@ -452,55 +483,25 @@ function ymGoal(goal, params) {
   } catch(e) {}
 }
 
-// ══ ГЕНЕРАЦИЯ request_id ════════════════════════════════════════
-function generateRequestId() {
-  if (typeof crypto !== 'undefined' && typeof crypto.randomUUID === 'function') {
-    return crypto.randomUUID();
-  }
-  if (typeof crypto !== 'undefined' && typeof crypto.getRandomValues === 'function') {
-    var bytes = new Uint8Array(16);
-    crypto.getRandomValues(bytes);
-    bytes[6] = (bytes[6] & 0x0f) | 0x40;
-    bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    return Array.from(bytes, function(b) {
-      return b.toString(16).padStart(2, '0');
-    }).join('').replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5');
-  }
-  throw new Error('Безопасный генератор request_id недоступен');
+// ══ UTM ══════════════════════════════════════════════════════════
+function collectUtm() {
+  var p = new URLSearchParams(window.location.search);
+  return {
+    utm_source:   p.get('utm_source')   || '',
+    utm_medium:   p.get('utm_medium')   || '',
+    utm_campaign: p.get('utm_campaign') || '',
+    utm_content:  p.get('utm_content')  || '',
+    utm_term:     p.get('utm_term')     || ''
+  };
 }
 
-function isValidUUID(s) {
-  return /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(s);
-}
-
-// ══ URL ФОРМ ════════════════════════════════════════════════════
-function buildConsentFormUrl(requestId) {
-  var u = new URL('https://forms.yandex.ru/u/6a968358f47e73036be3a17c/');
-  u.searchParams.set('iframe', '1');
-  u.searchParams.set('request_id', requestId);
-  return u.toString();
-}
-
-function buildFinalFormUrl(leadTopic, quizAnswers, requestId) {
-  var u = new URL('https://forms.yandex.ru/u/6a966ca9f47e73fef3e3a154/');
-  u.searchParams.set('iframe',       '1');
-  u.searchParams.set('lead_topic',   leadTopic);
-  u.searchParams.set('quiz_answers', quizAnswers);
-  u.searchParams.set('request_id',   requestId);
-  return u.toString();
-}
-
-// ══ КВИЗ ════════════════════════════════════════════════════════
-var QUIZ_PATH   = '/alimenty.html';
-var LEAD_TOPIC  = 'Алименты';
+// ══ КВИЗ ═════════════════════════════════════════════════════════
 var TOTAL_STEPS = 4;
 var currentStep = 1;
 var answers     = {};
 var quizStarted = false;
 var quizDone    = false;
-
-var KEY_RID   = 'rekoyur_request_id:'        + QUIZ_PATH;
-var KEY_CDONE = 'rekoyur_consent_completed:' + QUIZ_PATH;
+var submitInProgress = false;
 
 function showStep(n) {
   document.querySelectorAll('.step-q').forEach(function(s) {
@@ -532,21 +533,6 @@ function showStep(n) {
   if (isFinal && !quizDone) {
     quizDone = true;
     ymGoal('quiz_complete');
-    var alIframe = document.getElementById('al-yform');
-    if (alIframe && !alIframe.getAttribute('src')) {
-      var finalId = sessionStorage.getItem(KEY_RID) || '';
-      var alAnswers = [
-        document.getElementById('fSit')  && document.getElementById('fSit').value
-          ? 'Ситуация с алиментами: '           + document.getElementById('fSit').value  : null,
-        document.getElementById('fDoc')  && document.getElementById('fDoc').value
-          ? 'Документ: '                        + document.getElementById('fDoc').value  : null,
-        document.getElementById('fFSSP') && document.getElementById('fFSSP').value
-          ? 'Исполнительное производство: '     + document.getElementById('fFSSP').value : null,
-        document.getElementById('fDebt') && document.getElementById('fDebt').value
-          ? 'Доходы второго родителя: Сведения о доходах требуют индивидуального обсуждения' : null
-      ].filter(Boolean).join('\n');
-      alIframe.setAttribute('src', buildFinalFormUrl(LEAD_TOPIC, alAnswers, finalId));
-    }
   }
 
   if (!isFinal) ymGoal('quiz_step_view', {step: n});
@@ -554,7 +540,7 @@ function showStep(n) {
   var card = document.getElementById('quiz-card');
   if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
   if (target) {
-    var first = target.querySelector('.option, .back-btn, button');
+    var first = target.querySelector('.option, input, textarea, .back-btn, button');
     if (first) setTimeout(function(){ first.focus(); }, 50);
   }
 }
@@ -564,7 +550,6 @@ document.querySelectorAll('.option').forEach(function(btn) {
     if (!quizStarted) { quizStarted = true; ymGoal('quiz_start'); }
     var fid = btn.dataset.field;
     var val = btn.dataset.val;
-    // Нейтрализация вопроса 4 (fDebt) — доходы второго родителя: все варианты
     if (fid === 'fDebt') {
       val = 'Сведения о доходах требуют индивидуального обсуждения';
     }
@@ -580,12 +565,31 @@ document.querySelectorAll('.option').forEach(function(btn) {
   });
 });
 
+// «Назад» для шагов 2–4 (навешивается на существующие .back-btn)
 document.querySelectorAll('.back-btn').forEach(function(b) {
+  if (b.id === 'al-back-from-form') return; // обработан отдельно ниже
   b.addEventListener('click', function() {
     ymGoal('quiz_back', {step: currentStep});
     showStep(Math.max(1, currentStep - 1));
   });
 });
+
+// «Назад» с финального шага — сброс состояния формы
+var backFromForm = document.getElementById('al-back-from-form');
+if (backFromForm) {
+  backFromForm.addEventListener('click', function() {
+    // Если успех уже показан — скрыть success, показать форму
+    var ss = document.getElementById('al-success-screen');
+    var cf = document.getElementById('al-contact-form');
+    if (ss && ss.style.display !== 'none') {
+      ss.style.display = 'none';
+      if (cf) cf.style.display = '';
+      return;
+    }
+    ymGoal('quiz_back', {step: currentStep});
+    showStep(Math.max(1, currentStep - 1));
+  });
+}
 
 var heroCta = document.getElementById('hero-cta');
 if (heroCta) {
@@ -596,40 +600,121 @@ if (heroCta) {
   });
 }
 
-// ══ ИНИЦИАЛИЗАЦИЯ СОГЛАСИЯ ═════════════════════════════════════
-document.addEventListener('DOMContentLoaded', function() {
-  var storedId    = sessionStorage.getItem(KEY_RID);
-  var consentDone = sessionStorage.getItem(KEY_CDONE);
-  var consentOk   = !!(storedId && consentDone && consentDone === storedId
-                       && isValidUUID(storedId));
+// ══ ОТПРАВКА ЗАЯВКИ ══════════════════════════════════════════════
+var CF_ENDPOINT = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
 
-  var consentScreen = document.getElementById('al-consent-screen');
-  var quizSection   = document.getElementById('quiz');
+function showFormError(msg) {
+  var el = document.getElementById('al-error-msg');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideFormError() {
+  var el = document.getElementById('al-error-msg');
+  if (el) el.style.display = 'none';
+}
 
-  if (consentOk) {
-    if (consentScreen) consentScreen.style.display = 'none';
-    if (quizSection)   quizSection.style.display   = '';
-    var step1 = document.querySelector('#quiz-card .step-q[data-step="1"]');
-    if (step1) step1.classList.add('active');
-  } else {
-    if (consentScreen) consentScreen.style.display = '';
-    if (quizSection)   quizSection.style.display   = 'none';
+var submitBtn = document.getElementById('al-submit-btn');
+if (submitBtn) {
+  submitBtn.addEventListener('click', function() {
+    if (submitInProgress) return;
+    hideFormError();
 
-    var requestId;
-    try { requestId = generateRequestId(); }
-    catch(e) { return; }
+    var name    = (document.getElementById('al-name')    || {}).value || '';
+    var contact = (document.getElementById('al-contact') || {}).value || '';
+    var desc    = (document.getElementById('al-desc')    || {}).value || '';
+    var consent = (document.getElementById('al-consent-chk') || {}).checked;
+    var honeypot = (document.getElementById('al-honeypot') || {}).value || '';
 
-    sessionStorage.setItem('rekoyur_pending_return_path', QUIZ_PATH);
-    sessionStorage.setItem('rekoyur_pending_request_id',  requestId);
-
-    var ci = document.getElementById('al-consent-iframe');
-    if (ci && !ci.getAttribute('src')) {
-      ci.setAttribute('src', buildConsentFormUrl(requestId));
+    // Клиентская валидация
+    if (!name.trim()) {
+      showFormError('Пожалуйста, укажите ваше имя.');
+      document.getElementById('al-name').focus();
+      return;
     }
-  }
+    if (!contact.trim()) {
+      showFormError('Пожалуйста, укажите контакт для связи.');
+      document.getElementById('al-contact').focus();
+      return;
+    }
+    if (!desc.trim()) {
+      showFormError('Пожалуйста, опишите вашу ситуацию — это поможет разобраться быстрее.');
+      document.getElementById('al-desc').focus();
+      return;
+    }
+    if (!consent) {
+      showFormError('Для отправки заявки необходимо согласие на обработку персональных данных.');
+      document.getElementById('al-consent-chk').focus();
+      return;
+    }
+
+    submitInProgress = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+
+    var payload = {
+      topic:          'Алименты',
+      source_page:    '/alimenty.html',
+      name:           name.trim(),
+      contact:        contact.trim(),
+      description:    desc.trim(),
+      answers: {
+        situation: answers['fSit'] || '',
+        document:  answers['fDoc'] || '',
+        fssp:      answers['fFSSP'] || '',
+        debt:      answers['fDebt'] || ''
+      },
+      utm:          collectUtm(),
+      consent:      true,
+      website:      honeypot,
+      submitted_at: new Date().toISOString()
+    };
+
+    fetch(CF_ENDPOINT, {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify(payload)
+    })
+    .then(function(res) { return res.json(); })
+    .then(function(data) {
+      submitInProgress = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
+
+      if (data && data.ok) {
+        ymGoal('lead_sent');
+        // Показываем success-screen
+        var cf = document.getElementById('al-contact-form');
+        var ss = document.getElementById('al-success-screen');
+        var ri = document.getElementById('al-req-id');
+        if (cf) cf.style.display = 'none';
+        if (ri && data.request_id) {
+          ri.textContent = 'Номер заявки: ' + data.request_id;
+        }
+        if (ss) ss.style.display = '';
+        // Скрыть кнопку «Назад» после успеха
+        var bf = document.getElementById('al-back-from-form');
+        if (bf) bf.style.display = 'none';
+      } else {
+        showFormError('Не удалось отправить заявку. Попробуйте ещё раз или напишите напрямую в Telegram.');
+      }
+    })
+    .catch(function() {
+      submitInProgress = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
+      showFormError('Ошибка соединения. Проверьте интернет и попробуйте ещё раз, или напишите напрямую: t.me/a_likhacheva2026');
+    });
+  });
+}
+
+// ══ ИНИЦИАЛИЗАЦИЯ ════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  var step1 = document.querySelector('#quiz-card .step-q[data-step="1"]');
+  if (step1) step1.classList.add('active');
 });
 
-// ══ COOKIE ══════════════════════════════════════════════════════
+// ══ COOKIE ═══════════════════════════════════════════════════════
 (function() {
   if (!localStorage.getItem('cookie_consent')) {
     var banner = document.getElementById('cookie-banner');
