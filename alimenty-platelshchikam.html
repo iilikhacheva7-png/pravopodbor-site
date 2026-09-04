@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Проблемы с алиментами — бесплатный разбор ситуации для плательщиков | По рекомендации</title>
+<meta name="description" content="Судебный приказ, долг по алиментам, спорный расчёт пристава? Бесплатно разберём документы и объясним, какие законные варианты есть в вашей ситуации.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Проблемы с алиментами? Бесплатный разбор ситуации">
+<meta property="og:description" content="Судебный приказ, долг, спорный расчёт пристава или не учли платежи? Разберём документы бесплатно.">
+<style>
+:root{
+  --navy:#0f1a2b;--navy2:#16243b;--paper:#f6f1e8;--paper2:#eee6d8;
+  --ink:#152033;--muted:#667085;--gold:#c9a24b;--line:#ded5c7;
+  --white:#fff;--green:#557763;--radius:18px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1100px;margin:auto;padding:0 24px}
+
+/* HEADER */
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:19px;color:var(--navy)}.logo span{color:var(--gold)}
+.headnote{font-size:13px;color:var(--muted)}
+
+/* HERO */
+.hero{padding:56px 0 64px;background:var(--paper);text-align:center}
+.kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#8b6b27;margin-bottom:14px}
+h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(32px,5vw,56px);line-height:1.08;letter-spacing:-.03em;margin:0 0 16px;color:var(--navy)}
+.lead{font-size:17px;color:#465166;line-height:1.6;margin:0 auto 28px;max-width:540px}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 32px;border:0;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer;font-size:16px;text-decoration:none;transition:opacity .15s;font-family:inherit}
+.btn:hover{opacity:.86}
+.btn-gold{background:var(--gold);color:var(--navy)}
+.micro{font-size:13px;color:var(--muted);margin-top:10px}
+
+/* SECTIONS */
+.section{padding:60px 0}
+.section.white{background:#fff}
+.section h2{font:500 clamp(26px,3.2vw,40px)/1.12 Georgia;margin:0 0 12px;letter-spacing:-.02em;color:var(--navy)}
+.section-sub{font-size:16px;color:var(--muted);max-width:640px;margin:0 0 32px;line-height:1.6}
+
+/* CARDS GRID */
+.sits{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px}
+.sit{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px}
+.sit h3{font-size:15px;font-weight:700;margin:0 0 6px;color:var(--navy)}
+.sit p{font-size:13px;color:var(--muted);margin:0;line-height:1.5}
+.sit-num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;background:rgba(201,162,75,.15);border:1.5px solid var(--gold);color:#8b6b27;font-size:13px;font-weight:800;margin-bottom:10px;flex-shrink:0}
+
+/* CHAIN BLOCK */
+.chain-wrap{background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;margin:28px 0}
+.chain-row{display:flex;align-items:flex-start;gap:16px}
+.chain-box{flex:1;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:18px 16px}
+.chain-box.accent{background:rgba(201,162,75,.08);border-color:rgba(201,162,75,.3)}
+.chain-label{font-size:11px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.chain-val{font-size:15px;font-weight:700;color:var(--navy);line-height:1.4}
+.chain-val.gold{color:#8b6b27}
+.chain-arrow{display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:22px;padding:0 4px;flex-shrink:0;align-self:center}
+.chain-steps{font-size:13px;color:var(--muted);line-height:1.8;margin:0}
+.chain-steps li{list-style:none;padding:0;margin:0}
+.chain-steps li::before{content:"→ ";color:var(--gold);font-weight:700}
+
+/* URGENCY SECTION */
+.urgency-section{background:var(--navy2);padding:56px 0}
+.urgency-section h2{color:#fff}
+.urgency-section .section-sub{color:#b8c1cf}
+.urgency-section .btn-gold{margin-top:8px}
+
+/* CTA MID */
+.mid-cta{text-align:center;padding:32px 0 8px}
+
+/* QUIZ */
+.quiz-section{background:#fff;padding:56px 0}
+.quiz-wrap{max-width:600px;margin:0 auto;padding:0 24px}
+.quiz-heading{text-align:center;margin-bottom:32px}
+.quiz-heading h2{margin-bottom:8px}
+.quiz-heading p{font-size:15px;color:var(--muted);margin:0}
+.quiz-card{background:var(--paper);border:1px solid var(--line);border-radius:24px;padding:32px 28px;box-shadow:0 12px 40px rgba(21,32,51,.07)}
+
+/* PROGRESS */
+.prog-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.prog-label{font-size:12px;font-weight:700;color:#8b6b27;letter-spacing:.06em;text-transform:uppercase}
+.prog-fraction{font-size:12px;color:var(--muted)}
+.prog-bar{height:4px;background:#e5ddd2;border-radius:4px;overflow:hidden;margin-bottom:28px}
+.prog-bar i{display:block;height:100%;background:var(--gold);border-radius:4px;transition:width .35s ease}
+
+/* STEPS */
+.step-q{display:none}.step-q.active{display:block}
+.step-q h3{font:500 22px/1.25 Georgia;margin:0 0 20px;color:var(--navy)}
+.options{display:grid;gap:9px}
+.option{border:1.5px solid #ddd6ca;border-radius:12px;padding:13px 15px;cursor:pointer;background:#fff;text-align:left;font:inherit;font-size:14px;color:var(--ink);transition:border-color .12s,background .12s;width:100%}
+.option:hover,.option.selected{border-color:var(--gold);background:#fbf7ef}
+.option:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;min-height:36px}
+.back-btn{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:14px;padding:6px 0;display:flex;align-items:center;gap:4px}
+.back-btn:focus-visible{outline:2px solid var(--gold);border-radius:4px}
+
+/* TEXTAREA */
+.textarea-field{width:100%;min-height:130px;padding:14px;border:1.5px solid #ddd6ca;border-radius:12px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;resize:vertical;line-height:1.6}
+.textarea-field:focus{border-color:var(--gold)}
+
+/* FINAL FORM */
+.form-field input[type="text"],
+.form-field input[type="tel"]{width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box}
+.form-field input:focus{border-color:var(--gold)}
+.form-label{display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px}
+.consent-note{font-size:12px;color:var(--muted);line-height:1.55}
+.consent-note a{color:var(--gold)}
+
+/* SUCCESS */
+#pl-success-screen{display:none;text-align:center;padding:8px 0}
+
+/* FOOTER */
+footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
+.foot{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.foot span,.foot a{font-size:12px;color:#7b8494}
+.foot a:hover{color:var(--gold)}
+
+/* FLOAT WIDGET */
+#chat-widget{position:fixed;bottom:24px;right:24px;z-index:200;transition:opacity .25s}
+#chat-widget.quiz-active{opacity:0;pointer-events:none}
+#chat-popup{display:none;position:absolute;bottom:72px;right:0;width:260px;background:var(--navy2);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:8px;box-shadow:0 8px 32px rgba(0,0,0,.4)}
+#chat-popup a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;font-size:14px;color:#f4f1ea;text-decoration:none}
+#chat-popup a:hover{background:rgba(255,255,255,.07)}
+#chat-widget .trigger{width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--navy);font-size:22px;border:none;cursor:pointer;box-shadow:0 4px 20px rgba(201,162,75,.4);display:flex;align-items:center;justify-content:center}
+
+/* COOKIE */
+#cookie-banner{display:none;position:fixed;bottom:0;left:0;right:0;z-index:9999;background:var(--navy);border-top:1px solid rgba(255,255,255,.1);padding:16px 24px;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#cookie-banner p{font-size:13px;color:#a9b4c7;margin:0;max-width:700px}
+#cookie-accept{background:var(--gold);color:var(--navy);border:none;border-radius:999px;padding:10px 24px;font-weight:700;font-size:13px;cursor:pointer;white-space:nowrap}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .sits{grid-template-columns:1fr 1fr}
+  .chain-row{flex-direction:column;gap:8px}
+  .chain-arrow{transform:rotate(90deg);padding:4px 0}
+}
+@media(max-width:520px){
+  .wrap{padding:0 16px}
+  header{height:62px}
+  .hero{padding:36px 0 44px}
+  h1{font-size:30px}
+  .sits{grid-template-columns:1fr}
+  .quiz-card{padding:22px 16px}
+  .section{padding:44px 0}
+  .urgency-section{padding:44px 0}
+  .chain-wrap{padding:20px 16px}
+}
+</style>
+
+<!-- Яндекс.Метрика -->
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
+</script>
+</head>
+<body>
+
+<div class="wrap"><header>
+  <a class="logo" href="/"><span>По</span> рекомендации</a>
+  <div class="headnote">Юридическая помощь · онлайн по России</div>
+</header></div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap">
+    <div class="kicker">Помощь плательщикам алиментов</div>
+    <h1>Проблемы<br>с алиментами?</h1>
+    <p class="lead">Судебный приказ, большой долг, спорный расчёт пристава или не учли ваши платежи?</p>
+    <p style="font-size:16px;color:#465166;line-height:1.6;margin:0 auto 28px;max-width:520px;">Разберу документы и объясню, какие законные варианты есть именно в вашей ситуации.</p>
+    <button class="btn btn-gold" id="hero-cta">Бесплатно разобрать ситуацию</button>
+    <p class="micro">Онлайн по всей России · Без обязательства заказывать услуги</p>
+  </div>
+</section>
+
+<!-- БЛОК 2: С КАКОЙ ПРОБЛЕМОЙ ВЫ СТОЛКНУЛИСЬ -->
+<section class="section white">
+  <div class="wrap">
+    <h2>С какой проблемой вы столкнулись?</h2>
+    <p class="section-sub">Разные ситуации — разные варианты действий. Выберите похожую на вашу.</p>
+    <div class="sits">
+      <div class="sit">
+        <div class="sit-num">1</div>
+        <h3>Пристав внезапно насчитал долг за прошлые годы</h3>
+        <p>Долгое время алименты не взыскивались, а теперь появилась задолженность и ограничения.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">2</div>
+        <h3>Насчитали большой долг</h3>
+        <p>Не понимаете, откуда взялась сумма, или считаете расчёт неправильным.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">3</div>
+        <h3>Платили, но платежи не учли</h3>
+        <p>Переводили деньги напрямую, а пристав всё равно включил период в задолженность.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">4</div>
+        <h3>Получили судебный приказ</h3>
+        <p>Хотите понять, можно ли подать возражения и что произойдёт дальше.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">5</div>
+        <h3>Алименты рассчитали по средней зарплате</h3>
+        <p>Фактический доход отличался от суммы, которую использовал пристав.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">6</div>
+        <h3>Бывшая подала иск</h3>
+        <p>Требует алименты в другом размере, задолженность или неустойку.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">7</div>
+        <h3>Арестовали счета или появились ограничения</h3>
+        <p>Исполнительное производство уже возбуждено и нужно понять, что делать.</p>
+      </div>
+      <div class="sit">
+        <div class="sit-num">8</div>
+        <h3>Хотите изменить размер алиментов</h3>
+        <p>Обстоятельства изменились и нынешний размер стал проблемой.</p>
+      </div>
+    </div>
+    <div class="mid-cta">
+      <button class="btn btn-gold" id="cards-cta">Проверить мою ситуацию</button>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 3: СУММА У ПРИСТАВА — ЕЩЁ НЕ РЕЗУЛЬТАТ -->
+<section class="section">
+  <div class="wrap">
+    <h2>Сумма у пристава — это ещё не результат проверки</h2>
+    <p class="section-sub">При расчёте задолженности имеет значение период взыскания, установленный размер алиментов, сведения о доходах, произведённые платежи и другие обстоятельства.</p>
+
+    <div class="chain-wrap">
+      <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">
+        Поэтому сначала нужно получить постановление пристава и проверить, как именно получилась указанная в нём сумма.<br><br>
+        Если в расчёте есть основания для перерасчёта — можно ставить этот вопрос перед приставом. Если проблема не решается таким способом, оцениваются другие варианты защиты.
+      </p>
+      <div class="chain-row">
+        <div class="chain-box">
+          <div class="chain-label">Было</div>
+          <div class="chain-val gold" style="font-size:18px;">долг 640 000 ₽</div>
+          <div style="font-size:12px;color:var(--muted);margin-top:4px;">в постановлении пристава</div>
+        </div>
+        <div class="chain-arrow">↓</div>
+        <div class="chain-box">
+          <div class="chain-label">Проверяем</div>
+          <ul class="chain-steps">
+            <li>период взыскания</li>
+            <li>сведения о доходах</li>
+            <li>произведённые платежи</li>
+            <li>порядок расчёта</li>
+          </ul>
+        </div>
+        <div class="chain-arrow">↓</div>
+        <div class="chain-box accent">
+          <div class="chain-label">Результат</div>
+          <div class="chain-val">Понимаем, есть ли основания что-либо менять</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- БЛОК 4: ВТОРАЯ СТОРОНА УЖЕ ЗАЩИЩАЕТ СВОИ ИНТЕРЕСЫ -->
+<section class="urgency-section">
+  <div class="wrap">
+    <h2>Вторая сторона уже защищает свои интересы. А вы?</h2>
+    <p class="section-sub">Судебный приказ, иск или постановление пристава не нужно просто игнорировать.</p>
+    <p style="font-size:16px;color:#b8c1cf;line-height:1.7;max-width:640px;margin:0 0 24px;">
+      Если вы не согласны с требованиями, размером алиментов или рассчитанной задолженностью — сначала стоит проверить документы и понять, есть ли законные основания защищать свою позицию.
+    </p>
+    <button class="btn btn-gold" id="urgency-cta">Разобрать документы бесплатно</button>
+  </div>
+</section>
+
+<!-- КВИЗ -->
+<section class="quiz-section" id="quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-heading">
+      <h2>Расскажите о ситуации</h2>
+      <p>Займёт 2–3 минуты. Документы пока не нужны.</p>
+    </div>
+
+    <div class="quiz-card" id="pl-quiz-card">
+      <div class="prog-header">
+        <span class="prog-label" id="pl-prog-label">Шаг 1</span>
+        <span class="prog-fraction" id="pl-prog-fraction">1 / 5</span>
+      </div>
+      <div class="prog-bar"><i id="plBar" style="width:20%"></i></div>
+
+      <!-- Скрытые поля -->
+      <input type="hidden" id="fScenario">
+      <input type="hidden" id="fDebtAmount">
+      <input type="hidden" id="fWhen">
+      <input type="hidden" id="fDocs">
+      <input type="hidden" id="fDescription">
+
+      <!-- ШАГ 1: Что произошло -->
+      <div class="step-q active" data-step="1" id="pl-sq1">
+        <h3>Что произошло?</h3>
+        <div class="options" role="group" aria-label="Варианты ответа">
+          <button type="button" class="option" data-field="fScenario" data-val="Получил судебный приказ" data-debt="no">Получил судебный приказ</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Внезапно появился долг за прошлые годы" data-debt="yes">Внезапно появился долг за прошлые годы</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Пристав насчитал большой долг" data-debt="yes">Пристав насчитал большой долг</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Мои платежи не учли" data-debt="yes">Мои платежи не учли</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Алименты рассчитали по средней зарплате" data-debt="yes">Алименты рассчитали по средней зарплате</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Бывшая подала иск" data-debt="no">Бывшая подала иск</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Арестовали счета / появились ограничения" data-debt="no">Арестовали счета / появились ограничения</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Хочу изменить размер алиментов" data-debt="no">Хочу изменить размер алиментов</button>
+          <button type="button" class="option" data-field="fScenario" data-val="Другое" data-debt="no">Другое</button>
+        </div>
+        <div class="quiz-nav"><span></span></div>
+      </div>
+
+      <!-- ШАГ 2: Сумма задолженности (только для debt=yes) -->
+      <div class="step-q" data-step="2" id="pl-sq2">
+        <h3>Какую сумму задолженности вам сейчас указывают?</h3>
+        <div class="options" role="group" aria-label="Варианты ответа">
+          <button type="button" class="option" data-field="fDebtAmount" data-val="До 100 000 рублей">До 100 000 рублей</button>
+          <button type="button" class="option" data-field="fDebtAmount" data-val="100 000 – 300 000 рублей">100 000 – 300 000 рублей</button>
+          <button type="button" class="option" data-field="fDebtAmount" data-val="300 000 – 500 000 рублей">300 000 – 500 000 рублей</button>
+          <button type="button" class="option" data-field="fDebtAmount" data-val="500 000 – 1 000 000 рублей">500 000 – 1 000 000 рублей</button>
+          <button type="button" class="option" data-field="fDebtAmount" data-val="Более 1 000 000 рублей">Более 1 000 000 рублей</button>
+          <button type="button" class="option" data-field="fDebtAmount" data-val="Не знаю">Не знаю</button>
+        </div>
+        <div class="quiz-nav">
+          <button type="button" class="back-btn" data-target="1">← Назад</button>
+        </div>
+      </div>
+
+      <!-- ШАГ 3: Когда узнали -->
+      <div class="step-q" data-step="3" id="pl-sq3">
+        <h3>Когда вы узнали о проблеме?</h3>
+        <div class="options" role="group" aria-label="Варианты ответа">
+          <button type="button" class="option" data-field="fWhen" data-val="Сегодня / несколько дней назад">Сегодня / несколько дней назад</button>
+          <button type="button" class="option" data-field="fWhen" data-val="В течение последнего месяца">В течение последнего месяца</button>
+          <button type="button" class="option" data-field="fWhen" data-val="Более месяца назад">Более месяца назад</button>
+          <button type="button" class="option" data-field="fWhen" data-val="Давно знаю, но только сейчас решил заняться">Давно знаю, но только сейчас решил заняться</button>
+          <button type="button" class="option" data-field="fWhen" data-val="Другое">Другое</button>
+        </div>
+        <div class="quiz-nav">
+          <button type="button" class="back-btn" data-target="2-or-1">← Назад</button>
+        </div>
+      </div>
+
+      <!-- ШАГ 4: Документы -->
+      <div class="step-q" data-step="4" id="pl-sq4">
+        <h3>Есть ли у вас документы?</h3>
+        <div class="options" role="group" aria-label="Варианты ответа">
+          <button type="button" class="option" data-field="fDocs" data-val="Да, могу прислать">Да, могу прислать</button>
+          <button type="button" class="option" data-field="fDocs" data-val="Есть часть">Есть часть</button>
+          <button type="button" class="option" data-field="fDocs" data-val="Пока нет">Пока нет</button>
+        </div>
+        <div class="quiz-nav">
+          <button type="button" class="back-btn" data-target="3">← Назад</button>
+        </div>
+      </div>
+
+      <!-- ШАГ 5: Описание + форма -->
+      <div class="step-q" data-step="5" id="pl-sq5">
+        <div id="pl-form-header">
+          <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Подробно опишите ситуацию</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 14px;line-height:1.6;">Что произошло, когда вы об этом узнали, какой размер алиментов установлен, какая задолженность указана, платили ли вы алименты самостоятельно, что уже сделал пристав или суд и какого результата вы хотите добиться.</p>
+          <textarea
+            id="pl-description"
+            class="textarea-field"
+            placeholder="Опишите вашу ситуацию как можно подробнее — это поможет разобраться и предложить подходящие варианты..."
+            rows="5"
+          ></textarea>
+          <p style="font-size:12px;color:var(--muted);margin:6px 0 20px;line-height:1.5;">Чем подробнее — тем точнее разбор.</p>
+
+          <div style="height:1px;background:var(--line);margin:0 0 20px;"></div>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 16px;line-height:1.6;">Оставьте имя и номер — найду вашу заявку, когда напишете в мессенджер.</p>
+        </div>
+
+        <div id="pl-contact-form">
+          <!-- Honeypot -->
+          <input type="text" id="pl-honeypot" tabindex="-1" autocomplete="off"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+          <div style="display:grid;gap:12px;margin-bottom:16px;">
+            <div class="form-field">
+              <label for="pl-name" class="form-label">Ваше имя *</label>
+              <input type="text" id="pl-name" name="name" autocomplete="given-name" maxlength="100" required placeholder="Как вас зовут?">
+            </div>
+            <div class="form-field">
+              <label for="pl-contact" class="form-label">Номер телефона *</label>
+              <input type="tel" id="pl-contact" name="contact" autocomplete="tel" maxlength="18" required placeholder="+7 (___) ___-__-__">
+            </div>
+          </div>
+
+          <!-- Согласие -->
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
+            <input type="checkbox" id="pl-consent-chk"
+              style="margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer;">
+            <label for="pl-consent-chk" class="consent-note" style="cursor:pointer;">
+              Я соглашаюсь с
+              <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a>,
+              даю <a href="/consent-personal-data.html" target="_blank">согласие на обработку персональных данных</a>
+              и принимаю условия <a href="/offer.html" target="_blank">публичной оферты</a>.
+            </label>
+          </div>
+
+          <!-- Ошибка -->
+          <div id="pl-error-msg" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:12px 14px;font-size:13px;color:#b91c1c;margin-bottom:12px;line-height:1.5;"></div>
+
+          <!-- Кнопка -->
+          <button type="button" id="pl-submit-btn"
+            style="width:100%;min-height:50px;background:var(--navy);color:#fff;border:none;border-radius:12px;font:700 15px/1 inherit;cursor:pointer;transition:opacity .15s;font-family:inherit;">
+            Отправить заявку
+          </button>
+          <p style="font-size:11px;color:var(--muted);text-align:center;margin:10px 0 0;line-height:1.5;">Данные передаются защищённо. Ответим в течение рабочего дня.</p>
+        </div>
+
+        <!-- Экран успеха -->
+        <div id="pl-success-screen">
+          <div style="font-size:40px;margin-bottom:16px;">✅</div>
+          <h3 style="font:500 26px/1.2 Georgia;color:var(--navy);margin:0 0 12px;">Напишите мне, чтобы получить бесплатный разбор</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;">Заявку я уже получила. Выберите удобный мессенджер и напишите мне — я найду вашу заявку по номеру телефона.</p>
+          <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
+            <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
+              ✉️ Написать в MAX
+            </a>
+            <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
+              ✈️ Написать в Telegram
+            </a>
+            <a href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#25D366;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
+              💬 Написать в WhatsApp
+            </a>
+          </div>
+          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Не знаете, что написать? Просто отправьте: «Я отправил заявку» — и я сразу найду вас.</p>
+        </div>
+
+        <div class="quiz-nav" style="margin-top:20px;">
+          <button type="button" class="back-btn" id="pl-back-from-form">← Назад</button>
+        </div>
+      </div>
+
+    </div><!-- /quiz-card -->
+  </div><!-- /quiz-wrap -->
+</section>
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 По рекомендации · Екатеринбург · онлайн по России</span>
+    <span><a href="/privacy-policy.html">Политика конфиденциальности</a></span>
+    <span>
+      <a href="/consent-personal-data.html" style="color:inherit;">Согласие на обработку ПД</a>
+      · <a href="/offer.html" style="color:#7b8494;text-decoration:none;">Публичная оферта</a>
+    </span>
+  </div>
+  <div style="text-align:center;padding:4px 0 2px;">
+    <span style="display:block;margin-top:10px;font-size:13px;color:#c8d0dc;line-height:1.7;">
+      Исполнитель: Лихачева Анастасия Анатольевна · ИНН: 665100837011<br>
+      Стоимость услуг: шаблон документа — от 500 ₽; заполненный документ — от 1 000 ₽; заполненный документ с инструкцией — от 1 500 ₽.<br>
+      <a href="/#prices" style="color:#c9a24b;font-size:13px;text-decoration:underline;">Подробнее о стоимости</a>
+    </span>
+  </div>
+</footer>
+
+<!-- Floating widget -->
+<div id="chat-widget">
+  <div id="chat-popup">
+    <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener">✈️ Telegram</a>
+    <a href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener">💬 WhatsApp</a>
+    <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener">✉️ MAX</a>
+  </div>
+  <button class="trigger" onclick="var p=document.getElementById('chat-popup');p.style.display=p.style.display==='block'?'none':'block'" aria-label="Задать вопрос">💬</button>
+</div>
+
+<!-- Cookie -->
+<div id="cookie-banner">
+  <p>Мы используем файлы cookie. <a href="/privacy-policy.html" target="_blank" style="color:var(--gold)">Политика конфиденциальности</a>.</p>
+  <button id="cookie-accept">Принять</button>
+</div>
+
+<script>
+// ══ АНАЛИТИКА ════════════════════════════════════════════════════
+function ymGoal(goal, params) {
+  try {
+    if (typeof ym === 'function') {
+      params ? ym(110730303, 'reachGoal', goal, params)
+             : ym(110730303, 'reachGoal', goal);
+    }
+  } catch(e) {}
+}
+
+function collectUtm() {
+  var p = new URLSearchParams(window.location.search);
+  return {
+    utm_source:   p.get('utm_source')   || '',
+    utm_medium:   p.get('utm_medium')   || '',
+    utm_campaign: p.get('utm_campaign') || '',
+    utm_content:  p.get('utm_content')  || '',
+    utm_term:     p.get('utm_term')     || ''
+  };
+}
+
+// ══ КВИЗ — СОСТОЯНИЕ ══════════════════════════════════════════════
+var TOTAL_STEPS = 5;
+var currentStep = 1;
+var answers     = {};
+var showDebtQuestion = false; // показывать ли шаг 2 (сумма долга)
+var quizStarted = false;
+var quizDone    = false;
+var submitInProgress = false;
+
+function getVisualStep(logicStep) {
+  // Если не показываем шаг 2 — "сжимаем" шаги
+  if (!showDebtQuestion && logicStep > 2) return logicStep - 1;
+  return logicStep;
+}
+
+function getTotalVisible() {
+  return showDebtQuestion ? 5 : 4;
+}
+
+function showStep(n) {
+  // Если шаг 2 не нужен — перепрыгиваем
+  if (n === 2 && !showDebtQuestion) {
+    n = 3;
+  }
+
+  document.querySelectorAll('#pl-quiz-card .step-q').forEach(function(s) {
+    s.classList.remove('active');
+  });
+  var target = document.querySelector('#pl-quiz-card .step-q[data-step="' + n + '"]');
+  if (target) {
+    target.classList.add('active');
+    // Восстановить выбранные варианты
+    target.querySelectorAll('.option').forEach(function(btn) {
+      var field = btn.dataset.field;
+      btn.classList.toggle('selected', field && answers[field] === btn.dataset.val);
+    });
+  }
+  currentStep = n;
+  var isFinal = (n >= TOTAL_STEPS);
+
+  var visStep = getVisualStep(n);
+  var total = getTotalVisible();
+
+  var pct = isFinal ? 100 : Math.round(visStep / total * 100);
+  document.getElementById('plBar').style.width = pct + '%';
+  document.getElementById('pl-prog-label').textContent =
+    isFinal ? 'Готово!' : 'Шаг ' + visStep + ' из ' + total;
+  document.getElementById('pl-prog-fraction').textContent =
+    isFinal ? '✓' : visStep + ' / ' + total;
+
+  var widget = document.getElementById('chat-widget');
+  if (widget) widget.classList.toggle('quiz-active', n > 1 && !isFinal);
+
+  if (!isFinal) ymGoal('quiz_p_step_view', {step: n});
+
+  var card = document.getElementById('pl-quiz-card');
+  if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if (target) {
+    var first = target.querySelector('.option, textarea, input, .back-btn');
+    if (first) setTimeout(function(){ first.focus(); }, 50);
+  }
+}
+
+// ══ КЛИКИ ПО ВАРИАНТАМ ════════════════════════════════════════════
+document.querySelectorAll('#pl-quiz-card .option').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    if (!quizStarted) { quizStarted = true; ymGoal('quiz_p_start'); }
+
+    var fid = btn.dataset.field;
+    var val = btn.dataset.val;
+    answers[fid] = val;
+    var el = document.getElementById(fid);
+    if (el) el.value = val;
+
+    btn.closest('.options').querySelectorAll('.option').forEach(function(x){
+      x.classList.remove('selected');
+    });
+    btn.classList.add('selected');
+
+    // На шаге 1 определяем, нужен ли вопрос о сумме долга
+    if (fid === 'fScenario') {
+      showDebtQuestion = (btn.dataset.debt === 'yes');
+      // Сбросить ответ по сумме если ветка без долга
+      if (!showDebtQuestion) {
+        answers['fDebtAmount'] = '';
+        var dEl = document.getElementById('fDebtAmount');
+        if (dEl) dEl.value = '';
+      }
+    }
+
+    ymGoal('quiz_p_answer', {step: currentStep});
+    setTimeout(function(){ showStep(currentStep + 1); }, 200);
+  });
+});
+
+// ══ КНОПКИ «НАЗАД» ════════════════════════════════════════════════
+document.querySelectorAll('#pl-quiz-card .back-btn').forEach(function(b) {
+  if (b.id === 'pl-back-from-form') return;
+  b.addEventListener('click', function() {
+    ymGoal('quiz_p_back', {step: currentStep});
+    var target = b.dataset.target;
+    if (target === '2-or-1') {
+      // Шаг 3 → назад: если был шаг 2 — на 2, иначе на 1
+      showStep(showDebtQuestion ? 2 : 1);
+    } else {
+      showStep(parseInt(target) || Math.max(1, currentStep - 1));
+    }
+  });
+});
+
+// Назад с финального шага
+var backFromForm = document.getElementById('pl-back-from-form');
+if (backFromForm) {
+  backFromForm.addEventListener('click', function() {
+    var ss = document.getElementById('pl-success-screen');
+    var cf = document.getElementById('pl-contact-form');
+    if (ss && ss.style.display !== 'none') {
+      ss.style.display = 'none';
+      if (cf) cf.style.display = '';
+      return;
+    }
+    ymGoal('quiz_p_back', {step: currentStep});
+    showStep(4);
+  });
+}
+
+// CTA → квиз
+function scrollToQuiz() {
+  var qs = document.getElementById('quiz');
+  if (qs) qs.scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('hero-cta').addEventListener('click', scrollToQuiz);
+document.getElementById('cards-cta').addEventListener('click', scrollToQuiz);
+document.getElementById('urgency-cta').addEventListener('click', scrollToQuiz);
+
+// ══ ОТПРАВКА ЗАЯВКИ ═══════════════════════════════════════════════
+var CF_ENDPOINT = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
+
+function showFormError(msg) {
+  var el = document.getElementById('pl-error-msg');
+  if (!el) return;
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+function hideFormError() {
+  var el = document.getElementById('pl-error-msg');
+  if (el) el.style.display = 'none';
+}
+
+var submitBtn = document.getElementById('pl-submit-btn');
+if (submitBtn) {
+  submitBtn.addEventListener('click', function() {
+    if (submitInProgress) return;
+    hideFormError();
+
+    var name     = (document.getElementById('pl-name')        || {}).value || '';
+    var rawPhone = (document.getElementById('pl-contact')     || {}).value || '';
+    var consent  = (document.getElementById('pl-consent-chk') || {}).checked;
+    var honeypot = (document.getElementById('pl-honeypot')    || {}).value || '';
+    var descr    = (document.getElementById('pl-description') || {}).value || '';
+
+    var digits = rawPhone.replace(/\D/g, '');
+    if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
+      digits = '7' + digits.slice(1);
+    }
+    var normalizedPhone = digits.length === 11 ? '+' + digits : '';
+
+    if (!name.trim()) {
+      showFormError('Пожалуйста, укажите ваше имя.');
+      document.getElementById('pl-name').focus();
+      return;
+    }
+    if (!normalizedPhone) {
+      showFormError('Пожалуйста, введите корректный российский номер телефона (+7XXXXXXXXXX).');
+      document.getElementById('pl-contact').focus();
+      return;
+    }
+    if (!consent) {
+      showFormError('Для отправки заявки необходимо согласие на обработку персональных данных.');
+      document.getElementById('pl-consent-chk').focus();
+      return;
+    }
+
+    submitInProgress = true;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Отправляем…';
+
+    var payload = {
+      topic:       'Алименты — плательщик',
+      source_page: '/alimenty-platelshchikam.html',
+      name:    name.trim(),
+      contact: normalizedPhone,
+      answers: {
+        scenario:    answers['fScenario']   || '',
+        debt_amount: answers['fDebtAmount'] || '',
+        when:        answers['fWhen']       || '',
+        docs:        answers['fDocs']       || '',
+        description: descr.trim()
+      },
+      utm:          collectUtm(),
+      consent:      true,
+      website:      honeypot,
+      submitted_at: new Date().toISOString()
+    };
+
+    fetch(CF_ENDPOINT, {
+      method:  'POST',
+      headers: {'Content-Type': 'application/json'},
+      body:    JSON.stringify(payload)
+    })
+    .then(function(res){ return res.json(); })
+    .then(function(data) {
+      submitInProgress = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
+
+      if (data && data.ok) {
+        ymGoal('quiz_p_complete');
+        ymGoal('lead_p_sent');
+        var cf = document.getElementById('pl-contact-form');
+        var fh = document.getElementById('pl-form-header');
+        var ss = document.getElementById('pl-success-screen');
+        if (cf) cf.style.display = 'none';
+        if (fh) fh.style.display = 'none';
+        if (ss) ss.style.display = '';
+        var bf = document.getElementById('pl-back-from-form');
+        if (bf) bf.style.display = 'none';
+      } else {
+        showFormError('Не удалось отправить заявку. Попробуйте ещё раз или напишите напрямую в Telegram.');
+      }
+    })
+    .catch(function() {
+      submitInProgress = false;
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Отправить заявку';
+      showFormError('Ошибка соединения. Проверьте интернет и попробуйте ещё раз, или напишите напрямую: t.me/a_likhacheva2026');
+    });
+  });
+}
+
+// ══ ИНИЦИАЛИЗАЦИЯ ═════════════════════════════════════════════════
+document.addEventListener('DOMContentLoaded', function() {
+  showStep(1);
+
+  // Маска телефона
+  var phoneInput = document.getElementById('pl-contact');
+  if (phoneInput) {
+    phoneInput.addEventListener('input', function() {
+      var digits = this.value.replace(/\D/g, '');
+      if (digits.length > 0 && (digits[0] === '8' || digits[0] === '7')) {
+        digits = '7' + digits.slice(1);
+      } else if (digits.length > 0) {
+        digits = '7' + digits;
+      }
+      digits = digits.slice(0, 11);
+      var result = '';
+      if (digits.length > 0)  result = '+7';
+      if (digits.length > 1)  result += ' (' + digits.slice(1, 4);
+      if (digits.length >= 4) result += ') ' + digits.slice(4, 7);
+      if (digits.length >= 7) result += '-' + digits.slice(7, 9);
+      if (digits.length >= 9) result += '-' + digits.slice(9, 11);
+      this.value = result;
+    });
+    phoneInput.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && this.value.slice(-1).match(/[\s\(\)\-]/)) {
+        this.value = this.value.slice(0, -1);
+      }
+    });
+  }
+
+  // Textarea — сохранить в hidden при потере фокуса
+  var desc = document.getElementById('pl-description');
+  if (desc) {
+    desc.addEventListener('input', function() {
+      var el = document.getElementById('fDescription');
+      if (el) el.value = this.value;
+    });
+  }
+});
+
+// ══ COOKIE ════════════════════════════════════════════════════════
+(function() {
+  if (!localStorage.getItem('cookie_consent')) {
+    var banner = document.getElementById('cookie-banner');
+    if (banner) banner.style.display = 'flex';
+  }
+  var btn = document.getElementById('cookie-accept');
+  if (btn) btn.addEventListener('click', function() {
+    localStorage.setItem('cookie_consent', '1');
+    var banner = document.getElementById('cookie-banner');
+    if (banner) banner.style.display = 'none';
+  });
+})();
+</script>
+</body>
+</html>
