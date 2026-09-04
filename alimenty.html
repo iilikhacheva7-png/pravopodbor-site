@@ -544,8 +544,7 @@ function showStep(n) {
           ? 'Исполнительное производство: '     + document.getElementById('fFSSP').value : null,
         document.getElementById('fDebt') && document.getElementById('fDebt').value
           ? 'Доходы второго родителя: Сведения о доходах требуют индивидуального обсуждения' : null
-      ].filter(Boolean).join('
-');
+      ].filter(Boolean).join('\n');
       alIframe.setAttribute('src', buildFinalFormUrl(LEAD_TOPIC, alAnswers, finalId));
     }
   }
