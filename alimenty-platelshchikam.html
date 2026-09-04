@@ -383,25 +383,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
             </div>
           </div>
 
-          <!-- Предпочтительный мессенджер -->
-          <div style="margin-bottom:16px;">
-            <p style="font-size:13px;font-weight:600;color:var(--muted);margin:0 0 8px;">Предпочтительный мессенджер</p>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;">
-              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
-                <input type="radio" name="pl-messenger" value="MAX" style="display:none;">
-                <span style="font-size:18px;">✉️</span> MAX
-              </label>
-              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
-                <input type="radio" name="pl-messenger" value="Telegram" style="display:none;">
-                <span style="font-size:18px;">✈️</span> Telegram
-              </label>
-              <label style="display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 8px;border:1.5px solid #ddd6ca;border-radius:10px;cursor:pointer;font-size:12px;color:var(--ink);transition:border-color .12s;text-align:center;">
-                <input type="radio" name="pl-messenger" value="WhatsApp" style="display:none;">
-                <span style="font-size:18px;">💬</span> WhatsApp
-              </label>
-            </div>
-          </div>
-
           <!-- Согласие -->
           <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
             <input type="checkbox" id="pl-consent-chk"
@@ -567,6 +548,16 @@ function showStep(n) {
 
   if (!isFinal) ymGoal('quiz_p_step_view', {step: n});
 
+  // При переходе на финальный шаг всегда восстанавливаем состояние формы
+  if (isFinal) {
+    var cf = document.getElementById('pl-contact-form');
+    var ss = document.getElementById('pl-success-screen');
+    var bf = document.getElementById('pl-back-from-form');
+    if (cf) cf.style.display = '';
+    if (ss) ss.style.display = 'none';
+    if (bf) bf.style.display = '';
+  }
+
   // Прокрутка и фокус — только если пользователь уже взаимодействовал с квизом
   if (quizStarted) {
     var card = document.getElementById('pl-quiz-card');
@@ -636,17 +627,7 @@ if (backFromForm) {
   });
 }
 
-// Подсветка выбранного мессенджера
-document.querySelectorAll('input[name="pl-messenger"]').forEach(function(radio) {
-  radio.addEventListener('change', function() {
-    document.querySelectorAll('input[name="pl-messenger"]').forEach(function(r) {
-      r.closest('label').style.borderColor = '#ddd6ca';
-      r.closest('label').style.background = '';
-    });
-    radio.closest('label').style.borderColor = 'var(--gold)';
-    radio.closest('label').style.background = '#fbf7ef';
-  });
-});
+
 
 // CTA → квиз: прокрутка только по клику, никогда при загрузке
 function scrollToQuiz() {
@@ -681,8 +662,7 @@ if (submitBtn) {
     var rawPhone = (document.getElementById('pl-contact')     || {}).value || '';
     var consent  = (document.getElementById('pl-consent-chk') || {}).checked;
     var honeypot = (document.getElementById('pl-honeypot')    || {}).value || '';
-    var messengerEl = document.querySelector('input[name="pl-messenger"]:checked');
-    var messenger = messengerEl ? messengerEl.value : '';
+
 
     var digits = rawPhone.replace(/\D/g, '');
     if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
@@ -721,7 +701,7 @@ if (submitBtn) {
         when:        answers['fWhen']       || '',
         docs:        answers['fDocs']       || ''
       },
-      messenger: messenger,
+
       utm:          collectUtm(),
       consent:      true,
       website:      honeypot,
@@ -819,6 +799,7 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
 
 
 
