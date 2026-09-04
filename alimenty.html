@@ -338,12 +338,7 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
                 placeholder="+7 900 000-00-00 или @username"
                 style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box;">
             </div>
-            <div>
-              <label for="al-desc" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;">Опишите вашу ситуацию подробно *</label>
-              <textarea id="al-desc" name="description" maxlength="2000" required rows="5"
-                placeholder="Расскажите детали: сколько лет ребёнку, когда перестали платить, что уже предпринимали, есть ли решение суда — любая подробность поможет."
-                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;resize:vertical;box-sizing:border-box;line-height:1.5;"></textarea>
-            </div>
+
           </div>
 
           <!-- Согласие на ПД -->
@@ -532,7 +527,6 @@ function showStep(n) {
 
   if (isFinal && !quizDone) {
     quizDone = true;
-    ymGoal('quiz_complete');
   }
 
   if (!isFinal) ymGoal('quiz_step_view', {step: n});
@@ -622,7 +616,6 @@ if (submitBtn) {
 
     var name    = (document.getElementById('al-name')    || {}).value || '';
     var contact = (document.getElementById('al-contact') || {}).value || '';
-    var desc    = (document.getElementById('al-desc')    || {}).value || '';
     var consent = (document.getElementById('al-consent-chk') || {}).checked;
     var honeypot = (document.getElementById('al-honeypot') || {}).value || '';
 
@@ -635,11 +628,6 @@ if (submitBtn) {
     if (!contact.trim()) {
       showFormError('Пожалуйста, укажите контакт для связи.');
       document.getElementById('al-contact').focus();
-      return;
-    }
-    if (!desc.trim()) {
-      showFormError('Пожалуйста, опишите вашу ситуацию — это поможет разобраться быстрее.');
-      document.getElementById('al-desc').focus();
       return;
     }
     if (!consent) {
@@ -657,7 +645,6 @@ if (submitBtn) {
       source_page:    '/alimenty.html',
       name:           name.trim(),
       contact:        contact.trim(),
-      description:    desc.trim(),
       answers: {
         situation: answers['fSit'] || '',
         document:  answers['fDoc'] || '',
@@ -682,6 +669,7 @@ if (submitBtn) {
       submitBtn.textContent = 'Отправить заявку';
 
       if (data && data.ok) {
+        ymGoal('quiz_complete');
         ymGoal('lead_sent');
         // Показываем success-screen
         var cf = document.getElementById('al-contact-form');
