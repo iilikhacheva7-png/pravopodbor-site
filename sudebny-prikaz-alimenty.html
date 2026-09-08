@@ -164,6 +164,36 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
 @media(max-width:860px){
   .kit-img{max-width:480px;margin-left:auto;margin-right:auto}
 }
+
+/* FREE GUIDE BLOCK */
+.free-block{background:var(--navy2);border-radius:var(--radius);padding:40px 36px;color:#fff;margin-bottom:0}
+.free-block .kicker{color:var(--gold);margin-bottom:12px;display:block}
+.free-block h2{color:#fff;margin-bottom:10px;font-size:clamp(22px,2.8vw,32px)}
+.free-block .free-sub{font-size:15px;color:#b8c1cf;margin:0 0 20px;line-height:1.6;max-width:540px}
+.free-list{list-style:none;margin:0 0 24px;padding:0;display:flex;flex-direction:column;gap:7px}
+.free-list li{font-size:14px;color:#ccd3de;display:flex;align-items:flex-start;gap:8px}
+.free-list li::before{content:'—';color:var(--gold);flex-shrink:0}
+.free-form{display:none;margin-top:20px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:24px}
+.free-form.visible{display:block}
+.free-form label{display:block;font-size:12px;font-weight:600;color:#8fa0b8;margin-bottom:5px}
+.free-form input[type=text],.free-form input[type=tel]{width:100%;padding:11px 14px;border:1.5px solid rgba(255,255,255,.15);border-radius:10px;font:inherit;font-size:14px;color:#fff;background:rgba(255,255,255,.07);outline:none;transition:border-color .15s;box-sizing:border-box}
+.free-form input:focus{border-color:var(--gold)}
+.free-form input::placeholder{color:#5a6e88}
+.free-consent{display:flex;align-items:flex-start;gap:9px;margin:14px 0 18px}
+.free-consent input{margin-top:3px;accent-color:var(--gold);width:15px;height:15px;flex-shrink:0;cursor:pointer}
+.free-consent label{font-size:12px;color:#8fa0b8;line-height:1.55;cursor:pointer}
+.free-consent a{color:var(--gold)}
+.free-error{display:none;font-size:13px;color:#f87171;margin-bottom:12px;line-height:1.4}
+.free-success{display:none;text-align:center;padding:8px 0}
+.free-success h3{font:500 22px/1.2 Georgia;color:#fff;margin:0 0 10px}
+.free-success p{font-size:14px;color:#b8c1cf;line-height:1.6;margin:0 0 20px}
+.free-success .btn-gold{margin-bottom:12px;width:100%}
+.free-success .to-routes{display:inline-block;font-size:13px;color:var(--gold);cursor:pointer;background:none;border:none;font-family:inherit;text-decoration:underline;margin-top:4px}
+.free-success-note{font-size:13px;color:#8fa0b8;line-height:1.6;margin-top:16px;text-align:left}
+@media(max-width:640px){
+  .free-block{padding:28px 20px}
+  .free-form{padding:18px}
+}
 </style>
 
 <!-- Яндекс.Метрика -->
@@ -191,6 +221,74 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
     <p class="lead">Если вам подходит судебный приказ, можно пройти весь путь самостоятельно или поручить подготовку документов мне. Если ситуация сложнее — сначала разберём её.</p>
   </div>
 </section>
+
+
+<!-- БЕСПЛАТНЫЙ МАТЕРИАЛ -->
+<section class="section" id="free-guide">
+  <div class="wrap">
+    <div class="free-block">
+      <span class="kicker">БЕСПЛАТНО</span>
+      <h2>Не уверены, подходит ли вам судебный приказ?</h2>
+      <p class="free-sub">Получите бесплатную проверку маршрута: когда можно использовать судебный приказ, а когда нужен другой способ взыскания алиментов.</p>
+      <ul class="free-list">
+        <li>Быстрая проверка ситуации</li>
+        <li>Стандартный и нестандартный маршрут</li>
+        <li>Размеры долей на 1, 2, 3 и более детей</li>
+        <li>Варианты дальнейших действий</li>
+      </ul>
+
+      <!-- CTA — до формы -->
+      <div id="free-cta">
+        <button class="btn btn-gold" onclick="showFreeForm()">Получить бесплатно</button>
+      </div>
+
+      <!-- Форма -->
+      <div class="free-form" id="free-form">
+        <!-- Honeypot -->
+        <input type="text" name="website" id="fg-honeypot" tabindex="-1" autocomplete="off"
+          style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+
+        <div style="display:grid;gap:12px;margin-bottom:4px">
+          <div>
+            <label for="fg-name">Ваше имя *</label>
+            <input type="text" id="fg-name" placeholder="Как вас зовут?" maxlength="100" autocomplete="given-name">
+          </div>
+          <div>
+            <label for="fg-phone">Телефон *</label>
+            <input type="tel" id="fg-phone" placeholder="+7 (___) ___-__-__" maxlength="18" autocomplete="tel">
+          </div>
+        </div>
+
+        <div class="free-consent">
+          <input type="checkbox" id="fg-consent">
+          <label for="fg-consent">Я ознакомилась с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю <a href="/consent-personal-data.html" target="_blank">согласие на обработку персональных данных</a></label>
+        </div>
+
+        <div class="free-error" id="fg-error"></div>
+
+        <button class="btn btn-gold" id="fg-submit" style="width:100%" onclick="submitFreeForm()">Получить бесплатно</button>
+      </div>
+
+      <!-- Success state -->
+      <div class="free-success" id="free-success">
+        <h3>Готово — бесплатная проверка доступна</h3>
+        <p>Откройте материал и определите, подходит ли вашей ситуации стандартный судебный приказ.</p>
+        <a href="https://disk.yandex.ru/i/UIMNfCUD6kIqYw" target="_blank" class="btn btn-gold" style="display:block;text-align:center;margin-bottom:12px">Открыть бесплатную проверку</a>
+        <div class="free-success-note">
+          Если по результатам проверки судебный приказ вам подходит, ниже на странице можно выбрать:<br>
+          — готовый комплект для самостоятельной подачи за 590 рублей;<br>
+          — индивидуальную подготовку документов за 3 000 рублей.<br><br>
+          Если ситуация отличается от стандартной — можно написать Анастасии для разбора.
+        </div>
+        <div style="margin-top:16px">
+          <button class="to-routes" onclick="scrollToRoutes()">↓ Перейти к вариантам</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<!-- /БЕСПЛАТНЫЙ МАТЕРИАЛ -->
 
 <!-- 3 МАРШРУТА -->
 <section class="section white">
@@ -505,6 +603,131 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 </div>
 
 <script>
+
+// ══ БЕСПЛАТНЫЙ МАТЕРИАЛ ══════════════════════════════════════════
+var CF_ENDPOINT_FREE = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
+var fgSubmitting = false;
+
+function showFreeForm() {
+  document.getElementById('free-cta').style.display = 'none';
+  document.getElementById('free-form').classList.add('visible');
+  document.getElementById('fg-name').focus();
+}
+
+function collectUtmFree() {
+  var p = new URLSearchParams(window.location.search);
+  return {
+    utm_source:   p.get('utm_source')   || '',
+    utm_medium:   p.get('utm_medium')   || '',
+    utm_campaign: p.get('utm_campaign') || '',
+    utm_content:  p.get('utm_content')  || '',
+    utm_term:     p.get('utm_term')     || ''
+  };
+}
+
+function submitFreeForm() {
+  if (fgSubmitting) return;
+
+  var name     = (document.getElementById('fg-name')    || {}).value || '';
+  var rawPhone = (document.getElementById('fg-phone')   || {}).value || '';
+  var consent  = (document.getElementById('fg-consent') || {}).checked;
+  var honeypot = (document.getElementById('fg-honeypot')|| {}).value || '';
+
+  // Нормализация телефона
+  var digits = rawPhone.replace(/\D/g, '');
+  if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
+    digits = '7' + digits.slice(1);
+  }
+  var phone = digits.length === 11 ? '+' + digits : '';
+
+  var errEl = document.getElementById('fg-error');
+  errEl.style.display = 'none';
+
+  function showErr(msg) {
+    errEl.textContent = msg;
+    errEl.style.display = 'block';
+  }
+
+  if (!name.trim())  { showErr('Пожалуйста, укажите ваше имя.'); return; }
+  if (!phone)        { showErr('Пожалуйста, введите корректный номер телефона (+7XXXXXXXXXX).'); return; }
+  if (!consent)      { showErr('Необходимо согласие на обработку персональных данных.'); return; }
+
+  fgSubmitting = true;
+  var btn = document.getElementById('fg-submit');
+  btn.disabled = true;
+  btn.textContent = 'Отправляем…';
+
+  var payload = {
+    topic:       'Бесплатный материал — судебный приказ на алименты',
+    source_page: '/sudebny-prikaz-alimenty.html',
+    lead_type:   'free_alimony_guide',
+    name:        name.trim(),
+    contact:     phone,
+    utm:         collectUtmFree(),
+    consent:     true,
+    website:     honeypot,
+    submitted_at: new Date().toISOString()
+  };
+
+  fetch(CF_ENDPOINT_FREE, {
+    method:  'POST',
+    headers: {'Content-Type': 'application/json'},
+    body:    JSON.stringify(payload)
+  })
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    fgSubmitting = false;
+    btn.disabled = false;
+    btn.textContent = 'Получить бесплатно';
+    if (data && data.ok) {
+      document.getElementById('free-form').style.display = 'none';
+      document.getElementById('free-success').style.display = 'block';
+      if (typeof ym === 'function') ym(110730303, 'reachGoal', 'free_guide_sent');
+    } else {
+      showErr('Не удалось отправить. Попробуйте ещё раз.');
+    }
+  })
+  .catch(function() {
+    fgSubmitting = false;
+    btn.disabled = false;
+    btn.textContent = 'Получить бесплатно';
+    showErr('Ошибка соединения. Проверьте интернет и попробуйте снова.');
+  });
+}
+
+function scrollToRoutes() {
+  var el = document.querySelector('.routes');
+  if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
+}
+
+// Маска телефона для поля бесплатного блока
+document.addEventListener('DOMContentLoaded', function() {
+  var ph = document.getElementById('fg-phone');
+  if (ph) {
+    ph.addEventListener('input', function() {
+      var digits = this.value.replace(/\D/g, '');
+      if (digits.length > 0 && (digits[0] === '8' || digits[0] === '7')) {
+        digits = '7' + digits.slice(1);
+      } else if (digits.length > 0) {
+        digits = '7' + digits;
+      }
+      digits = digits.slice(0, 11);
+      var r = '';
+      if (digits.length > 0) r = '+7';
+      if (digits.length > 1) r += ' (' + digits.slice(1, 4);
+      if (digits.length >= 4) r += ') ' + digits.slice(4, 7);
+      if (digits.length >= 7) r += '-' + digits.slice(7, 9);
+      if (digits.length >= 9) r += '-' + digits.slice(9, 11);
+      this.value = r;
+    });
+    ph.addEventListener('keydown', function(e) {
+      if (e.key === 'Backspace' && this.value.slice(-1).match(/[\s\(\)\-]/)) {
+        this.value = this.value.slice(0, -1);
+      }
+    });
+  }
+});
+
 function toggleFaq(btn) {
   btn.parentElement.classList.toggle('open');
 }
