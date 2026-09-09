@@ -194,6 +194,20 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
   .free-block{padding:28px 20px}
   .free-form{padding:18px}
 }
+
+/* FREE CHANNEL BUTTONS */
+.free-cta-channels{margin-top:20px}
+.free-channels-label{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin:0 0 8px}
+.free-channels-sub{font-size:14px;color:#b8c1cf;margin:0 0 18px;line-height:1.55}
+.free-channels-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-channel{display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border-radius:10px;font-size:15px;font-weight:700;text-decoration:none;color:#fff;transition:opacity .15s;font-family:inherit;min-width:180px;justify-content:center}
+.btn-channel:hover{opacity:.86}
+.btn-channel-max{background:#5B4FCF}
+.btn-channel-tg{background:#2AABEE}
+@media(max-width:520px){
+  .free-channels-btns{flex-direction:column}
+  .btn-channel{min-width:0;width:100%}
+}
 </style>
 
 <!-- Яндекс.Метрика -->
@@ -229,59 +243,26 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
     <div class="free-block">
       <span class="kicker">БЕСПЛАТНО</span>
       <h2>Не уверены, подходит ли вам судебный приказ?</h2>
-      <p class="free-sub">Получите бесплатную проверку маршрута: когда можно использовать судебный приказ, а когда нужен другой способ взыскания алиментов.</p>
+      <p class="free-sub">Получите бесплатную проверку ситуации и определите, подходит ли вам стандартный судебный приказ или нужен другой способ взыскания алиментов.</p>
       <ul class="free-list">
-        <li>Быстрая проверка ситуации</li>
-        <li>Стандартный и нестандартный маршрут</li>
-        <li>Размеры долей на 1, 2, 3 и более детей</li>
-        <li>Варианты дальнейших действий</li>
+        <li>Когда подходит судебный приказ</li>
+        <li>Когда нужен другой вариант</li>
+        <li>Размер алиментов в доле от дохода</li>
+        <li>Какой маршрут выбрать дальше</li>
       </ul>
 
-      <!-- CTA — до формы -->
-      <div id="free-cta">
-        <button class="btn btn-gold" onclick="showFreeForm()">Получить бесплатно</button>
-      </div>
-
-      <!-- Форма -->
-      <div class="free-form" id="free-form">
-        <!-- Honeypot -->
-        <input type="text" name="website" id="fg-honeypot" tabindex="-1" autocomplete="off"
-          style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
-
-        <div style="display:grid;gap:12px;margin-bottom:4px">
-          <div>
-            <label for="fg-name">Ваше имя *</label>
-            <input type="text" id="fg-name" placeholder="Как вас зовут?" maxlength="100" autocomplete="given-name">
-          </div>
-          <div>
-            <label for="fg-phone">Телефон *</label>
-            <input type="tel" id="fg-phone" placeholder="+7 (___) ___-__-__" maxlength="18" autocomplete="tel">
-          </div>
-        </div>
-
-        <div class="free-consent">
-          <input type="checkbox" id="fg-consent">
-          <label for="fg-consent">Я ознакомилась с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю <a href="/consent-personal-data.html" target="_blank">согласие на обработку персональных данных</a></label>
-        </div>
-
-        <div class="free-error" id="fg-error"></div>
-
-        <button class="btn btn-gold" id="fg-submit" style="width:100%" onclick="submitFreeForm()">Получить бесплатно</button>
-      </div>
-
-      <!-- Success state -->
-      <div class="free-success" id="free-success">
-        <h3>Готово — бесплатная проверка доступна</h3>
-        <p>Откройте материал и определите, подходит ли вашей ситуации стандартный судебный приказ.</p>
-        <a href="https://rekoyur.ru/downloads/free-alimenty-route-2026.pdf" target="_blank" class="btn btn-gold" style="display:block;text-align:center;margin-bottom:12px">Открыть бесплатную проверку</a>
-        <div class="free-success-note">
-          Если по результатам проверки судебный приказ вам подходит, ниже на странице можно выбрать:<br>
-          — готовый комплект для самостоятельной подачи за 590 рублей;<br>
-          — индивидуальную подготовку документов за 3 000 рублей.<br><br>
-          Если ситуация отличается от стандартной — можно написать Анастасии для разбора.
-        </div>
-        <div style="margin-top:16px">
-          <button class="to-routes" onclick="scrollToRoutes()">↓ Перейти к вариантам</button>
+      <div class="free-cta-channels">
+        <p class="free-channels-label">БЕСПЛАТНАЯ ПРОВЕРКА СИТУАЦИИ</p>
+        <p class="free-channels-sub">Материал уже опубликован в моём канале. Выберите, где вам удобнее его открыть.</p>
+        <div class="free-channels-btns">
+          <a href="https://max.ru/channel_rekoyur/AaCEaq4cCHI" target="_blank" class="btn-channel btn-channel-max" onclick="ym(110730303,'reachGoal','free_open_max')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="12" fill="rgba(255,255,255,0.25)"/><text x="12" y="16.5" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-weight="700" font-size="13">M</text></svg>
+            Открыть в MAX
+          </a>
+          <a href="https://t.me/po_rekomendatsii/73" target="_blank" class="btn-channel btn-channel-tg" onclick="ym(110730303,'reachGoal','free_open_tg')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.467l-2.96-.924c-.643-.203-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.092z"/></svg>
+            Открыть в Telegram
+          </a>
         </div>
       </div>
 
@@ -604,129 +585,6 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true});
 
 <script>
 
-// ══ БЕСПЛАТНЫЙ МАТЕРИАЛ ══════════════════════════════════════════
-var CF_ENDPOINT_FREE = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
-var fgSubmitting = false;
-
-function showFreeForm() {
-  document.getElementById('free-cta').style.display = 'none';
-  document.getElementById('free-form').classList.add('visible');
-  document.getElementById('fg-name').focus();
-}
-
-function collectUtmFree() {
-  var p = new URLSearchParams(window.location.search);
-  return {
-    utm_source:   p.get('utm_source')   || '',
-    utm_medium:   p.get('utm_medium')   || '',
-    utm_campaign: p.get('utm_campaign') || '',
-    utm_content:  p.get('utm_content')  || '',
-    utm_term:     p.get('utm_term')     || ''
-  };
-}
-
-function submitFreeForm() {
-  if (fgSubmitting) return;
-
-  var name     = (document.getElementById('fg-name')    || {}).value || '';
-  var rawPhone = (document.getElementById('fg-phone')   || {}).value || '';
-  var consent  = (document.getElementById('fg-consent') || {}).checked;
-  var honeypot = (document.getElementById('fg-honeypot')|| {}).value || '';
-
-  // Нормализация телефона
-  var digits = rawPhone.replace(/\D/g, '');
-  if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
-    digits = '7' + digits.slice(1);
-  }
-  var phone = digits.length === 11 ? '+' + digits : '';
-
-  var errEl = document.getElementById('fg-error');
-  errEl.style.display = 'none';
-
-  function showErr(msg) {
-    errEl.textContent = msg;
-    errEl.style.display = 'block';
-  }
-
-  if (!name.trim())  { showErr('Пожалуйста, укажите ваше имя.'); return; }
-  if (!phone)        { showErr('Пожалуйста, введите корректный номер телефона (+7XXXXXXXXXX).'); return; }
-  if (!consent)      { showErr('Необходимо согласие на обработку персональных данных.'); return; }
-
-  fgSubmitting = true;
-  var btn = document.getElementById('fg-submit');
-  btn.disabled = true;
-  btn.textContent = 'Отправляем…';
-
-  var payload = {
-    topic:       'Бесплатный материал — судебный приказ на алименты',
-    source_page: '/sudebny-prikaz-alimenty.html',
-    lead_type:   'free_alimony_guide',
-    name:        name.trim(),
-    contact:     phone,
-    utm:         collectUtmFree(),
-    consent:     true,
-    website:     honeypot,
-    submitted_at: new Date().toISOString()
-  };
-
-  fetch(CF_ENDPOINT_FREE, {
-    method:  'POST',
-    headers: {'Content-Type': 'application/json'},
-    body:    JSON.stringify(payload)
-  })
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-    fgSubmitting = false;
-    btn.disabled = false;
-    btn.textContent = 'Получить бесплатно';
-    if (data && data.ok) {
-      document.getElementById('free-form').style.display = 'none';
-      document.getElementById('free-success').style.display = 'block';
-      if (typeof ym === 'function') ym(110730303, 'reachGoal', 'free_guide_sent');
-    } else {
-      showErr('Не удалось отправить. Попробуйте ещё раз.');
-    }
-  })
-  .catch(function() {
-    fgSubmitting = false;
-    btn.disabled = false;
-    btn.textContent = 'Получить бесплатно';
-    showErr('Ошибка соединения. Проверьте интернет и попробуйте снова.');
-  });
-}
-
-function scrollToRoutes() {
-  var el = document.querySelector('.routes');
-  if (el) el.scrollIntoView({behavior: 'smooth', block: 'start'});
-}
-
-// Маска телефона для поля бесплатного блока
-document.addEventListener('DOMContentLoaded', function() {
-  var ph = document.getElementById('fg-phone');
-  if (ph) {
-    ph.addEventListener('input', function() {
-      var digits = this.value.replace(/\D/g, '');
-      if (digits.length > 0 && (digits[0] === '8' || digits[0] === '7')) {
-        digits = '7' + digits.slice(1);
-      } else if (digits.length > 0) {
-        digits = '7' + digits;
-      }
-      digits = digits.slice(0, 11);
-      var r = '';
-      if (digits.length > 0) r = '+7';
-      if (digits.length > 1) r += ' (' + digits.slice(1, 4);
-      if (digits.length >= 4) r += ') ' + digits.slice(4, 7);
-      if (digits.length >= 7) r += '-' + digits.slice(7, 9);
-      if (digits.length >= 9) r += '-' + digits.slice(9, 11);
-      this.value = r;
-    });
-    ph.addEventListener('keydown', function(e) {
-      if (e.key === 'Backspace' && this.value.slice(-1).match(/[\s\(\)\-]/)) {
-        this.value = this.value.slice(0, -1);
-      }
-    });
-  }
-});
 
 function toggleFaq(btn) {
   btn.parentElement.classList.toggle('open');
