@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<!-- Страница успешной оплаты -->
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Спасибо за заказ — По рекомендации</title>
+<meta name="description" content="Оплата успешно получена. Доступ к материалам будет отправлен на указанную электронную почту.">
+<meta name="robots" content="noindex,nofollow">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>
+/* === Дизайн-токены (из актуального светлого стиля rekoyur.ru) === */
+:root{
+  --navy:#0f1a2b;--navy2:#16243b;
+  --paper:#f6f1e8;--paper2:#eee6d8;
+  --ink:#152033;--muted:#667085;
+  --gold:#c9a24b;--gold-soft:rgba(201,162,75,.10);
+  --line:#ded5c7;--white:#fff;--green:#557763;
+  --radius:18px
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:860px;margin:auto;padding:0 24px}
+
+/* HEADER */
+header{height:72px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line)}
+.logo{font-weight:800;font-size:19px;color:var(--navy)}.logo span{color:var(--gold)}
+
+/* HERO — SUCCESS */
+.ty-hero{padding:56px 0 12px;text-align:center}
+.ty-icon{width:52px;height:52px;border-radius:50%;background:#edf6f1;border:2px solid #b5d9c6;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:24px;color:#557763}
+.ty-hero h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(26px,4vw,40px);line-height:1.15;letter-spacing:-.03em;margin:0 0 10px;color:var(--navy)}
+.ty-hero h2{font:400 clamp(15px,2vw,18px)/1.5 "Segoe UI",system-ui,sans-serif;color:var(--muted);margin:0 0 6px;font-weight:400}
+.ty-lead{font-size:15px;color:var(--muted);max-width:540px;margin:0 auto 0;line-height:1.65}
+
+/* CARDS */
+.ty-section{padding:36px 0}
+.ty-card{background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:28px 32px;margin-bottom:16px}
+.ty-card h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:20px;color:var(--navy);margin:0 0 10px;letter-spacing:-.02em}
+.ty-card p{font-size:15px;color:var(--muted);margin:0 0 10px;line-height:1.65}
+.ty-card p:last-child{margin:0}
+
+/* CHECKLIST */
+.ty-checks{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.ty-checks li{font-size:14.5px;color:var(--ink);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.ty-checks li::before{content:'✓';color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+
+/* MESSENGER BUTTONS */
+.msng-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn-msng{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:10px;font-size:14px;font-weight:600;text-decoration:none;color:#fff;transition:opacity .15s;font-family:inherit}
+.btn-msng:hover{opacity:.86}
+.btn-max{background:#5B4FCF}
+.btn-tg{background:#2AABEE}
+.btn-wa{background:#25D366}
+
+/* UPSELL BLOCK */
+.upsell-block{display:none;background:var(--white);border:1.5px solid var(--line);border-radius:var(--radius);padding:28px 32px;margin-bottom:16px}
+.upsell-block h3{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:22px;color:var(--navy);margin:0 0 12px;letter-spacing:-.02em}
+.upsell-block p{font-size:15px;color:var(--muted);line-height:1.65;margin:0 0 10px}
+.upsell-formula{display:flex;align-items:center;gap:0;flex-wrap:wrap;gap:10px;margin:20px 0 22px;background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.upsell-formula-item{text-align:center;flex:1;min-width:90px}
+.upsell-formula-num{font-size:26px;font-weight:800;color:var(--navy);letter-spacing:-.5px;line-height:1}
+.upsell-formula-lbl{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.3}
+.upsell-formula-num.paid{color:var(--gold)}
+.upsell-formula-sep{font-size:22px;color:var(--line);font-weight:300;flex-shrink:0;align-self:center;padding:0 2px}
+.upsell-note{font-size:13px;color:var(--muted);margin-top:12px;line-height:1.55;font-style:italic}
+.btn-upsell{display:inline-flex;align-items:center;justify-content:center;min-height:50px;padding:0 28px;border:0;border-radius:999px;background:var(--navy);color:#fff;font-weight:700;cursor:pointer;font-size:15px;text-decoration:none;transition:opacity .15s;font-family:inherit}
+.btn-upsell:hover{opacity:.86}
+.upsell-label{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+
+/* DIVIDER */
+.divider{border:none;border-top:1px solid var(--line);margin:4px 0 20px}
+
+/* FOOTER */
+footer{border-top:1px solid var(--line);padding:28px 0;background:var(--navy)}
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.foot span,.foot a{font-size:12px;color:#7b8494}
+.foot a:hover{color:var(--gold)}
+
+/* MOBILE */
+@media(max-width:640px){
+  .ty-card,.upsell-block{padding:22px 18px}
+  .upsell-formula{gap:8px;padding:14px 12px}
+  .upsell-formula-num{font-size:22px}
+  .msng-row{flex-direction:column}
+  .btn-msng{width:100%;justify-content:center}
+}
+@media(max-width:480px){
+  .wrap{padding:0 16px}
+  header{height:62px}
+  .ty-hero{padding:36px 0 8px}
+}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <a class="logo" href="/"><span>По</span> рекомендации</a>
+</header>
+</div>
+
+<!-- HERO -->
+<div class="ty-hero">
+  <div class="wrap">
+    <div class="ty-icon">✓</div>
+    <h1>Спасибо!<br>Оплата успешно получена.</h1>
+    <h2>Заказ уже зарегистрирован.</h2>
+    <p class="ty-lead">Письмо с доступом к материалам обычно приходит автоматически на указанный при оплате email в течение нескольких минут.</p>
+  </div>
+</div>
+
+<div class="ty-section">
+<div class="wrap">
+
+  <!-- ЕСЛИ ПИСЬМО НЕ ПРИШЛО -->
+  <div class="ty-card">
+    <h3>Если письмо не пришло</h3>
+    <p>Иногда письмо может попасть в папку «Спам» или «Промоакции».</p>
+    <p>Если в течение 10–15 минут письмо так и не появилось — напишите мне любым удобным способом.</p>
+    <div class="msng-row">
+      <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" class="btn-msng btn-max">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="12" fill="rgba(255,255,255,0.25)"/><text x="12" y="16.5" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-weight="700" font-size="13">M</text></svg>
+        MAX
+      </a>
+      <a href="https://wa.me/79920011995" target="_blank" class="btn-msng btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://t.me/a_likhacheva2026" target="_blank" class="btn-msng btn-tg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.467l-2.96-.924c-.643-.203-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.092z"/></svg>
+        Telegram
+      </a>
+    </div>
+  </div>
+
+  <!-- ЧТО ДАЛЬШЕ -->
+  <div class="ty-card">
+    <h3>Что дальше?</h3>
+    <ul class="ty-checks">
+      <li>Сохраните письмо с доступом к материалам.</li>
+      <li>Скачайте материалы на своё устройство.</li>
+      <li>Начните с основного файла или инструкции «Начните здесь», если она есть в комплекте.</li>
+      <li>Внимательно пройдите маршрут по порядку — каждый шаг важен.</li>
+      <li>Если позже захотите передать подготовку документов мне — это можно сделать отдельно.</li>
+    </ul>
+  </div>
+
+  <!-- ДОПРОДАЖА — показывается только при ?product=alimony-order -->
+  <div class="upsell-block" id="upsell-alimony-order">
+    <div class="upsell-label">Дополнительно</div>
+    <h3>Решили передать подготовку документов мне?</h3>
+    <p>Если после изучения комплекта вы решите, что удобнее получить уже готовые документы под вашу ситуацию, можно заказать индивидуальную подготовку.</p>
+    <p>В течение 30 дней стоимость приобретённого комплекта полностью засчитывается.</p>
+
+    <div class="upsell-formula">
+      <div class="upsell-formula-item">
+        <div class="upsell-formula-num paid">590 ₽</div>
+        <div class="upsell-formula-lbl">уже оплачено</div>
+      </div>
+      <div class="upsell-formula-sep">+</div>
+      <div class="upsell-formula-item">
+        <div class="upsell-formula-num">2 410 ₽</div>
+        <div class="upsell-formula-lbl">доплата</div>
+      </div>
+      <div class="upsell-formula-sep">=</div>
+      <div class="upsell-formula-item">
+        <div class="upsell-formula-num">3 000 ₽</div>
+        <div class="upsell-formula-lbl">индивидуальная подготовка документов</div>
+      </div>
+    </div>
+
+    <p>Я подготовлю заявление, проверю данные и реквизиты, определю нужный судебный участок, сформирую готовый комплект документов и персональную инструкцию. Вам останется распечатать документы и пройти по инструкции.</p>
+    <p class="upsell-note">Индивидуальная подготовка выполняется после предварительной проверки ситуации и объёма работы. В стоимость не входят представительство в суде, исполнительное производство или дальнейшее ведение дела.</p>
+
+    <hr class="divider">
+
+    <a href="https://t.me/a_likhacheva2026" target="_blank" class="btn-upsell">Подготовить документы за меня</a>
+
+    <div class="msng-row">
+      <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" class="btn-msng btn-max">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="12" fill="rgba(255,255,255,0.25)"/><text x="12" y="16.5" text-anchor="middle" fill="#fff" font-family="Arial,sans-serif" font-weight="700" font-size="13">M</text></svg>
+        MAX
+      </a>
+      <a href="https://wa.me/79920011995?text=%D0%94%D0%BE%D0%B1%D1%80%D1%8B%D0%B9%20%D0%B4%D0%B5%D0%BD%D1%8C%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D0%B7%D0%B0%D0%BA%D0%B0%D0%B7%D0%B0%D1%82%D1%8C%20%D0%B8%D0%BD%D0%B4%D0%B8%D0%B2%D0%B8%D0%B4%D1%83%D0%B0%D0%BB%D1%8C%D0%BD%D1%83%D1%8E%20%D0%BF%D0%BE%D0%B4%D0%B3%D0%BE%D1%82%D0%BE%D0%B2%D0%BA%D1%83%20%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%BE%D0%B2." target="_blank" class="btn-msng btn-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://t.me/a_likhacheva2026" target="_blank" class="btn-msng btn-tg">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.447 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.12L7.17 13.467l-2.96-.924c-.643-.203-.657-.643.136-.953l11.57-4.461c.537-.194 1.006.131.978.092z"/></svg>
+        Telegram
+      </a>
+    </div>
+  </div>
+
+</div><!-- /wrap -->
+</div><!-- /ty-section -->
+
+<footer>
+  <div class="wrap foot">
+    <span>© 2026 По рекомендации · Екатеринбург · онлайн по России</span>
+    <span>
+      <a href="/privacy-policy.html">Политика конфиденциальности</a> ·
+      <a href="/offer.html">Оферта</a>
+    </span>
+  </div>
+</footer>
+
+<!-- Здесь будет вызываться цель успешной оплаты Яндекс Метрики -->
+<script>
+/*
+Здесь будет отправка события успешной покупки.
+
+Пример будущего вызова:
+reachGoal('product_purchase');
+*/
+
+// ── Продуктовые допродажи ──────────────────────────────────────
+// Чтобы добавить новый продукт: добавьте новый case в switch
+// и разместите соответствующий <div id="upsell-{product}"> в HTML.
+(function() {
+  var product = new URLSearchParams(window.location.search).get('product');
+  if (!product) return;
+
+  switch (product) {
+    case 'alimony-order':
+      var el = document.getElementById('upsell-alimony-order');
+      if (el) el.style.display = 'block';
+      break;
+    // case 'another-product':
+    //   var el2 = document.getElementById('upsell-another-product');
+    //   if (el2) el2.style.display = 'block';
+    //   break;
+  }
+})();
+</script>
+
+</body>
+</html>
