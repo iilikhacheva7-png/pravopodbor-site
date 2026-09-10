@@ -70,6 +70,7 @@ ym(110730303, "init", {clickmap:true, trackLinks:true, accurateTrackBounce:true,
 }
 
 html { scroll-behavior: smooth; }
+body { padding-top: 0; } /* nav is fixed, hero starts at top */
 
 body {
   font-family: var(--font);
@@ -157,40 +158,145 @@ section { padding: 100px 0; }
 .timer-sep { font-size: 24px; font-weight: 300; color: var(--ink-muted); margin-bottom: 16px; }
 .timer-caption { font-size: 10px; color: var(--ink-muted); letter-spacing: .05em; text-transform: uppercase; }
 
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 68px;
+  background: rgba(253,250,245,.88);
+  backdrop-filter: blur(20px) saturate(1.6);
+  -webkit-backdrop-filter: blur(20px) saturate(1.6);
+  border-bottom: 1px solid rgba(26,18,8,.06);
+  transition: background .3s ease;
+}
+.nav-logo {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 15px; font-weight: 700; color: var(--ink); text-decoration: none;
+  letter-spacing: -.01em;
+}
+.nav-logo svg { flex-shrink: 0; }
+.nav-links { display: flex; align-items: center; gap: 8px; }
+.nav-link {
+  font-size: 14px; color: var(--ink-soft); text-decoration: none; font-weight: 400;
+  padding: 8px 14px; border-radius: 8px;
+  transition: color .2s ease, background .2s ease;
+}
+.nav-link:hover { color: var(--ink); background: rgba(26,18,8,.05); }
+.nav-cta {
+  background: var(--ink); color: var(--cta-text);
+  font-size: 13px; font-weight: 600; letter-spacing: .03em; text-decoration: none;
+  padding: 10px 22px; border-radius: 10px;
+  transition: transform .2s, box-shadow .2s;
+  margin-left: 8px;
+}
+.nav-cta:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(26,18,8,.25); }
+.nav-mobile-cta { display: none; }
+
 /* ── HERO ── */
 #hero {
   padding: 0; min-height: 100svh; display: flex; align-items: stretch;
-  background: var(--cream);
+  background: #FDFAF5;
   position: relative; overflow: hidden;
 }
 .hero-inner {
   display: grid; grid-template-columns: 1fr 1fr;
-  align-items: center; min-height: 100svh;
-  max-width: var(--max); margin: 0 auto; padding: 80px 24px;
-  gap: 60px; width: 100%;
+  align-items: stretch; min-height: 100svh;
+  max-width: 100%; margin: 0;
+  gap: 0; width: 100%;
 }
-.hero-left { display: flex; flex-direction: column; gap: 32px; z-index: 1; }
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  gap: 28px; z-index: 2;
+  padding: 100px 60px 60px 8%;
+}
 .hero-emotion {
-  font-size: 13px; color: var(--rose); font-weight: 500;
+  font-size: 15px; color: var(--rose); font-weight: 500;
   display: flex; align-items: center; gap: 8px;
+  font-style: italic;
 }
-.hero-badges { display: flex; flex-direction: column; gap: 8px; }
+.hero-h1 {
+  font-size: clamp(36px, 4.2vw, 58px);
+  font-weight: 800; line-height: 1.06; letter-spacing: -.03em;
+  color: var(--ink);
+}
+.hero-h1 em { color: var(--rose); font-style: normal; }
+.hero-sub {
+  font-size: clamp(15px, 1.4vw, 18px); color: var(--ink-soft);
+  line-height: 1.6; font-weight: 400;
+  max-width: 420px;
+}
+.hero-badges { display: flex; flex-direction: column; gap: 10px; }
 .hero-badge {
-  display: inline-flex; align-items: center; gap: 8px;
-  font-size: 13px; color: var(--ink-soft); font-weight: 400;
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13px; color: var(--ink); font-weight: 500;
+  background: rgba(139,168,136,.12); border: 1px solid rgba(139,168,136,.3);
+  padding: 9px 16px; border-radius: 40px;
+  width: fit-content; line-height: 1.3;
 }
-.hero-badge::before { content: '✓'; color: var(--sage); font-weight: 700; flex-shrink: 0; }
-.hero-cta-area { display: flex; flex-direction: column; gap: 16px; }
-.hero-sub { font-size: 13px; color: var(--ink-muted); }
+.hero-badge-check {
+  width: 18px; height: 18px; border-radius: 50%;
+  background: var(--sage); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.hero-badge-check svg { display: block; }
+.price-row { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+.price-old {
+  font-size: 22px; color: var(--ink-muted); text-decoration: line-through;
+  font-weight: 400;
+}
+.price-new {
+  font-size: clamp(52px, 6vw, 76px); font-weight: 800; color: var(--ink);
+  line-height: 1; letter-spacing: -.04em;
+}
+.price-badge {
+  display: flex; flex-direction: column; align-items: flex-start;
+  background: #FFF0EB; border: 1px solid rgba(196,120,90,.25);
+  padding: 8px 14px; border-radius: 12px; gap: 1px;
+}
+.price-badge-line1 { font-size: 13px; font-weight: 700; color: var(--rose); }
+.price-badge-line2 { font-size: 11px; font-weight: 500; color: var(--ink-muted); }
+.timer-wrap { display: flex; flex-direction: column; gap: 8px; }
+.timer-label-row {
+  font-size: 12px; font-weight: 600; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--ink-muted);
+}
+.timer-digits { display: flex; align-items: center; gap: 8px; }
+.timer-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.timer-num {
+  background: var(--ink); color: #FDFAF5;
+  font-size: clamp(24px, 2.5vw, 34px); font-weight: 700; font-variant-numeric: tabular-nums;
+  min-width: 64px; text-align: center;
+  padding: 10px 14px; border-radius: 12px; letter-spacing: -.01em; line-height: 1;
+}
+.timer-sep { font-size: 28px; font-weight: 300; color: var(--ink-muted); margin-bottom: 18px; }
+.timer-caption { font-size: 10px; color: var(--ink-muted); letter-spacing: .06em; text-transform: uppercase; }
+.hero-btn {
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  background: var(--ink); color: #FDFAF5;
+  font-size: 15px; font-weight: 700; letter-spacing: .05em; text-decoration: none;
+  height: 64px; border-radius: 14px;
+  border: none; cursor: pointer;
+  transition: transform .25s ease, box-shadow .25s ease;
+  box-shadow: 0 6px 28px rgba(26,18,8,.28);
+}
+.hero-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 40px rgba(26,18,8,.32); }
+.hero-btn:active { transform: translateY(0); }
+.hero-btn svg { transition: transform .25s ease; }
+.hero-btn:hover svg { transform: translateX(4px); }
+.hero-trust { display: flex; gap: 20px; flex-wrap: wrap; }
+.hero-trust-item {
+  display: flex; align-items: center; gap: 7px;
+  font-size: 13px; color: var(--ink-soft); font-weight: 500;
+}
+/* RIGHT: full-bleed photo */
 .hero-right {
-  position: relative; display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
 }
-.hero-img-wrap {
-  width: 100%; max-width: 580px; border-radius: var(--r-lg);
-  overflow: hidden; box-shadow: var(--shadow-lg);
-  aspect-ratio: 4/5;
+.hero-right img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
 }
-.hero-img-wrap img { width: 100%; height: 100%; object-fit: cover; object-position: center top; }
 
 /* ── SECTION: CHECKLIST ── */
 #checklist { background: var(--cream-dark); }
@@ -356,9 +462,14 @@ footer a:hover { color: var(--ink); }
 }
 @media (max-width: 768px) {
   section { padding: 70px 0; }
-  .hero-inner { grid-template-columns: 1fr; min-height: auto; padding: 60px 20px; gap: 40px; }
-  .hero-right { order: -1; }
-  .hero-img-wrap { max-width: 100%; aspect-ratio: 3/2; }
+  nav { padding: 0 20px; height: 60px; }
+  .nav-links { display: none; }
+  .nav-mobile-cta { display: flex; }
+  .hero-inner { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { order: -1; height: 65vw; min-height: 300px; max-height: 480px; position: relative; }
+  .hero-right img { position: absolute; }
+  .hero-left { padding: 40px 20px 52px; gap: 22px; }
+  .hero-btn { height: 56px; font-size: 14px; }
   .checklist-inner, .losses-inner { grid-template-columns: 1fr; gap: 40px; }
   .checklist-img, .losses-img { aspect-ratio: 16/9; }
   .losses-inner .losses-img { order: -1; }
@@ -380,67 +491,94 @@ footer a:hover { color: var(--ink); }
 
 <body>
 
+<!-- ═══════════════════════════ NAV ═══════════════════════════ -->
+<nav aria-label="Главное меню">
+  <a href="/" class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2C10 2 3 6 3 11.5C3 14.5 6.1 17 10 17C13.9 17 17 14.5 17 11.5C17 6 10 2 10 2Z" fill="#C4785A" opacity=".2"/><path d="M10 4C10 4 4.5 7.5 4.5 12C4.5 14.5 7 16.5 10 16.5C13 16.5 15.5 14.5 15.5 12C15.5 7.5 10 4 10 4Z" stroke="#C4785A" stroke-width="1.2" fill="none"/><path d="M10 8.5L11.5 11.5H8.5L10 8.5Z" fill="#C4785A"/></svg>
+    По рекомендации
+  </a>
+  <div class="nav-links">
+    <a href="#reviews" class="nav-link">Отзывы</a>
+    <a href="#checklist" class="nav-link">Как это работает</a>
+    <a href="#faq" class="nav-link">Вопросы</a>
+    <a href="https://prodamus.ru/" class="nav-cta" onclick="ym(110730303,'reachGoal','cta_click')">ЗАБРАТЬ КОМПЛЕКТ</a>
+  </div>
+  <a href="https://prodamus.ru/" class="nav-cta nav-mobile-cta" onclick="ym(110730303,'reachGoal','cta_click')">КУПИТЬ</a>
+</nav>
+
 <!-- ═══════════════════════════ HERO ═══════════════════════════ -->
 <section id="hero" aria-label="Главный экран">
   <div class="hero-inner">
+    <!-- LEFT -->
     <div class="hero-left">
-      <div class="fade-up">
-        <div class="hero-emotion">❤️ Представьте этот момент...</div>
+      <div class="hero-emotion">❤️ Представьте этот момент...</div>
+
+      <h1 class="hero-h1">
+        Еще недавно вы<br>искали, как подать<br><em>на алименты.</em>
+      </h1>
+      <p class="hero-sub">А сегодня представляете первое поступление денег на содержание ребенка.</p>
+
+      <div class="hero-badges">
+        <div class="hero-badge">
+          <span class="hero-badge-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Готовый комплект для взыскания алиментов через судебный приказ
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Пошаговая инструкция
+        </div>
+        <div class="hero-badge">
+          <span class="hero-badge-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          Поддержка после покупки
+        </div>
       </div>
 
-      <div class="fade-up">
-        <h1 class="h1">Еще недавно вы искали, как подать на алименты.</h1>
-        <p style="font-size:18px;color:var(--ink-soft);margin-top:16px;line-height:1.6;">
-          А сегодня представляете первое поступление денег на содержание ребенка.
-        </p>
-      </div>
-
-      <div class="hero-badges fade-up">
-        <div class="hero-badge">Готовый комплект для взыскания алиментов через судебный приказ</div>
-        <div class="hero-badge">Пошаговая инструкция</div>
-        <div class="hero-badge">Поддержка после покупки</div>
-      </div>
-
-      <div class="fade-up">
-        <div class="price-block" style="margin-bottom:24px;">
+      <div>
+        <div class="price-row" style="margin-bottom:20px;">
           <span class="price-old">990 ₽</span>
           <span class="price-new">590 ₽</span>
-          <span class="price-label">🔥 Скидка 40%</span>
+          <div class="price-badge">
+            <span class="price-badge-line1">🔥 Скидка 40%</span>
+            <span class="price-badge-line2">Только 24 часа</span>
+          </div>
         </div>
 
-        <div class="timer-wrap" style="margin-bottom:28px;">
-          <span class="timer-label">Цена действует ещё</span>
+        <div class="timer-wrap" style="margin-bottom:24px;" id="buy">
+          <div class="timer-label-row">Цена действует ещё</div>
           <div class="timer-digits">
             <div class="timer-unit">
               <div class="timer-num" id="t-h">23</div>
-              <div class="timer-caption">ч</div>
+              <div class="timer-caption">часа</div>
             </div>
             <span class="timer-sep">:</span>
             <div class="timer-unit">
               <div class="timer-num" id="t-m">59</div>
-              <div class="timer-caption">мин</div>
+              <div class="timer-caption">минут</div>
             </div>
             <span class="timer-sep">:</span>
             <div class="timer-unit">
               <div class="timer-num" id="t-s">59</div>
-              <div class="timer-caption">сек</div>
+              <div class="timer-caption">секунд</div>
             </div>
           </div>
         </div>
 
-        <div class="hero-cta-area">
-          <a href="https://prodamus.ru/" class="btn-primary" onclick="ym(110730303,'reachGoal','cta_click')" id="buy">
-            ЗАБРАТЬ ГОТОВЫЙ КОМПЛЕКТ
-          </a>
-          <p class="hero-sub">Доступ сразу после оплаты.</p>
+        <a href="https://prodamus.ru/" class="hero-btn" onclick="ym(110730303,'reachGoal','cta_click')">
+          ЗАБРАТЬ ГОТОВЫЙ КОМПЛЕКТ
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M4 9H14M14 9L10 5M14 9L10 13" stroke="#FDFAF5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <div class="hero-trust" style="margin-top:20px;">
+          <span class="hero-trust-item">🔒 Безопасная оплата</span>
+          <span class="hero-trust-item">⚡ Мгновенный доступ</span>
+          <span class="hero-trust-item">💬 Поддержка после покупки</span>
         </div>
       </div>
     </div>
 
-    <div class="hero-right fade-up">
-      <div class="hero-img-wrap">
-        <img src="img/sp-hero.png" alt="Первое поступление алиментов на телефон" loading="eager" fetchpriority="high">
-      </div>
+    <!-- RIGHT: full-bleed photo -->
+    <div class="hero-right">
+      <img src="img/sp-hero.png" alt="Первое поступление алиментов — +27 500 ₽" loading="eager" fetchpriority="high">
     </div>
   </div>
 </section>
