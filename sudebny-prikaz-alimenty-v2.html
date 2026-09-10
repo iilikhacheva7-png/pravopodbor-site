@@ -211,7 +211,7 @@ nav {
 /* ── Фото ── */
 .m-photo {
   width: 100%;
-  height: 42svh;          /* ~38% экрана */
+  height: 28svh;          /* ~38% экрана */
   object-fit: cover;
   object-position: 60% 15%;  /* девушка и телефон в кадре */
   display: block;
@@ -226,6 +226,10 @@ nav {
 }
 
 /* ── Eyebrow ── */
+.m-bridge {
+  font-size: 15px; font-weight: 600; color: #2E7D52;
+  margin-bottom: 10px; line-height: 1.4;
+}
 .m-eyebrow {
   font-size: 12px; color: var(--mob-accent);
   font-weight: 500; font-style: italic;
@@ -501,8 +505,8 @@ nav {
 <section class="hero-mobile" style="display:none;">
 
   <!-- 1. Большое фото сверху — эмоция первая -->
-  <img class="m-photo" src="img/sp-hero.png"
-       alt="Первое поступление алиментов +27 500 ₽" loading="eager">
+  <img class="m-photo" src="img/sp-hero-mobile.png"
+       alt="Устали искать, как подать на алименты?" loading="eager">
 
   <div class="m-content">
 
@@ -512,6 +516,8 @@ nav {
     <!-- 3. Заголовок -->
     <h1 class="m-h1">Ещё недавно вы искали,<br>как подать <em>на алименты.</em></h1>
 
+    <p class="m-bridge">А сегодня не нужно больше ничего искать.</p>
+
     <!-- 4. Подзаголовок -->
     <p class="m-sub">Всё начинается с одного заявления.<br>Остальное мы уже собрали за вас.</p>
 
@@ -519,27 +525,6 @@ nav {
     <div class="m-value">
       Вам не придётся искать образцы, инструкции<br>и порядок подачи — всё уже внутри.
     </div>
-
-    <!-- 6. Карточки -->
-    <p class="m-badges-label">Вам останется только:</p>
-    <div class="m-badges">
-      <div class="m-badge-primary">
-        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        <span class="m-badge-primary-text">
-          <span class="m-badge-primary-title">Всё готово для подачи</span>
-          <span class="m-badge-primary-sub">Останется только заполнить свои данные.</span>
-        </span>
-      </div>
-      <div class="m-badge">
-        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        Каждый следующий шаг уже расписан.
-      </div>
-      <div class="m-badge">
-        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-        Если что-то будет непонятно — подскажем.
-      </div>
-    </div>
-
     <!-- 7. Цена -->
     <div class="m-price-block">
       <div class="m-price-row">
