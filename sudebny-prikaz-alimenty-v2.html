@@ -16,10 +16,10 @@ body {
 nav {
   position: absolute; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 56px; height: 60px;
+  padding: 0 40px; height: 52px;
   background: transparent;
 }
-.nav-logo-wrap { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.nav-logo-wrap { display: flex; align-items: center; gap: 6px; text-decoration: none; }
 .nav-logo-icon { color: #C4785A; font-size: 20px; line-height: 1; }
 .nav-logo-text { display: flex; flex-direction: column; }
 .nav-logo-name { font-size: 15px; font-weight: 800; color: #1A1208; letter-spacing: -.02em; line-height: 1.15; }
@@ -62,45 +62,45 @@ nav {
 .hero-content {
   position: relative; z-index: 2;
   /* 2. уменьшен top padding: 130→110 чтобы помещалось на 1366×768 */
-  padding: 110px 0 0 56px;
+  padding: 80px 0 0 44px;
   display: flex; flex-direction: column; gap: 0;
 }
 .hero-eyebrow {
-  font-size: 14px; color: #C4785A; font-weight: 500; font-style: italic;
-  margin-bottom: 10px;
+  font-size: 12px; color: #C4785A; font-weight: 500; font-style: italic;
+  margin-bottom: 8px;
 }
 .hero-h1 {
-  max-width: 870px;
-  font-size: clamp(40px, 4.2vw, 62px);
+  max-width: 680px;
+  font-size: clamp(30px, 3.2vw, 48px);
   font-weight: 900; line-height: 1.06; letter-spacing: -.03em;
-  color: #1A1208; margin-bottom: 10px;
+  color: #1A1208; margin-bottom: 8px;
 }
 .hero-h1 em { color: #C4785A; font-style: normal; }
-.hero-body { max-width: 460px; display: flex; flex-direction: column; gap: 0; }
+.hero-body { max-width: 360px; display: flex; flex-direction: column; gap: 0; }
 .hero-sub {
-  font-size: 18px; color: #3D3020; line-height: 1.65;
-  margin-bottom: 10px;
+  font-size: 14px; color: #3D3020; line-height: 1.6;
+  margin-bottom: 8px;
 }
 
 .instant-badge {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(76,175,130,.1); border: 1px solid rgba(76,175,130,.3);
-  color: #2E7D52; font-size: 12px; font-weight: 600;
-  padding: 5px 11px; border-radius: 20px;
-  margin-bottom: 10px; width: fit-content;
+  color: #2E7D52; font-size: 11px; font-weight: 600;
+  padding: 4px 9px; border-radius: 20px;
+  margin-bottom: 8px; width: fit-content;
 }
 /* ── Лейбл ── */
 .badges-label {
-  font-size: 12px; font-weight: 600; color: #6B5E4A;
-  margin-bottom: 6px; letter-spacing: .01em;
+  font-size: 11px; font-weight: 600; color: #6B5E4A;
+  margin-bottom: 5px; letter-spacing: .01em;
 }
 
 /* ── Бейджи ── */
-.hero-badges { display: flex; flex-direction: column; gap: 6px; margin-bottom: 2px; }
+.hero-badges { display: flex; flex-direction: column; gap: 5px; margin-bottom: 2px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 9px;
   background: rgba(255,255,255,.88); border: 1px solid rgba(0,0,0,.08);
-  padding: 10px 16px; border-radius: 10px;
+  padding: 7px 12px; border-radius: 8px;
   font-size: 13px; color: #1A1208; font-weight: 500; line-height: 1.4;
   width: fit-content; max-width: 440px;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
@@ -110,18 +110,18 @@ nav {
   display: inline-flex; align-items: flex-start; gap: 12px;
   background: rgba(255,255,255,.95);
   border: 1.5px solid rgba(75,175,130,.4);
-  padding: 14px 18px; border-radius: 14px; /* было 16px 20px */
+  padding: 10px 14px; border-radius: 12px; /* compact */
   width: fit-content; max-width: 440px;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
 .badge-primary-title {
-  font-size: 18.5px; font-weight: 900; color: #1A1208;
+  font-size: 14px; font-weight: 900; color: #1A1208;
   letter-spacing: .01em; line-height: 1.15;
-  display: block; margin-bottom: 4px; text-transform: uppercase;
+  display: block; margin-bottom: 3px; text-transform: uppercase;
 }
 .badge-primary-sub {
-  font-size: 13px; font-weight: 500; color: #5A4E3A;
-  line-height: 1.45; display: block;
+  font-size: 11px; font-weight: 500; color: #5A4E3A;
+  line-height: 1.4; display: block;
 }
 .check {
   width: 20px; height: 20px; border-radius: 50%;
@@ -129,7 +129,7 @@ nav {
   flex-shrink: 0;
 }
 .check-lg {
-  width: 26px; height: 26px; border-radius: 50%;
+  width: 20px; height: 20px; border-radius: 50%;
   background: #4CAF82; display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; margin-top: 2px;
 }
@@ -137,71 +137,71 @@ nav {
 
 /* ── Цена ── */
 .price-row {
-  display: flex; align-items: center; gap: 24px; flex-wrap: wrap;
+  display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   margin-bottom: 2px;
 }
 .price-old {
-  font-size: 34px; color: #000; font-weight: 900;
+  font-size: 26px; color: #000; font-weight: 900;
   text-decoration: line-through;
   text-decoration-color: #B05030; text-decoration-thickness: 3px;
 }
 .price-new {
-  font-size: clamp(56px, 5.8vw, 78px);
+  font-size: clamp(42px, 4.4vw, 60px);
   font-weight: 900; color: #1A1208;
   line-height: 1; letter-spacing: -.04em;
 }
 /* 4. Скидка: «Экономия 400 ₽» — конкретная сумма */
 .price-badge {
   background: rgba(255,248,240,.95); border: 1px solid rgba(176,80,48,.25);
-  padding: 7px 12px; border-radius: 10px;
+  padding: 5px 10px; border-radius: 8px;
   display: flex; flex-direction: column; gap: 1px;
   backdrop-filter: blur(6px);
 }
-.price-badge-l1 { font-size: 13px; font-weight: 800; color: #B05030; }
+.price-badge-l1 { font-size: 11px; font-weight: 800; color: #B05030; }
 .price-badge-l2 { font-size: 9px; font-weight: 400; color: #C4A898; letter-spacing: .01em; }
 /* 3. Под ценой — что именно получает пользователь */
 .price-desc {
-  font-size: 13px; color: #4A3C28; font-weight: 500;
-  margin-bottom: 8px; line-height: 1.5;
+  font-size: 11px; color: #4A3C28; font-weight: 500;
+  margin-bottom: 6px; line-height: 1.5;
 }
 
 /* ── Кнопка — единый CTA ── */
 .hero-btn {
   display: flex; align-items: center; justify-content: center;
   background: #1A1208; color: #fff;
-  font-size: 15px; font-weight: 700; letter-spacing: .04em; text-decoration: none;
-  height: 58px; border-radius: 29px; /* было 60/30 */
+  font-size: 12px; font-weight: 700; letter-spacing: .04em; text-decoration: none;
+  height: 46px; border-radius: 23px;
   width: calc(100% + 28px); margin-left: -14px;
   box-shadow: 0 6px 28px rgba(26,18,8,.28);
-  margin-bottom: 6px; cursor: pointer; border: none;
+  margin-bottom: 5px; cursor: pointer; border: none;
   transition: transform .2s, box-shadow .2s;
 }
 .hero-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(26,18,8,.32); }
 .btn-sub {
-  font-size: 11px; color: #9E8E78; font-weight: 400;
-  text-align: center; margin-bottom: 10px;
+  font-size: 10px; color: #9E8E78; font-weight: 400;
+  text-align: center; margin-bottom: 8px;
 }
 
 /* ── Таймер ── */
 .timer-label {
-  font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
-  color: #9E8E78; margin-bottom: 6px;
+  font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: #9E8E78; margin-bottom: 5px;
 }
-.timer-digits { display: flex; align-items: center; gap: 7px; margin-bottom: 10px; }
+.timer-digits { display: flex; align-items: center; gap: 6px; margin-bottom: 8px; }
 .timer-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .timer-num {
   background: rgba(255,255,255,.9); color: #1A1208;
-  font-size: 28px; font-weight: 800; font-variant-numeric: tabular-nums; /* было 30 */
-  min-width: 60px; text-align: center;
-  padding: 7px 10px; border-radius: 10px; line-height: 1;
+  font-size: 22px; font-weight: 800; font-variant-numeric: tabular-nums;
+  min-width: 46px; text-align: center;
+  padding: 5px 8px; border-radius: 8px; line-height: 1;
   border: 1px solid rgba(0,0,0,.08); backdrop-filter: blur(4px);
 }
-.timer-sep { font-size: 20px; font-weight: 300; color: #9E8E78; margin-bottom: 14px; }
+.timer-sep { font-size: 16px; font-weight: 300; color: #9E8E78; margin-bottom: 10px; }
 .timer-cap { font-size: 9px; color: #9E8E78; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
 
 /* ── Trust ── */
-.hero-trust { display: flex; gap: 18px; flex-wrap: wrap; padding-bottom: 32px; }
-.hero-trust-item { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #5A4E3A; font-weight: 500; }
+.hero-trust { display: flex; gap: 14px; flex-wrap: wrap; padding-bottom: 20px; }
+.hero-trust-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #5A4E3A; font-weight: 500; }
 
 /* ══ MOBILE ══ */
 @media (max-width: 768px) {
@@ -242,7 +242,7 @@ nav {
   .hero-body { max-width: 100%; }
   .hero-sub { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
   .badges-label { font-size: 11px; margin-bottom: 6px; }
-  .hero-badges { gap: 6px; margin-bottom: 2px; }
+  .hero-badges { gap: 5px; margin-bottom: 2px; }
   .hero-badge { display: none; } /* только главная на мобильном */
   .hero-badge-primary { padding: 11px 14px; border-radius: 12px; width: 100%; max-width: 100%; }
   .badge-primary-title { font-size: 14px; margin-bottom: 3px; }
