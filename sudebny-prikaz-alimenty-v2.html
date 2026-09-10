@@ -26,14 +26,18 @@ nav {
 .nav-logo-sub  { font-size: 9px; font-weight: 500; color: #9E8E78; letter-spacing: .05em; text-transform: uppercase; }
 .nav-links { display: flex; align-items: center; gap: 4px; }
 .nav-link { font-size: 14px; color: #1A1208; text-decoration: none; font-weight: 500; padding: 7px 14px; border-radius: 8px; }
-/* CTA единый: «КУПИТЬ — 590 РУБЛЕЙ» */
 .nav-cta {
   background: #1A1208; color: #fff; font-size: 12px; font-weight: 700;
   letter-spacing: .04em; text-decoration: none; padding: 10px 18px;
   border-radius: 10px; margin-left: 8px; white-space: nowrap;
 }
 
-/* ══ HERO DESKTOP ══ */
+/* ══════════════════════════════════
+   DESKTOP HERO — НЕ ТРОГАТЬ
+   ══════════════════════════════════ */
+.hero-desktop { display: block; }
+.hero-mobile  { display: none; }
+
 #hero {
   position: relative; width: 100%; min-height: 100vh;
   overflow: hidden; display: flex; flex-direction: column; justify-content: flex-start;
@@ -41,7 +45,6 @@ nav {
 .hero-bg {
   position: absolute; inset: 0; width: 100%; height: 100%;
   object-fit: cover; object-position: right center; z-index: 0;
-  /* 5. фото чуть правее: translateX увеличен с 25 до 50px */
   transform: translateX(50px) scale(1.075);
   transform-origin: right center;
 }
@@ -61,7 +64,6 @@ nav {
 }
 .hero-content {
   position: relative; z-index: 2;
-  /* 2. уменьшен top padding: 130→110 чтобы помещалось на 1366×768 */
   padding: 80px 0 0 44px;
   display: flex; flex-direction: column; gap: 0;
 }
@@ -81,7 +83,6 @@ nav {
   font-size: 14px; color: #3D3020; line-height: 1.6;
   margin-bottom: 8px;
 }
-
 .instant-badge {
   display: inline-flex; align-items: center; gap: 6px;
   background: rgba(76,175,130,.1); border: 1px solid rgba(76,175,130,.3);
@@ -89,13 +90,10 @@ nav {
   padding: 4px 9px; border-radius: 20px;
   margin-bottom: 8px; width: fit-content;
 }
-/* ── Лейбл ── */
 .badges-label {
   font-size: 11px; font-weight: 600; color: #6B5E4A;
   margin-bottom: 5px; letter-spacing: .01em;
 }
-
-/* ── Бейджи ── */
 .hero-badges { display: flex; flex-direction: column; gap: 5px; margin-bottom: 2px; }
 .hero-badge {
   display: inline-flex; align-items: center; gap: 9px;
@@ -105,12 +103,11 @@ nav {
   width: fit-content; max-width: 440px;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
 }
-/* Главная карточка */
 .hero-badge-primary {
   display: inline-flex; align-items: flex-start; gap: 12px;
   background: rgba(255,255,255,.95);
   border: 1.5px solid rgba(75,175,130,.4);
-  padding: 10px 14px; border-radius: 12px; /* compact */
+  padding: 10px 14px; border-radius: 12px;
   width: fit-content; max-width: 440px;
   backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
 }
@@ -134,8 +131,6 @@ nav {
   flex-shrink: 0; margin-top: 2px;
 }
 .check svg, .check-lg svg { display: block; }
-
-/* ── Цена ── */
 .price-row {
   display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
   margin-bottom: 2px;
@@ -150,7 +145,6 @@ nav {
   font-weight: 900; color: #1A1208;
   line-height: 1; letter-spacing: -.04em;
 }
-/* 4. Скидка: «Экономия 400 ₽» — конкретная сумма */
 .price-badge {
   background: rgba(255,248,240,.95); border: 1px solid rgba(176,80,48,.25);
   padding: 5px 10px; border-radius: 8px;
@@ -159,13 +153,10 @@ nav {
 }
 .price-badge-l1 { font-size: 11px; font-weight: 800; color: #B05030; }
 .price-badge-l2 { font-size: 9px; font-weight: 400; color: #C4A898; letter-spacing: .01em; }
-/* 3. Под ценой — что именно получает пользователь */
 .price-desc {
   font-size: 11px; color: #4A3C28; font-weight: 500;
   margin-bottom: 6px; line-height: 1.5;
 }
-
-/* ── Кнопка — единый CTA ── */
 .hero-btn {
   display: flex; align-items: center; justify-content: center;
   background: #1A1208; color: #fff;
@@ -181,8 +172,6 @@ nav {
   font-size: 10px; color: #9E8E78; font-weight: 400;
   text-align: center; margin-bottom: 8px;
 }
-
-/* ── Таймер ── */
 .timer-label {
   font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
   color: #9E8E78; margin-bottom: 5px;
@@ -198,16 +187,203 @@ nav {
 }
 .timer-sep { font-size: 16px; font-weight: 300; color: #9E8E78; margin-bottom: 10px; }
 .timer-cap { font-size: 9px; color: #9E8E78; letter-spacing: .08em; text-transform: uppercase; font-weight: 600; }
-
-/* ── Trust ── */
 .hero-trust { display: flex; gap: 14px; flex-wrap: wrap; padding-bottom: 20px; }
 .hero-trust-item { display: flex; align-items: center; gap: 5px; font-size: 10px; color: #5A4E3A; font-weight: 500; }
 
-/* ══ MOBILE ══ */
+/* ══════════════════════════════════
+   MOBILE HERO — отдельный, с нуля
+   ══════════════════════════════════ */
+
+/* Переменные только для mobile */
+:root {
+  --mob-accent: #C4785A;
+  --mob-ink: #1A1208;
+  --mob-ink-soft: #3D3020;
+  --mob-muted: #9E8E78;
+  --mob-green: #2E7D52;
+  --mob-green-bg: rgba(76,175,130,.1);
+  --mob-green-border: rgba(76,175,130,.3);
+}
+
+/* Mobile nav */
+.nav-mobile-cta { display: none; }
+
+/* ── Фото ── */
+.m-photo {
+  width: 100%;
+  height: 42svh;          /* ~38% экрана */
+  object-fit: cover;
+  object-position: 60% 15%;  /* девушка и телефон в кадре */
+  display: block;
+  flex-shrink: 0;
+}
+
+/* ── Контент под фото ── */
+.m-content {
+  padding: 20px 20px 0;
+  display: flex; flex-direction: column;
+  flex: 1;
+}
+
+/* ── Eyebrow ── */
+.m-eyebrow {
+  font-size: 12px; color: var(--mob-accent);
+  font-weight: 500; font-style: italic;
+  margin-bottom: 8px;
+}
+
+/* ── Заголовок: крупный, тёмный ── */
+.m-h1 {
+  font-size: 28px; font-weight: 900;
+  line-height: 1.1; letter-spacing: -.025em;
+  color: var(--mob-ink); margin-bottom: 10px;
+}
+.m-h1 em { color: var(--mob-accent); font-style: normal; }
+
+/* ── Подзаголовок ── */
+.m-sub {
+  font-size: 15px; color: var(--mob-ink-soft);
+  line-height: 1.6; margin-bottom: 12px;
+}
+
+/* ── Смысловой блок — зелёное утверждение ── */
+.m-value {
+  background: var(--mob-green-bg);
+  border: 1px solid var(--mob-green-border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px; font-weight: 600;
+  color: var(--mob-green);
+  line-height: 1.5;
+  margin-bottom: 14px;
+}
+
+/* ── Лейбл над карточками ── */
+.m-badges-label {
+  font-size: 11px; font-weight: 700;
+  color: var(--mob-muted); letter-spacing: .04em;
+  text-transform: uppercase; margin-bottom: 8px;
+}
+
+/* ── Карточки ── */
+.m-badges { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+
+.m-badge-primary {
+  display: flex; align-items: flex-start; gap: 10px;
+  background: #fff; border: 1.5px solid rgba(75,175,130,.4);
+  border-radius: 12px; padding: 12px 14px;
+}
+.m-badge-primary-text {}
+.m-badge-primary-title {
+  font-size: 14px; font-weight: 900;
+  color: var(--mob-ink); text-transform: uppercase;
+  letter-spacing: .01em; line-height: 1.2;
+  display: block; margin-bottom: 3px;
+}
+.m-badge-primary-sub {
+  font-size: 12px; font-weight: 500;
+  color: #5A4E3A; line-height: 1.4;
+}
+
+.m-badge {
+  display: flex; align-items: center; gap: 10px;
+  background: rgba(255,255,255,.9); border: 1px solid rgba(0,0,0,.07);
+  border-radius: 8px; padding: 9px 12px;
+  font-size: 13px; font-weight: 500; color: var(--mob-ink);
+}
+
+.m-check {
+  width: 20px; height: 20px; border-radius: 50%;
+  background: #4CAF82; display: flex; align-items: center;
+  justify-content: center; flex-shrink: 0;
+}
+.m-check svg { display: block; }
+
+/* ── Цена ── */
+.m-price-block { margin-bottom: 6px; }
+.m-price-row {
+  display: flex; align-items: baseline; gap: 10px;
+  flex-wrap: wrap; margin-bottom: 4px;
+}
+.m-price-old {
+  font-size: 22px; font-weight: 900; color: #000;
+  text-decoration: line-through;
+  text-decoration-color: #B05030;
+  text-decoration-thickness: 2px;
+}
+.m-price-new {
+  font-size: 52px; font-weight: 900;
+  color: var(--mob-ink); line-height: 1;
+  letter-spacing: -.03em;
+}
+.m-economy {
+  display: inline-flex; flex-direction: column; gap: 1px;
+  background: rgba(255,248,240,.95);
+  border: 1px solid rgba(176,80,48,.25);
+  border-radius: 8px; padding: 5px 10px;
+  align-self: center;
+}
+.m-economy-main { font-size: 12px; font-weight: 800; color: #B05030; }
+.m-economy-sub  { font-size: 9px;  font-weight: 400; color: #C4A898; }
+
+.m-price-desc {
+  font-size: 12px; color: #4A3C28; font-weight: 500;
+  line-height: 1.5; margin-bottom: 12px;
+}
+
+/* ── CTA ── */
+.m-btn {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--mob-ink); color: #fff;
+  font-size: 14px; font-weight: 700; letter-spacing: .04em;
+  text-decoration: none; border: none; cursor: pointer;
+  height: 56px; border-radius: 28px; width: 100%;
+  box-shadow: 0 6px 24px rgba(26,18,8,.3);
+  margin-bottom: 8px;
+  transition: transform .2s, box-shadow .2s;
+}
+.m-btn:active { transform: scale(.98); }
+
+.m-btn-sub {
+  font-size: 11px; color: var(--mob-muted);
+  text-align: center; margin-bottom: 14px;
+}
+
+/* ── Таймер ── */
+.m-timer-label {
+  font-size: 10px; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; color: var(--mob-muted); margin-bottom: 8px;
+}
+.m-timer-row { display: flex; align-items: center; gap: 6px; margin-bottom: 14px; }
+.m-timer-unit { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.m-timer-num {
+  background: #F5F2EE; color: var(--mob-ink);
+  font-size: 26px; font-weight: 800; font-variant-numeric: tabular-nums;
+  min-width: 56px; text-align: center;
+  padding: 7px 10px; border-radius: 10px; line-height: 1;
+  border: 1px solid rgba(0,0,0,.06);
+}
+.m-timer-sep { font-size: 20px; font-weight: 300; color: var(--mob-muted); margin-bottom: 16px; }
+.m-timer-cap { font-size: 9px; color: var(--mob-muted); letter-spacing: .06em; text-transform: uppercase; font-weight: 600; }
+
+/* ── Trust ── */
+.m-trust {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  padding-bottom: 28px;
+}
+.m-trust-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: #5A4E3A; font-weight: 500;
+}
+
+/* ══════════════════════════════════
+   MEDIA QUERIES
+   ══════════════════════════════════ */
 @media (max-width: 768px) {
+
+  /* Nav: sticky, белая */
   nav {
-    padding: 0 20px; height: 54px;
-    position: fixed;
+    position: fixed; padding: 0 18px; height: 52px;
     background: rgba(255,255,255,.96);
     backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0,0,0,.06);
@@ -216,64 +392,26 @@ nav {
   .nav-mobile-cta {
     display: flex !important;
     background: #1A1208; color: #fff; font-size: 11px; font-weight: 700;
-    letter-spacing: .03em; text-decoration: none; padding: 8px 14px;
-    border-radius: 10px; white-space: nowrap;
+    letter-spacing: .03em; text-decoration: none;
+    padding: 8px 14px; border-radius: 10px; white-space: nowrap;
   }
 
-  #hero {
-    min-height: 100svh; display: flex; flex-direction: column;
-    background: #fff; overflow: visible;
-    padding-top: 54px;
+  /* Переключение секций */
+  .hero-desktop { display: none !important; }
+  .hero-mobile  {
+    display: flex !important;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: 52px;   /* компенсация fixed nav */
+    background: #fff;
   }
-  .hero-bg {
-    position: relative; inset: auto; transform: none;
-    width: 100%; height: 58vw; min-height: 240px; max-height: 360px;
-    object-fit: cover; object-position: center 20%;
-    display: block; flex-shrink: 0;
-    border-radius: 0 0 18px 18px;
-  }
-  .hero-gradient { display: none; }
-  .hero-content { padding: 16px 18px 0; }
-  .hero-eyebrow { font-size: 12px; margin-bottom: 7px; }
-  .hero-h1 {
-    font-size: clamp(24px, 6.5vw, 32px);
-    max-width: 100%; margin-bottom: 8px; line-height: 1.1;
-  }
-  .hero-body { max-width: 100%; }
-  .hero-sub { font-size: 14px; line-height: 1.55; margin-bottom: 10px; }
-  .badges-label { font-size: 11px; margin-bottom: 6px; }
-  .hero-badges { gap: 5px; margin-bottom: 2px; }
-  .hero-badge { display: none; } /* только главная на мобильном */
-  .hero-badge-primary { padding: 11px 14px; border-radius: 12px; width: 100%; max-width: 100%; }
-  .badge-primary-title { font-size: 14px; margin-bottom: 3px; }
-  .badge-primary-sub { font-size: 12px; }
-  .check-lg { width: 22px; height: 22px; }
-  .price-row { gap: 8px; margin-bottom: 3px; }
-  .price-old { font-size: 20px; }
-  .price-new { font-size: 46px; }
-  .price-badge { padding: 5px 9px; }
-  .price-badge-l1 { font-size: 12px; }
-  .price-badge-l2 { font-size: 9px; }
-  .price-desc { font-size: 11px; margin-bottom: 10px; }
-  .hero-btn {
-    height: 52px; font-size: 12px; margin-bottom: 6px;
-    border-radius: 26px; width: 100%; margin-left: 0;
-    letter-spacing: .02em; white-space: nowrap; overflow: hidden;
-  }
-  .btn-sub { font-size: 10px; margin-bottom: 10px; }
-  .timer-label { font-size: 9px; margin-bottom: 5px; }
-  .timer-num { font-size: 22px; min-width: 48px; padding: 6px 8px; }
-  .timer-sep { font-size: 16px; margin-bottom: 12px; }
-  .timer-digits { gap: 6px; margin-bottom: 10px; }
-  .hero-trust { gap: 10px; padding-bottom: 20px; }
-  .hero-trust-item { font-size: 10px; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="nav-logo-wrap">
+  <a href="https://prodamus.ru/" class="nav-logo-wrap">
     <span class="nav-logo-icon">♡</span>
     <div class="nav-logo-text">
       <span class="nav-logo-name">По рекомендации</span>
@@ -281,81 +419,203 @@ nav {
     </div>
   </a>
   <div class="nav-links">
-    <a href="#" class="nav-link">Отзывы</a>
-    <a href="#" class="nav-link">Как это работает</a>
-    <a href="#" class="nav-link">Вопросы</a>
-    <!-- 1. Единый CTA в шапке -->
-    <a href="#" class="nav-cta">ПОЛУЧИТЬ КОМПЛЕКТ ЗА 590 РУБЛЕЙ</a>
+    <a href="#reviews" class="nav-link">Отзывы</a>
+    <a href="#free" class="nav-link">Как это работает</a>
+    <a href="#faq" class="nav-link">Вопросы</a>
+    <a href="https://prodamus.ru/" class="nav-cta">ПОЛУЧИТЬ КОМПЛЕКТ ЗА 590 РУБЛЕЙ</a>
   </div>
-  <!-- 6. Mobile sticky CTA -->
-  <a href="#" class="nav-mobile-cta" style="display:none;">ПОЛУЧИТЬ ЗА 590 ₽</a>
+  <a href="https://prodamus.ru/" class="nav-mobile-cta" style="display:none;">ПОЛУЧИТЬ ЗА 590 ₽</a>
 </nav>
 
-<section id="hero">
-  <img class="hero-bg" src="img/sp-hero.png"
-       alt="Первое поступление алиментов +27 500 ₽" loading="eager">
-  <div class="hero-gradient"></div>
+<!-- ═══════════════════════════════════════
+     DESKTOP HERO — НЕ ИЗМЕНЁН
+     ═══════════════════════════════════════ -->
+<section class="hero-desktop">
+  <div id="hero">
+    <img class="hero-bg" src="img/sp-hero.png"
+         alt="Первое поступление алиментов +27 500 ₽" loading="eager">
+    <div class="hero-gradient"></div>
 
-  <div class="hero-content">
-    <div class="hero-eyebrow">❤️ Представьте этот момент...</div>
-    <h1 class="hero-h1">Еще недавно вы искали,<br>как подать <em>на алименты.</em></h1>
+    <div class="hero-content">
+      <div class="hero-eyebrow">❤️ Представьте этот момент...</div>
+      <h1 class="hero-h1">Еще недавно вы искали,<br>как подать <em>на алименты.</em></h1>
 
-    <div class="hero-body">
-      <p class="hero-sub">А сегодня представляете первое поступление денег<br>на содержание ребенка.</p>
+      <div class="hero-body">
+        <p class="hero-sub">А сегодня представляете первое поступление денег<br>на содержание ребенка.</p>
 
-      <span class="instant-badge">✅ Скачивание сразу после оплаты</span>
-      <p class="badges-label">Что входит в комплект:</p>
-      <div class="hero-badges">
-        <div class="hero-badge-primary">
-          <span class="check-lg"><svg width="11" height="9" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          <span>
-            <span class="badge-primary-title">Всё готово для подачи</span>
-            <span class="badge-primary-sub">Заявление • Инструкция • Порядок подачи</span>
-          </span>
+        <span class="instant-badge">✅ Скачивание сразу после оплаты</span>
+        <p class="badges-label">Что входит в комплект:</p>
+        <div class="hero-badges">
+          <div class="hero-badge-primary">
+            <span class="check-lg"><svg width="11" height="9" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>
+              <span class="badge-primary-title">Всё готово для подачи</span>
+              <span class="badge-primary-sub">Заявление • Инструкция • Порядок подачи</span>
+            </span>
+          </div>
+          <div class="hero-badge">
+            <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Пошаговая инструкция
+          </div>
+          <div class="hero-badge">
+            <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            Поддержка после покупки
+          </div>
         </div>
-        <div class="hero-badge">
-          <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          Пошаговая инструкция
+
+        <div class="price-row">
+          <span class="price-old">990 ₽</span>
+          <span class="price-new">590 ₽</span>
+          <div class="price-badge">
+            <span class="price-badge-l1">Экономия 400 ₽</span>
+            <span class="price-badge-l2">Только сегодня</span>
+          </div>
         </div>
-        <div class="hero-badge">
-          <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-          Поддержка после покупки
+        <p class="price-desc">Получите документы сразу после оплаты.</p>
+
+        <a href="https://prodamus.ru/" class="hero-btn">ПОЛУЧИТЬ КОМПЛЕКТ ЗА 590 РУБЛЕЙ</a>
+        <p class="btn-sub">Мгновенный доступ после оплаты</p>
+
+        <div class="timer-label">Цена действует ещё:</div>
+        <div class="timer-digits">
+          <div class="timer-unit"><div class="timer-num" id="d-h">23</div><div class="timer-cap">часа</div></div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit"><div class="timer-num" id="d-m">58</div><div class="timer-cap">минут</div></div>
+          <span class="timer-sep">:</span>
+          <div class="timer-unit"><div class="timer-num" id="d-s">12</div><div class="timer-cap">секунд</div></div>
         </div>
-      </div>
 
-      <div class="price-row">
-        <span class="price-old">990 ₽</span>
-        <span class="price-new">590 ₽</span>
-        <!-- 4. Скидка конкретной суммой -->
-        <div class="price-badge">
-          <span class="price-badge-l1">Экономия 400 ₽</span>
-          <span class="price-badge-l2">Только сегодня</span>
+        <div class="hero-trust">
+          <span class="hero-trust-item">🔒 Безопасная оплата</span>
+          <span class="hero-trust-item">⚡ Мгновенный доступ</span>
+          <span class="hero-trust-item">💬 Поддержка</span>
         </div>
-      </div>
-      <!-- 3. Понятная ценность под ценой -->
-      <p class="price-desc">Получите документы сразу после оплаты.</p>
-
-      <!-- 1. Единый CTA: «ПОЛУЧИТЬ ДОКУМЕНТЫ ЗА 590 РУБЛЕЙ» -->
-      <a href="#" class="hero-btn">ПОЛУЧИТЬ КОМПЛЕКТ ЗА 590 РУБЛЕЙ</a>
-      <p class="btn-sub">Мгновенный доступ после оплаты</p>
-
-      <div class="timer-label">Цена действует ещё:</div>
-      <div class="timer-digits">
-        <div class="timer-unit"><div class="timer-num">23</div><div class="timer-cap">часа</div></div>
-        <span class="timer-sep">:</span>
-        <div class="timer-unit"><div class="timer-num">58</div><div class="timer-cap">минут</div></div>
-        <span class="timer-sep">:</span>
-        <div class="timer-unit"><div class="timer-num">12</div><div class="timer-cap">секунд</div></div>
-      </div>
-
-      <div class="hero-trust">
-        <span class="hero-trust-item">🔒 Безопасная оплата</span>
-        <span class="hero-trust-item">⚡ Мгновенный доступ</span>
-        <span class="hero-trust-item">💬 Поддержка</span>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ═══════════════════════════════════════
+     MOBILE HERO — спроектирован с нуля
+     ═══════════════════════════════════════ -->
+<section class="hero-mobile" style="display:none;">
+
+  <!-- 1. Большое фото сверху — эмоция первая -->
+  <img class="m-photo" src="img/sp-hero.png"
+       alt="Первое поступление алиментов +27 500 ₽" loading="eager">
+
+  <div class="m-content">
+
+    <!-- 2. Eyebrow -->
+    <div class="m-eyebrow">❤️ Представьте этот момент...</div>
+
+    <!-- 3. Заголовок -->
+    <h1 class="m-h1">Ещё недавно вы искали,<br>как подать <em>на алименты.</em></h1>
+
+    <!-- 4. Подзаголовок -->
+    <p class="m-sub">Всё начинается с одного заявления.<br>Остальное мы уже собрали за вас.</p>
+
+    <!-- 5. Смысловой блок — зелёное утверждение -->
+    <div class="m-value">
+      Вам не придётся искать образцы, инструкции<br>и порядок подачи — всё уже внутри.
+    </div>
+
+    <!-- 6. Карточки -->
+    <p class="m-badges-label">Вам останется только:</p>
+    <div class="m-badges">
+      <div class="m-badge-primary">
+        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="m-badge-primary-text">
+          <span class="m-badge-primary-title">Всё готово для подачи</span>
+          <span class="m-badge-primary-sub">Останется только заполнить свои данные.</span>
+        </span>
+      </div>
+      <div class="m-badge">
+        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Каждый следующий шаг уже расписан.
+      </div>
+      <div class="m-badge">
+        <span class="m-check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        Если что-то будет непонятно — подскажем.
+      </div>
+    </div>
+
+    <!-- 7. Цена -->
+    <div class="m-price-block">
+      <div class="m-price-row">
+        <span class="m-price-old">990 ₽</span>
+        <span class="m-price-new">590 ₽</span>
+        <div class="m-economy">
+          <span class="m-economy-main">Экономия 400 ₽</span>
+          <span class="m-economy-sub">Только сегодня</span>
+        </div>
+      </div>
+      <p class="m-price-desc">После оплаты можно сразу приступать к заполнению заявления.</p>
+    </div>
+
+    <!-- 8. Кнопка -->
+    <a href="https://prodamus.ru/" class="m-btn"
+       onclick="if(typeof ym!=='undefined') ym(110730303,'reachGoal','cta_click')">
+      ПОЛУЧИТЬ КОМПЛЕКТ ЗА 590 РУБЛЕЙ
+    </a>
+    <p class="m-btn-sub">Мгновенный доступ после оплаты</p>
+
+    <!-- 9. Таймер -->
+    <div class="m-timer-label">Цена действует ещё:</div>
+    <div class="m-timer-row">
+      <div class="m-timer-unit"><div class="m-timer-num" id="m-h">23</div><div class="m-timer-cap">часа</div></div>
+      <span class="m-timer-sep">:</span>
+      <div class="m-timer-unit"><div class="m-timer-num" id="m-m">58</div><div class="m-timer-cap">минут</div></div>
+      <span class="m-timer-sep">:</span>
+      <div class="m-timer-unit"><div class="m-timer-num" id="m-s">12</div><div class="m-timer-cap">секунд</div></div>
+    </div>
+
+    <!-- 10. Доверие -->
+    <div class="m-trust">
+      <span class="m-trust-item">🔒 Безопасная оплата</span>
+      <span class="m-trust-item">⚡ Мгновенный доступ</span>
+      <span class="m-trust-item">💬 Поддержка</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ОБЩИЙ ТАЙМЕР (синхронизирован)
+     ═══════════════════════════════════════ -->
+<script>
+(function() {
+  var KEY = 'sp_timer_v2_end';
+  var DURATION = 24 * 60 * 60 * 1000;
+  var end = parseInt(localStorage.getItem(KEY) || '0');
+  if (!end || end < Date.now()) {
+    end = Date.now() + DURATION;
+    localStorage.setItem(KEY, end);
+  }
+  function pad(n) { return String(n).padStart(2,'0'); }
+  function tick() {
+    var diff = Math.max(0, end - Date.now());
+    var h = Math.floor(diff / 3600000);
+    var m = Math.floor((diff % 3600000) / 60000);
+    var s = Math.floor((diff % 60000) / 1000);
+    ['d-h','d-m','d-s','m-h','m-m','m-s'].forEach(function(id, i) {
+      var el = document.getElementById(id);
+      if (el) el.textContent = pad([h,h,h,m,m,s][i]);
+    });
+    // Исправим: h,m,s для каждого
+    var ids = [['d-h','m-h'], ['d-m','m-m'], ['d-s','m-s']];
+    var vals = [h, m, s];
+    ids.forEach(function(pair, i) {
+      pair.forEach(function(id) {
+        var el = document.getElementById(id);
+        if (el) el.textContent = pad(vals[i]);
+      });
+    });
+  }
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
 
 </body>
 </html>
