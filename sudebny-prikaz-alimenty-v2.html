@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Hero Preview</title>
+<title>Судебный приказ на алименты — материалы для самостоятельной подачи</title>
+<meta name="description" content="Пошаговые материалы для самостоятельной подачи заявления о судебном приказе на алименты: образец заполнения, инструкции, чек-листы и поддержка.">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -410,7 +411,664 @@ nav {
     background: #fff;
   }
 }
+
+
+/* ══════════════════════════════════
+   SECTION 2 — ЧТО МЫ УЖЕ СДЕЛАЛИ ЗА ВАС
+   compact desktop + separate mobile adaptation
+   ══════════════════════════════════ */
+.what-section {
+  background: #FFFDFC;
+  padding: 54px 40px 58px;
+}
+.what-wrap {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+}
+.what-head {
+  max-width: 860px;
+  margin: 0 auto 28px;
+  text-align: center;
+}
+.what-kicker {
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #C4785A;
+  margin-bottom: 8px;
+}
+.what-title {
+  font-size: clamp(31px, 2.7vw, 44px);
+  line-height: 1.04;
+  letter-spacing: -.035em;
+  color: #1A1208;
+  font-weight: 900;
+  margin-bottom: 10px;
+}
+.what-title em {
+  color: #C4785A;
+  font-style: normal;
+}
+.what-sub {
+  max-width: 720px;
+  margin: 0 auto;
+  font-size: 15px;
+  line-height: 1.5;
+  color: #5A4E3A;
+}
+.what-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+.what-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 184px;
+  padding: 20px 22px 18px;
+  border-radius: 18px;
+  border: 1px solid rgba(26,18,8,.08);
+  box-shadow: 0 8px 24px rgba(26,18,8,.055);
+}
+.what-card:nth-child(1) { background: #FFF3EE; border-color: rgba(196,120,90,.23); }
+.what-card:nth-child(2) { background: #F1F8F4; border-color: rgba(76,175,130,.22); }
+.what-card:nth-child(3) { background: #F8F2EA; border-color: rgba(164,126,81,.18); }
+.what-card:nth-child(4) { background: #F5F3F0; }
+
+.what-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 31px;
+  height: 25px;
+  padding: 0 9px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(26,18,8,.06);
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .08em;
+  color: #C4785A;
+  margin-bottom: 11px;
+}
+.what-card h3 {
+  max-width: 82%;
+  font-size: 21px;
+  line-height: 1.1;
+  letter-spacing: -.025em;
+  color: #1A1208;
+  margin-bottom: 7px;
+  font-weight: 900;
+  text-transform: none;
+}
+.what-card p {
+  max-width: 82%;
+  font-size: 13px;
+  line-height: 1.48;
+  color: #5A4E3A;
+}
+.what-card strong {
+  color: #1A1208;
+  font-weight: 800;
+}
+
+/* compact visual accents — do not overlap text */
+.what-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 74px;
+  height: 74px;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 34px;
+  background: rgba(255,255,255,.68);
+  border: 1px solid rgba(26,18,8,.06);
+}
+.what-note {
+  margin: 16px auto 0;
+  max-width: 930px;
+  padding: 13px 18px;
+  text-align: center;
+  border-radius: 14px;
+  background: #1A1208;
+  color: #fff;
+  font-size: 13px;
+  line-height: 1.45;
+  font-weight: 700;
+}
+.what-note span { color: #F0B49E; }
+
+@media (max-width: 768px) {
+  .what-section {
+    padding: 38px 18px 46px;
+  }
+  .what-head {
+    text-align: left;
+    margin: 0 0 20px;
+  }
+  .what-kicker {
+    font-size: 10px;
+    margin-bottom: 7px;
+  }
+  .what-title {
+    font-size: 28px;
+    line-height: 1.06;
+    margin-bottom: 9px;
+  }
+  .what-sub {
+    font-size: 13px;
+    line-height: 1.5;
+    margin: 0;
+  }
+  .what-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .what-card {
+    min-height: 150px;
+    padding: 17px 16px 16px;
+    border-radius: 16px;
+  }
+  .what-card h3 {
+    max-width: calc(100% - 68px);
+    font-size: 18px;
+    line-height: 1.1;
+    margin-bottom: 6px;
+  }
+  .what-card p {
+    max-width: calc(100% - 68px);
+    font-size: 12px;
+    line-height: 1.42;
+  }
+  .what-num {
+    min-width: 28px;
+    height: 22px;
+    padding: 0 8px;
+    font-size: 9px;
+    margin-bottom: 9px;
+  }
+  .what-icon {
+    right: 13px;
+    width: 54px;
+    height: 54px;
+    border-radius: 14px;
+    font-size: 25px;
+  }
+  .what-note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    text-align: left;
+    font-size: 12px;
+    border-radius: 13px;
+  }
+}
+
 </style>
+
+<style>
+/* ===== СЕКЦИИ 2–3: согласованная версия ===== */
+.mp-flow{
+  background:#FFF9F4;
+  color:#1A1208;
+  padding:44px 34px 48px;
+}
+.mp-wrap{max-width:1120px;margin:0 auto;}
+.mp-head{text-align:center;max-width:760px;margin:0 auto 22px;}
+.mp-head h2{
+  margin:0 0 8px;
+  font-family:Georgia,serif;
+  font-size:clamp(28px,2.5vw,38px);
+  line-height:1.08;
+  letter-spacing:-.025em;
+}
+.mp-head p{margin:0;color:#6F6254;font-size:15px;line-height:1.5;}
+.mp-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px 12px;
+}
+.mp-item{
+  display:grid;
+  grid-template-columns:38px 1fr;
+  gap:12px;
+  align-items:start;
+  padding:14px 16px;
+  border:1px solid rgba(196,120,90,.22);
+  border-radius:16px;
+  background:#fff;
+  box-shadow:0 8px 24px rgba(55,34,18,.045);
+}
+.mp-item:nth-child(2n){background:#F6FBF7;border-color:rgba(46,125,82,.18);}
+.mp-num{
+  width:36px;height:36px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  background:#F8E9E1;color:#A85E43;
+  font-weight:800;font-size:12px;
+}
+.mp-item:nth-child(2n) .mp-num{background:#E6F3EA;color:#2E7D52;}
+.mp-item h3{margin:0 0 4px;font-size:16px;line-height:1.2;}
+.mp-item p{margin:0;color:#665A4E;font-size:12.5px;line-height:1.42;}
+.mp-more{
+  margin:12px 0 0;padding:10px 14px;border-radius:13px;
+  text-align:center;background:#F3E7DF;color:#59483B;
+  font-size:12.5px;font-weight:700;
+}
+.mp-benefit{
+  margin-top:16px;
+  display:grid;grid-template-columns:1.2fr .8fr;gap:12px;
+}
+.mp-benefit-copy,.mp-speed{
+  border-radius:20px;padding:20px 22px;
+}
+.mp-benefit-copy{background:#1A1208;color:#fff;}
+.mp-benefit-copy h3{
+  margin:0 0 7px;font-family:Georgia,serif;font-size:23px;line-height:1.12;
+}
+.mp-benefit-copy p{margin:0;color:#E8DED5;font-size:13px;line-height:1.5;}
+.mp-speed{
+  background:#C4785A;color:#fff;
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;
+}
+.mp-speed small{font-size:11px;opacity:.88;text-transform:uppercase;letter-spacing:.08em;}
+.mp-speed strong{font-family:Georgia,serif;font-size:30px;line-height:1.05;margin:5px 0;}
+.mp-speed span{font-size:12px;line-height:1.35;}
+.mp-safety{
+  margin-top:12px;display:grid;grid-template-columns:1fr 1fr;gap:12px;
+}
+.mp-support,.mp-guarantee{
+  padding:17px 18px;border-radius:18px;
+}
+.mp-support{background:#EAF5EE;border:1px solid rgba(46,125,82,.18);}
+.mp-guarantee{background:#FFF0E9;border:1px solid rgba(196,120,90,.24);}
+.mp-safety h3{margin:0 0 6px;font-size:16px;}
+.mp-safety p{margin:0;color:#5E544A;font-size:12.5px;line-height:1.48;}
+.mp-safety strong{color:#1A1208;}
+.mp-free{
+  position:relative;overflow:hidden;
+  background:#EDE3D8;color:#1A1208;
+  padding:54px 34px;
+}
+.mp-free:before{
+  content:"";position:absolute;width:330px;height:330px;border-radius:50%;
+  background:rgba(196,120,90,.20);right:-80px;top:-100px;
+}
+.mp-free-inner{
+  position:relative;max-width:1120px;margin:0 auto;
+  display:grid;grid-template-columns:.78fr 1.22fr;gap:46px;align-items:center;
+}
+.mp-free-visual{
+  min-height:330px;display:flex;align-items:center;justify-content:center;
+}
+.mp-phone{
+  width:205px;height:330px;border-radius:30px;background:#1A1208;
+  padding:9px;transform:rotate(-4deg);
+  box-shadow:0 24px 50px rgba(55,34,18,.18);
+}
+.mp-phone-screen{
+  height:100%;border-radius:23px;background:#FFF9F4;padding:24px 16px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.mp-phone-tag{font-size:10px;font-weight:800;color:#C4785A;letter-spacing:.08em;margin-bottom:10px;}
+.mp-phone-title{font-family:Georgia,serif;font-size:23px;line-height:1.05;margin-bottom:12px;}
+.mp-phone-lines span{display:block;height:7px;background:#E5D8CB;border-radius:10px;margin:7px 0;}
+.mp-phone-lines span:nth-child(2){width:78%}.mp-phone-lines span:nth-child(3){width:88%}
+.mp-free-copy{max-width:620px;}
+.mp-free-copy .eyebrow{
+  color:#A85E43;font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;
+}
+.mp-free-copy h2{
+  margin:0 0 10px;font-family:Georgia,serif;
+  font-size:clamp(31px,3vw,46px);line-height:1.04;letter-spacing:-.025em;
+}
+.mp-free-copy .lead{font-size:19px;font-weight:700;line-height:1.3;margin:0 0 10px;}
+.mp-free-copy p{color:#625548;font-size:14px;line-height:1.55;margin:0 0 18px;}
+.mp-free-actions{display:flex;gap:10px;flex-wrap:wrap;}
+.mp-free-actions a{
+  text-decoration:none;border-radius:999px;padding:14px 19px;
+  font-size:12px;font-weight:800;letter-spacing:.02em;
+}
+.mp-max{background:#1A1208;color:#fff;}
+.mp-tg{background:#fff;color:#1A1208;border:1px solid rgba(26,18,8,.15);}
+.mp-free-note{margin-top:12px!important;font-size:11.5px!important;color:#817264!important;}
+
+@media(max-width:768px){
+  .mp-flow{padding:32px 16px 36px;}
+  .mp-head{margin-bottom:17px;}
+  .mp-head h2{font-size:27px;}
+  .mp-head p{font-size:13px;}
+  .mp-grid{grid-template-columns:1fr;gap:8px;}
+  .mp-item{grid-template-columns:34px 1fr;padding:12px 13px;border-radius:14px;gap:10px;}
+  .mp-num{width:32px;height:32px;border-radius:10px;}
+  .mp-item h3{font-size:15px;}
+  .mp-item p{font-size:11.8px;}
+  .mp-more{font-size:11.5px;margin-top:9px;padding:9px 10px;}
+  .mp-benefit{grid-template-columns:1fr;gap:8px;margin-top:12px;}
+  .mp-benefit-copy,.mp-speed{padding:17px 16px;border-radius:16px;}
+  .mp-benefit-copy h3{font-size:20px;}
+  .mp-benefit-copy p{font-size:12px;}
+  .mp-speed strong{font-size:26px;}
+  .mp-safety{grid-template-columns:1fr;gap:8px;margin-top:8px;}
+  .mp-support,.mp-guarantee{padding:14px 15px;border-radius:15px;}
+  .mp-safety h3{font-size:15px;}
+  .mp-safety p{font-size:11.8px;}
+  .mp-free{padding:38px 16px 42px;}
+  .mp-free-inner{grid-template-columns:1fr;gap:22px;}
+  .mp-free-visual{min-height:230px;}
+  .mp-phone{width:150px;height:235px;border-radius:23px;padding:7px;}
+  .mp-phone-screen{border-radius:18px;padding:18px 12px;}
+  .mp-phone-title{font-size:18px;}
+  .mp-free-copy{text-align:center;}
+  .mp-free-copy h2{font-size:29px;}
+  .mp-free-copy .lead{font-size:16px;}
+  .mp-free-copy p{font-size:13px;}
+  .mp-free-actions{display:grid;grid-template-columns:1fr;width:100%;}
+  .mp-free-actions a{text-align:center;padding:14px;}
+}
+</style>
+
+
+<style>
+/* Компактная версия исходного блока "что не нужно делать" */
+.mp2-dont{background:#FFF9F4;color:#1A1208;padding:28px 32px 30px;}
+.mp2d-wrap{max-width:1160px;margin:0 auto;}
+.mp2d-head{text-align:center;max-width:760px;margin:0 auto 16px;}
+.mp2d-kicker{font-size:9px;font-weight:900;letter-spacing:.13em;color:#C4785A;margin-bottom:6px;}
+.mp2d-head h2{margin:0 0 6px;font-family:Georgia,serif;font-size:32px;line-height:1.06;letter-spacing:-.02em;}
+.mp2d-head h2 span{color:#C4785A;}
+.mp2d-head p{margin:0;color:#6C5D50;font-size:12.5px;line-height:1.4;}
+.mp2d-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.mp2d-item{
+  min-height:76px;display:grid;grid-template-columns:29px 1fr;gap:9px;
+  padding:11px 12px;border-radius:13px;background:#fff;
+  border:1px solid rgba(196,120,90,.17);box-shadow:0 4px 14px rgba(55,34,18,.03);
+}
+.mp2d-item:nth-child(2),.mp2d-item:nth-child(5){background:#F2F8F4;border-color:rgba(46,125,82,.15);}
+.mp2d-item:nth-child(3),.mp2d-item:nth-child(4){background:#F8F1EA;border-color:rgba(158,142,120,.18);}
+.mp2d-n{
+  width:27px;height:27px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+  background:#F7E6DE;color:#B66A4D;font-size:9px;font-weight:900;
+}
+.mp2d-item strong{display:block;font-size:13.5px;line-height:1.16;margin:1px 0 3px;}
+.mp2d-item small{display:block;color:#6D6155;font-size:10.7px;line-height:1.3;}
+
+@media(max-width:768px){
+  .mp2-dont{padding:27px 16px 30px;}
+  .mp2d-head{margin-bottom:14px;}
+  .mp2d-head h2{font-size:26px;}
+  .mp2d-head p{font-size:12px;}
+  .mp2d-grid{grid-template-columns:1fr;gap:7px;}
+  .mp2d-item{min-height:auto;padding:10px 11px;}
+  .mp2d-item strong{font-size:13.5px;}
+  .mp2d-item small{font-size:10.8px;}
+}
+</style>
+
+
+<style>
+.story-reviews{background:#FFFDFC;color:#1A1208;padding:48px 32px 52px;}
+.story-wrap{max-width:1120px;margin:0 auto;}
+.story-head{text-align:center;max-width:700px;margin:0 auto 24px;}
+.story-label{
+  color:#9E8E78;font-size:9px;font-weight:800;letter-spacing:.13em;
+  text-transform:uppercase;margin-bottom:8px;
+}
+.story-head h2{
+  margin:0;font-family:Georgia,serif;font-size:clamp(30px,2.8vw,42px);
+  line-height:1.05;letter-spacing:-.025em;
+}
+.story-head h2 span{color:#C4785A;}
+.story-grid{display:grid;grid-template-columns:1.08fr .92fr;gap:12px;}
+.story-side{display:grid;grid-template-rows:1fr 1fr;gap:12px;}
+.story-card{
+  position:relative;background:#fff;border:1px solid #EADFD5;border-radius:20px;
+  padding:20px 22px;box-shadow:0 10px 28px rgba(55,34,18,.05);
+}
+.story-main{background:#FBF3EE;padding:24px 26px;}
+.story-side .story-card:first-child{background:#F3F8F4;}
+.story-stars{color:#C4785A;font-size:13px;letter-spacing:.12em;margin-bottom:10px;}
+.story-card p{margin:0 0 9px;color:#4F443A;font-size:13px;line-height:1.5;}
+.story-main p{font-size:13.5px;}
+.story-card .story-result{color:#1A1208;font-weight:700;}
+.story-sign{
+  margin-top:12px;padding-top:10px;border-top:1px solid rgba(158,142,120,.22);
+  color:#9E8E78;font-size:9px;line-height:1.3;
+}
+@media(max-width:768px){
+  .story-reviews{padding:36px 16px 40px;}
+  .story-head{margin-bottom:18px;}
+  .story-head h2{font-size:29px;}
+  .story-grid{grid-template-columns:1fr;gap:9px;}
+  .story-side{gap:9px;}
+  .story-card,.story-main{padding:17px 16px;border-radius:16px;}
+  .story-card p,.story-main p{font-size:12.2px;line-height:1.47;}
+  .story-label{font-size:8px;}
+}
+</style>
+
+
+<style>
+/* Reviews v2 — four balanced cards */
+.story-reviews-v2 .story-grid,
+.story-reviews-v2 .story-side{display:none!important;}
+.story-grid-v2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+.story-card-v2{
+  display:flex;
+  flex-direction:column;
+  min-height:330px;
+  padding:20px 22px;
+  border-radius:20px;
+  border:1px solid rgba(158,142,120,.20);
+  box-shadow:0 9px 26px rgba(55,34,18,.045);
+}
+.story-card-v2.tone-peach{background:#FBF3EE;}
+.story-card-v2.tone-green{background:#F2F8F4;}
+.story-card-v2.tone-cream{background:#FFF9F1;}
+.story-card-v2.tone-rose{background:#FAF0ED;}
+.story-card-v2 p{
+  margin:0 0 8px;
+  color:#4F443A;
+  font-size:12.5px;
+  line-height:1.46;
+}
+.story-card-v2 .story-result{color:#1A1208;font-weight:700;}
+.story-card-v2 .story-sign{
+  margin-top:auto;
+  padding-top:10px;
+  border-top:1px solid rgba(158,142,120,.22);
+  color:#9E8E78;
+  font-size:9px;
+  line-height:1.3;
+}
+@media(max-width:768px){
+  .story-grid-v2{grid-template-columns:1fr;gap:9px;}
+  .story-card-v2{min-height:auto;padding:17px 16px;border-radius:16px;}
+  .story-card-v2 p{font-size:12.1px;line-height:1.45;}
+}
+</style>
+
+
+<style>
+.story-compact{background:#FFFDFC;color:#1A1208;padding:32px 24px 34px;}
+.sc-wrap{max-width:980px;margin:0 auto;}
+.sc-head{text-align:center;margin:0 auto 14px;max-width:720px;}
+.sc-label{font-size:8px;font-weight:800;letter-spacing:.12em;color:#9E8E78;margin-bottom:5px;}
+.sc-head h2{margin:0;font-family:Georgia,serif;font-size:30px;line-height:1.06;}
+.sc-head h2 span{color:#C4785A;}
+.sc-main{
+  background:#FBF3EE;border:1px solid #EAD8CC;border-radius:17px;
+  padding:16px 20px;
+}
+.sc-stars{color:#C4785A;font-size:11px;letter-spacing:.1em;margin-bottom:7px;}
+.sc-main p{margin:0 0 6px;font-size:12.5px;line-height:1.42;color:#51463C;}
+.sc-main .sc-result{margin-bottom:0;font-weight:700;color:#1A1208;}
+.sc-more{
+  margin-top:8px;border:1px solid #E7DDD4;border-radius:14px;background:#fff;overflow:hidden;
+}
+.sc-more summary{
+  cursor:pointer;list-style:none;padding:11px 15px;
+  display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;font-weight:800;color:#3D3020;
+}
+.sc-more summary::-webkit-details-marker{display:none;}
+.sc-more summary span{font-size:18px;color:#C4785A;line-height:1;}
+.sc-more[open] summary span{transform:rotate(45deg);}
+.sc-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 8px 8px;}
+.sc-list article{background:#FAF7F3;border-radius:11px;padding:11px 12px;}
+.sc-list article:nth-child(2){background:#F2F8F4;}
+.sc-list article:nth-child(3){background:#FAF0ED;}
+.sc-list p{margin:0;font-size:10.8px;line-height:1.38;color:#554A40;}
+
+@media(max-width:768px){
+  .story-compact{padding:27px 16px 30px;}
+  .sc-head{margin-bottom:12px;}
+  .sc-label{font-size:7px;}
+  .sc-head h2{font-size:25px;}
+  .sc-main{padding:14px 14px;border-radius:15px;}
+  .sc-main p{font-size:11.5px;line-height:1.4;}
+  .sc-more summary{padding:11px 13px;}
+  .sc-list{grid-template-columns:1fr;gap:6px;padding:0 7px 7px;}
+  .sc-list p{font-size:11px;}
+}
+</style>
+
+
+<style>
+/* ===== ФИНАЛЬНАЯ КОМПАКТНАЯ АРХИТЕКТУРА НИЖЕ HERO ===== */
+.compact-value{background:#FFF9F4;padding:26px 24px 28px;color:#1A1208;}
+.cv-wrap{max-width:980px;margin:0 auto;}
+.cv-time{display:grid;grid-template-columns:1.35fr .65fr;gap:12px;align-items:center;background:#1A1208;color:#fff;border-radius:18px;padding:17px 20px;}
+.cv-time small{font-size:8px;letter-spacing:.12em;color:#D9B19F;font-weight:800;}
+.cv-time h2{font-family:Georgia,serif;font-size:24px;line-height:1.08;margin:4px 0 5px;}
+.cv-time p{margin:0;color:#E4DAD1;font-size:11.5px;line-height:1.4;}
+.cv-number{text-align:center;font-family:Georgia,serif;font-size:29px;color:#F0B297;font-weight:700;}
+.cv-number span{display:block;font-family:Arial,sans-serif;font-size:9px;color:#E4DAD1;font-weight:400;margin-top:2px;}
+.cv-accordions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;}
+.cv-accordions details{background:#fff;border:1px solid #E7DDD4;border-radius:13px;overflow:hidden;}
+.cv-accordions details:first-child{background:#F2F8F4;border-color:rgba(46,125,82,.18);}
+.cv-accordions details:last-child{background:#FFF1EA;border-color:rgba(196,120,90,.2);}
+.cv-accordions summary{list-style:none;cursor:pointer;padding:11px 13px;display:flex;justify-content:space-between;align-items:center;font-size:12px;font-weight:800;}
+.cv-accordions summary::-webkit-details-marker{display:none;}
+.cv-accordions summary b{font-size:17px;color:#C4785A;}
+.cv-accordions details[open] summary b{transform:rotate(45deg);}
+.cv-answer{padding:0 13px 12px;font-size:11px;line-height:1.4;color:#5A4D42;}
+.cv-answer a{color:#2E7D52;font-weight:700;}
+.cv-note{text-align:right;font-size:8px;color:#9E8E78;margin-top:4px;}
+
+.faq-compact{background:#FFFDFC;padding:34px 24px 36px;color:#1A1208;}
+.fq-wrap{max-width:900px;margin:0 auto;}
+.fq-head{text-align:center;margin-bottom:15px;}
+.fq-kicker{font-size:8px;letter-spacing:.13em;font-weight:900;color:#C4785A;margin-bottom:5px;}
+.fq-head h2{font-family:Georgia,serif;font-size:30px;line-height:1.06;margin:0;}
+.fq-list{display:grid;gap:6px;}
+.fq-list details{border:1px solid #E8DED5;border-radius:12px;background:#fff;overflow:hidden;}
+.fq-list summary{cursor:pointer;list-style:none;padding:11px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-size:12.5px;font-weight:800;}
+.fq-list summary::-webkit-details-marker{display:none;}
+.fq-list summary span{font-size:18px;color:#C4785A;}
+.fq-list details[open] summary span{transform:rotate(45deg);}
+.fq-list p{margin:0;padding:0 14px 12px;font-size:11px;line-height:1.42;color:#5A4D42;}
+
+.final-cta{background:#1A1208;color:#fff;padding:36px 24px 20px;}
+.fc-wrap{max-width:980px;margin:0 auto;display:grid;grid-template-columns:1.15fr .85fr;gap:28px;align-items:center;}
+.fc-kicker{font-size:8px;letter-spacing:.13em;color:#D9B19F;font-weight:900;margin-bottom:6px;}
+.fc-copy h2{font-family:Georgia,serif;font-size:34px;line-height:1.03;margin:0 0 8px;}
+.fc-copy p{margin:0;color:#E4DAD1;font-size:12px;line-height:1.45;max-width:570px;}
+.fc-trust{display:flex;flex-wrap:wrap;gap:7px 14px;margin-top:12px;color:#CFE6D8;font-size:10px;}
+.fc-buy{text-align:center;background:#FFF9F4;color:#1A1208;border-radius:19px;padding:18px;}
+.fc-old{text-decoration:line-through;color:#9E8E78;font-size:11px;}
+.fc-price{font-family:Georgia,serif;font-size:38px;font-weight:700;line-height:1;margin:3px 0 11px;}
+.fc-price small{font-family:Arial,sans-serif;font-size:12px;font-weight:700;}
+.fc-btn{display:block;text-decoration:none;background:#1A1208;color:#fff;border-radius:999px;padding:14px 14px;font-size:11px;font-weight:900;}
+.fc-legal{font-size:8.5px;line-height:1.35;color:#8C7D70;margin-top:8px;}
+.fc-legal a{color:#6D5B4F;}
+.fc-footnote{max-width:980px;margin:12px auto 0;text-align:center;color:#9E8E78;font-size:8px;line-height:1.35;}
+
+.site-footer{background:#120D08;color:#C7B9AD;padding:24px 24px 14px;font-size:10px;}
+.sf-wrap{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1.1fr 1.4fr 1fr 1.2fr;gap:20px;}
+.sf-logo{color:#fff;font-family:Georgia,serif;font-size:17px;margin-bottom:4px;}
+.sf-data,.sf-contacts,.sf-links{display:flex;flex-direction:column;gap:4px;}
+.sf-data strong{color:#EEE5DD;}
+.sf-contacts a,.sf-links a{color:#D8C9BC;text-decoration:none;}
+.sf-contacts a:hover,.sf-links a:hover{text-decoration:underline;}
+.sf-bottom{max-width:1100px;margin:16px auto 0;padding-top:10px;border-top:1px solid rgba(255,255,255,.08);color:#8F8176;font-size:8.5px;text-align:center;}
+
+/* Не раздуваем уже существующие блоки */
+.mp-free{padding-top:38px!important;padding-bottom:38px!important;}
+.story-compact{padding-top:28px!important;padding-bottom:30px!important;}
+
+@media(max-width:768px){
+  .cv-time{grid-template-columns:1fr;padding:15px 14px;gap:9px;text-align:center;}
+  .cv-time h2{font-size:21px;}
+  .cv-time p{font-size:11px;}
+  .cv-number{font-size:25px;}
+  .cv-accordions{grid-template-columns:1fr;}
+  .cv-note{text-align:center;}
+
+  .faq-compact{padding:28px 16px 30px;}
+  .fq-head h2{font-size:25px;}
+  .fq-list summary{padding:10px 12px;font-size:11.5px;}
+  .fq-list p{padding:0 12px 11px;font-size:10.8px;}
+
+  .final-cta{padding:30px 16px 18px;}
+  .fc-wrap{grid-template-columns:1fr;gap:17px;text-align:center;}
+  .fc-copy h2{font-size:28px;}
+  .fc-copy p{font-size:11.5px;}
+  .fc-trust{justify-content:center;font-size:9.5px;}
+  .fc-buy{padding:16px 14px;}
+  .fc-price{font-size:34px;}
+  .fc-btn{font-size:10.5px;padding:13px 11px;}
+
+  .site-footer{padding:22px 16px 12px;}
+  .sf-wrap{grid-template-columns:1fr;gap:12px;text-align:center;}
+  .sf-data,.sf-contacts,.sf-links{align-items:center;}
+  .sf-logo{font-size:16px;}
+
+  /* Бесплатник — компактнее на телефоне */
+  .mp-free{padding:30px 16px!important;}
+  .mp-free-inner{gap:15px!important;}
+  .mp-free-visual{min-height:175px!important;}
+  .mp-phone{width:118px!important;height:185px!important;}
+  .mp-phone-title{font-size:15px!important;}
+
+  /* Истории — главный отзыв + раскрытие остаются компактными */
+  .story-compact{padding:26px 16px 28px!important;}
+}
+</style>
+
+
+<style>
+/* ===== ФИНАЛЬНЫЙ CTA: 590 / 3000 ===== */
+.fc-wrap-dual{grid-template-columns:.8fr 1.2fr;gap:24px;}
+.fc-options{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.fc-buy-main{border:1px solid rgba(196,120,90,.22);}
+.fc-buy-personal{background:#F2F8F4;border:1px solid rgba(46,125,82,.2);}
+.fc-option-label{font-size:8px;letter-spacing:.13em;font-weight:900;color:#C4785A;margin-bottom:5px;}
+.fc-buy-personal .fc-option-label{color:#2E7D52;}
+.fc-option-title{font-family:Georgia,serif;font-size:20px;line-height:1.08;font-weight:700;margin-bottom:6px;}
+.fc-option-text{font-size:10.5px;line-height:1.4;color:#6E6054;min-height:58px;margin-bottom:10px;}
+.fc-price-personal{margin-top:13px;}
+.fc-btn-personal{background:#2E7D52;}
+.fc-personal-note{font-size:8.5px;line-height:1.35;color:#6E7A71;margin-top:8px;}
+.fc-legal-dual{max-width:980px;margin:11px auto 0;text-align:center;color:#9E8E78;font-size:8.5px;line-height:1.35;}
+.fc-legal-dual a{color:#C9B6A8;}
+
+@media(max-width:768px){
+  .fc-wrap-dual{grid-template-columns:1fr;}
+  .fc-options{grid-template-columns:1fr;gap:10px;}
+  .fc-option-text{min-height:0;}
+  .fc-option-title{font-size:18px;}
+}
+</style>
+
 </head>
 <body>
 
@@ -424,7 +1082,7 @@ nav {
   </a>
   <div class="nav-links">
     <a href="#reviews" class="nav-link">Отзывы</a>
-    <a href="#free" class="nav-link">Как это работает</a>
+    <a href="#how" class="nav-link">Как это работает</a>
     <a href="#faq" class="nav-link">Вопросы</a>
     <a href="https://link.payform.ru/?paymentLinkId=0040917f-edb9-4fef-b7c1-196a8275fb25" class="nav-cta">ПОЛУЧИТЬ МАТЕРИАЛЫ ЗА 590 РУБЛЕЙ</a>
   </div>
@@ -565,9 +1223,110 @@ nav {
   </div>
 </section>
 
+
+
+<!-- ═══════════════════════════════════════
+     SECTION 2 — ЧТО МЫ УЖЕ СДЕЛАЛИ ЗА ВАС
+     ═══════════════════════════════════════ -->
+
+<section class="mp2-dont">
+  <div class="mp2d-wrap">
+    <div class="mp2d-head">
+      <div class="mp2d-kicker">САМОЕ НЕПРИЯТНОЕ УЖЕ СДЕЛАЛИ ЗА ВАС</div>
+      <h2>Что вам больше <span>не придётся делать</span></h2>
+      <p>Все вопросы, на которых обычно начинается новая беготня по сайтам, уже разобраны внутри материалов.</p>
+    </div>
+
+    <div class="mp2d-grid">
+      <div class="mp2d-item">
+        <span class="mp2d-n">01</span>
+        <div><strong>Искать, в какой суд обращаться</strong><small>Как определить нужный суд и найти его адрес.</small></div>
+      </div>
+      <div class="mp2d-item">
+        <span class="mp2d-n">02</span>
+        <div><strong>Искать бланк и гадать, как его заполнить</strong><small>Заявление + наглядный образец: видно, что и куда вписывать.</small></div>
+      </div>
+      <div class="mp2d-item">
+        <span class="mp2d-n">03</span>
+        <div><strong>Разбираться, что подготовить к подаче</strong><small>Что приложить и что проверить перед отправкой заявления.</small></div>
+      </div>
+      <div class="mp2d-item">
+        <span class="mp2d-n">04</span>
+        <div><strong>Искать, как подать документы лично</strong><small>Куда идти, что взять с собой и как зафиксировать подачу.</small></div>
+      </div>
+      <div class="mp2d-item">
+        <span class="mp2d-n">05</span>
+        <div><strong>Отдельно искать, как отправить Почтой России</strong><small>Что вложить, как отправить и что сохранить после отправки.</small></div>
+      </div>
+      <div class="mp2d-item">
+        <span class="mp2d-n">06</span>
+        <div><strong>Искать ответы на новые вопросы по ходу</strong><small>Типичные ошибки, частые вопросы и что делать после подачи.</small></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
 <!-- ═══════════════════════════════════════
      ОБЩИЙ ТАЙМЕР (синхронизирован)
      ═══════════════════════════════════════ -->
+
+
+<!-- КОМПАКТНЫЙ БЛОК ВЫГОДЫ / ПОДДЕРЖКИ -->
+<section class="compact-value" id="how">
+  <div class="cv-wrap">
+    <div class="cv-time">
+      <div>
+        <small>ВМЕСТО ЧАСОВ И ВЕЧЕРОВ ПОИСКА</small>
+        <h2>Понятный маршрут до готового заявления</h2>
+        <p>Идёте по шагам, сверяетесь с образцом и сразу знаете, что делать дальше.</p>
+      </div>
+      <div class="cv-number">≈ 15 минут<span>в обычной ситуации*</span></div>
+    </div>
+
+    <div class="cv-accordions">
+      <details>
+        <summary><span>Поддержка включена</span><b>＋</b></summary>
+        <div class="cv-answer">Если на каком-то этапе что-то стало непонятно — напишите мне. Не придётся снова искать ответ самостоятельно. Telegram: <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener">@a_likhacheva2026</a>. MAX: <a href="tel:+79920011995">+7 992 001-19-95</a>. Контакт для поддержки есть и внутри материалов.</div>
+      </details>
+      <details>
+        <summary><span>Гарантия спокойной подачи</span><b>＋</b></summary>
+        <div class="cv-answer">Если вы заполнили заявление по материалам и выполнили инструкции, но суд вернул его из-за ошибки в подготовке или подаче — я помогу разобраться и исправить. Если проблему не получится решить — верну 590 рублей.</div>
+      </details>
+    </div>
+    <div class="cv-note">* Если необходимые данные уже под рукой.</div>
+  </div>
+</section>
+
+
+<!-- SECTION 3 — БЕСПЛАТНЫЙ МАТЕРИАЛ -->
+<section class="mp-free" id="free">
+  <div class="mp-free-inner">
+    <div class="mp-free-visual" aria-hidden="true">
+      <div class="mp-phone">
+        <div class="mp-phone-screen">
+          <div class="mp-phone-tag">БЕСПЛАТНО</div>
+          <div class="mp-phone-title">Подходит ли вам судебный приказ?</div>
+          <div class="mp-phone-lines"><span></span><span></span><span></span></div>
+        </div>
+      </div>
+    </div>
+    <div class="mp-free-copy">
+      <div class="eyebrow">Можно начать бесплатно</div>
+      <h2>Пока не готовы покупать материалы?</h2>
+      <div class="lead">Сначала разберитесь, подходит ли вам судебный приказ. Бесплатно.</div>
+      <p>Я подготовила короткий материал, который поможет понять, можно ли в вашей ситуации начать взыскание алиментов через судебный приказ и на что обратить внимание до подачи.</p>
+      <div class="mp-free-actions">
+        <a class="mp-max" href="https://max.ru/channel_rekoyur/AaCEaq4cCHI" target="_blank" rel="noopener">ОТКРЫТЬ БЕСПЛАТНО В MAX</a>
+        <a class="mp-tg" href="https://t.me/po_rekomendatsii/73" target="_blank" rel="noopener">ОТКРЫТЬ В TELEGRAM</a>
+      </div>
+      <p class="mp-free-note">Материал уже опубликован — ничего заполнять и оставлять не нужно.</p>
+    </div>
+  </div>
+</section>
+
 <script>
 (function() {
   var KEY = 'sp_timer_v2_end';
@@ -601,6 +1360,149 @@ nav {
   setInterval(tick, 1000);
 })();
 </script>
+
+
+
+
+<!-- SECTION 4 — КОМПАКТНЫЕ ИСТОРИИ -->
+<section class="story-compact" id="reviews">
+  <div class="sc-wrap">
+    <div class="sc-head">
+      <div class="sc-label">ИСТОРИИ, ДЛЯ КОТОРЫХ МЫ СОБИРАЛИ ЭТОТ ПРОДУКТ</div>
+      <h2>Когда вместо поиска <span>просто идёшь по шагам</span></h2>
+    </div>
+
+    <article class="sc-main">
+      <div class="sc-stars">★★★★★</div>
+      <p>«Я вообще хотела всё сделать сама. Нашла заявление в интернете, начала заполнять — и понеслось: что здесь писать, какой суд указывать, что прикладывать, как отправлять. На каждый вопрос снова лезла искать ответ и в итоге только запуталась.</p>
+      <p>Потом увидела эти материалы. По образцу заполнила заявление, прошлась по инструкции, собрала всё примерно за полчаса и на следующий день отправила в суд.</p>
+      <p class="sc-result">А сегодня пришла первая выплата по алиментам 🥹 Очень рада, что тогда всё-таки довела до конца.»</p>
+    </article>
+
+    <details class="sc-more">
+      <summary>Ещё 3 истории <span>＋</span></summary>
+      <div class="sc-list">
+        <article>
+          <div class="sc-stars">★★★★★</div>
+          <p>«Мне судебный приказ нужен был ещё и для оформления пособия. Сама зависла на том, куда подавать и какие документы нужны. С материалами вечером всё спокойно заполнила и отправила. <b>Получила приказ и смогла дальше заниматься оформлением пособия.</b>»</p>
+        </article>
+        <article>
+          <div class="sc-stars">★★★★★</div>
+          <p>«Почти всё заполнила сама, но на одном пункте застряла и уже боялась отправлять. Написала, уточнила вопрос и спокойно закончила. <b>Не пришлось после каждого шага снова идти в Яндекс и искать, что делать дальше.</b>»</p>
+        </article>
+        <article>
+          <div class="sc-stars">★★★★★</div>
+          <p>«Несколько месяцев откладывала алименты. Первый раз открыла образец, запуталась — и руки опустились. Потом наткнулась на эти материалы. <b>В тот же вечер заполнила заявление и собрала всё для подачи.</b> А до этого несколько месяцев не могла себя заставить даже начать.»</p>
+        </article>
+      </div>
+    </details>
+  </div>
+</section>
+
+
+
+
+<!-- FAQ -->
+<section class="faq-compact" id="faq">
+  <div class="fq-wrap">
+    <div class="fq-head">
+      <div class="fq-kicker">ОСТАЛИСЬ ВОПРОСЫ?</div>
+      <h2>Перед оплатой — коротко о главном</h2>
+    </div>
+
+    <div class="fq-list">
+      <details>
+        <summary>А если я уже скачала заявление в интернете?<span>＋</span></summary>
+        <p>Это нормально. Сам бланк найти несложно — вопросы обычно начинаются при заполнении и подаче: что писать, куда подавать, что приложить, как отправить и что делать потом. Именно этот маршрут и собран в материалах.</p>
+      </details>
+      <details>
+        <summary>Как понять, подходит ли мне судебный приказ?<span>＋</span></summary>
+        <p>Если сомневаетесь — сначала откройте бесплатный материал выше. Он поможет проверить, подходит ли вам такой порядок, до покупки.</p>
+      </details>
+      <details>
+        <summary>Что я получу сразу после оплаты?<span>＋</span></summary>
+        <p>Материалы для самостоятельной подготовки и подачи: заявление, образец заполнения, пошаговые инструкции, чек-листы и порядок дальнейших действий.</p>
+      </details>
+      <details>
+        <summary>А если при заполнении всё равно возникнет вопрос?<span>＋</span></summary>
+        <p>Напишите мне в MAX или Telegram. Поддержка по материалам включена.</p>
+      </details>
+      <details>
+        <summary>Что если суд вернёт заявление?<span>＋</span></summary>
+        <p>Если вы действовали по материалам, а заявление вернули из-за ошибки в подготовке или подаче — помогу разобраться и исправить. Если проблему решить не получится — верну 590 рублей.</p>
+      </details>
+      <details>
+        <summary>Мне обязательно подавать лично?<span>＋</span></summary>
+        <p>Нет. В материалах отдельно разобраны личная подача и отправка Почтой России.</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ФИНАЛЬНЫЙ CTA -->
+<section class="final-cta">
+  <div class="fc-wrap fc-wrap-dual">
+    <div class="fc-copy">
+      <div class="fc-kicker">ВЫБЕРИТЕ, КАК ВАМ УДОБНЕЕ</div>
+      <h2>Сделать самой — или передать подготовку мне</h2>
+      <p>Оба варианта ведут к одной цели: чтобы у вас было готовое заявление и понятный следующий шаг без лишнего поиска.</p>
+    </div>
+
+    <div class="fc-options">
+      <div class="fc-buy fc-buy-main">
+        <div class="fc-option-label">САМОСТОЯТЕЛЬНО</div>
+        <div class="fc-option-title">Пройти по готовому маршруту</div>
+        <div class="fc-option-text">Заявление, образец заполнения, инструкции, чек-листы и поддержка.</div>
+        <div class="fc-old">990 рублей</div>
+        <div class="fc-price">590 <small>рублей</small></div>
+        <a class="fc-btn" href="https://link.payform.ru/?paymentLinkId=0040917f-edb9-4fef-b7c1-196a8275fb25" target="_blank" rel="noopener">ПОЛУЧИТЬ МАТЕРИАЛЫ ЗА 590 РУБЛЕЙ</a>
+      </div>
+
+      <div class="fc-buy fc-buy-personal">
+        <div class="fc-option-label">ИНДИВИДУАЛЬНО</div>
+        <div class="fc-option-title">Не хотите заполнять самостоятельно?</div>
+        <div class="fc-option-text">Вы присылаете данные и документы — я индивидуально подготавливаю заявление и даю порядок дальнейших действий.</div>
+        <div class="fc-price fc-price-personal">3 000 <small>рублей</small></div>
+        <a class="fc-btn fc-btn-personal" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener">НАПИСАТЬ МНЕ В MAX</a>
+        <div class="fc-personal-note">Сначала уточню вашу ситуацию. Если судебный приказ вам не подходит — скажу об этом до оплаты.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fc-legal-dual">
+    Нажимая кнопку оплаты материалов, вы переходите к оплате и принимаете условия
+    <a href="/offer.html" target="_blank">публичной оферты</a>.
+  </div>
+</section>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="sf-wrap">
+    <div class="sf-brand">
+      <div class="sf-logo">♡ По рекомендации</div>
+      <div>Юридический сервис · Екатеринбург · онлайн по России</div>
+    </div>
+
+    <div class="sf-data">
+      <strong>Лихачева Анастасия Анатольевна</strong>
+      <span>Самозанятая · Налог на профессиональный доход</span>
+      <span>ИНН 665100837011</span>
+      <span>Рег. номер оператора персональных данных: 66-26-087909</span>
+    </div>
+
+    <div class="sf-contacts">
+      <a href="tel:+79920011995">+7 992 001-19-95</a>
+      <a href="mailto:alikhacheva7@yandex.ru">alikhacheva7@yandex.ru</a>
+      <a href="https://rekoyur.ru/">rekoyur.ru</a>
+    </div>
+
+    <div class="sf-links">
+      <a href="/offer.html" target="_blank">Публичная оферта</a>
+      <a href="/privacy-policy.html" target="_blank">Политика обработки персональных данных</a>
+      <a href="/consent.html" target="_blank">Согласие на обработку персональных данных</a>
+    </div>
+  </div>
+  <div class="sf-bottom">© 2026 «По рекомендации». Информационные материалы не заменяют индивидуальную юридическую консультацию.</div>
+</footer>
 
 </body>
 </html>
