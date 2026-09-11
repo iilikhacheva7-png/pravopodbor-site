@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Возврат страховки по кредиту — бесплатная проверка документов | По рекомендации</title>
+<meta name="description" content="Бесплатно проверим ваши документы и скажем, можно ли вернуть деньги за страховку по кредиту. Без давления и обязательств.">
+<link rel="canonical" href="https://rekoyur.ru/vozvrat-strahovki.html">
+<meta name="robots" content="noindex">
+
+<!-- Яндекс.Метрика -->
+<script>
+(function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+m[i].l=1*new Date();for(var j=0;j<document.scripts.length;j++){if(document.scripts[j].src===r){return;}}
+k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})(window,document,"script","https://mc.yandex.ru/metrika/tag.js","ym");
+ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webvisor:false});
+</script>
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  background: #fff;
+  color: #1A1208;
+}
+
+/* ══ ПЕРЕМЕННЫЕ ══ */
+:root {
+  --ink:      #1A1208;
+  --ink-soft: #3D3020;
+  --muted:    #9E8E78;
+  --yellow:   #FFD600;
+  --yellow-dark: #E5C000;
+  --paper:    #FFFCF8;
+  --line:     rgba(26,18,8,.09);
+  --green:    #2E7D52;
+  --green-bg: rgba(76,175,130,.1);
+  --green-border: rgba(76,175,130,.3);
+}
+
+/* ══ NAV ══ */
+nav {
+  position: absolute; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 40px; height: 56px;
+  background: transparent;
+}
+.nav-logo-wrap { display: flex; align-items: center; gap: 8px; text-decoration: none; }
+.nav-logo-icon { color: #fff; font-size: 20px; line-height: 1; }
+.nav-logo-text { display: flex; flex-direction: column; }
+.nav-logo-name { font-size: 15px; font-weight: 800; color: #fff; letter-spacing: -.02em; line-height: 1.15; }
+.nav-logo-sub  { font-size: 9px; font-weight: 500; color: rgba(255,255,255,.6); letter-spacing: .05em; text-transform: uppercase; }
+.nav-links { display: flex; align-items: center; gap: 4px; }
+.nav-link { font-size: 13px; color: rgba(255,255,255,.8); text-decoration: none; font-weight: 500; padding: 7px 13px; border-radius: 8px; transition: color .15s; }
+.nav-link:hover { color: #fff; }
+.nav-cta {
+  background: var(--yellow); color: #111; font-size: 12px; font-weight: 800;
+  letter-spacing: .04em; text-decoration: none; padding: 10px 20px;
+  border-radius: 10px; margin-left: 8px; white-space: nowrap;
+  transition: opacity .15s;
+}
+.nav-cta:hover { opacity: .9; }
+.nav-mobile-cta { display: none; }
+
+/* ══ HERO DESKTOP ══ */
+/* ГЕОМЕТРИЯ: из sudebny-prikaz-alimenty-v2 (padding, ширины, отступы, фото)  */
+/* ДИЗАЙН: цвета, шрифты, стили — из текущего лендинга страховки              */
+.hero-desktop { display: block; }
+.hero-mobile  { display: none; }
+
+#hero {
+  position: relative; width: 100%; min-height: 100vh;
+  overflow: hidden; background: #111;
+  display: flex; flex-direction: column; justify-content: flex-start;
+}
+
+/* Фото: та же геометрия что в референсе */
+.hero-bg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  object-fit: cover; object-position: right center; z-index: 0;
+  transform: translateX(50px) scale(1.21);
+  transform-origin: right center;
+}
+
+/* Градиент: тёмный (цвет страховки), геометрия остановки как в референсе */
+.hero-gradient {
+  position: absolute; inset: 0; z-index: 1;
+  background: linear-gradient(
+    to right,
+    rgba(14,14,14,1)    0%,
+    rgba(14,14,14,.97) 12%,
+    rgba(14,14,14,.88) 22%,
+    rgba(14,14,14,.64) 32%,
+    rgba(14,14,14,.28) 42%,
+    rgba(14,14,14,.06) 52%,
+    rgba(14,14,14,0)   58%
+  );
+  pointer-events: none;
+}
+
+/* Контент: padding из референса */
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 52px 0 0 44px;
+  display: flex; flex-direction: column; gap: 0;
+}
+
+/* Eyebrow: геометрия из референса (margin-bottom: 8px), цвет/стиль — страховка */
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,214,0,.14); border: 1px solid rgba(255,214,0,.4);
+  color: var(--yellow); font-size: 11px; font-weight: 700;
+  letter-spacing: .07em; text-transform: uppercase;
+  padding: 5px 12px; border-radius: 20px;
+  margin-bottom: 6px; width: fit-content;
+}
+
+/* H1: заходит на всю ширину левой половины */
+.hero-h1 {
+  max-width: 700px;
+  font-size: clamp(34px, 3.6vw, 54px);
+  font-weight: 900; line-height: 1.04; letter-spacing: -.03em;
+  color: #fff; margin-bottom: 6px;
+}
+.hero-h1 em {
+  display: inline; font-style: normal;
+  background: var(--yellow); color: #111;
+  padding: 2px 10px 5px; border-radius: 6px; line-height: 1.4;
+}
+
+/* Body: занимает ~половину экрана */
+.hero-body { max-width: 580px; display: flex; flex-direction: column; gap: 0; }
+
+.hero-sub {
+  font-size: 14px; color: rgba(255,255,255,.72); line-height: 1.55;
+  margin-bottom: 10px;
+}
+
+.instant-badge {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: rgba(255,214,0,.14); border: 1px solid rgba(255,214,0,.4);
+  color: var(--yellow); font-size: 12px; font-weight: 700;
+  padding: 5px 12px; border-radius: 20px;
+  margin-bottom: 6px; width: fit-content;
+}
+
+.badges-label {
+  font-size: 12px; font-weight: 600; color: rgba(255,255,255,.5);
+  margin-bottom: 6px; letter-spacing: .01em;
+}
+
+/* Карточки — шире, крупнее */
+.hero-badges { display: flex; flex-direction: column; gap: 5px; margin-bottom: 12px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: rgba(255,255,255,.10); border: 1px solid rgba(255,255,255,.18);
+  padding: 8px 16px; border-radius: 12px;
+  font-size: 14px; color: #fff; font-weight: 600; line-height: 1.4;
+  width: fit-content; max-width: 560px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+}
+.hero-badge-primary {
+  display: inline-flex; align-items: flex-start; gap: 14px;
+  background: rgba(255,255,255,.13);
+  border: 1.5px solid rgba(255,214,0,.35);
+  padding: 10px 16px; border-radius: 14px;
+  width: fit-content; max-width: 560px;
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+}
+.badge-primary-title {
+  font-size: 14px; font-weight: 900; color: #fff;
+  letter-spacing: .01em; line-height: 1.15;
+  display: block; margin-bottom: 3px; text-transform: uppercase;
+}
+.badge-primary-sub {
+  font-size: 12px; font-weight: 500; color: rgba(255,255,255,.7);
+  line-height: 1.4; display: block;
+}
+.check {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--yellow); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.check svg path { stroke: #111; }
+.check-lg {
+  width: 22px; height: 22px; border-radius: 50%;
+  background: var(--yellow); display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; margin-top: 2px;
+}
+.check-lg svg path { stroke: #111; }
+.check svg, .check-lg svg { display: block; }
+
+.hero-btn {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--yellow); color: #111;
+  font-size: 14px; font-weight: 900; letter-spacing: .05em; text-decoration: none;
+  height: 50px; border-radius: 25px;
+  width: 100%;
+  box-shadow: 0 6px 28px rgba(255,214,0,.4);
+  margin-bottom: 8px; cursor: pointer; border: none;
+  transition: transform .2s, box-shadow .2s;
+}
+.hero-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 36px rgba(255,214,0,.55); }
+
+.hero-trust { display: flex; gap: 16px; flex-wrap: wrap; padding-bottom: 20px; }
+.hero-trust-item { display: flex; align-items: center; gap: 5px; font-size: 11px; color: rgba(255,255,255,.5); font-weight: 500; }
+
+/* ══ MOBILE HERO ══ */
+/* ГЕОМЕТРИЯ: из sudebny-prikaz-alimenty-v2 | ДИЗАЙН: страховка */
+.nav-mobile-cta { display: none; }
+
+/* Фото: высота и object-position из референса */
+.m-photo {
+  width: 100%; height: 18svh;
+  object-fit: cover; object-position: center 18%;
+  display: block; flex-shrink: 0;
+  background: #1a1a1a;
+}
+
+.m-content {
+  padding: 16px 18px 0;
+  display: flex; flex-direction: column; flex: 1;
+  background: #fff;
+}
+
+.m-eyebrow {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,214,0,.12); border: 1px solid rgba(255,214,0,.4);
+  color: #b89500; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 20px;
+  margin-bottom: 11px; width: fit-content;
+}
+
+.m-h1 {
+  font-size: 26px; font-weight: 900;
+  line-height: 1.08; letter-spacing: -.025em;
+  color: var(--mob-ink); margin-bottom: 8px;
+}
+.m-h1 em {
+  display: inline; font-style: normal;
+  background: var(--yellow); color: #111;
+  padding: 0 5px 2px; border-radius: 4px;
+}
+
+.m-bridge {
+  font-size: 13px; color: var(--mob-ink-soft);
+  line-height: 1.5; margin-bottom: 6px; font-weight: 500;
+}
+
+.m-sub {
+  font-size: 13px; color: var(--mob-ink-soft);
+  line-height: 1.55; margin-bottom: 14px;
+}
+
+.m-cards { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
+.m-card {
+  display: flex; align-items: center; gap: 9px;
+  background: #F8F6F2; border: 1px solid rgba(26,18,8,.07);
+  border-radius: 9px; padding: 9px 12px;
+  font-size: 13px; font-weight: 500; color: var(--mob-ink);
+}
+.m-card-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--yellow-dark); flex-shrink: 0; }
+
+.m-btn {
+  display: flex; align-items: center; justify-content: center;
+  background: var(--yellow); color: #111;
+  font-size: 14px; font-weight: 900; letter-spacing: .04em;
+  text-decoration: none; border: none; cursor: pointer;
+  height: 52px; border-radius: 26px; width: 100%;
+  box-shadow: 0 4px 18px rgba(255,214,0,.3);
+  margin-bottom: 8px;
+  transition: opacity .15s;
+}
+.m-btn:active { opacity: .88; }
+
+.m-trust {
+  display: flex; gap: 14px; flex-wrap: wrap;
+  padding-bottom: 28px;
+}
+.m-trust-item {
+  display: flex; align-items: center; gap: 5px;
+  font-size: 11px; color: var(--mob-muted); font-weight: 500;
+}
+
+/* ══ RESPONSIVE SWITCH ══ */
+@media (max-width: 768px) {
+  nav {
+    position: fixed; padding: 0 16px; height: 52px;
+    background: rgba(20,20,20,.96);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,255,255,.07);
+  }
+  .nav-links { display: none; }
+  .nav-mobile-cta {
+    display: flex !important;
+    background: var(--yellow); color: #111; font-size: 11px; font-weight: 800;
+    letter-spacing: .03em; text-decoration: none;
+    padding: 8px 14px; border-radius: 10px; white-space: nowrap;
+  }
+  .hero-desktop { display: none !important; }
+  .hero-mobile {
+    display: flex !important;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: 52px;
+    background: #fff;
+  }
+}
+
+/* ══ ОБЩИЕ СЕКЦИИ ══ */
+.section { padding: 56px 40px 60px; }
+.section-paper { background: var(--paper); }
+.section-white { background: #fff; }
+.section-dark  { background: #141414; }
+.s-wrap { max-width: 1160px; margin: 0 auto; }
+.s-kicker {
+  font-size: 11px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase;
+  color: #9E8E78; margin-bottom: 8px;
+}
+.s-title {
+  font-size: clamp(26px, 2.6vw, 38px); font-weight: 900;
+  line-height: 1.06; letter-spacing: -.03em;
+  color: var(--ink); margin-bottom: 10px;
+}
+.s-title em { color: var(--yellow-dark); font-style: normal; }
+.s-sub {
+  font-size: 15px; line-height: 1.55; color: #5A4E3A;
+  margin-bottom: 32px; max-width: 680px;
+}
+
+/* ══ СИТУАЦИИ ══ */
+.sits-grid {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
+  margin-bottom: 32px;
+}
+.sit-card {
+  padding: 20px 22px; border-radius: 18px;
+  border: 1px solid rgba(26,18,8,.08);
+  background: #fff;
+  box-shadow: 0 8px 24px rgba(26,18,8,.04);
+}
+.sit-card:nth-child(1) { background: #F8F4EE; }
+.sit-card:nth-child(2) { background: #F3F8F5; }
+.sit-card:nth-child(3) { background: #F5F3F0; }
+.sit-ico { font-size: 28px; margin-bottom: 10px; }
+.sit-card h3 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 6px; line-height: 1.2; }
+.sit-card p  { font-size: 13px; color: #5A4E3A; line-height: 1.5; }
+
+.pros-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.pro-item { display: flex; align-items: flex-start; gap: 10px; }
+.pro-ico  { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+.pro-item p { font-size: 13px; color: var(--ink-soft); line-height: 1.55; }
+.pro-item strong { color: var(--ink); }
+
+/* ══ ЧТО ПРОВЕРЯЕМ ══ */
+.checks-grid {
+  display: grid; grid-template-columns: repeat(2,1fr); gap: 12px;
+}
+.check-card {
+  display: grid; grid-template-columns: 36px 1fr; gap: 14px;
+  align-items: start;
+  padding: 18px 20px; border-radius: 16px;
+  border: 1px solid rgba(26,18,8,.08);
+  box-shadow: 0 6px 20px rgba(26,18,8,.04);
+}
+.check-card:nth-child(odd)  { background: #FFF3E8; border-color: rgba(196,120,90,.2); }
+.check-card:nth-child(even) { background: #F1F8F4; border-color: rgba(76,175,130,.2); }
+.check-num {
+  width: 36px; height: 36px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px; flex-shrink: 0;
+}
+.check-card:nth-child(odd)  .check-num { background: #F8E9E1; color: #A85E43; }
+.check-card:nth-child(even) .check-num { background: #E6F3EA; color: #2E7D52; }
+.check-card h3 { font-size: 16px; font-weight: 800; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+.check-card p  { font-size: 12.5px; color: #5A4E3A; line-height: 1.48; }
+
+/* ══ КАК ПРОХОДИТ ══ */
+.steps-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 12px; }
+.step-card {
+  padding: 22px 20px; border-radius: 18px;
+  background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+}
+.step-n {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 32px; height: 32px; border-radius: 10px;
+  background: var(--yellow); color: #111;
+  font-size: 14px; font-weight: 900; margin-bottom: 12px;
+}
+.step-card h3 { font-size: 15px; font-weight: 800; color: #fff; margin-bottom: 6px; }
+.step-card p  { font-size: 13px; color: rgba(255,255,255,.6); line-height: 1.5; }
+
+/* ══ ДОКУМЕНТЫ ══ */
+.docs-list { display: grid; gap: 10px; max-width: 640px; }
+.doc-item {
+  display: flex; align-items: center; gap: 14px;
+  background: #fff; border: 1px solid rgba(26,18,8,.08);
+  border-radius: 13px; padding: 14px 18px;
+  font-size: 14px; color: var(--ink-soft); font-weight: 500;
+  box-shadow: 0 4px 14px rgba(26,18,8,.04);
+}
+.doc-ico { font-size: 22px; flex-shrink: 0; }
+.doc-note {
+  margin-top: 14px; padding: 12px 18px; border-radius: 13px;
+  background: var(--ink); color: #fff;
+  font-size: 13px; font-weight: 700; line-height: 1.45;
+  max-width: 640px;
+}
+.doc-note span { color: var(--yellow); }
+
+/* ══ КВИЗ ══ */
+.quiz-section { background: #fff; padding: 56px 0; border-top: 1px solid var(--line); }
+.quiz-wrap { max-width: 600px; margin: 0 auto; padding: 0 24px; }
+.quiz-heading { text-align: center; margin-bottom: 32px; }
+.quiz-heading h2 { font-size: clamp(22px,2.2vw,30px); font-weight: 900; letter-spacing: -.025em; color: var(--ink); margin-bottom: 8px; }
+.quiz-heading p  { font-size: 14px; color: var(--muted); }
+.quiz-card {
+  background: var(--paper); border: 1px solid var(--line);
+  border-radius: 24px; padding: 32px 28px;
+  box-shadow: 0 12px 40px rgba(26,18,8,.07);
+}
+.prog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.prog-label  { font-size: 12px; font-weight: 700; color: #8b6b27; letter-spacing: .06em; text-transform: uppercase; }
+.prog-fraction { font-size: 12px; color: var(--muted); }
+.prog-bar { height: 4px; background: #e5ddd2; border-radius: 4px; overflow: hidden; margin-bottom: 28px; }
+.prog-bar i { display: block; height: 100%; background: var(--yellow-dark); border-radius: 4px; transition: width .35s ease; }
+.step-q { display: none; } .step-q.active { display: block; }
+.step-q h3 { font-size: 20px; font-weight: 800; line-height: 1.2; letter-spacing: -.02em; margin: 0 0 20px; color: var(--ink); }
+.options { display: grid; gap: 9px; }
+.option {
+  border: 1.5px solid #ddd6ca; border-radius: 12px; padding: 13px 15px;
+  cursor: pointer; background: #fff; text-align: left;
+  font: inherit; font-size: 14px; color: var(--ink);
+  transition: border-color .12s, background .12s; width: 100%;
+}
+.option:hover, .option.selected { border-color: var(--yellow-dark); background: #FFFBEA; }
+.option:focus-visible { outline: 2px solid var(--yellow); outline-offset: 2px; }
+.quiz-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; min-height: 36px; }
+.back-btn { background: none; border: 0; color: var(--muted); cursor: pointer; font: inherit; font-size: 14px; padding: 6px 0; display: flex; align-items: center; gap: 4px; }
+
+/* ══ ОТЗЫВЫ ══ */
+.reviews-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 14px; }
+.review-card {
+  background: #fff; border: 1px solid rgba(26,18,8,.08);
+  border-radius: 18px; padding: 22px 20px;
+  box-shadow: 0 6px 20px rgba(26,18,8,.05);
+}
+.review-stars { font-size: 14px; color: var(--yellow-dark); margin-bottom: 10px; }
+.review-text  { font-size: 13px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 14px; font-style: italic; }
+.review-author { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+/* ══ FAQ ══ */
+.faq-list { display: grid; gap: 10px; max-width: 740px; margin: 0 auto; }
+.faq-item { background: #fff; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; }
+.faq-q {
+  width: 100%; text-align: left; padding: 16px 20px;
+  background: none; border: none; cursor: pointer; font: inherit;
+  font-size: 14px; font-weight: 700; color: var(--ink);
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  line-height: 1.4;
+}
+.faq-q:hover { background: var(--paper); }
+.faq-icon { font-size: 20px; color: var(--muted); transition: transform .25s; flex-shrink: 0; }
+.faq-a { display: none; padding: 0 20px 16px; font-size: 13px; color: #5A4E3A; line-height: 1.65; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-item.open .faq-a   { display: block; }
+
+/* ══ ФИНАЛЬНЫЙ CTA ══ */
+.final-section {
+  background: #141414; padding: 72px 40px; text-align: center;
+}
+.final-section h2 { font-size: clamp(26px,2.6vw,38px); font-weight: 900; color: #fff; letter-spacing: -.025em; margin-bottom: 12px; line-height: 1.1; }
+.final-section p  { font-size: 15px; color: rgba(255,255,255,.6); margin-bottom: 36px; line-height: 1.6; }
+.final-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--yellow); color: #111;
+  font-size: 15px; font-weight: 900; letter-spacing: .04em;
+  padding: 16px 44px; border-radius: 30px;
+  border: none; cursor: pointer; text-decoration: none;
+  box-shadow: 0 6px 28px rgba(255,214,0,.3);
+  margin-bottom: 20px;
+  transition: transform .2s, box-shadow .2s;
+}
+.final-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 36px rgba(255,214,0,.4); }
+.final-contacts {
+  display: flex; align-items: center; justify-content: center;
+  gap: 20px; flex-wrap: wrap;
+  font-size: 13px; color: rgba(255,255,255,.45);
+}
+.final-contacts a { color: rgba(255,255,255,.7); font-weight: 600; transition: color .15s; text-decoration: none; }
+.final-contacts a:hover { color: #fff; }
+
+/* ══ ФУТЕР ══ */
+footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,.07); background: #0e0e0e; }
+.foot { max-width: 1160px; margin: 0 auto; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.foot span, .foot a { font-size: 11px; color: rgba(255,255,255,.3); text-decoration: none; }
+.foot a:hover { color: rgba(255,255,255,.65); }
+
+/* ══ COOKIE ══ */
+#cookie-banner { display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 9999; background: #1a1a1a; border-top: 1px solid rgba(255,255,255,.1); padding: 14px 24px; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+#cookie-banner p { font-size: 13px; color: rgba(255,255,255,.55); margin: 0; max-width: 700px; }
+#cookie-banner a { color: var(--yellow); }
+#cookie-accept { background: var(--yellow); color: #111; border: none; border-radius: 999px; padding: 9px 22px; font-weight: 800; font-size: 12px; cursor: pointer; white-space: nowrap; }
+
+/* ══ АДАПТИВ СЕКЦИЙ ══ */
+@media (max-width: 900px) {
+  .sits-grid    { grid-template-columns: 1fr 1fr; }
+  .steps-grid   { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .section { padding: 40px 18px 44px; }
+  .sits-grid    { grid-template-columns: 1fr; }
+  .pros-row     { grid-template-columns: 1fr; }
+  .checks-grid  { grid-template-columns: 1fr; }
+  .steps-grid   { grid-template-columns: 1fr 1fr; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .faq-list     { padding: 0 18px; }
+  .final-section { padding: 48px 18px; }
+  footer { padding: 20px 18px; }
+  .s-title { font-size: 26px; }
+  .quiz-card { padding: 22px 16px; }
+}
+@media (max-width: 520px) {
+  .steps-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ NAV ════════════════════════════════════════════════════ -->
+<nav>
+  <a href="/" class="nav-logo-wrap">
+    <span class="nav-logo-icon">♡</span>
+    <div class="nav-logo-text">
+      <span class="nav-logo-name">По рекомендации</span>
+      <span class="nav-logo-sub">Юридические документы</span>
+    </div>
+  </a>
+  <div class="nav-links">
+    <a href="#how" class="nav-link">Как это работает</a>
+    <a href="#reviews" class="nav-link">Отзывы</a>
+    <a href="#faq" class="nav-link">Вопросы</a>
+    <a href="#quiz" class="nav-cta" id="desk-nav-cta">ПРОВЕРИТЬ БЕСПЛАТНО</a>
+  </div>
+  <a href="#quiz" class="nav-mobile-cta" id="mob-nav-cta">ПРОВЕРИТЬ БЕСПЛАТНО</a>
+</nav>
+
+<!-- ═══ DESKTOP HERO ═══════════════════════════════════════════ -->
+<section class="hero-desktop">
+  <div id="hero">
+    <img class="hero-bg" src="img/vozvrat-hero.png"
+         alt="Навязали страховку по кредиту?" loading="eager">
+    <div class="hero-gradient"></div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">❤️ Уже заплатили за страховку? Возможно, эти деньги ещё можно вернуть.</div>
+      <h1 class="hero-h1">Навязали страховку<br>по <em>кредиту?</em></h1>
+
+      <div class="hero-body">
+        <p class="hero-sub">Или другие дополнительные услуги при оформлении кредита?<br><br>Пришлите документы — бесплатно проверим договор и скажем, что именно можно вернуть в вашем случае.</p>
+
+        <a href="#quiz" class="hero-btn" id="desk-hero-cta">ПРОВЕРИТЬ БЕСПЛАТНО</a>
+
+        <div class="hero-trust">
+          <span class="hero-trust-item">🔒 Без регистрации</span>
+          <span class="hero-trust-item">⚡ Без оплаты</span>
+          <span class="hero-trust-item">💬 Ответим в течение дня</span>
+        </div>
+
+        <span class="instant-badge">✅ Бесплатная проверка документов</span>
+        <p class="badges-label">Что мы проверим:</p>
+        <div class="hero-badges">
+          <div class="hero-badge-primary">
+            <span class="check-lg"><svg width="11" height="9" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span>
+              <span class="badge-primary-title">Что именно можно вернуть</span>
+              <span class="badge-primary-sub">По вашему договору и дополнительным услугам</span>
+            </span>
+          </div>
+          <div class="hero-badge">
+            <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong style="display:block;font-size:13px">Сколько примерно можно вернуть</strong><span style="font-size:11px;opacity:.75;font-weight:400">Оценим возможную сумму возврата</span></span>
+          </div>
+          <div class="hero-badge">
+            <span class="check"><svg width="10" height="8" viewBox="0 0 10 8" fill="none"><path d="M1 4L3.8 7L9 1" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong style="display:block;font-size:13px">Есть ли смысл начинать возврат</strong><span style="font-size:11px;opacity:.75;font-weight:400">Честно скажем, если шансов практически нет</span></span>
+          </div>
+        </div>
+
+        <div style="margin-bottom:8px;padding:10px 14px;border-radius:10px;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);font-size:12px;color:rgba(255,255,255,.6);line-height:1.7;width:fit-content;max-width:560px">
+          <span style="font-weight:600;color:rgba(255,255,255,.75)">Также проверяем:</span>
+          GAP · карты помощи на дороге · юридические услуги · телемедицину · сертификаты · другие дополнительные услуги
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ MOBILE HERO ═════════════════════════════════════════════ -->
+<section class="hero-mobile" style="display:none;">
+
+  <img class="m-photo" src="img/vozvrat-hero-mobile.png"
+       alt="Навязали страховку по кредиту?" loading="eager">
+
+  <div class="m-content">
+
+    <div class="m-eyebrow">❤️ Возможно, эти деньги ещё можно вернуть</div>
+
+    <h1 class="m-h1">Навязали страховку<br>по <em>кредиту?</em></h1>
+
+    <p class="m-sub">Пришлите документы — бесплатно скажем, можно ли вернуть деньги именно в вашем случае.</p>
+
+    <a href="#quiz" class="m-btn" id="mob-hero-cta"
+       onclick="if(typeof ym!=='undefined') ym(110730303,'reachGoal','cta_click')">
+      ПРОВЕРИТЬ БЕСПЛАТНО
+    </a>
+    <p class="m-btn-sub">Без оплаты · Без регистрации · Ответим в течение дня</p>
+
+    <div class="m-trust">
+      <span class="m-trust-item">🔒 Конфиденциально</span>
+      <span class="m-trust-item">⚡ Без обязательств</span>
+      <span class="m-trust-item">💬 Онлайн по России</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ УЗНАЁТЕ СИТУАЦИЮ ════════════════════════════════════════ -->
+<section class="section section-paper" id="situations">
+  <div class="s-wrap">
+    <div class="s-kicker">Узнаёте себя?</div>
+    <h2 class="s-title">Когда берёшь кредит, страховку часто <em>включают автоматически</em></h2>
+    <p class="s-sub">Даже если кредит давно оформлен — в некоторых случаях деньги всё ещё можно вернуть.</p>
+    <div class="sits-grid">
+      <div class="sit-card">
+        <div class="sit-ico">😤</div>
+        <h3>«Сказали, без страховки не одобрят»</h3>
+        <p>Менеджер настоял. Вы согласились. Теперь хочется разобраться — можно ли это исправить.</p>
+      </div>
+      <div class="sit-card">
+        <div class="sit-ico">👀</div>
+        <h3>«Не заметил(а) галочку»</h3>
+        <p>Страховка уже была включена в договор. Узнали об этом, когда пришёл первый большой платёж.</p>
+      </div>
+      <div class="sit-card">
+        <div class="sit-ico">💸</div>
+        <h3>«Страховка стоила десятки тысяч»</h3>
+        <p>Сумма немаленькая. Хочется понять — реально ли вернуть хоть что-то.</p>
+      </div>
+    </div>
+    <div class="pros-row">
+      <div class="pro-item"><div class="pro-ico">✅</div><p><strong>Бесплатная проверка</strong> — скажем, что реально возможно в вашей ситуации</p></div>
+      <div class="pro-item"><div class="pro-ico">🤝</div><p><strong>Без давления</strong> — никаких договоров до того, как вы сами решите действовать</p></div>
+      <div class="pro-item"><div class="pro-ico">🔒</div><p><strong>Конфиденциально</strong> — ваши данные не передаём третьим лицам</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ЧТО ПРОВЕРЯЕМ ═══════════════════════════════════════════ -->
+<section class="section section-white" id="how">
+  <div class="s-wrap">
+    <div class="s-kicker">Что вы узнаете</div>
+    <h2 class="s-title">Пришлёте документы — ответим на четыре конкретных вопроса</h2>
+    <p class="s-sub">Никаких общих слов. Смотрим именно ваш договор.</p>
+    <div class="checks-grid">
+      <div class="check-card">
+        <div class="check-num">1</div>
+        <div>
+          <h3>Можно ли вернуть деньги</h3>
+          <p>В вашем конкретном случае — с вашим банком и типом страховки</p>
+        </div>
+      </div>
+      <div class="check-card">
+        <div class="check-num">2</div>
+        <div>
+          <h3>Сколько примерно можно вернуть</h3>
+          <p>Хотя бы порядок суммы — чтобы понять, стоит ли заниматься</p>
+        </div>
+      </div>
+      <div class="check-card">
+        <div class="check-num">3</div>
+        <div>
+          <h3>Повлияет ли отказ на кредит</h3>
+          <p>Изменится ли ставка — это главный страх, и его мы проверяем первым</p>
+        </div>
+      </div>
+      <div class="check-card">
+        <div class="check-num">4</div>
+        <div>
+          <h3>Какие варианты есть именно у вас</h3>
+          <p>С чего начать, если возврат возможен</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ КАК ПРОХОДИТ ПРОВЕРКА ═══════════════════════════════════ -->
+<section class="section section-dark">
+  <div class="s-wrap">
+    <div class="s-kicker" style="color:rgba(255,255,255,.4)">Как это работает</div>
+    <h2 class="s-title" style="color:#fff;margin-bottom:10px">Четыре шага. Всё онлайн.</h2>
+    <p class="s-sub" style="color:rgba(255,255,255,.5);margin-bottom:32px">Без визита в офис и без долгого ожидания.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-n">1</div>
+        <h3>Ответьте на вопросы</h3>
+        <p>Короткий квиз ниже — 2–3 минуты, без лишнего</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">2</div>
+        <h3>Напишите нам</h3>
+        <p>В Telegram или MAX — прикрепите кредитный договор и полис</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">3</div>
+        <h3>Мы проверяем</h3>
+        <p>Смотрим документы и готовим ответ в течение дня</p>
+      </div>
+      <div class="step-card">
+        <div class="step-n">4</div>
+        <h3>Вы узнаёте</h3>
+        <p>Есть смысл действовать — или нет. Честно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ДОКУМЕНТЫ ═══════════════════════════════════════════════ -->
+<section class="section section-paper">
+  <div class="s-wrap">
+    <div class="s-kicker">Что нужно прислать</div>
+    <h2 class="s-title">Скорее всего, всё уже есть на вашем телефоне</h2>
+    <p class="s-sub">Или в приложении банка — достаточно сделать скриншот.</p>
+    <div class="docs-list">
+      <div class="doc-item"><div class="doc-ico">📄</div>Кредитный договор — или скриншот из приложения банка</div>
+      <div class="doc-item"><div class="doc-ico">🛡️</div>Договор страхования или полис (если есть отдельно)</div>
+    </div>
+    <div class="doc-note">Нет документов под рукой? <span>Напишите — подскажем, где их получить.</span></div>
+  </div>
+</section>
+
+<!-- ═══ КВИЗ ══════════════════════════════════════════════════ -->
+<section class="quiz-section" id="quiz">
+  <div class="quiz-wrap">
+    <div class="quiz-heading">
+      <h2>Ответьте на 4 вопроса</h2>
+      <p>Займёт 2 минуты. Паспортные данные не нужны.</p>
+    </div>
+    <div class="quiz-card" id="quiz-card">
+      <div class="prog-header">
+        <span class="prog-label" id="prog-label">Шаг 1 из 4</span>
+        <span class="prog-fraction" id="prog-fraction">1 / 4</span>
+      </div>
+      <div class="prog-bar"><i id="vsBar" style="width:25%"></i></div>
+
+      <input type="hidden" id="vsWhen">
+      <input type="hidden" id="vsSum">
+      <input type="hidden" id="vsDoc">
+      <input type="hidden" id="vsGoal">
+
+      <!-- Шаг 1 -->
+      <div class="step-q active" data-step="1">
+        <h3>Когда вы оформили кредит со страховкой?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="vsWhen" data-val="Менее 14 дней назад">Менее 14 дней назад</button>
+          <button type="button" class="option" data-field="vsWhen" data-val="От 14 дней до 1 года назад">От 14 дней до 1 года назад</button>
+          <button type="button" class="option" data-field="vsWhen" data-val="От 1 до 3 лет назад">От 1 до 3 лет назад</button>
+          <button type="button" class="option" data-field="vsWhen" data-val="Более 3 лет назад">Более 3 лет назад</button>
+          <button type="button" class="option" data-field="vsWhen" data-val="Не помню точно">Не помню точно</button>
+        </div>
+        <div class="quiz-nav"><span></span></div>
+      </div>
+
+      <!-- Шаг 2 -->
+      <div class="step-q" data-step="2">
+        <h3>Примерно сколько стоила страховка?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="vsSum" data-val="До 20 000 ₽">До 20 000 ₽</button>
+          <button type="button" class="option" data-field="vsSum" data-val="20 000 — 60 000 ₽">20 000 — 60 000 ₽</button>
+          <button type="button" class="option" data-field="vsSum" data-val="60 000 — 100 000 ₽">60 000 — 100 000 ₽</button>
+          <button type="button" class="option" data-field="vsSum" data-val="Более 100 000 ₽">Более 100 000 ₽</button>
+          <button type="button" class="option" data-field="vsSum" data-val="Не знаю">Не знаю / не помню</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Шаг 3 -->
+      <div class="step-q" data-step="3">
+        <h3>Есть ли у вас кредитный договор или доступ к нему в приложении?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="vsDoc" data-val="Да, договор есть">Да, договор есть или доступен в приложении</button>
+          <button type="button" class="option" data-field="vsDoc" data-val="Есть частично">Частично — есть полис или часть документов</button>
+          <button type="button" class="option" data-field="vsDoc" data-val="Нет, нужна помощь">Нет, не знаю где взять</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Шаг 4 -->
+      <div class="step-q" data-step="4">
+        <h3>Что для вас важнее узнать в первую очередь?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="vsGoal" data-val="Реально ли вернуть">Реально ли вообще вернуть деньги</button>
+          <button type="button" class="option" data-field="vsGoal" data-val="Не поднимет ли банк ставку">Не поднимет ли банк ставку при отказе</button>
+          <button type="button" class="option" data-field="vsGoal" data-val="Сколько можно вернуть">Сколько примерно можно вернуть</button>
+          <button type="button" class="option" data-field="vsGoal" data-val="С чего начать">С чего начать и что делать</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Шаг 5 — форма -->
+      <div class="step-q" data-step="5">
+        <div id="vs-form-header">
+          <h3>Почти готово!</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6">Оставьте имя и телефон — я найду вашу заявку, когда вы напишете в мессенджере.</p>
+        </div>
+        <div id="vs-contact-form">
+          <input type="text" name="website" id="vs-honeypot" tabindex="-1" autocomplete="off"
+            style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
+          <div style="display:grid;gap:12px;margin-bottom:16px">
+            <div>
+              <label for="vs-name" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px">Ваше имя *</label>
+              <input type="text" id="vs-name" name="name" autocomplete="given-name" maxlength="100" required
+                placeholder="Как вас зовут?"
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box">
+            </div>
+            <div>
+              <label for="vs-phone" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px">Номер телефона *</label>
+              <input type="tel" id="vs-phone" name="contact" autocomplete="tel" maxlength="18" required
+                placeholder="+7 (___) ___-__-__"
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box">
+            </div>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px">
+            <input type="checkbox" id="vs-consent"
+              style="margin-top:3px;accent-color:var(--yellow-dark);width:16px;height:16px;flex-shrink:0;cursor:pointer">
+            <label for="vs-consent" style="font-size:12px;color:var(--muted);line-height:1.55;cursor:pointer">
+              Я соглашаюсь с <a href="/privacy-policy.html" target="_blank" style="color:var(--yellow-dark)">Политикой конфиденциальности</a>,
+              даю <a href="/consent-personal-data.html" target="_blank" style="color:var(--yellow-dark)">согласие на обработку персональных данных</a>
+              и принимаю условия <a href="/offer.html" target="_blank" style="color:var(--yellow-dark)">публичной оферты</a>.
+            </label>
+          </div>
+          <div id="vs-form-error" style="display:none;background:#fee;border:1px solid #fcc;border-radius:10px;padding:10px 14px;font-size:13px;color:#c00;margin-bottom:12px"></div>
+          <button type="button" id="vs-submit-btn"
+            style="width:100%;min-height:50px;background:var(--yellow);color:#111;border:none;border-radius:12px;font:800 15px/1 inherit;cursor:pointer;transition:opacity .15s;">
+            Отправить заявку
+          </button>
+          <p style="font-size:11px;color:var(--muted);text-align:center;margin:10px 0 0;line-height:1.5">Данные передаются защищённо. Ответим в течение рабочего дня.</p>
+        </div>
+        <!-- Успех -->
+        <div id="vs-success-screen" style="display:none;text-align:center;padding:8px 0">
+          <div style="font-size:40px;margin-bottom:16px">✅</div>
+          <h3 style="font-size:22px;font-weight:800;color:var(--ink);margin:0 0 12px;line-height:1.3;letter-spacing:-.02em">Напишите мне, чтобы прислать документы</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6">Заявку я уже получила. Выберите мессенджер — я найду вас по номеру телефона.</p>
+          <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 16px">
+            <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:700 14px/1 inherit;text-decoration:none">
+              ✈️ Написать в Telegram
+            </a>
+            <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:700 14px/1 inherit;text-decoration:none">
+              ✉️ Написать в MAX
+            </a>
+          </div>
+          <p style="font-size:12px;color:var(--muted);line-height:1.6">Прикрепите кредитный договор и полис страхования — или напишите, что документов пока нет.</p>
+        </div>
+        <div class="quiz-nav" style="margin-top:16px">
+          <button type="button" class="back-btn" id="vs-back-from-form">← Назад</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ОТЗЫВЫ ═══════════════════════════════════════════════ -->
+<section class="section section-paper" id="reviews">
+  <div class="s-wrap">
+    <div class="s-kicker">Отзывы</div>
+    <h2 class="s-title">Что говорят те, кто уже обратился</h2>
+    <p class="s-sub" style="margin-bottom:28px">Имена изменены по просьбе.</p>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Думала, срок давно вышел. Оказалось, ещё нет. Объяснили всё по-человечески. Вернула 18 000 ₽.»</p>
+        <div class="review-author">Марина, Екатеринбург</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Боялся, что банк поднимет ставку. Проверили договор и объяснили, что в моём случае этого не будет.»</p>
+        <div class="review-author">Алексей, Новосибирск</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">«Написала — разобрали всё за один день. Страховка была 54 000 ₽, оказалось, можно попробовать вернуть часть.»</p>
+        <div class="review-author">Светлана, Самара</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FAQ ══════════════════════════════════════════════════ -->
+<section class="section section-white" id="faq">
+  <div class="s-wrap" style="text-align:center">
+    <div class="s-kicker">Частые вопросы</div>
+    <h2 class="s-title" style="margin-bottom:28px">Отвечаем честно</h2>
+  </div>
+  <div class="faq-list">
+    <div class="faq-item">
+      <button class="faq-q">Это правда бесплатно? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Да. Проверка документов и ответ — бесплатно. Если потом понадобится помощь с оформлением — скажем об этом отдельно, и это будет только ваше решение.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Банк узнает, что я консультировался? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Нет. Мы просто смотрим ваши документы. Никаких запросов в банк не делаем.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Если откажусь от страховки — поднимут ли ставку по кредиту? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Зависит от конкретного договора. Это один из первых вопросов, который мы проверяем по вашим документам. Именно поэтому важно смотреть именно ваш договор, а не давать общий ответ.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Прошло уже больше года — можно что-то сделать? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Иногда да, иногда нет. Срок зависит от типа страховки, даты оформления и условий договора. Пришлите документы — разберёмся конкретно.</div>
+    </div>
+    <div class="faq-item">
+      <button class="faq-q">Я не разбираюсь в юридических вопросах — это проблема? <span class="faq-icon">+</span></button>
+      <div class="faq-a">Нет. Мы разбираемся вместо вас и объясняем на понятном языке.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ФИНАЛЬНЫЙ CTA ════════════════════════════════════════ -->
+<section class="final-section" id="free">
+  <h2>Пришлите документы — бесплатно скажем, есть ли смысл</h2>
+  <p>Это займёт 2 минуты. Никаких обязательств — просто честный ответ.</p>
+  <a href="#quiz" class="final-btn" id="final-cta-btn">ПРОВЕРИТЬ БЕСПЛАТНО →</a>
+  <div class="final-contacts">
+    <span>Или напишите напрямую:</span>
+    <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener">✈️ Telegram</a>
+    <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener">✉️ MAX</a>
+  </div>
+</section>
+
+<!-- ═══ ФУТЕР ═════════════════════════════════════════════════ -->
+<footer>
+  <div class="foot">
+    <span>© 2025 «По рекомендации» · Самозанятая Лихачева А.А. · ИНН 665100837011</span>
+    <span>РКН: 66-26-087909</span>
+    <span>
+      <a href="/offer.html">Оферта</a> ·
+      <a href="/privacy-policy.html">Конфиденциальность</a> ·
+      <a href="/consent-personal-data.html">Согласие на ПД</a>
+    </span>
+  </div>
+</footer>
+
+<!-- ═══ COOKIE ════════════════════════════════════════════════ -->
+<div id="cookie-banner">
+  <p>Мы используем cookies. <a href="/privacy-policy.html">Подробнее</a></p>
+  <button id="cookie-accept">Понятно</button>
+</div>
+
+<script>
+// ══ АНАЛИТИКА ════════════════════════════════════════════════
+function ymGoal(goal, params) {
+  try { if (typeof ym === 'function') { params ? ym(110730303,'reachGoal',goal,params) : ym(110730303,'reachGoal',goal); } } catch(e){}
+}
+
+// ══ UTM ══════════════════════════════════════════════════════
+function collectUtm() {
+  var p = new URLSearchParams(window.location.search);
+  return { utm_source: p.get('utm_source')||'', utm_medium: p.get('utm_medium')||'', utm_campaign: p.get('utm_campaign')||'', utm_content: p.get('utm_content')||'', utm_term: p.get('utm_term')||'' };
+}
+
+// ══ КВИЗ ═════════════════════════════════════════════════════
+var TOTAL = 4, cur = 1, answers = {}, started = false, done = false, sending = false;
+
+function showStep(n) {
+  document.querySelectorAll('.step-q').forEach(function(s){ s.classList.remove('active'); s.setAttribute('aria-hidden','true'); });
+  var t = document.querySelector('.step-q[data-step="'+n+'"]');
+  if (t) {
+    t.classList.add('active'); t.removeAttribute('aria-hidden');
+    t.querySelectorAll('.option').forEach(function(b){ b.classList.toggle('selected', b.dataset.field && answers[b.dataset.field]===b.dataset.val); });
+  }
+  cur = n;
+  var fin = n > TOTAL;
+  var pct = fin ? 100 : Math.round(n/TOTAL*100);
+  document.getElementById('vsBar').style.width = pct+'%';
+  document.getElementById('prog-label').textContent = fin ? 'Готово!' : 'Шаг '+n+' из '+TOTAL;
+  document.getElementById('prog-fraction').textContent = fin ? '✓' : n+' / '+TOTAL;
+  if (fin && !done) done = true;
+  if (!fin) ymGoal('quiz_step_view', {step:n});
+  var card = document.getElementById('quiz-card');
+  if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
+  if (t) { var f = t.querySelector('.option, input, .back-btn, button'); if (f) setTimeout(function(){ f.focus(); },50); }
+}
+
+document.querySelectorAll('.option').forEach(function(btn){
+  btn.addEventListener('click', function(){
+    if (!started){ started = true; ymGoal('quiz_start'); }
+    answers[btn.dataset.field] = btn.dataset.val;
+    var el = document.getElementById(btn.dataset.field); if(el) el.value = btn.dataset.val;
+    btn.closest('.options').querySelectorAll('.option').forEach(function(x){ x.classList.remove('selected'); });
+    btn.classList.add('selected');
+    ymGoal('quiz_answer', {step:cur});
+    setTimeout(function(){ showStep(cur+1); }, 200);
+  });
+});
+
+document.querySelectorAll('.back-btn').forEach(function(b){
+  if (b.id==='vs-back-from-form') return;
+  b.addEventListener('click', function(){ ymGoal('quiz_back',{step:cur}); showStep(Math.max(1,cur-1)); });
+});
+
+var bff = document.getElementById('vs-back-from-form');
+if (bff) bff.addEventListener('click', function(){
+  var ss = document.getElementById('vs-success-screen');
+  var cf = document.getElementById('vs-contact-form');
+  if (ss && ss.style.display!=='none'){ ss.style.display='none'; if(cf) cf.style.display=''; return; }
+  showStep(Math.max(1,cur-1));
+});
+
+// CTA → квиз
+['desk-nav-cta','mob-nav-cta','desk-hero-cta','mob-hero-cta','final-cta-btn'].forEach(function(id){
+  var el = document.getElementById(id);
+  if (el) el.addEventListener('click', function(e){ e.preventDefault(); ymGoal('cta_click'); document.getElementById('quiz').scrollIntoView({behavior:'smooth'}); });
+});
+
+// ══ ОТПРАВКА ═════════════════════════════════════════════════
+function showErr(msg){ var e=document.getElementById('vs-form-error'); if(e){e.textContent=msg;e.style.display='block';} }
+
+var sb = document.getElementById('vs-submit-btn');
+if (sb) sb.addEventListener('click', function(){
+  if (sending) return;
+  var name = document.getElementById('vs-name').value.trim();
+  var phone = document.getElementById('vs-phone').value.trim();
+  var consent = document.getElementById('vs-consent').checked;
+  var hp = document.getElementById('vs-honeypot').value;
+  var errEl = document.getElementById('vs-form-error'); if(errEl) errEl.style.display='none';
+  if (!name){ showErr('Введите имя'); document.getElementById('vs-name').focus(); return; }
+  if (!phone||phone.length<10){ showErr('Введите корректный номер'); document.getElementById('vs-phone').focus(); return; }
+  if (!consent){ showErr('Необходимо согласие на обработку данных'); return; }
+  sending=true; sb.disabled=true; sb.textContent='Отправляем...';
+  var payload = Object.assign({}, collectUtm(), { form_type:'vozvrat_strahovki', name:name, contact:phone, q_when:answers['vsWhen']||'', q_sum:answers['vsSum']||'', q_doc:answers['vsDoc']||'', q_goal:answers['vsGoal']||'', consent:true, website:hp, submitted_at:new Date().toISOString() });
+  fetch('https://formspree.io/f/xpqekrvz', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
+  .then(function(r){ return r.json(); })
+  .then(function(d){
+    sending=false; sb.disabled=false; sb.textContent='Отправить заявку';
+    if (d && d.ok){
+      ymGoal('quiz_complete'); ymGoal('lead_sent');
+      document.getElementById('vs-contact-form').style.display='none';
+      document.getElementById('vs-form-header').style.display='none';
+      document.getElementById('vs-success-screen').style.display='';
+      document.getElementById('vs-back-from-form').style.display='none';
+    } else { showErr('Не удалось отправить. Напишите напрямую: t.me/a_likhacheva2026'); }
+  })
+  .catch(function(){ sending=false; sb.disabled=false; sb.textContent='Отправить заявку'; showErr('Ошибка соединения. Напишите: t.me/a_likhacheva2026'); });
+});
+
+// ══ FAQ ══════════════════════════════════════════════════════
+document.querySelectorAll('.faq-item').forEach(function(i){ i.querySelector('.faq-q').addEventListener('click', function(){ i.classList.toggle('open'); }); });
+
+// ══ COOKIE ═══════════════════════════════════════════════════
+(function(){
+  if (!localStorage.getItem('cookie_consent')){ var b=document.getElementById('cookie-banner'); if(b) b.style.display='flex'; }
+  var btn=document.getElementById('cookie-accept');
+  if(btn) btn.addEventListener('click',function(){ localStorage.setItem('cookie_consent','1'); document.getElementById('cookie-banner').style.display='none'; });
+})();
+</script>
+</body>
+</html>
