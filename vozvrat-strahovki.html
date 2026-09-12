@@ -860,10 +860,12 @@ footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,.07); backgr
           <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6">Заявку я уже получила. Выберите мессенджер — я найду вас по номеру телефона.</p>
           <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 16px">
             <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+              onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:700 14px/1 inherit;text-decoration:none">
               ✈️ Написать в Telegram
             </a>
             <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+              onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:700 14px/1 inherit;text-decoration:none">
               ✉️ Написать в MAX
             </a>
@@ -941,8 +943,8 @@ footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,.07); backgr
   <a href="#quiz" class="final-btn" id="final-cta-btn">ПРОВЕРИТЬ БЕСПЛАТНО →</a>
   <div class="final-contacts">
     <span>Или напишите напрямую:</span>
-    <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener">✈️ Telegram</a>
-    <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener">✉️ MAX</a>
+    <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener" onclick="ymGoal('messenger_click')">✈️ Telegram</a>
+    <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener" onclick="ymGoal('messenger_click')">✉️ MAX</a>
   </div>
 </section>
 
@@ -1052,7 +1054,7 @@ if (sb) sb.addEventListener('click', function(){
   .then(function(d){
     sending=false; sb.disabled=false; sb.textContent='Отправить заявку';
     if (d && d.ok){
-      ymGoal('quiz_complete'); ymGoal('lead_sent');
+      ymGoal('quiz_complete'); ymGoal('lead');
       document.getElementById('vs-contact-form').style.display='none';
       document.getElementById('vs-form-header').style.display='none';
       document.getElementById('vs-success-screen').style.display='';
