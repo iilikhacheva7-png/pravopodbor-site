@@ -856,8 +856,8 @@ footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,.07); backgr
         <!-- Успех -->
         <div id="vs-success-screen" style="display:none;text-align:center;padding:8px 0">
           <div style="font-size:40px;margin-bottom:16px">✅</div>
-          <h3 style="font-size:22px;font-weight:800;color:var(--ink);margin:0 0 12px;line-height:1.3;letter-spacing:-.02em">Напишите мне, чтобы прислать документы</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6">Заявку я уже получила. Выберите мессенджер — я найду вас по номеру телефона.</p>
+          <h3 style="font-size:22px;font-weight:800;color:var(--ink);margin:0 0 12px;line-height:1.3;letter-spacing:-.02em">Напишите мне — и я сразу начну проверку</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6">Заявка получена. Теперь напишите мне в любой мессенджер — без этого я не смогу начать проверку ваших документов. Это займёт 10 секунд.</p>
           <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 16px">
             <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
@@ -993,9 +993,15 @@ function showStep(n) {
   var fin = n > TOTAL;
   var pct = fin ? 100 : Math.round(n/TOTAL*100);
   document.getElementById('vsBar').style.width = pct+'%';
-  document.getElementById('prog-label').textContent = fin ? 'Готово!' : 'Шаг '+n+' из '+TOTAL;
+  document.getElementById('prog-label').textContent = fin ? 'ПОЧТИ ГОТОВО!' : 'Шаг '+n+' из '+TOTAL;
   document.getElementById('prog-fraction').textContent = fin ? '✓' : n+' / '+TOTAL;
-  if (fin && !done) done = true;
+  if (fin && !done) {
+    done = true;
+    var qh = document.querySelector('.quiz-heading h2');
+    var qp = document.querySelector('.quiz-heading p');
+    if (qh) qh.textContent = 'Осталось одно — напишите мне в мессенджер';
+    if (qp) qp.textContent = 'Это займёт 30 секунд — и я сразу начну проверку';
+  }
   if (!fin) ymGoal('quiz_step_view', {step:n});
   var card = document.getElementById('quiz-card');
   if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
