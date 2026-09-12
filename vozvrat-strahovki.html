@@ -1040,34 +1040,69 @@ if (bff) bff.addEventListener('click', function(){
 });
 
 // ══ ОТПРАВКА ═════════════════════════════════════════════════
+var CF_ENDPOINT = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
+
 function showErr(msg){ var e=document.getElementById('vs-form-error'); if(e){e.textContent=msg;e.style.display='block';} }
+function hideErr(){ var e=document.getElementById('vs-form-error'); if(e) e.style.display='none'; }
 
 var sb = document.getElementById('vs-submit-btn');
 if (sb) sb.addEventListener('click', function(){
   if (sending) return;
-  var name = document.getElementById('vs-name').value.trim();
-  var phone = document.getElementById('vs-phone').value.trim();
-  var consent = document.getElementById('vs-consent').checked;
-  var hp = document.getElementById('vs-honeypot').value;
-  var errEl = document.getElementById('vs-form-error'); if(errEl) errEl.style.display='none';
-  if (!name){ showErr('Введите имя'); document.getElementById('vs-name').focus(); return; }
-  if (!phone||phone.length<10){ showErr('Введите корректный номер'); document.getElementById('vs-phone').focus(); return; }
-  if (!consent){ showErr('Необходимо согласие на обработку данных'); return; }
-  sending=true; sb.disabled=true; sb.textContent='Отправляем...';
-  var payload = Object.assign({}, collectUtm(), { form_type:'vozvrat_strahovki', name:name, contact:phone, q_when:answers['vsWhen']||'', q_sum:answers['vsSum']||'', q_doc:answers['vsDoc']||'', q_goal:answers['vsGoal']||'', consent:true, website:hp, submitted_at:new Date().toISOString() });
-  fetch('https://formspree.io/f/xpqekrvz', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) })
-  .then(function(r){ return r.json(); })
-  .then(function(d){
-    sending=false; sb.disabled=false; sb.textContent='Отправить заявку';
-    if (d && d.ok){
-      ymGoal('quiz_complete'); ymGoal('lead');
-      document.getElementById('vs-contact-form').style.display='none';
-      document.getElementById('vs-form-header').style.display='none';
-      document.getElementById('vs-success-screen').style.display='';
-      document.getElementById('vs-back-from-form').style.display='none';
-    } else { showErr('Не удалось отправить. Напишите напрямую: t.me/a_likhacheva2026'); }
+  hideErr();
+  var name    = (document.getElementById('vs-name') || {}).value || '';
+  var phone   = (document.getElementById('vs-phone') || {}).value || '';
+  var consent = (document.getElementById('vs-consent') || {}).checked;
+  var hp      = (document.getElementById('vs-honeypot') || {}).value || '';
+
+  name = name.trim();
+  var normalizedPhone = phone.replace(/\D/g,'');
+  if (normalizedPhone.length === 11 && normalizedPhone[0] === '8') normalizedPhone = '7' + normalizedPhone.slice(1);
+
+  if (!name)                     { showErr('Введите имя'); document.getElementById('vs-name').focus(); return; }
+  if (normalizedPhone.length < 11){ showErr('Введите корректный номер телефона'); document.getElementById('vs-phone').focus(); return; }
+  if (!consent)                  { showErr('Необходимо согласие на обработку данных'); return; }
+
+  sending = true; sb.disabled = true; sb.textContent = 'Отправляем...';
+
+  var payload = {
+    topic:       'Возврат страховки по кредиту',
+    source_page: '/vozvrat-strahovki.html',
+    name:        name,
+    contact:     normalizedPhone,
+    answers: {
+      when: answers['vsWhen'] || '',
+      sum:  answers['vsSum']  || '',
+      doc:  answers['vsDoc']  || '',
+      goal: answers['vsGoal'] || ''
+    },
+    utm:          collectUtm(),
+    consent:      true,
+    website:      hp,
+    submitted_at: new Date().toISOString()
+  };
+
+  fetch(CF_ENDPOINT, {
+    method:  'POST',
+    headers: {'Content-Type': 'application/json'},
+    body:    JSON.stringify(payload)
   })
-  .catch(function(){ sending=false; sb.disabled=false; sb.textContent='Отправить заявку'; showErr('Ошибка соединения. Напишите: t.me/a_likhacheva2026'); });
+  .then(function(res){ return res.json(); })
+  .then(function(data){
+    sending = false; sb.disabled = false; sb.textContent = 'Отправить заявку';
+    if (data && data.ok) {
+      ymGoal('quiz_complete'); ymGoal('lead');
+      document.getElementById('vs-contact-form').style.display = 'none';
+      document.getElementById('vs-form-header').style.display  = 'none';
+      document.getElementById('vs-success-screen').style.display = '';
+      document.getElementById('vs-back-from-form').style.display = 'none';
+    } else {
+      showErr('Не удалось отправить заявку. Попробуйте ещё раз или напишите напрямую в Telegram.');
+    }
+  })
+  .catch(function(){
+    sending = false; sb.disabled = false; sb.textContent = 'Отправить заявку';
+    showErr('Ошибка соединения. Проверьте интернет и попробуйте ещё раз, или напишите напрямую: t.me/a_likhacheva2026');
+  });
 });
 
 // ══ МАСКА ТЕЛЕФОНА ═══════════════════════════════════════════
