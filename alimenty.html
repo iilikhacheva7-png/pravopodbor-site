@@ -373,14 +373,17 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;">Заявку я уже получила. Выберите удобный мессенджер и напишите мне — я найду вашу заявку по номеру телефона.</p>
           <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
             <a id="ss-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+              onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               ✉️ Написать в MAX
             </a>
             <a id="ss-telegram" href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+              onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               ✈️ Написать в Telegram
             </a>
             <a id="ss-whatsapp" href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener"
+              onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#25D366;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               💬 Написать в WhatsApp
             </a>
@@ -682,7 +685,7 @@ if (submitBtn) {
 
       if (data && data.ok) {
         ymGoal('quiz_complete');
-        ymGoal('lead_sent');
+        ymGoal('lead');
         // Показываем success-screen, скрываем форму и заголовок шага
         var cf = document.getElementById('al-contact-form');
         var fh = document.getElementById('al-form-header');
