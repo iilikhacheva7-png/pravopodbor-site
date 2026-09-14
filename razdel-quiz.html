@@ -1032,13 +1032,15 @@ function submitForm() {
   btn.textContent = 'Отправляем...';
   btn.disabled = true;
   const payload = {
-    topic:       'Раздел имущества',
-    source_page: '/razdel-quiz.html',
-    name:    answers['name'] || '',
-    contact: answers['phone'] || '',
-    answers: answers,
-    clarify: clarifyAnswers,
-    text:    buildEmailText()
+    topic:        'Раздел имущества',
+    source_page:  '/razdel-quiz.html',
+    name:         answers['name'] || '',
+    contact:      answers['phone'] || '',
+    answers:      { text: buildEmailText() },
+    utm:          (function(){ var p=new URLSearchParams(window.location.search); return {utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'',utm_content:p.get('utm_content')||'',utm_term:p.get('utm_term')||''}; })(),
+    consent:      true,
+    website:      '',
+    submitted_at: new Date().toISOString()
   };
   fetch(CF_ENDPOINT, {
     method:  'POST',
