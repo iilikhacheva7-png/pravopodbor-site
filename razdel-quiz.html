@@ -436,12 +436,10 @@ const steps = [
     section: "Автомобили и другое имущество",
     questions: [
       { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, options:["Нет","Да"] },
-      { id:"cars_detail",   type:"textarea", label:"Перечислите: марка, год, на кого оформлен, примерная стоимость",
-        placeholder:"Например:\n1. Toyota Camry 2020, на мужа, ~2 200 000 ₽\n2. Лада Гранта 2017, на меня, ~550 000 ₽",
-        condition:{id:"has_cars",value:"Да"} },
+
       { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
         options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
-      { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"], placeholder:"стоимость, на кого оформлено" }
+
     ]
   },
   {
@@ -648,7 +646,7 @@ function renderStep(step) {
           const val = (det[safeKey] || '').replace(/"/g,'&quot;');
           html += `<div style="margin-bottom:8px;">
             <div style="font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">${opt}</div>
-            <input class="text-input" placeholder="${q.placeholder||''}" value="${val}"
+            <input class="text-input" placeholder="что именно, стоимость, на кого оформлено" value="${val}"
               oninput="setLinkedDetail('${q.id}','${safeKey.replace(/'/g,"\\'")}',this.value)">
           </div>`;
         });
