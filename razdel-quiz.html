@@ -365,6 +365,7 @@ body {
   <div class="intro-badge">Раздел имущества</div>
   <h1>Анкета для подготовки иска</h1>
   <p class="subtitle">Чтобы не задавать вам 35 вопросов в мессенджере по одному — попросила заполнить этот опросник. Это займёт 10–15 минут. Ответы получу сразу и смогу сразу подготовить документы.</p>
+  <p class="subtitle" style="margin-top:0.75rem;">В конце опросника вы получите предварительный расчёт судебных расходов — госпошлины за раздел имущества и за расторжение брака. Это справочная информация, она не входит в стоимость моей работы.</p>
 
   <div class="intro-stats">
     <div class="stat-chip"><span>🕐</span> 10–15 минут</div>
@@ -443,6 +444,9 @@ const steps = [
       { id:"divorce_status",    type:"radio",    label:"Статус брака на сегодня",                            required:true, clarify:true,
         options:["Брак ещё не расторгнут","Брак расторгнут — есть решение/свидетельство","Поданы документы на развод, ждём решения"] },
       { id:"divorce_date",      type:"date_or_text", label:"Дата расторжения брака (если расторгнут)" },
+      { id:"divorce_help",    type:"radio",    label:"Нужна ли помощь с расторжением брака?", required:true, clarify:true,
+        note:"Если хотите развестись быстро — лучше подать отдельно (ЗАГС или отдельный иск). Объединение с разделом имущества дешевле, но суды по разделу идут 6–18 месяцев.",
+        options:["Хочу развестись как можно быстрее — подам отдельно","Можно объединить с иском о разделе — готова ждать","Брак уже расторгнут","Пока не думала об этом"] },
       { id:"actual_separation", type:"radio",    label:"Когда фактически перестали вести общее хозяйство?",  clarify:true,
         note:"Важно для имущества, купленного незадолго до развода",
         options:["Не разъезжались — жили вместе до последнего","За несколько месяцев до развода","За год и более до развода","Более 2 лет назад"] },
@@ -454,8 +458,11 @@ const steps = [
     section: "Недвижимость",
     questions: [
       { id:"has_realty",             type:"radio",    label:"Есть ли совместно нажитая недвижимость?",   required:true, clarify:true, options:["Да","Нет / не уверена"] },
-      { id:"realty_list",            type:"textarea", label:"Перечислите каждый объект: тип, адрес, на кого оформлен, примерная стоимость",
-        placeholder:"Например:\n1. Квартира, Екатеринбург, ул. Мира 5 кв.12 — на мужа, ~5 000 000 ₽\n2. Земельный участок, СНТ Берёзка — на меня, ~600 000 ₽",
+      { id:"realty_list",            type:"textarea", label:"Перечислите каждый объект: тип, адрес, на кого оформлен",
+        placeholder:"Например:\n1. Квартира, Екатеринбург, ул. Мира 5 кв.12 — на мужа\n2. Земельный участок, СНТ Берёзка — на меня",
+        condition:{id:"has_realty",value:"Да"} },
+      { id:"realty_value",           type:"text",     label:"Общая примерная стоимость всей недвижимости (₽)", placeholder:"Например: 6 000 000",
+        note:"Используется для расчёта госпошлины. Укажите суммарно по всем объектам.",
         condition:{id:"has_realty",value:"Да"} },
       { id:"has_mortgage",           type:"radio",    label:"Есть ли ипотека?",                          clarify:true, options:["Нет","Да, ипотека есть"] },
       { id:"mortgage_detail",        type:"textarea", label:"Ипотека: на какой объект, в каком банке, остаток долга?",
@@ -471,11 +478,16 @@ const steps = [
   {
     section: "Автомобили и другое имущество",
     questions: [
-      { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, clarifyPlaceholder:"Марка, модель, год, примерная стоимость, на кого оформлено", options:["Нет","Да"] },
+      { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, clarifyPlaceholder:"Марка, модель, год, на кого оформлено", options:["Нет","Да"] },
+      { id:"cars_value",    type:"text",     label:"Общая примерная стоимость автомобилей (₽)", placeholder:"Например: 2 200 000",
+        note:"Используется для расчёта госпошлины.",
+        condition:{id:"has_cars",value:"Да"} },
 
       { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
-        options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
+        options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Мотоцикл / мототехника","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
       { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"] },
+      { id:"other_value",   type:"text",     label:"Общая примерная стоимость прочего имущества (₽)", placeholder:"Например: 800 000",
+        note:"Используется для расчёта госпошлины. Укажите суммарно." },
 
     ]
   },
@@ -549,11 +561,12 @@ const steps = [
 
 const labels = {
   name:'ФИО клиента', phone:'Телефон', spouse_name:'ФИО супруга', marriage_date:'Дата брака',
-  divorce_status:'Статус брака', divorce_date:'Дата расторжения', actual_separation:'Фактическое расставание',
+  divorce_help:'Расторжение брака',
+  divorce_status:'Статус брака', divorce_date:'Дата расторжения', divorce_help:'Помощь с расторжением', actual_separation:'Фактическое расставание',
   bridal_contract:'Брачный договор', has_realty:'Совместная недвижимость', realty_list:'Перечень недвижимости',
   has_mortgage:'Ипотека', mortgage_detail:'Детали ипотеки', realty_inherited:'Наследство/дар',
   realty_inherited_detail:'Что получено', has_cars:'Автомобили', cars_detail:'Перечень авто',
-  other_property:'Прочее имущество', other_detail:'Детали прочего', has_accounts:'Счета/вклады',
+  other_property:'Прочее имущество', other_detail:'Детали прочего', other_value:'Стоимость прочего имущества', realty_value:'Стоимость недвижимости', cars_value:'Стоимость авто', has_accounts:'Счета/вклады',
   accounts_detail:'Детали счетов', has_debts:'Долги (кроме ипотеки)', debts_detail:'Детали долгов',
   personal_funds:'Личные вложения в совместное', personal_funds_detail:'Детали вложений',
   matkapital:'Маткапитал при покупке жилья', waste:'Ущерб имуществу семьи', waste_detail:'Описание ущерба',
@@ -564,9 +577,9 @@ const labels = {
 };
 
 const sectionKeys = [
-  { name:'Общие данные',          keys:['name','phone','spouse_name','marriage_date','divorce_status','divorce_date','actual_separation','bridal_contract'] },
-  { name:'Недвижимость',          keys:['has_realty','realty_list','has_mortgage','mortgage_detail','realty_inherited','realty_inherited_detail'] },
-  { name:'Авто и прочее',         keys:['has_cars','cars_detail','other_property','other_detail'] },
+  { name:'Общие данные',          keys:['name','phone','spouse_name','marriage_date','divorce_status','divorce_date','divorce_help','actual_separation','bridal_contract'] },
+  { name:'Недвижимость',          keys:['has_realty','realty_list','realty_value','has_mortgage','mortgage_detail','realty_inherited','realty_inherited_detail'] },
+  { name:'Авто и прочее',         keys:['has_cars','cars_value','other_property','other_detail','other_value'] },
   { name:'Счета и долги',         keys:['has_accounts','accounts_detail','has_debts','debts_detail'] },
   { name:'Особые обстоятельства', keys:['personal_funds','personal_funds_detail','matkapital','waste','waste_detail'] },
   { name:'Цели и пожелания',      keys:['goal','want_object','willing_compensate','urgency','attempts','attempts_detail'] },
@@ -814,6 +827,101 @@ function buildEmailText() {
   return t;
 }
 
+
+function calcGosposhlinаRazdel(sum) {
+  // Новая шкала (с 2025 года), цена иска = доля истца = sum/2
+  const s = sum / 2;
+  let duty = 0;
+  if (s <= 100000)          duty = 4000;
+  else if (s <= 300000)     duty = 4000  + (s - 100000) * 0.03;
+  else if (s <= 500000)     duty = 10000 + (s - 300000) * 0.025;
+  else if (s <= 1000000)    duty = 15000 + (s - 500000) * 0.02;
+  else if (s <= 3000000)    duty = 25000 + (s - 1000000) * 0.01;
+  else if (s <= 8000000)    duty = 45000 + (s - 3000000) * 0.007;
+  else if (s <= 24000000)   duty = 80000 + (s - 8000000) * 0.0035;
+  else if (s <= 50000000)   duty = 136000 + (s - 24000000) * 0.003;
+  else if (s <= 100000000)  duty = 214000 + (s - 50000000) * 0.002;
+  else                       duty = Math.min(314000 + (s - 100000000) * 0.0015, 900000);
+  return Math.round(duty);
+}
+
+function formatMoney(n) {
+  return n.toLocaleString('ru-RU') + ' ₽';
+}
+
+function buildDutyScreen() {
+  const realty  = parseFloat((answers['realty_value']  || '0').replace(/[^0-9.]/g,'')) || 0;
+  const cars    = parseFloat((answers['cars_value']    || '0').replace(/[^0-9.]/g,'')) || 0;
+  const other   = parseFloat((answers['other_value']   || '0').replace(/[^0-9.]/g,'')) || 0;
+  const total   = realty + cars + other;
+  const divorceOpt = answers['divorce_help'] || '';
+
+  let html = '';
+
+  if (total > 0) {
+    const dutyRazdel = calcGosposhlinаRazdel(total);
+    const share = Math.round(total / 2);
+    html += `
+    <div style="background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-bottom:0.875rem;">
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.75rem;">Раздел имущества</div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border);">
+        <span>Стоимость заявленного имущества</span><span style="color:var(--ink);font-weight:600;">${formatMoney(total)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border);">
+        <span>Цена иска (ваша доля — ½)</span><span style="color:var(--ink);font-weight:600;">${formatMoney(share)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;font-size:15px;padding:8px 0;font-weight:700;">
+        <span>Госпошлина за раздел</span><span style="color:var(--accent);">${formatMoney(dutyRazdel)}</span>
+      </div>
+      <div style="font-size:11px;color:var(--ink-soft);margin-top:4px;">Расчёт по актуальной шкале НК РФ. Итоговая сумма зависит от принятой судом цены иска.</div>
+    </div>`;
+  } else {
+    html += `<div style="font-size:13px;color:var(--ink-soft);padding:8px 12px;background:var(--bg-inner);border-radius:var(--radius-sm);margin-bottom:0.875rem;">
+      Госпошлина за раздел: не рассчитана — не указана стоимость имущества. Добавьте суммы в предыдущих шагах.
+    </div>`;
+  }
+
+  // Расторжение брака
+  let divorceHtml = '';
+  if (divorceOpt && divorceOpt !== 'Брак уже расторгнут' && divorceOpt !== 'Пока не думала об этом') {
+    if (divorceOpt.includes('быстрее') || divorceOpt.includes('отдельно')) {
+      divorceHtml = `
+      <div style="background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-bottom:0.875rem;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.75rem;">Расторжение брака (отдельно)</div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border);">
+          <span>Через ЗАГС (если оба согласны, дети совершеннолетние)</span><span style="color:var(--ink);font-weight:600;">5 000 ₽ с вас</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border);">
+          <span>Через суд — госпошлина при подаче иска</span><span style="color:var(--ink);font-weight:600;">5 000 ₽</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;">
+          <span>+ За свидетельство в ЗАГС после решения суда (каждый)</span><span style="color:var(--ink);font-weight:600;">5 000 ₽</span>
+        </div>
+      </div>`;
+    } else if (divorceOpt.includes('объединить')) {
+      divorceHtml = `
+      <div style="background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-bottom:0.875rem;">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.75rem;">Расторжение брака (в одном иске с разделом)</div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border);">
+          <span>Госпошлина за иск о расторжении (внутри иска о разделе)</span><span style="color:var(--ink);font-weight:600;">5 000 ₽</span>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;">
+          <span>+ За свидетельство в ЗАГС после решения суда (каждый)</span><span style="color:var(--ink);font-weight:600;">5 000 ₽</span>
+        </div>
+        <div style="font-size:11px;color:var(--ink-soft);margin-top:6px;">Суды по разделу имущества идут в среднем 6–18 месяцев — на этот срок брак остаётся формально действующим.</div>
+      </div>`;
+    }
+  }
+
+  html += divorceHtml;
+
+  html += `<div style="font-size:12px;color:var(--ink-soft);padding:10px 14px;background:rgba(201,168,76,0.08);border-radius:8px;border-left:2px solid var(--accent);line-height:1.6;">
+    ⚠️ Расчёт предварительный и носит справочный характер. Суд вправе скорректировать цену иска. Госпошлина оплачивается до подачи документов и не входит в стоимость подготовки документов.
+  </div>`;
+
+  return html;
+}
+
 function submitForm() {
   const btn = document.getElementById('btnNext');
   btn.textContent = 'Отправляем...';
@@ -838,6 +946,12 @@ function showThankYou() {
       <h2>Анкета получена!</h2>
       <p>Спасибо — я изучу вашу ситуацию и свяжусь с вами в течение рабочего дня, чтобы рассказать, что и как будет дальше.</p>
       <a class="tg-link" href="https://t.me/a_likhacheva2026" target="_blank">✈️ Написать в Telegram</a>
+    </div>
+    <div style="margin-top:1.5rem;">
+      <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);">
+        Предварительный расчёт судебных расходов
+      </div>
+      ${buildDutyScreen()}
     </div>`;
   document.getElementById('btnRow').innerHTML = '';
   document.getElementById('errorMsg').style.display = 'none';
