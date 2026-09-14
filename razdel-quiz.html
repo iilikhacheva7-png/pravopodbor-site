@@ -1029,6 +1029,37 @@ function buildDutyScreen() {
   return html;
 }
 
+function buildDutyText() {
+  var total = getValuationTotal();
+  var divorceOpt = answers['divorce_help'] || '';
+  var lines = [];
+
+  if (total > 0) {
+    var share = Math.round(total / 2);
+    var duty  = calcGosposhlinаRazdel(total);
+    lines.push('Раздел имущества:');
+    lines.push('  Имущество: ' + total.toLocaleString('ru-RU') + ' ₽');
+    lines.push('  Цена иска (½): ' + share.toLocaleString('ru-RU') + ' ₽');
+    lines.push('  Госпошлина: ' + duty.toLocaleString('ru-RU') + ' ₽');
+  }
+
+  if (divorceOpt && divorceOpt !== 'Брак уже расторгнут' && divorceOpt !== 'Пока не думал(а) об этом') {
+    lines.push('');
+    lines.push('Расторжение брака:');
+    if (divorceOpt.includes('отдельно') || divorceOpt.includes('быстрее')) {
+      lines.push('  Через ЗАГС (оба согласны): 5 000 ₽ с вас');
+      lines.push('  Через суд: 5 000 ₽ при подаче + 5 000 ₽ в ЗАГС после решения');
+    } else if (divorceOpt.includes('объединить')) {
+      lines.push('  В одном иске с разделом: 5 000 ₽ + 5 000 ₽ в ЗАГС после решения');
+    }
+  }
+
+  if (lines.length === 0) return '';
+  lines.push('');
+  lines.push('⚠️ Расчёт предварительный. Госпошлина не входит в стоимость подготовки документов.');
+  return lines.join('\n');
+}
+
 function submitForm() {
   const btn = document.getElementById('btnNext');
   btn.textContent = 'Отправляем...';
@@ -1047,6 +1078,10 @@ function submitForm() {
   for (var i = 0; i < fullMsg.length; i += chunkSize) {
     chunks.push(fullMsg.slice(i, i + chunkSize));
   }
+
+  // Добавляем расчёт госпошлины последним сообщением
+  var dutyMsg = buildDutyText();
+  if (dutyMsg) chunks.push('💰 <b>РАСЧЁТ ГОСПОШЛИНЫ</b>\n──────────────────\n' + dutyMsg);
 
   function sendChunk(idx) {
     if (idx >= chunks.length) { showThankYou(); return; }
