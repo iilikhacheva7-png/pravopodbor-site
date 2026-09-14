@@ -410,8 +410,6 @@ body {
   <div class="footer-contacts">
     <a href="https://rekoyur.ru" target="_blank">🌐 rekoyur.ru</a>
     <a href="https://t.me/a_likhacheva2026" target="_blank">✈️ Telegram</a>
-    <a href="https://t.me/po_rekomendatsii" target="_blank">📢 Канал</a>
-    <a href="https://instagram.com/rek.yur" target="_blank">📸 @rek.yur</a>
     <a href="tel:+79920011995">📞 +7 992 001-19-95</a>
     <a href="mailto:alikhacheva7@yandex.ru">✉️ alikhacheva7@yandex.ru</a>
   </div>
@@ -424,8 +422,8 @@ body {
   </div>
 
   <div class="footer-copy">
-    © 2024–2026 «По рекомендации» · Лихачева Анастасия Анатольевна · Самозанятая<br>
-    Оплата: СБП +7 992 001-19-95 (Т-Банк) · Назначение платежа: «Юридические документы»<br>
+    © 2026 «По рекомендации» · Лихачева Анастасия Анатольевна · Самозанятая<br>
+    Оплата: СБП +7 992 001-19-95 (Т-Банк)<br>
     Регистрационный номер оператора ПД: 66-26-087909
   </div>
 </footer>
@@ -446,7 +444,7 @@ const steps = [
       { id:"divorce_date",      type:"date_or_text", label:"Дата расторжения брака (если расторгнут)" },
       { id:"divorce_help",    type:"radio",    label:"Нужна ли помощь с расторжением брака?", required:true, clarify:true,
         note:"Если хотите развестись быстро — лучше подать отдельно (ЗАГС или отдельный иск). Объединение с разделом имущества дешевле, но суды по разделу идут 6–18 месяцев.",
-        options:["Хочу развестись как можно быстрее — подам отдельно","Можно объединить с иском о разделе — готова ждать","Брак уже расторгнут","Пока не думала об этом"] },
+        options:["Хочу, чтобы вы подали на развод отдельно — как можно быстрее","Можно объединить расторжение с иском о разделе — готов(а) ждать","Брак уже расторгнут","Пока не думал(а) об этом"] },
       { id:"actual_separation", type:"radio",    label:"Когда фактически перестали вести общее хозяйство?",  clarify:true,
         note:"Важно для имущества, купленного незадолго до развода",
         options:["Не разъезжались — жили вместе до последнего","За несколько месяцев до развода","За год и более до развода","Более 2 лет назад"] },
@@ -461,13 +459,12 @@ const steps = [
       { id:"realty_list",            type:"textarea", label:"Перечислите каждый объект: тип, адрес, на кого оформлен",
         placeholder:"Например:\n1. Квартира, Екатеринбург, ул. Мира 5 кв.12 — на мужа\n2. Земельный участок, СНТ Берёзка — на меня",
         condition:{id:"has_realty",value:"Да"} },
-      { id:"realty_value",           type:"text",     label:"Общая примерная стоимость всей недвижимости (₽)", placeholder:"Например: 6 000 000",
-        note:"Используется для расчёта госпошлины. Укажите суммарно по всем объектам.",
-        condition:{id:"has_realty",value:"Да"} },
-      { id:"has_mortgage",           type:"radio",    label:"Есть ли ипотека?",                          clarify:true, options:["Нет","Да, ипотека есть"] },
-      { id:"mortgage_detail",        type:"textarea", label:"Ипотека: на какой объект, в каком банке, остаток долга?",
-        placeholder:"Например: квартира на ул. Мира, Сбербанк, остаток ~2 300 000 ₽",
-        condition:{id:"has_mortgage",value:"Да, ипотека есть"} },
+      { id:"has_mortgage", type:"radio", label:"Есть ли ипотека?", options:["Нет","Да, ипотека есть"] },
+      { id:"mortgage_bank",    type:"text",     label:"Банк", placeholder:"Например: Сбербанк", condition:{id:"has_mortgage",value:"Да, ипотека есть"} },
+      { id:"mortgage_sum",     type:"text",     label:"Остаток долга (₽)", placeholder:"Например: 2 300 000", condition:{id:"has_mortgage",value:"Да, ипотека есть"} },
+      { id:"mortgage_owner",   type:"text",     label:"На кого оформлен кредитный договор", placeholder:"Например: на мужа", condition:{id:"has_mortgage",value:"Да, ипотека есть"} },
+      { id:"mortgage_payer",   type:"radio",    label:"Кто фактически платит ипотеку?", condition:{id:"has_mortgage",value:"Да, ипотека есть"},
+        options:["Платим пополам","Плачу я одна(один)","Платит супруг(а)","Никто не платит — просрочка"] },
       { id:"realty_inherited",       type:"radio",    label:"Есть ли недвижимость, полученная в наследство или в дар?",
         note:"Такое имущество обычно не делится", clarify:true, options:["Нет","Да — укажу ниже"] },
       { id:"realty_inherited_detail",type:"textarea", label:"Что получено в наследство / дар и кем?",
@@ -479,15 +476,10 @@ const steps = [
     section: "Автомобили и другое имущество",
     questions: [
       { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, clarifyPlaceholder:"Марка, модель, год, на кого оформлено", options:["Нет","Да"] },
-      { id:"cars_value",    type:"text",     label:"Общая примерная стоимость автомобилей (₽)", placeholder:"Например: 2 200 000",
-        note:"Используется для расчёта госпошлины.",
-        condition:{id:"has_cars",value:"Да"} },
 
       { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
         options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Мотоцикл / мототехника","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
-      { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"] },
-      { id:"other_value",   type:"text",     label:"Общая примерная стоимость прочего имущества (₽)", placeholder:"Например: 800 000",
-        note:"Используется для расчёта госпошлины. Укажите суммарно." },
+      { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"] }
 
     ]
   },
@@ -499,7 +491,7 @@ const steps = [
         placeholder:"Например: вклад мужа в Альфа-банке, ~800 000 ₽; мой счёт в Сбере, ~50 000 ₽",
         condition:{id:"has_accounts",value:"Да, есть"} },
       { id:"has_debts",      type:"radio",    label:"Есть ли совместные кредиты / долги (кроме ипотеки)?",
-        note:"Долги тоже делятся при разделе", clarify:true, options:["Нет","Да"] },
+        note:"Долги делятся при разделе. Важно: кредитные обязательства не уменьшают цену иска о разделе имущества — они идут отдельным требованием. Госпошлина считается только от стоимости активов.", clarify:true, options:["Нет","Да"] },
       { id:"debts_detail",   type:"textarea", label:"Какие кредиты и долги? Сумма, на кого оформлен",
         placeholder:"Например: потребкредит в ВТБ на мужа, остаток 350 000 ₽",
         condition:{id:"has_debts",value:"Да"} }
@@ -509,12 +501,14 @@ const steps = [
     section: "Особые обстоятельства",
     questions: [
       { id:"personal_funds",        type:"radio",    label:"Вкладывали ли личные деньги (добрачные или из наследства) в совместную покупку?",
-        note:"Это может увеличить вашу долю", clarify:true,
+        note:"Это может увеличить вашу долю. Обязательно укажите: сколько вложили, когда и чем можно подтвердить (расписка, выписка со счёта, договор дарения, справка о продаже добрачного имущества).", clarify:true,
         options:["Нет","Да, я вкладывала личные средства","Да, супруг вкладывал личные средства"] },
       { id:"personal_funds_detail", type:"textarea", label:"В какой объект и сколько примерно?",
-        placeholder:"Например: при покупке квартиры внесла 700 000 ₽ из добрачных накоплений",
+        placeholder:"Например: при покупке квартиры в 2019 г. внесла 700 000 ₽ из добрачных накоплений. Подтверждение — выписка с личного счёта.",
         condition:{id:"personal_funds",value:"Да, я вкладывала личные средства"} },
-      { id:"matkapital",            type:"radio",    label:"Использовался ли материнский капитал при покупке жилья?", clarify:true, options:["Нет","Да"] },
+      { id:"matkapital", type:"radio", label:"Использовался ли материнский капитал при покупке жилья?", clarify:true,
+        note:"Если маткапитал вложен в жильё — дети имеют обязательные доли в этой квартире. При разделе супруги делят только оставшуюся часть (за вычетом детских долей). Это нужно учесть при расчёте цены иска.",
+        options:["Нет","Да"] },
       { id:"waste",                 type:"radio",    label:"Есть ли основания считать, что супруг тратил общее имущество в ущерб семье?",
         note:"Азартные игры, алкоголь, растрата — могут дать основание на бо́льшую долю", clarify:true,
         options:["Нет","Да, есть такие основания"] },
@@ -531,8 +525,8 @@ const steps = [
       { id:"want_object",        type:"textarea", label:"Что именно хотите получить? (конкретно)",
         note:"Возможные варианты: (1) попросить ½ доли в каждом объекте — самый простой путь; (2) просить конкретные объекты целиком с выплатой компенсации другой стороне; (3) просить деньги — оценить всё имущество и получить половину деньгами. Опишите, что важнее именно вам.",
         placeholder:"Например: хочу оставить себе квартиру и получить компенсацию за его долю. Машину пусть берёт." },
-      { id:"willing_compensate", type:"radio",    label:"Готовы ли выплатить супругу компенсацию, если вам достанется имущество на бо́льшую сумму?", clarify:true,
-        options:["Да, готова","Нет, хочу чтобы он выплатил мне","Пока не думала об этом"] },
+      { id:"willing_compensate", type:"radio",    label:"Готовы ли вы выплатить супруг(е) компенсацию, если вам достанется имущество на бо́льшую сумму?", clarify:true,
+        options:["Да, готов(а)","Нет, хочу чтобы супруг(а) выплатил(а) мне","Пока не думал(а) об этом"] },
       { id:"urgency",            type:"radio",    label:"Насколько срочно нужно подать иск?", clarify:true,
         options:["Срочно, как можно быстрее","В течение 1–2 месяцев","Пока собираю информацию"] },
       { id:"attempts",           type:"radio",    label:"Пытались ли договориться о разделе без суда?", clarify:true,
@@ -543,11 +537,16 @@ const steps = [
     ]
   },
   {
+    section: "Оценка имущества",
+    type: "valuation",
+    questions: []
+  },
+  {
     section: "Документы на руках",
     questions: [
       { id:"docs",               type:"checkbox", label:"Какие документы у вас есть?", clarify:true,
         options:["Свидетельство о заключении брака","Свидетельство о расторжении или решение суда","Выписки ЕГРН / договоры купли-продажи на недвижимость","ПТС / СТС на автомобили","Кредитный договор по ипотеке","Выписки по банковским счетам","Чеки, договоры на покупку имущества в браке"] },
-      { id:"docs_missing",       type:"radio",    label:"Есть ли имущество, по которому документов на руках нет?",
+      { id:"docs_missing", type:"radio", label:"Есть ли имущество, по которому документов на руках нет?",
         options:["Нет, всё есть","Да, по некоторым объектам"] },
       { id:"docs_missing_detail",type:"textarea", label:"Опишите объекты, на которые нет документов",
         note:"Для истребования через суд (ст. 57 ГПК РФ) важно указать: что за объект, что о нём известно (адрес, марка, банк), у кого предположительно находятся документы.",
@@ -564,7 +563,7 @@ const labels = {
   divorce_help:'Расторжение брака',
   divorce_status:'Статус брака', divorce_date:'Дата расторжения', divorce_help:'Помощь с расторжением', actual_separation:'Фактическое расставание',
   bridal_contract:'Брачный договор', has_realty:'Совместная недвижимость', realty_list:'Перечень недвижимости',
-  has_mortgage:'Ипотека', mortgage_detail:'Детали ипотеки', realty_inherited:'Наследство/дар',
+  has_mortgage:'Ипотека', mortgage_bank:'Банк по ипотеке', mortgage_sum:'Остаток долга по ипотеке', mortgage_owner:'Кредитный договор оформлен на', mortgage_payer:'Кто платит ипотеку', realty_inherited:'Наследство/дар',
   realty_inherited_detail:'Что получено', has_cars:'Автомобили', cars_detail:'Перечень авто',
   other_property:'Прочее имущество', other_detail:'Детали прочего', other_value:'Стоимость прочего имущества', realty_value:'Стоимость недвижимости', cars_value:'Стоимость авто', has_accounts:'Счета/вклады',
   accounts_detail:'Детали счетов', has_debts:'Долги (кроме ипотеки)', debts_detail:'Детали долгов',
@@ -578,11 +577,12 @@ const labels = {
 
 const sectionKeys = [
   { name:'Общие данные',          keys:['name','phone','spouse_name','marriage_date','divorce_status','divorce_date','divorce_help','actual_separation','bridal_contract'] },
-  { name:'Недвижимость',          keys:['has_realty','realty_list','realty_value','has_mortgage','mortgage_detail','realty_inherited','realty_inherited_detail'] },
+  { name:'Недвижимость',          keys:['has_realty','realty_list','realty_value','has_mortgage','mortgage_bank','mortgage_sum','mortgage_owner','mortgage_payer','realty_inherited','realty_inherited_detail'] },
   { name:'Авто и прочее',         keys:['has_cars','cars_value','other_property','other_detail','other_value'] },
   { name:'Счета и долги',         keys:['has_accounts','accounts_detail','has_debts','debts_detail'] },
   { name:'Особые обстоятельства', keys:['personal_funds','personal_funds_detail','matkapital','waste','waste_detail'] },
   { name:'Цели и пожелания',      keys:['goal','want_object','willing_compensate','urgency','attempts','attempts_detail'] },
+  { name:'Оценка имущества',       keys:[] },
   { name:'Документы',             keys:['docs','docs_missing','docs_missing_detail','extra'] }
 ];
 
@@ -615,6 +615,15 @@ function toggleNotDivorced(qid, btn) {
   }
 }
 
+function moneyMask(el) {
+  let v = el.value.replace(/[^0-9]/g, '');
+  if (v) {
+    v = parseInt(v, 10).toLocaleString('ru-RU');
+  }
+  el.value = v;
+  answers[el.dataset.qid] = el.value.replace(/\s/g, '');
+}
+
 function phoneMask(el) {
   let v = el.value.replace(/\D/g, '');
   if (v.startsWith('8')) v = '7' + v.slice(1);
@@ -644,6 +653,7 @@ document.addEventListener('input', function(e) {
   if (!el.dataset.mask) return;
   if (el.dataset.mask === 'phone') phoneMask(el);
   else if (el.dataset.mask === 'date') dateMask(el);
+  else if (el.dataset.mask === 'money') moneyMask(el);
   else answers[el.dataset.qid] = el.value;
 });
 
@@ -666,8 +676,76 @@ function isVisible(q) {
   return answers[q.condition.id] === q.condition.value;
 }
 
+function renderValuationStep() {
+  // Собираем все объекты имущества на основе ответов
+  const items = [];
+
+  if (answers['has_realty'] === 'Да') {
+    const list = answers['realty_list'] || '';
+    const lines = list.split('\n').filter(l => l.trim());
+    if (lines.length > 0) {
+      lines.forEach((line, i) => {
+        items.push({ id: 'val_realty_' + i, label: 'Недвижимость: ' + line.replace(/^\d+\.\s*/,'').substring(0,60) });
+      });
+    } else {
+      items.push({ id: 'val_realty_0', label: 'Недвижимость (совместная)' });
+    }
+  }
+
+  if (answers['has_mortgage'] === 'Да, ипотека есть') {
+    const bank = answers['mortgage_bank'] || 'банк';
+    const sum = answers['mortgage_sum'] || '';
+    items.push({ id: 'val_mortgage', label: `Ипотека (${bank}${sum ? ', остаток ' + sum + ' ₽' : ''}) — остаток входит в раздел долгов` });
+  }
+
+  if (answers['has_cars'] === 'Да') {
+    const clarify = clarifyAnswers['has_cars'] || '';
+    items.push({ id: 'val_car', label: 'Автомобиль(и): ' + (clarify || 'укажите в уточнении').substring(0,60) });
+  }
+
+  const otherChosen = (answers['other_property'] || []).filter(o => o !== 'Ничего из перечисленного');
+  otherChosen.forEach((opt, i) => {
+    items.push({ id: 'val_other_' + i, label: opt });
+  });
+
+  if (answers['has_accounts'] === 'Да, есть') {
+    items.push({ id: 'val_accounts', label: 'Банковские счета / вклады' });
+  }
+
+  if (items.length === 0) {
+    return '<div style="font-size:14px;color:var(--ink-soft);padding:1rem 0;">Не указано совместное имущество. Вернитесь назад и заполните предыдущие шаги.</div>';
+  }
+
+  let html = '<div style="font-size:13px;color:var(--ink-soft);margin-bottom:1rem;line-height:1.5;">Укажите примерную стоимость каждого объекта — это нужно для расчёта госпошлины.</div>';
+
+  items.forEach(item => {
+    const val = (answers[item.id] || '').replace(/"/g, '&quot;');
+    html += `<div class="question-card" style="padding:0.875rem 1.1rem;">
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;">${item.label}</div>
+      <input class="text-input" data-mask="money" data-qid="${item.id}" inputmode="numeric"
+        placeholder="Стоимость в ₽, например: 3 500 000" value="${val}">
+    </div>`;
+  });
+
+  return html;
+}
+
 function renderStep(step) {
   const s = steps[step];
+
+  // Шаг оценки имущества — специальный рендер
+  if (s.type === 'valuation') {
+    document.getElementById('quizContent').innerHTML =
+      '<div class="section-title">Оценка имущества</div>' + renderValuationStep();
+    document.getElementById('stepLabel').textContent = `Шаг ${step+1} из ${TOTAL}`;
+    document.getElementById('progressFill').style.width = `${(step/TOTAL)*100}%`;
+    document.getElementById('btnBack').style.display = step > 0 ? 'inline-block' : 'none';
+    document.getElementById('btnNext').textContent = 'Далее →';
+    document.getElementById('btnNext').disabled = false;
+    document.getElementById('errorMsg').style.display = 'none';
+    return;
+  }
+
   const visibleQs = s.questions.filter(isVisible);
   let html = `<div class="section-title">${s.section}</div>`;
 
@@ -806,8 +884,31 @@ function goBack() {
   if (currentStep > 0) { currentStep--; renderStep(currentStep); window.scrollTo({top:0,behavior:'smooth'}); }
 }
 
+function getValuationTotal() {
+  // Собираем все val_* ключи и суммируем
+  let total = 0;
+  Object.keys(answers).forEach(k => {
+    if (k.startsWith('val_') && !k.includes('mortgage')) {
+      const v = parseFloat((answers[k] || '').replace(/[^0-9]/g, '')) || 0;
+      total += v;
+    }
+  });
+  return total;
+}
+
 function buildEmailText() {
   let t = 'АНКЕТА ПО РАЗДЕЛУ ИМУЩЕСТВА\n══════════════════════════\n\n';
+  // Добавляем оценку имущества
+  const valKeys = Object.keys(answers).filter(k => k.startsWith('val_'));
+  if (valKeys.length > 0) {
+    t += '【Оценка имущества】\n';
+    valKeys.forEach(k => {
+      if (answers[k]) t += `  ${k.replace('val_','').replace(/_\d+$/,'').replace(/_/g,' ')}: ${answers[k]} ₽\n`;
+    });
+    t += `  Итого (сумма): ${getValuationTotal().toLocaleString('ru-RU')} ₽\n`;
+    t += `  Цена иска (½): ${Math.round(getValuationTotal()/2).toLocaleString('ru-RU')} ₽\n\n`;
+  }
+
   sectionKeys.forEach(sec => {
     let rows = '';
     sec.keys.forEach(k => {
@@ -850,10 +951,7 @@ function formatMoney(n) {
 }
 
 function buildDutyScreen() {
-  const realty  = parseFloat((answers['realty_value']  || '0').replace(/[^0-9.]/g,'')) || 0;
-  const cars    = parseFloat((answers['cars_value']    || '0').replace(/[^0-9.]/g,'')) || 0;
-  const other   = parseFloat((answers['other_value']   || '0').replace(/[^0-9.]/g,'')) || 0;
-  const total   = realty + cars + other;
+  const total = getValuationTotal();
   const divorceOpt = answers['divorce_help'] || '';
 
   let html = '';
