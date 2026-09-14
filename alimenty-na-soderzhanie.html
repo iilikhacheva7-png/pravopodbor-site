@@ -617,9 +617,9 @@ function showStep(n) {
   var pct = isFinal ? 100 : Math.round(n / TOTAL_STEPS * 100);
   document.getElementById('alBar').style.width = pct + '%';
   document.getElementById('prog-label').textContent =
-    isFinal ? 'Готово!' : 'Шаг ' + n + ' из ' + TOTAL_STEPS;
+    isFinal ? 'Шаг ' + TOTAL_STEPS + ' из ' + TOTAL_STEPS : 'Шаг ' + n + ' из ' + TOTAL_STEPS;
   document.getElementById('prog-fraction').textContent =
-    isFinal ? '✓' : n + ' / ' + TOTAL_STEPS;
+    isFinal ? TOTAL_STEPS + ' / ' + TOTAL_STEPS : n + ' / ' + TOTAL_STEPS;
 
   var widget = document.getElementById('chat-widget');
   if (widget) widget.classList.toggle('quiz-active', n > 1 && !isFinal);
