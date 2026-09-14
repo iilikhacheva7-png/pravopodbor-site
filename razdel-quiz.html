@@ -700,16 +700,20 @@ function renderValuationStep() {
 
   if (answers['has_cars'] === 'Да') {
     const clarify = clarifyAnswers['has_cars'] || '';
-    items.push({ id: 'val_car', label: 'Автомобиль(и): ' + (clarify || 'укажите в уточнении').substring(0,60) });
+    const carHint = clarify || '';
+    items.push({ id: 'val_car', label: 'Автомобиль(и)', hint: carHint ? 'Указано: ' + carHint.substring(0,100) : '' });
   }
 
   const otherChosen = (answers['other_property'] || []).filter(o => o !== 'Ничего из перечисленного');
   otherChosen.forEach((opt, i) => {
-    items.push({ id: 'val_other_' + i, label: opt });
+    const safeKey = opt.replace(/['"]/g,'');
+    const otherHint = answers['other_detail'] && answers['other_detail'][safeKey] ? answers['other_detail'][safeKey] : '';
+    items.push({ id: 'val_other_' + i, label: opt, hint: otherHint ? 'Указано: ' + otherHint.substring(0,100) : '' });
   });
 
   if (answers['has_accounts'] === 'Да, есть') {
-    items.push({ id: 'val_accounts', label: 'Банковские счета / вклады' });
+    const accHint = answers['accounts_detail'] || '';
+    items.push({ id: 'val_accounts', label: 'Банковские счета / вклады', hint: accHint ? 'Указано: ' + accHint.substring(0,100) : '' });
   }
 
   if (items.length === 0) {
@@ -720,8 +724,10 @@ function renderValuationStep() {
 
   items.forEach(item => {
     const val = (answers[item.id] || '').replace(/"/g, '&quot;');
+    const hint = item.hint ? `<div style="font-size:12px;color:var(--ink-soft);margin-bottom:6px;font-style:italic;">${item.hint}</div>` : '';
     html += `<div class="question-card" style="padding:0.875rem 1.1rem;">
-      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px;">${item.label}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--ink);margin-bottom:4px;">${item.label}</div>
+      ${hint}
       <input class="text-input" data-mask="money" data-qid="${item.id}" inputmode="numeric"
         placeholder="Стоимость в ₽, например: 3 500 000" value="${val}">
     </div>`;
@@ -776,7 +782,7 @@ function renderStep(step) {
           const val = (det[safeKey] || '').replace(/"/g,'&quot;');
           html += `<div style="margin-bottom:8px;">
             <div style="font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">${opt}</div>
-            <input class="text-input" placeholder="что именно, стоимость, на кого оформлено" value="${val}"
+            <input class="text-input" placeholder="что именно, на кого оформлено" value="${val}"
               oninput="setLinkedDetail('${q.id}','${safeKey.replace(/'/g,"\\'")}',this.value)">
           </div>`;
         });
@@ -803,7 +809,7 @@ function renderStep(step) {
         html += `<div class="radio-option${sel}" id="ro_${eid}" onclick="var inp=this.querySelector('input');inp.checked=true;inp.dispatchEvent(new Event('change',{bubbles:true}))" style="cursor:pointer;user-select:none;">
           <input type="radio" name="q_${q.id}" id="${eid}" value="${opt.replace(/"/g,'&quot;')}" ${checked}
             onclick="event.stopPropagation()"
-            onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)})">
+            onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)}); if(steps[currentStep].questions.some(function(qq){return qq.condition&&qq.condition.id===q.id;})) renderStep(currentStep);">
           <span style="font-size:14px;color:var(--ink);line-height:1.4;">${opt}</span></div>`;
       });
       html += `</div>`;
