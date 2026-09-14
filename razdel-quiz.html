@@ -429,7 +429,7 @@ body {
 </footer>
 
 <script>
-const FORMSPREE_URL = 'https://formspree.io/f/xpqekrvz';
+const CF_ENDPOINT = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
 
 const steps = [
   {
@@ -1030,15 +1030,23 @@ function submitForm() {
   const btn = document.getElementById('btnNext');
   btn.textContent = 'Отправляем...';
   btn.disabled = true;
-  const fd = new FormData();
-  fd.append('form_type', 'Анкета раздел имущества');
-  fd.append('Имя', answers['name'] || '');
-  fd.append('Телефон', answers['phone'] || '');
-  fd.append('Анкета', buildEmailText());
-  fd.append('_subject', 'Анкета раздел имущества — ' + (answers['name'] || 'клиент'));
-  fetch(FORMSPREE_URL, { method:'POST', body:fd, headers:{'Accept':'application/json'} })
-    .then(r => { if (r.ok) showThankYou(); else showError(); })
-    .catch(showError);
+  const payload = {
+    topic:       'Раздел имущества',
+    source_page: '/razdel-quiz.html',
+    name:    answers['name'] || '',
+    contact: answers['phone'] || '',
+    answers: answers,
+    clarify: clarifyAnswers,
+    text:    buildEmailText()
+  };
+  fetch(CF_ENDPOINT, {
+    method:  'POST',
+    headers: {'Content-Type': 'application/json'},
+    body:    JSON.stringify(payload)
+  })
+  .then(r => r.json())
+  .then(data => { if (data && data.ok) showThankYou(); else showError(); })
+  .catch(showError);
 }
 
 function showThankYou() {
@@ -1054,7 +1062,7 @@ function showThankYou() {
            style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent);color:#1a1306;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;">
           ✈️ Telegram
         </a>
-        <a href="https://max.ru/a_likhacheva" target="_blank"
+        <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank"
            style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">
           💬 Max
         </a>
