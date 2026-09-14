@@ -807,7 +807,7 @@ function renderStep(step) {
         const checked = answers[q.id] === opt ? 'checked' : '';
         const sel = answers[q.id] === opt ? ' selected' : '';
         const eid = 'q_'+q.id+'_'+opt.replace(/\W/g,'_');
-        html += `<div class="radio-option${sel}" id="ro_${eid}" onclick="var inp=this.querySelector('input');inp.checked=true;inp.dispatchEvent(new Event('change',{bubbles:true}))" style="cursor:pointer;user-select:none;">
+        html += `<div class="radio-option${sel}" id="ro_${eid}" onclick="if(event.target.tagName!=='INPUT'){var inp=this.querySelector('input');inp.checked=true;inp.dispatchEvent(new Event('change',{bubbles:true}));}" style="cursor:pointer;user-select:none;">
           <input type="radio" name="q_${q.id}" id="${eid}" value="${opt.replace(/"/g,'&quot;')}" ${checked}
             onclick="event.stopPropagation()"
             onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)}); if(steps[currentStep].questions.some(function(qq){return qq.condition&&qq.condition.id===q.id;})) renderStep(currentStep);">
@@ -1031,13 +1031,31 @@ function submitForm() {
   const btn = document.getElementById('btnNext');
   btn.textContent = 'Отправляем...';
   btn.disabled = true;
-  const payload = {
+  var emailText = buildEmailText();
+  var p = new URLSearchParams(window.location.search);
+  var payload = {
     topic:        'Раздел имущества',
     source_page:  '/razdel-quiz.html',
     name:         answers['name'] || '',
     contact:      answers['phone'] || '',
-    answers:      { text: buildEmailText() },
-    utm:          (function(){ var p=new URLSearchParams(window.location.search); return {utm_source:p.get('utm_source')||'',utm_medium:p.get('utm_medium')||'',utm_campaign:p.get('utm_campaign')||'',utm_content:p.get('utm_content')||'',utm_term:p.get('utm_term')||''}; })(),
+    answers: {
+      divorce:   answers['divorce_help'] || '',
+      realty:    answers['realty_list'] || '',
+      mortgage:  answers['has_mortgage'] || '',
+      cars:      clarifyAnswers['has_cars'] || '',
+      other:     (answers['other_property']||[]).join(', '),
+      accounts:  answers['accounts_detail'] || '',
+      goal:      answers['goal'] || '',
+      urgency:   answers['urgency'] || '',
+      full_text: emailText.substring(0, 3000)
+    },
+    utm: {
+      utm_source:   p.get('utm_source')   || '',
+      utm_medium:   p.get('utm_medium')   || '',
+      utm_campaign: p.get('utm_campaign') || '',
+      utm_content:  p.get('utm_content')  || '',
+      utm_term:     p.get('utm_term')     || ''
+    },
     consent:      true,
     website:      '',
     submitted_at: new Date().toISOString()
@@ -1047,9 +1065,12 @@ function submitForm() {
     headers: {'Content-Type': 'application/json'},
     body:    JSON.stringify(payload)
   })
-  .then(r => r.json())
-  .then(data => { if (data && data.ok) showThankYou(); else showError(); })
-  .catch(showError);
+  .then(function(res) { return res.json(); })
+  .then(function(data) {
+    if (data && data.ok) { showThankYou(); }
+    else { showError(); }
+  })
+  .catch(function() { showError(); });
 }
 
 function showThankYou() {
