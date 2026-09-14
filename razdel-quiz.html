@@ -1081,7 +1081,7 @@ function submitForm() {
 
   // Добавляем расчёт госпошлины последним сообщением
   var dutyMsg = buildDutyText();
-  if (dutyMsg) chunks.push('💰 <b>РАСЧЁТ ГОСПОШЛИНЫ</b>\n──────────────────\n' + dutyMsg);
+  if (dutyMsg) chunks.push('💰 <b>РАСЧЁТ ГОСПОШЛИНЫ — ' + (answers['name'] || '—') + '</b>\n──────────────────\n' + dutyMsg);
 
   function sendChunk(idx) {
     if (idx >= chunks.length) { showThankYou(); return; }
