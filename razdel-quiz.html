@@ -406,7 +406,7 @@ const steps = [
       { id:"marriage_date",     type:"text",     label:"Дата заключения брака",                              placeholder:"дд.мм.гггг",                       required:true },
       { id:"divorce_status",    type:"radio",    label:"Статус брака на сегодня",                            required:true, clarify:true,
         options:["Брак ещё не расторгнут","Брак расторгнут — есть решение/свидетельство","Поданы документы на развод, ждём решения"] },
-      { id:"divorce_date",      type:"text",     label:"Дата расторжения брака (если расторгнут)",           placeholder:"дд.мм.гггг или «пока не расторгнут»" },
+      { id:"divorce_date",      type:"date_or_text", label:"Дата расторжения брака (если расторгнут)" },
       { id:"actual_separation", type:"radio",    label:"Когда фактически перестали вести общее хозяйство?",  clarify:true,
         note:"Важно для имущества, купленного незадолго до развода",
         options:["Не разъезжались — жили вместе до последнего","За несколько месяцев до развода","За год и более до развода","Более 2 лет назад"] },
@@ -542,6 +542,30 @@ const answers = {};
 const clarifyAnswers = {};
 const TOTAL = steps.length;
 
+function toggleNotDivorced(qid, btn) {
+  const isActive = answers[qid] === 'не расторгнут';
+  const input = btn.previousElementSibling;
+  if (isActive) {
+    answers[qid] = '';
+    input.value = '';
+    input.disabled = false;
+    input.style.opacity = '1';
+    btn.style.border = '1px solid var(--border-strong)';
+    btn.style.background = 'transparent';
+    btn.style.color = 'var(--ink-soft)';
+    btn.textContent = 'Не расторгнут';
+  } else {
+    answers[qid] = 'не расторгнут';
+    input.value = '';
+    input.disabled = true;
+    input.style.opacity = '0.4';
+    btn.style.border = '1px solid var(--accent)';
+    btn.style.background = 'var(--accent-dim)';
+    btn.style.color = 'var(--ink)';
+    btn.textContent = '✓ Не расторгнут';
+  }
+}
+
 function phoneMask(el) {
   let v = el.value.replace(/\D/g, '');
   if (v.startsWith('8')) v = '7' + v.slice(1);
@@ -606,13 +630,26 @@ function renderStep(step) {
     if (q.type === 'text') {
       const v = (answers[q.id] || '').replace(/"/g,'&quot;');
       const isPhone = q.id === 'phone';
-      const isDate = q.id.includes('date') || q.id === 'marriage_date';
+      const isDate = (q.id.includes('date') || q.id === 'marriage_date') && q.id !== 'divorce_date';
       const maskType = isPhone ? 'phone' : isDate ? 'date' : '';
       const inputmode = isPhone ? 'inputmode="tel"' : isDate ? 'inputmode="numeric"' : '';
       html += `<input class="text-input" data-mask="${maskType}" data-qid="${q.id}" placeholder="${q.placeholder||''}" value="${v}" ${inputmode}>`;
     } else if (q.type === 'textarea') {
       const v = (answers[q.id] || '').replace(/</g,'&lt;');
       html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" oninput="answers['${q.id}']=this.value">${v}</textarea>`;
+    } else if (q.type === 'date_or_text') {
+      const v = answers[q.id] || '';
+      const isNotDivorced = v === 'не расторгнут';
+      const dateVal = isNotDivorced ? '' : v;
+      html += `<div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+        <input class="text-input" data-mask="date" data-qid="${q.id}" inputmode="numeric"
+          placeholder="дд.мм.гггг" value="${isNotDivorced ? '' : dateVal.replace(/"/g,'&quot;')}"
+          style="flex:1;min-width:140px;" ${isNotDivorced ? 'disabled style="flex:1;min-width:140px;opacity:0.4;"' : ''}>
+        <button type="button" onclick="toggleNotDivorced('${q.id}', this)"
+          style="flex-shrink:0;padding:9px 16px;border-radius:999px;border:1px solid ${isNotDivorced ? 'var(--accent)' : 'var(--border-strong)'};background:${isNotDivorced ? 'var(--accent-dim)' : 'transparent'};color:${isNotDivorced ? 'var(--ink)' : 'var(--ink-soft)'};font-size:13px;font-weight:600;cursor:pointer;font-family:inherit;white-space:nowrap;">
+          ${isNotDivorced ? '✓ Не расторгнут' : 'Не расторгнут'}
+        </button>
+      </div>`;
     } else if (q.type === 'radio') {
       html += `<div class="radio-group">`;
       q.options.forEach(opt => {
