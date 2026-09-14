@@ -672,10 +672,11 @@ function renderStep(step) {
         const checked = answers[q.id] === opt ? 'checked' : '';
         const sel = answers[q.id] === opt ? ' selected' : '';
         const eid = 'q_'+q.id+'_'+opt.replace(/\W/g,'_');
-        html += `<div class="radio-option${sel}" id="ro_${eid}">
+        html += `<div class="radio-option${sel}" id="ro_${eid}" onclick="var inp=this.querySelector('input');inp.checked=true;inp.dispatchEvent(new Event('change',{bubbles:true}))" style="cursor:pointer;user-select:none;">
           <input type="radio" name="q_${q.id}" id="${eid}" value="${opt.replace(/"/g,'&quot;')}" ${checked}
+            onclick="event.stopPropagation()"
             onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)})">
-          <label for="${eid}">${opt}</label></div>`;
+          <span style="font-size:14px;color:var(--ink);line-height:1.4;">${opt}</span></div>`;
       });
       html += `</div>`;
       if (q.clarify) {
@@ -690,10 +691,11 @@ function renderStep(step) {
         const checked = arr.includes(opt) ? 'checked' : '';
         const sel = arr.includes(opt) ? ' selected' : '';
         const eid = 'q_'+q.id+'_'+opt.replace(/\W/g,'_');
-        html += `<div class="checkbox-option${sel}" id="cb_${eid}">
+        html += `<div class="checkbox-option${sel}" id="cb_${eid}" onclick="var inp=this.querySelector('input');inp.checked=!inp.checked;inp.dispatchEvent(new Event('change',{bubbles:true}))" style="cursor:pointer;user-select:none;">
           <input type="checkbox" id="${eid}" value="${opt}" ${checked}
+            onclick="event.stopPropagation()"
             onchange="toggleCheck('${q.id}','${opt.replace(/'/g,"\\'")}',this.checked); document.getElementById('cb_${eid}').classList.toggle('selected',this.checked)">
-          <label for="${eid}">${opt}</label></div>`;
+          <span style="font-size:14px;color:var(--ink);line-height:1.4;">${opt}</span></div>`;
       });
       html += `</div>`;
       if (q.clarify) {
