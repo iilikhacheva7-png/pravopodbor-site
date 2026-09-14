@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета по разделу имущества — По рекомендации</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root {
+  --bg:        #f7f4ef;
+  --bg-card:   #ffffff;
+  --bg-inner:  #f9f7f3;
+  --ink:       #1a1208;
+  --ink-soft:  #6b5f50;
+  --accent:    #c9a84c;
+  --accent-dim: rgba(201,168,76,0.12);
+  --accent-border: rgba(201,168,76,0.4);
+  --border:    rgba(26,18,8,0.10);
+  --border-strong: rgba(26,18,8,0.18);
+  --green:     #2e7d52;
+  --green-bg:  rgba(46,125,82,0.10);
+  --radius:    14px;
+  --radius-sm: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+}
+
+.site-header {
+  width: 100%;
+  max-width: 680px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1.75rem;
+}
+.logo-mark { font-size: 20px; line-height: 1; }
+.logo-title { font-size: 15px; font-weight: 700; color: var(--ink); }
+.logo-sub { font-size: 11px; color: var(--ink-soft); margin-top: 1px; }
+
+/* ── Интро-экран ── */
+.intro-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2rem 1.75rem;
+  max-width: 680px;
+  width: 100%;
+}
+.intro-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: var(--accent-dim);
+  border: 1px solid var(--accent-border);
+  border-radius: 6px;
+  padding: 3px 10px;
+  margin-bottom: 1rem;
+}
+.intro-card h1 {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--ink);
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+.intro-card .subtitle {
+  font-size: 15px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.intro-stats {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: var(--bg-inner);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 14px;
+  font-size: 13px;
+  color: var(--ink);
+}
+.stat-chip span { font-size: 16px; }
+.intro-docs {
+  background: var(--bg-inner);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  margin-bottom: 1.5rem;
+}
+.intro-docs h3 {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--ink-soft);
+  margin-bottom: 0.75rem;
+}
+.doc-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.doc-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--ink);
+  line-height: 1.4;
+}
+.doc-item::before {
+  content: "📄";
+  font-size: 13px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.intro-note {
+  font-size: 13px;
+  color: var(--ink-soft);
+  line-height: 1.6;
+  padding: 10px 14px;
+  background: var(--green-bg);
+  border-radius: 8px;
+  border-left: 2px solid var(--green);
+  margin-bottom: 1.5rem;
+}
+
+/* ── Квиз ── */
+.quiz-wrap {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+  max-width: 680px;
+  width: 100%;
+}
+
+.progress-bar {
+  background: rgba(26,18,8,0.08);
+  border-radius: 4px;
+  height: 3px;
+  margin-bottom: 0.75rem;
+}
+.progress-fill {
+  background: var(--accent);
+  border-radius: 4px;
+  height: 3px;
+  transition: width 0.35s ease;
+}
+.step-label {
+  font-size: 12px;
+  color: var(--ink-soft);
+  margin-bottom: 1.25rem;
+}
+.section-title {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+.question-card {
+  background: var(--bg-inner);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 1.1rem 1.2rem 1rem;
+  margin-bottom: 0.875rem;
+}
+.question-text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 0.5rem;
+  line-height: 1.5;
+}
+.question-note {
+  font-size: 12px;
+  color: #5a6e4a;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+  padding: 6px 10px;
+  background: var(--green-bg);
+  border-radius: 6px;
+  border-left: 2px solid var(--green);
+}
+.radio-group, .checkbox-group { display: flex; flex-direction: column; gap: 6px; }
+.radio-option, .checkbox-option {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  padding: 8px 11px;
+  border-radius: 8px;
+  border: 1px solid var(--border-strong);
+  background: var(--bg-card);
+  transition: border-color 0.15s, background 0.15s;
+}
+.radio-option { align-items: center; }
+.radio-option:hover, .checkbox-option:hover { border-color: var(--accent); background: var(--accent-dim); }
+.radio-option.selected, .checkbox-option.selected { border-color: var(--accent); background: var(--accent-dim); }
+.radio-option input, .checkbox-option input { accent-color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+.radio-option input { margin-top: 0; }
+.radio-option label, .checkbox-option label { font-size: 14px; color: var(--ink); cursor: pointer; line-height: 1.4; }
+
+.clarify-wrap { margin-top: 8px; }
+.clarify-label { font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
+
+.clarify-input, .text-input, .textarea-input {
+  width: 100%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-strong);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 14px;
+  font-family: inherit;
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.clarify-input { font-size: 13px; padding: 7px 10px; }
+.clarify-input::placeholder, .text-input::placeholder, .textarea-input::placeholder { color: rgba(107,95,80,0.45); }
+.clarify-input:focus, .text-input:focus, .textarea-input:focus { border-color: var(--accent); }
+.textarea-input { min-height: 80px; resize: vertical; }
+
+.btn-row { display: flex; gap: 10px; margin-top: 1.5rem; align-items: center; }
+.btn {
+  padding: 11px 24px;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border-strong);
+  background: transparent;
+  color: var(--ink-soft);
+  transition: border-color 0.15s, background 0.15s;
+  font-family: inherit;
+}
+.btn:hover { border-color: rgba(26,18,8,0.3); color: var(--ink); background: var(--bg-inner); }
+.btn-primary {
+  background: var(--accent);
+  color: #1a1306;
+  border-color: var(--accent);
+}
+.btn-primary:hover { background: #dbb84e; border-color: #dbb84e; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn-start {
+  width: 100%;
+  padding: 14px;
+  font-size: 15px;
+  font-weight: 700;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #1a1306;
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+  font-family: inherit;
+}
+.btn-start:hover { background: #dbb84e; }
+
+.error-msg {
+  font-size: 13px;
+  color: #b00;
+  margin-top: 10px;
+  display: none;
+  padding: 8px 12px;
+  background: rgba(180,0,0,0.07);
+  border-radius: 6px;
+  border-left: 2px solid #b00;
+}
+
+.consent-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 1rem;
+  padding: 12px 14px;
+  background: var(--bg-inner);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.consent-wrap input { margin-top: 2px; accent-color: var(--accent); flex-shrink: 0; width: 16px; height: 16px; cursor: pointer; }
+.consent-wrap label { font-size: 13px; color: var(--ink-soft); line-height: 1.5; cursor: pointer; }
+.consent-wrap a { color: var(--accent); text-decoration: none; }
+
+.thank-you { text-align: center; padding: 2.5rem 1rem 2rem; }
+.thank-you-icon { font-size: 44px; margin-bottom: 1rem; }
+.thank-you h2 { font-size: 22px; font-weight: 700; color: var(--ink); margin-bottom: 0.6rem; }
+.thank-you p { font-size: 15px; color: var(--ink-soft); line-height: 1.7; max-width: 400px; margin: 0 auto; }
+.tg-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+  padding: 12px 24px;
+  background: var(--accent);
+  color: #1a1306;
+  border-radius: 999px;
+  font-size: 14px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+.tg-link:hover { background: #dbb84e; }
+
+.quiz-footer { margin-top: 1.5rem; font-size: 12px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
+.quiz-footer a { color: var(--ink-soft); text-decoration: underline; }
+
+@media (max-width: 480px) {
+  body { padding: 1rem 0.75rem 3rem; }
+  .intro-card, .quiz-wrap { padding: 1.25rem; }
+  .intro-stats { gap: 8px; }
+  .btn-row { flex-direction: column-reverse; }
+  .btn { width: 100%; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div class="logo-mark">♡</div>
+  <div>
+    <div class="logo-title">По рекомендации</div>
+    <div class="logo-sub">Юридические документы</div>
+  </div>
+</header>
+
+<!-- ИНТРО -->
+<div class="intro-card" id="introCard">
+  <div class="intro-badge">Раздел имущества</div>
+  <h1>Анкета для подготовки иска</h1>
+  <p class="subtitle">Чтобы не задавать вам 35 вопросов в мессенджере по одному — попросила заполнить этот опросник. Это займёт 10–15 минут. Ответы получу сразу и смогу сразу подготовить документы.</p>
+
+  <div class="intro-stats">
+    <div class="stat-chip"><span>🕐</span> 10–15 минут</div>
+    <div class="stat-chip"><span>📋</span> 7 разделов</div>
+    <div class="stat-chip"><span>🔒</span> Только мне на почту</div>
+  </div>
+
+  <div class="intro-docs">
+    <h3>Подготовьте под рукой</h3>
+    <div class="doc-list">
+      <div class="doc-item">Свидетельство о браке и о расторжении (если есть)</div>
+      <div class="doc-item">Выписки ЕГРН или договоры купли-продажи на недвижимость</div>
+      <div class="doc-item">ПТС / СТС на автомобили</div>
+      <div class="doc-item">Кредитный договор по ипотеке (если есть)</div>
+      <div class="doc-item">Информация о банковских счетах и кредитах</div>
+    </div>
+  </div>
+
+  <div class="intro-note">
+    Если каких-то документов нет — не страшно, просто укажите что примерно известно. Уточним в рабочем порядке.
+  </div>
+
+  <button class="btn-start" onclick="startQuiz()">Начать заполнение →</button>
+</div>
+
+<!-- КВИЗ -->
+<div class="quiz-wrap" id="quizWrap" style="display:none;">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="step-label" id="stepLabel">Шаг 1 из 7</div>
+  <div id="quizContent"></div>
+  <div class="btn-row" id="btnRow">
+    <button class="btn" id="btnBack" onclick="goBack()" style="display:none">← Назад</button>
+    <button class="btn btn-primary" id="btnNext" onclick="goNext()">Далее →</button>
+  </div>
+  <div class="error-msg" id="errorMsg">Пожалуйста, заполните обязательные поля</div>
+</div>
+
+<div class="quiz-footer">
+  <a href="/privacy-policy.html" target="_blank">Политика конфиденциальности</a> · rekoyur.ru
+</div>
+
+<script>
+const FORMSPREE_URL = 'https://formspree.io/f/xpqekrvz';
+
+const steps = [
+  {
+    section: "Общая информация о браке",
+    questions: [
+      { id:"name",              type:"text",     label:"Ваши ФИО (полностью)",                              placeholder:"Иванова Анна Сергеевна",           required:true },
+      { id:"phone",             type:"text",     label:"Номер телефона",                                     placeholder:"+7 (___) ___-__-__",               required:true },
+      { id:"spouse_name",       type:"text",     label:"ФИО супруга / бывшего супруга",                     placeholder:"Иванов Сергей Петрович",           required:true },
+      { id:"marriage_date",     type:"text",     label:"Дата заключения брака",                              placeholder:"дд.мм.гггг",                       required:true },
+      { id:"divorce_status",    type:"radio",    label:"Статус брака на сегодня",                            required:true, clarify:true,
+        options:["Брак ещё не расторгнут","Брак расторгнут — есть решение/свидетельство","Поданы документы на развод, ждём решения"] },
+      { id:"divorce_date",      type:"text",     label:"Дата расторжения брака (если расторгнут)",           placeholder:"дд.мм.гггг или «пока не расторгнут»" },
+      { id:"actual_separation", type:"radio",    label:"Когда фактически перестали вести общее хозяйство?",  clarify:true,
+        note:"Важно для имущества, купленного незадолго до развода",
+        options:["Не разъезжались — жили вместе до последнего","За несколько месяцев до развода","За год и более до развода","Более 2 лет назад"] },
+      { id:"bridal_contract",   type:"radio",    label:"Есть ли брачный договор?",                          required:true, clarify:true,
+        options:["Нет","Да, заключали","Не уверена"] }
+    ]
+  },
+  {
+    section: "Недвижимость",
+    questions: [
+      { id:"has_realty",             type:"radio",    label:"Есть ли совместно нажитая недвижимость?",   required:true, clarify:true, options:["Да","Нет / не уверена"] },
+      { id:"realty_list",            type:"textarea", label:"Перечислите каждый объект: тип, адрес, на кого оформлен, примерная стоимость",
+        placeholder:"Например:\n1. Квартира, Екатеринбург, ул. Мира 5 кв.12 — на мужа, ~5 000 000 ₽\n2. Земельный участок, СНТ Берёзка — на меня, ~600 000 ₽",
+        condition:{id:"has_realty",value:"Да"} },
+      { id:"has_mortgage",           type:"radio",    label:"Есть ли ипотека?",                          clarify:true, options:["Нет","Да, ипотека есть"] },
+      { id:"mortgage_detail",        type:"textarea", label:"Ипотека: на какой объект, в каком банке, остаток долга?",
+        placeholder:"Например: квартира на ул. Мира, Сбербанк, остаток ~2 300 000 ₽",
+        condition:{id:"has_mortgage",value:"Да, ипотека есть"} },
+      { id:"realty_inherited",       type:"radio",    label:"Есть ли недвижимость, полученная в наследство или в дар?",
+        note:"Такое имущество обычно не делится", clarify:true, options:["Нет","Да — укажу ниже"] },
+      { id:"realty_inherited_detail",type:"textarea", label:"Что получено в наследство / дар и кем?",
+        placeholder:"Например: квартира в Перми — по наследству от бабушки в 2018 году",
+        condition:{id:"realty_inherited",value:"Да — укажу ниже"} }
+    ]
+  },
+  {
+    section: "Автомобили и другое имущество",
+    questions: [
+      { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, options:["Нет","Да"] },
+      { id:"cars_detail",   type:"textarea", label:"Перечислите: марка, год, на кого оформлен, примерная стоимость",
+        placeholder:"Например:\n1. Toyota Camry 2020, на мужа, ~2 200 000 ₽\n2. Лада Гранта 2017, на меня, ~550 000 ₽",
+        condition:{id:"has_cars",value:"Да"} },
+      { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
+        options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
+      { id:"other_detail",  type:"textarea", label:"Опишите подробнее (стоимость, на кого оформлено)",
+        placeholder:"Необязательно, но поможет точнее оценить иск" }
+    ]
+  },
+  {
+    section: "Банковские счета и долги",
+    questions: [
+      { id:"has_accounts",   type:"radio",    label:"Есть ли банковские счета / вклады, открытые в браке?", clarify:true, options:["Нет / не знаю","Да"] },
+      { id:"accounts_detail",type:"textarea", label:"Чьи счета, в каком банке, примерный остаток",
+        placeholder:"Например: вклад мужа в Альфа-банке, ~800 000 ₽; мой счёт в Сбере, ~50 000 ₽",
+        condition:{id:"has_accounts",value:"Да"} },
+      { id:"has_debts",      type:"radio",    label:"Есть ли совместные кредиты / долги (кроме ипотеки)?",
+        note:"Долги тоже делятся при разделе", clarify:true, options:["Нет","Да"] },
+      { id:"debts_detail",   type:"textarea", label:"Какие кредиты и долги? Сумма, на кого оформлен",
+        placeholder:"Например: потребкредит в ВТБ на мужа, остаток 350 000 ₽",
+        condition:{id:"has_debts",value:"Да"} }
+    ]
+  },
+  {
+    section: "Особые обстоятельства",
+    questions: [
+      { id:"personal_funds",        type:"radio",    label:"Вкладывали ли личные деньги (добрачные или из наследства) в совместную покупку?",
+        note:"Это может увеличить вашу долю", clarify:true,
+        options:["Нет","Да, я вкладывала личные средства","Да, супруг вкладывал личные средства"] },
+      { id:"personal_funds_detail", type:"textarea", label:"В какой объект и сколько примерно?",
+        placeholder:"Например: при покупке квартиры внесла 700 000 ₽ из добрачных накоплений",
+        condition:{id:"personal_funds",value:"Да, я вкладывала личные средства"} },
+      { id:"matkapital",            type:"radio",    label:"Использовался ли материнский капитал при покупке жилья?", clarify:true, options:["Нет","Да"] },
+      { id:"waste",                 type:"radio",    label:"Есть ли основания считать, что супруг тратил общее имущество в ущерб семье?",
+        note:"Азартные игры, алкоголь, растрата — могут дать основание на бо́льшую долю", clarify:true,
+        options:["Нет","Да, есть такие основания"] },
+      { id:"waste_detail",          type:"textarea", label:"Опишите коротко",
+        placeholder:"Например: муж проиграл в казино ~400 000 ₽ общих денег в 2023 году",
+        condition:{id:"waste",value:"Да, есть такие основания"} }
+    ]
+  },
+  {
+    section: "Что вы хотите получить",
+    questions: [
+      { id:"goal",               type:"radio",    label:"Что для вас важнее всего по итогу раздела?", required:true, clarify:true,
+        options:["Получить конкретный объект (квартира, машина и т.д.)","Получить денежную компенсацию от супруга","Разделить всё поровну и закрыть вопрос","Получить бо́льшую долю, чем 50%"] },
+      { id:"want_object",        type:"textarea", label:"Что именно хотите получить? (конкретно)",
+        placeholder:"Например: хочу оставить себе квартиру и получить компенсацию за его долю. Машину пусть берёт." },
+      { id:"willing_compensate", type:"radio",    label:"Готовы ли выплатить супругу компенсацию, если вам достанется имущество на бо́льшую сумму?", clarify:true,
+        options:["Да, готова","Нет, хочу чтобы он выплатил мне","Пока не думала об этом"] },
+      { id:"urgency",            type:"radio",    label:"Насколько срочно нужно подать иск?", clarify:true,
+        options:["Срочно, как можно быстрее","В течение 1–2 месяцев","Пока собираю информацию"] },
+      { id:"attempts",           type:"radio",    label:"Пытались ли договориться о разделе без суда?", clarify:true,
+        options:["Нет, ещё не пробовали","Пробовали, но не договорились","Есть частичная договорённость по некоторым объектам"] },
+      { id:"attempts_detail",    type:"textarea", label:"Что удалось согласовать / где застряли?",
+        placeholder:"Необязательно",
+        condition:{id:"attempts",value:"Есть частичная договорённость по некоторым объектам"} }
+    ]
+  },
+  {
+    section: "Документы на руках",
+    questions: [
+      { id:"docs",               type:"checkbox", label:"Какие документы у вас есть?", clarify:true,
+        options:["Свидетельство о заключении брака","Свидетельство о расторжении или решение суда","Выписки ЕГРН / договоры купли-продажи на недвижимость","ПТС / СТС на автомобили","Кредитный договор по ипотеке","Выписки по банковским счетам","Чеки, договоры на покупку имущества в браке"] },
+      { id:"docs_missing",       type:"radio",    label:"Есть ли имущество, по которому документов на руках нет?", clarify:true,
+        options:["Нет, всё есть","Да, по некоторым объектам"] },
+      { id:"docs_missing_detail",type:"textarea", label:"По каким объектам нет документов?",
+        placeholder:"Например: нет договора купли-продажи машины мужа",
+        condition:{id:"docs_missing",value:"Да, по некоторым объектам"} },
+      { id:"extra",              type:"textarea", label:"Есть ли что-то важное, что не вошло в вопросы выше?",
+        placeholder:"Любая информация, которую считаете нужным добавить" }
+    ]
+  }
+];
+
+const labels = {
+  name:'ФИО клиента', phone:'Телефон', spouse_name:'ФИО супруга', marriage_date:'Дата брака',
+  divorce_status:'Статус брака', divorce_date:'Дата расторжения', actual_separation:'Фактическое расставание',
+  bridal_contract:'Брачный договор', has_realty:'Совместная недвижимость', realty_list:'Перечень недвижимости',
+  has_mortgage:'Ипотека', mortgage_detail:'Детали ипотеки', realty_inherited:'Наследство/дар',
+  realty_inherited_detail:'Что получено', has_cars:'Автомобили', cars_detail:'Перечень авто',
+  other_property:'Прочее имущество', other_detail:'Детали прочего', has_accounts:'Счета/вклады',
+  accounts_detail:'Детали счетов', has_debts:'Долги (кроме ипотеки)', debts_detail:'Детали долгов',
+  personal_funds:'Личные вложения в совместное', personal_funds_detail:'Детали вложений',
+  matkapital:'Маткапитал при покупке жилья', waste:'Ущерб имуществу семьи', waste_detail:'Описание ущерба',
+  goal:'Главная цель раздела', want_object:'Что хочет получить', willing_compensate:'Готовность к компенсации',
+  urgency:'Срочность', attempts:'Досудебные попытки', attempts_detail:'Детали договорённостей',
+  docs:'Документы на руках', docs_missing:'Отсутствующие документы', docs_missing_detail:'По каким объектам нет документов',
+  extra:'Дополнительная информация'
+};
+
+const sectionKeys = [
+  { name:'Общие данные',          keys:['name','phone','spouse_name','marriage_date','divorce_status','divorce_date','actual_separation','bridal_contract'] },
+  { name:'Недвижимость',          keys:['has_realty','realty_list','has_mortgage','mortgage_detail','realty_inherited','realty_inherited_detail'] },
+  { name:'Авто и прочее',         keys:['has_cars','cars_detail','other_property','other_detail'] },
+  { name:'Счета и долги',         keys:['has_accounts','accounts_detail','has_debts','debts_detail'] },
+  { name:'Особые обстоятельства', keys:['personal_funds','personal_funds_detail','matkapital','waste','waste_detail'] },
+  { name:'Цели и пожелания',      keys:['goal','want_object','willing_compensate','urgency','attempts','attempts_detail'] },
+  { name:'Документы',             keys:['docs','docs_missing','docs_missing_detail','extra'] }
+];
+
+let currentStep = 0;
+const answers = {};
+const clarifyAnswers = {};
+const TOTAL = steps.length;
+
+function startQuiz() {
+  document.getElementById('introCard').style.display = 'none';
+  document.getElementById('quizWrap').style.display = 'block';
+  renderStep(0);
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+function isVisible(q) {
+  if (!q.condition) return true;
+  return answers[q.condition.id] === q.condition.value;
+}
+
+function renderStep(step) {
+  const s = steps[step];
+  const visibleQs = s.questions.filter(isVisible);
+  let html = `<div class="section-title">${s.section}</div>`;
+
+  visibleQs.forEach(q => {
+    html += `<div class="question-card">`;
+    html += `<div class="question-text">${q.label}${q.required ? ' <span style="color:var(--accent)">*</span>' : ''}</div>`;
+    if (q.note) html += `<div class="question-note">${q.note}</div>`;
+
+    if (q.type === 'text') {
+      const v = (answers[q.id] || '').replace(/"/g,'&quot;');
+      html += `<input class="text-input" placeholder="${q.placeholder||''}" value="${v}" oninput="answers['${q.id}']=this.value">`;
+    } else if (q.type === 'textarea') {
+      const v = (answers[q.id] || '').replace(/</g,'&lt;');
+      html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" oninput="answers['${q.id}']=this.value">${v}</textarea>`;
+    } else if (q.type === 'radio') {
+      html += `<div class="radio-group">`;
+      q.options.forEach(opt => {
+        const checked = answers[q.id] === opt ? 'checked' : '';
+        const sel = answers[q.id] === opt ? ' selected' : '';
+        const eid = 'q_'+q.id+'_'+opt.replace(/\W/g,'_');
+        html += `<div class="radio-option${sel}" id="ro_${eid}">
+          <input type="radio" name="q_${q.id}" id="${eid}" value="${opt.replace(/"/g,'&quot;')}" ${checked}
+            onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)})">
+          <label for="${eid}">${opt}</label></div>`;
+      });
+      html += `</div>`;
+      if (q.clarify) {
+        const cv = (clarifyAnswers[q.id]||'').replace(/"/g,'&quot;');
+        html += `<div class="clarify-wrap"><div class="clarify-label">Уточнение или свой вариант</div>
+          <input class="clarify-input" placeholder="Опишите подробнее или добавьте свой ответ..." value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
+      }
+    } else if (q.type === 'checkbox') {
+      html += `<div class="checkbox-group">`;
+      q.options.forEach(opt => {
+        const arr = answers[q.id] || [];
+        const checked = arr.includes(opt) ? 'checked' : '';
+        const sel = arr.includes(opt) ? ' selected' : '';
+        const eid = 'q_'+q.id+'_'+opt.replace(/\W/g,'_');
+        html += `<div class="checkbox-option${sel}" id="cb_${eid}">
+          <input type="checkbox" id="${eid}" value="${opt}" ${checked}
+            onchange="toggleCheck('${q.id}','${opt.replace(/'/g,"\\'")}',this.checked); document.getElementById('cb_${eid}').classList.toggle('selected',this.checked)">
+          <label for="${eid}">${opt}</label></div>`;
+      });
+      html += `</div>`;
+      if (q.clarify) {
+        const cv = (clarifyAnswers[q.id]||'').replace(/"/g,'&quot;');
+        html += `<div class="clarify-wrap"><div class="clarify-label">Добавьте что-то своё</div>
+          <input class="clarify-input" placeholder="Укажите что-то, чего нет в списке..." value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
+      }
+    }
+    html += `</div>`;
+  });
+
+  if (step === TOTAL - 1) {
+    html += `<div class="consent-wrap">
+      <input type="checkbox" id="consent_pd" onchange="document.getElementById('btnNext').disabled=!this.checked">
+      <label for="consent_pd">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных</label>
+    </div>`;
+  }
+
+  document.getElementById('quizContent').innerHTML = html;
+  document.getElementById('stepLabel').textContent = `Шаг ${step+1} из ${TOTAL}`;
+  document.getElementById('progressFill').style.width = `${(step/TOTAL)*100}%`;
+  document.getElementById('btnBack').style.display = step > 0 ? 'inline-block' : 'none';
+  const btn = document.getElementById('btnNext');
+  btn.textContent = step === TOTAL-1 ? 'Отправить анкету →' : 'Далее →';
+  btn.disabled = step === TOTAL-1;
+  document.getElementById('errorMsg').style.display = 'none';
+}
+
+function toggleCheck(id, val, checked) {
+  if (!answers[id]) answers[id] = [];
+  if (checked) answers[id].push(val);
+  else answers[id] = answers[id].filter(v => v !== val);
+}
+
+function validateStep(step) {
+  return steps[step].questions.filter(isVisible).every(q => {
+    if (!q.required) return true;
+    const v = answers[q.id];
+    return v && !(Array.isArray(v) && v.length === 0) && !(typeof v === 'string' && !v.trim());
+  });
+}
+
+function goNext() {
+  if (!validateStep(currentStep)) { document.getElementById('errorMsg').style.display='block'; return; }
+  if (currentStep < TOTAL-1) { currentStep++; renderStep(currentStep); window.scrollTo({top:0,behavior:'smooth'}); }
+  else submitForm();
+}
+
+function goBack() {
+  if (currentStep > 0) { currentStep--; renderStep(currentStep); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+
+function buildEmailText() {
+  let t = 'АНКЕТА ПО РАЗДЕЛУ ИМУЩЕСТВА\n══════════════════════════\n\n';
+  sectionKeys.forEach(sec => {
+    let rows = '';
+    sec.keys.forEach(k => {
+      const v = answers[k], cv = clarifyAnswers[k];
+      if ((!v || (Array.isArray(v) && !v.length)) && !cv) return;
+      let line = (labels[k]||k) + ': ';
+      if (v) line += Array.isArray(v) ? v.join(', ') : v;
+      if (cv) line += '\n  → Уточнение: ' + cv;
+      rows += line + '\n';
+    });
+    if (rows) t += `【${sec.name}】\n${rows}\n`;
+  });
+  return t;
+}
+
+function submitForm() {
+  const btn = document.getElementById('btnNext');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  const fd = new FormData();
+  fd.append('form_type', 'Анкета раздел имущества');
+  fd.append('Имя', answers['name'] || '');
+  fd.append('Телефон', answers['phone'] || '');
+  fd.append('Анкета', buildEmailText());
+  fd.append('_subject', 'Анкета раздел имущества — ' + (answers['name'] || 'клиент'));
+  fetch(FORMSPREE_URL, { method:'POST', body:fd, headers:{'Accept':'application/json'} })
+    .then(r => { if (r.ok) showThankYou(); else showError(); })
+    .catch(showError);
+}
+
+function showThankYou() {
+  document.getElementById('progressFill').style.width = '100%';
+  document.getElementById('stepLabel').textContent = 'Готово!';
+  document.getElementById('quizContent').innerHTML = `
+    <div class="thank-you">
+      <div class="thank-you-icon">✅</div>
+      <h2>Анкета получена!</h2>
+      <p>Спасибо — я изучу вашу ситуацию и свяжусь с вами в течение рабочего дня, чтобы рассказать, что и как будет дальше.</p>
+      <a class="tg-link" href="https://t.me/a_likhacheva2026" target="_blank">✈️ Написать в Telegram</a>
+    </div>`;
+  document.getElementById('btnRow').innerHTML = '';
+  document.getElementById('errorMsg').style.display = 'none';
+}
+
+function showError() {
+  const btn = document.getElementById('btnNext');
+  btn.textContent = 'Отправить анкету →';
+  btn.disabled = false;
+  const e = document.getElementById('errorMsg');
+  e.textContent = 'Не удалось отправить. Попробуйте ещё раз или напишите напрямую: t.me/a_likhacheva2026';
+  e.style.display = 'block';
+}
+</script>
+</body>
+</html>
