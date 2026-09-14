@@ -325,8 +325,21 @@ body {
 }
 .tg-link:hover { background: #dbb84e; }
 
-.quiz-footer { margin-top: 1.5rem; font-size: 12px; color: var(--ink-soft); text-align: center; line-height: 1.6; }
-.quiz-footer a { color: var(--ink-soft); text-decoration: underline; }
+.site-footer {
+  width: 100%;
+  max-width: 680px;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1.75rem;
+}
+.footer-brand-name { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 3px; }
+.footer-brand-sub { font-size: 12px; color: var(--ink-soft); line-height: 1.6; margin-bottom: 1rem; }
+.footer-contacts { display: flex; flex-wrap: wrap; gap: 6px 16px; margin-bottom: 1.25rem; }
+.footer-contacts a { font-size: 13px; color: var(--accent); text-decoration: none; }
+.footer-contacts a:hover { text-decoration: underline; }
+.footer-links { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-bottom: 1.25rem; padding-bottom: 1.25rem; border-bottom: 1px solid var(--border); }
+.footer-links a { font-size: 12px; color: var(--ink-soft); text-decoration: underline; }
+.footer-copy { font-size: 11px; color: var(--ink-soft); line-height: 1.7; }
 
 @media (max-width: 480px) {
   body { padding: 1rem 0.75rem 3rem; }
@@ -389,9 +402,32 @@ body {
   <div class="error-msg" id="errorMsg">Пожалуйста, заполните обязательные поля</div>
 </div>
 
-<div class="quiz-footer">
-  <a href="/privacy-policy.html" target="_blank">Политика конфиденциальности</a> · rekoyur.ru
-</div>
+<footer class="site-footer">
+  <div class="footer-brand-name">♡ По рекомендации</div>
+  <div class="footer-brand-sub">Лихачева Анастасия Анатольевна · Самозанятая<br>Подбор юристов и юридические документы онлайн · По всей России</div>
+
+  <div class="footer-contacts">
+    <a href="https://rekoyur.ru" target="_blank">🌐 rekoyur.ru</a>
+    <a href="https://t.me/a_likhacheva2026" target="_blank">✈️ Telegram</a>
+    <a href="https://t.me/po_rekomendatsii" target="_blank">📢 Канал</a>
+    <a href="https://instagram.com/rek.yur" target="_blank">📸 @rek.yur</a>
+    <a href="tel:+79920011995">📞 +7 992 001-19-95</a>
+    <a href="mailto:alikhacheva7@yandex.ru">✉️ alikhacheva7@yandex.ru</a>
+  </div>
+
+  <div class="footer-links">
+    <a href="https://rekoyur.ru" target="_blank">Главная страница</a>
+    <a href="/privacy-policy.html" target="_blank">Политика конфиденциальности</a>
+    <a href="/oferta.html" target="_blank">Публичная оферта</a>
+    <a href="/privacy-policy.html#pd" target="_blank">Согласие на обработку персональных данных</a>
+  </div>
+
+  <div class="footer-copy">
+    © 2024–2026 «По рекомендации» · Лихачева Анастасия Анатольевна · Самозанятая<br>
+    Оплата: СБП +7 992 001-19-95 (Т-Банк) · Назначение платежа: «Юридические документы»<br>
+    Регистрационный номер оператора ПД: 66-26-087909
+  </div>
+</footer>
 
 <script>
 const FORMSPREE_URL = 'https://formspree.io/f/xpqekrvz';
