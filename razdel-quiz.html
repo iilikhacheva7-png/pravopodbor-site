@@ -441,8 +441,7 @@ const steps = [
         condition:{id:"has_cars",value:"Да"} },
       { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
         options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
-      { id:"other_detail",  type:"textarea", label:"Опишите подробнее (стоимость, на кого оформлено)",
-        placeholder:"Необязательно, но поможет точнее оценить иск" }
+      { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"], placeholder:"стоимость, на кого оформлено" }
     ]
   },
   {
@@ -637,6 +636,23 @@ function renderStep(step) {
     } else if (q.type === 'textarea') {
       const v = (answers[q.id] || '').replace(/</g,'&lt;');
       html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" oninput="answers['${q.id}']=this.value">${v}</textarea>`;
+    } else if (q.type === 'linked_detail') {
+      const linked = answers[q.linkedTo] || [];
+      const items = linked.filter(o => !(q.excludeOptions||[]).includes(o));
+      if (items.length === 0) {
+        html += `<div style="font-size:13px;color:var(--ink-soft);padding:8px 0;">Выберите пункты выше — здесь появятся поля для каждого</div>`;
+      } else {
+        const det = answers[q.id] || {};
+        items.forEach(opt => {
+          const safeKey = opt.replace(/['"]/g,'');
+          const val = (det[safeKey] || '').replace(/"/g,'&quot;');
+          html += `<div style="margin-bottom:8px;">
+            <div style="font-size:12px;font-weight:600;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;">${opt}</div>
+            <input class="text-input" placeholder="${q.placeholder||''}" value="${val}"
+              oninput="setLinkedDetail('${q.id}','${safeKey.replace(/'/g,"\\'")}',this.value)">
+          </div>`;
+        });
+      }
     } else if (q.type === 'date_or_text') {
       const v = answers[q.id] || '';
       const isNotDivorced = v === 'не расторгнут';
@@ -706,10 +722,18 @@ function renderStep(step) {
   document.getElementById('errorMsg').style.display = 'none';
 }
 
+function setLinkedDetail(id, key, val) {
+  if (!answers[id] || typeof answers[id] !== 'object') answers[id] = {};
+  answers[id][key] = val;
+}
+
 function toggleCheck(id, val, checked) {
   if (!answers[id]) answers[id] = [];
   if (checked) answers[id].push(val);
   else answers[id] = answers[id].filter(v => v !== val);
+  // перерисовываем шаг чтобы linked_detail обновился
+  const hasLinked = steps[currentStep].questions.some(q => q.type === 'linked_detail' && q.linkedTo === id);
+  if (hasLinked) renderStep(currentStep);
 }
 
 function validateStep(step) {
@@ -736,9 +760,13 @@ function buildEmailText() {
     let rows = '';
     sec.keys.forEach(k => {
       const v = answers[k], cv = clarifyAnswers[k];
-      if ((!v || (Array.isArray(v) && !v.length)) && !cv) return;
+      if ((!v || (Array.isArray(v) && !v.length) || (typeof v === 'object' && !Array.isArray(v) && !Object.values(v).some(x=>x))) && !cv) return;
       let line = (labels[k]||k) + ': ';
-      if (v) line += Array.isArray(v) ? v.join(', ') : v;
+      if (v) {
+        if (Array.isArray(v)) line += v.join(', ');
+        else if (typeof v === 'object') line += '\n' + Object.entries(v).filter(([,val])=>val).map(([key,val])=>`  • ${key}: ${val}`).join('\n');
+        else line += v;
+      }
       if (cv) line += '\n  → Уточнение: ' + cv;
       rows += line + '\n';
     });
