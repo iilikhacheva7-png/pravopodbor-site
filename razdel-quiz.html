@@ -435,10 +435,11 @@ const steps = [
   {
     section: "Автомобили и другое имущество",
     questions: [
-      { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, options:["Нет","Да"] },
+      { id:"has_cars",      type:"radio",    label:"Есть ли автомобили, купленные в браке?", clarify:true, clarifyPlaceholder:"Марка, модель, год, примерная стоимость, на кого оформлено", options:["Нет","Да"] },
 
       { id:"other_property",type:"checkbox", label:"Что ещё есть из совместного имущества?", clarify:true,
         options:["Мебель, техника на значительную сумму","Гараж / машиноместо","Дача / садовый участок","Ценные бумаги / акции","Доля в ООО или бизнесе","Ничего из перечисленного"] },
+      { id:"other_detail", type:"linked_detail", label:"Опишите подробнее каждый пункт", linkedTo:"other_property", excludeOptions:["Ничего из перечисленного"] },
 
     ]
   },
@@ -680,7 +681,7 @@ function renderStep(step) {
       if (q.clarify) {
         const cv = (clarifyAnswers[q.id]||'').replace(/"/g,'&quot;');
         html += `<div class="clarify-wrap"><div class="clarify-label">Уточнение или свой вариант</div>
-          <input class="clarify-input" placeholder="Опишите подробнее или добавьте свой ответ..." value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
+          <input class="clarify-input" placeholder="${q.clarifyPlaceholder||'Опишите подробнее или добавьте свой ответ...'}" value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
       }
     } else if (q.type === 'checkbox') {
       html += `<div class="checkbox-group">`;
