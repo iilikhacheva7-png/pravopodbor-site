@@ -542,6 +542,45 @@ const answers = {};
 const clarifyAnswers = {};
 const TOTAL = steps.length;
 
+function phoneMask(el) {
+  let v = el.value.replace(/\D/g, '');
+  if (v.startsWith('8')) v = '7' + v.slice(1);
+  if (!v.startsWith('7')) v = '7' + v;
+  v = v.slice(0, 11);
+  let r = '+7';
+  if (v.length > 1) r += ' (' + v.slice(1, 4);
+  if (v.length >= 4) r += ') ' + v.slice(4, 7);
+  if (v.length >= 7) r += '-' + v.slice(7, 9);
+  if (v.length >= 9) r += '-' + v.slice(9, 11);
+  el.value = r;
+  answers[el.dataset.qid] = r;
+}
+
+function dateMask(el) {
+  let v = el.value.replace(/\D/g, '').slice(0, 8);
+  let r = '';
+  if (v.length > 0) r = v.slice(0, 2);
+  if (v.length > 2) r += '.' + v.slice(2, 4);
+  if (v.length > 4) r += '.' + v.slice(4, 8);
+  el.value = r;
+  answers[el.dataset.qid] = r;
+}
+
+document.addEventListener('input', function(e) {
+  const el = e.target;
+  if (!el.dataset.mask) return;
+  if (el.dataset.mask === 'phone') phoneMask(el);
+  else if (el.dataset.mask === 'date') dateMask(el);
+  else answers[el.dataset.qid] = el.value;
+});
+
+document.addEventListener('input', function(e) {
+  const el = e.target;
+  if (el.classList.contains('text-input') && !el.dataset.mask) {
+    answers[el.dataset.qid] = el.value;
+  }
+});
+
 function startQuiz() {
   document.getElementById('introCard').style.display = 'none';
   document.getElementById('quizWrap').style.display = 'block';
@@ -566,7 +605,11 @@ function renderStep(step) {
 
     if (q.type === 'text') {
       const v = (answers[q.id] || '').replace(/"/g,'&quot;');
-      html += `<input class="text-input" placeholder="${q.placeholder||''}" value="${v}" oninput="answers['${q.id}']=this.value">`;
+      const isPhone = q.id === 'phone';
+      const isDate = q.id.includes('date') || q.id === 'marriage_date';
+      const maskType = isPhone ? 'phone' : isDate ? 'date' : '';
+      const inputmode = isPhone ? 'inputmode="tel"' : isDate ? 'inputmode="numeric"' : '';
+      html += `<input class="text-input" data-mask="${maskType}" data-qid="${q.id}" placeholder="${q.placeholder||''}" value="${v}" ${inputmode}>`;
     } else if (q.type === 'textarea') {
       const v = (answers[q.id] || '').replace(/</g,'&lt;');
       html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" oninput="answers['${q.id}']=this.value">${v}</textarea>`;
