@@ -1045,20 +1045,36 @@ function showThankYou() {
   document.getElementById('progressFill').style.width = '100%';
   document.getElementById('stepLabel').textContent = 'Готово!';
   document.getElementById('quizContent').innerHTML = `
-    <div class="thank-you">
-      <div class="thank-you-icon">✅</div>
-      <h2>Анкета получена!</h2>
-      <p>Спасибо — я изучу вашу ситуацию и свяжусь с вами в течение рабочего дня, чтобы рассказать, что и как будет дальше.</p>
-      <a class="tg-link" href="https://t.me/a_likhacheva2026" target="_blank">✈️ Написать в Telegram</a>
-    </div>
-    <div style="margin-top:1.5rem;">
-      <div style="font-size:14px;font-weight:700;color:var(--ink);margin-bottom:1rem;padding-bottom:0.75rem;border-bottom:1px solid var(--border);">
-        Предварительный расчёт судебных расходов
+    <div style="text-align:center;padding:1rem 0 0.75rem;">
+      <div style="font-size:32px;margin-bottom:0.5rem;">✅</div>
+      <h2 style="font-size:18px;font-weight:700;color:var(--ink);margin-bottom:0.4rem;">Анкета получена!</h2>
+      <p style="font-size:13px;color:var(--ink-soft);line-height:1.5;margin-bottom:1rem;">Изучу вашу ситуацию и свяжусь в течение рабочего дня.</p>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1rem;">
+        <a href="https://t.me/a_likhacheva2026" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent);color:#1a1306;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;">
+          ✈️ Telegram
+        </a>
+        <a href="https://max.ru/a_likhacheva" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">
+          💬 Max
+        </a>
+        <a href="https://wa.me/79920011995" target="_blank"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">
+          📱 WhatsApp
+        </a>
+        <a href="tel:+79920011995"
+           style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">
+          📞 Позвонить
+        </a>
       </div>
+    </div>
+    <div style="border-top:1px solid var(--border);padding-top:1rem;">
+      <div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:0.75rem;">Предварительный расчёт судебных расходов</div>
       ${buildDutyScreen()}
     </div>`;
   document.getElementById('btnRow').innerHTML = '';
   document.getElementById('errorMsg').style.display = 'none';
+  window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function showError() {
