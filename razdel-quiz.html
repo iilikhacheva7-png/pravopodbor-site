@@ -430,7 +430,9 @@ body {
 </footer>
 
 <script>
-const CF_ENDPOINT = 'https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
+const TG_TOKEN = '8877924330:AAF2VjYIjHiQLi7vBN6MoQmO3rtkGSYJFzI';
+const TG_CHAT  = '8091089728';
+const TG_URL   = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage';
 
 const steps = [
   {
@@ -1031,46 +1033,41 @@ function submitForm() {
   const btn = document.getElementById('btnNext');
   btn.textContent = 'Отправляем...';
   btn.disabled = true;
-  var emailText = buildEmailText();
-  var p = new URLSearchParams(window.location.search);
-  var payload = {
-    topic:        'Раздел имущества',
-    source_page:  '/razdel-quiz.html',
-    name:         answers['name'] || '',
-    contact:      answers['phone'] || '',
-    answers: {
-      divorce:   answers['divorce_help'] || '',
-      realty:    answers['realty_list'] || '',
-      mortgage:  answers['has_mortgage'] || '',
-      cars:      clarifyAnswers['has_cars'] || '',
-      other:     (answers['other_property']||[]).join(', '),
-      accounts:  answers['accounts_detail'] || '',
-      goal:      answers['goal'] || '',
-      urgency:   answers['urgency'] || '',
-      full_text: emailText.substring(0, 3000)
-    },
-    utm: {
-      utm_source:   p.get('utm_source')   || '',
-      utm_medium:   p.get('utm_medium')   || '',
-      utm_campaign: p.get('utm_campaign') || '',
-      utm_content:  p.get('utm_content')  || '',
-      utm_term:     p.get('utm_term')     || ''
-    },
-    consent:      true,
-    website:      '',
-    submitted_at: new Date().toISOString()
-  };
-  fetch(CF_ENDPOINT, {
-    method:  'POST',
-    headers: {'Content-Type': 'application/json'},
-    body:    JSON.stringify(payload)
-  })
-  .then(function(res) { return res.json(); })
-  .then(function(data) {
-    if (data && data.ok) { showThankYou(); }
-    else { showError(); }
-  })
-  .catch(function() { showError(); });
+  var text = buildEmailText();
+  // Telegram ограничивает сообщение 4096 символами — режем если длиннее
+  var chunks = [];
+  var chunkSize = 3800;
+  var header = '📋 <b>АНКЕТА: РАЗДЕЛ ИМУЩЕСТВА</b>\n'
+    + '👤 ' + (answers['name'] || '—') + '\n'
+    + '📞 ' + (answers['phone'] || '—') + '\n'
+    + '──────────────────\n';
+  var body = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // Разбиваем на части если длинно
+  var fullMsg = header + body;
+  for (var i = 0; i < fullMsg.length; i += chunkSize) {
+    chunks.push(fullMsg.slice(i, i + chunkSize));
+  }
+
+  function sendChunk(idx) {
+    if (idx >= chunks.length) { showThankYou(); return; }
+    fetch(TG_URL, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        chat_id:    TG_CHAT,
+        text:       chunks[idx],
+        parse_mode: 'HTML'
+      })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(d) {
+      if (d.ok) { sendChunk(idx + 1); }
+      else { console.error('TG error', d); showError(); }
+    })
+    .catch(function() { showError(); });
+  }
+
+  sendChunk(0);
 }
 
 function showThankYou() {
