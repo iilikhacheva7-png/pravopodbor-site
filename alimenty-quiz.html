@@ -137,7 +137,7 @@ var childrenData=[]; // [{age:'',gender:''}]
 var currentStep=0;
 
 function getSteps(){
-  var collected=answers['collected']==='Да';
+  var collected=answers['collected']==='Да, есть исполнительный документ';
   var notPaying=['Не платит совсем','Раньше платил, сейчас перестал'].includes(answers['paying']);
   var hasBailiff=answers['bailiff']==='Да, дело у приставов';
   var wasMarried=answers['was_married']==='Да';
