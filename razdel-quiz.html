@@ -812,7 +812,7 @@ function renderStep(step) {
         html += `<div class="radio-option${sel}" id="ro_${eid}" onclick="if(event.target.tagName!=='INPUT'){var inp=this.querySelector('input');inp.checked=true;inp.dispatchEvent(new Event('change',{bubbles:true}));}" style="cursor:pointer;user-select:none;">
           <input type="radio" name="q_${q.id}" id="${eid}" value="${opt.replace(/"/g,'&quot;')}" ${checked}
             onclick="event.stopPropagation()"
-            onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)}); if(steps[currentStep].questions.some(function(qq){return qq.condition&&qq.condition.id===q.id;})) renderStep(currentStep);">
+            onchange="answers['${q.id}']=this.value; document.querySelectorAll('[name=q_${q.id}]').forEach(function(r){r.closest('.radio-option').classList.toggle('selected',r.checked)}); if(steps[currentStep].questions.some(function(qq){return qq.condition&&qq.condition.id===q.id;})) { var sv=window.scrollY; renderStep(currentStep); window.scrollTo(0,sv); }">
           <span style="font-size:14px;color:var(--ink);line-height:1.4;">${opt}</span></div>`;
       });
       html += `</div>`;
@@ -894,11 +894,10 @@ function goBack() {
 }
 
 function getValuationTotal() {
-  // Собираем все val_* ключи и суммируем
-  let total = 0;
-  Object.keys(answers).forEach(k => {
+  var total = 0;
+  Object.keys(answers).forEach(function(k) {
     if (k.startsWith('val_') && !k.includes('mortgage')) {
-      const v = parseFloat((answers[k] || '').replace(/[^0-9]/g, '')) || 0;
+      var v = parseFloat((answers[k] || '').toString().replace(/[^0-9]/g, '')) || 0;
       total += v;
     }
   });
@@ -911,8 +910,16 @@ function buildEmailText() {
   const valKeys = Object.keys(answers).filter(k => k.startsWith('val_'));
   if (valKeys.length > 0) {
     t += '【Оценка имущества】\n';
+    const valLabels = {
+      realty: 'Недвижимость', mortgage: 'Ипотека (долг)', car: 'Автомобиль(и)',
+      accounts: 'Счета / вклады'
+    };
     valKeys.forEach(k => {
-      if (answers[k]) t += `  ${k.replace('val_','').replace(/_\d+$/,'').replace(/_/g,' ')}: ${answers[k]} ₽\n`;
+      if (answers[k]) {
+        const short = k.replace('val_','').replace(/_\d+$/,'');
+        const label = valLabels[short] || short.replace(/_/g,' ');
+        t += `  ${label}: ${parseInt(answers[k].replace(/\D/g,''),10).toLocaleString('ru-RU')} ₽\n`;
+      }
     });
     t += `  Итого (сумма): ${getValuationTotal().toLocaleString('ru-RU')} ₽\n`;
     t += `  Цена иска (½): ${Math.round(getValuationTotal()/2).toLocaleString('ru-RU')} ₽\n\n`;
@@ -1037,20 +1044,23 @@ function buildDutyText() {
   if (total > 0) {
     var share = Math.round(total / 2);
     var duty  = calcGosposhlinаRazdel(total);
-    lines.push('Раздел имущества:');
-    lines.push('  Имущество: ' + total.toLocaleString('ru-RU') + ' ₽');
-    lines.push('  Цена иска (½): ' + share.toLocaleString('ru-RU') + ' ₽');
-    lines.push('  Госпошлина: ' + duty.toLocaleString('ru-RU') + ' ₽');
+    lines.push('РАЗДЕЛ ИМУЩЕСТВА:');
+    lines.push('  Стоимость имущества: ' + total.toLocaleString('ru-RU') + ' руб.');
+    lines.push('  Цена иска (доля 1/2): ' + share.toLocaleString('ru-RU') + ' руб.');
+    lines.push('  => Госпошлина за раздел: ' + duty.toLocaleString('ru-RU') + ' руб.');
+  } else {
+    lines.push('РАЗДЕЛ ИМУЩЕСТВА:');
+    lines.push('  Стоимость не указана — госпошлина не рассчитана.');
   }
 
   if (divorceOpt && divorceOpt !== 'Брак уже расторгнут' && divorceOpt !== 'Пока не думал(а) об этом') {
     lines.push('');
     lines.push('Расторжение брака:');
     if (divorceOpt.includes('отдельно') || divorceOpt.includes('быстрее')) {
-      lines.push('  Через ЗАГС (оба согласны): 5 000 ₽ с вас');
-      lines.push('  Через суд: 5 000 ₽ при подаче + 5 000 ₽ в ЗАГС после решения');
+      lines.push('  Через ЗАГС (оба согласны): 5 000 руб. с вас');
+      lines.push('  Через суд: 5 000 руб. при подаче + 5 000 руб. в ЗАГС после решения');
     } else if (divorceOpt.includes('объединить')) {
-      lines.push('  В одном иске с разделом: 5 000 ₽ + 5 000 ₽ в ЗАГС после решения');
+      lines.push('  В одном иске с разделом: 5 000 руб. + 5 000 руб. в ЗАГС после решения');
     }
   }
 
@@ -1068,11 +1078,11 @@ function submitForm() {
   // Telegram ограничивает сообщение 4096 символами — режем если длиннее
   var chunks = [];
   var chunkSize = 3800;
-  var header = '📋 <b>АНКЕТА: РАЗДЕЛ ИМУЩЕСТВА</b>\n'
+  var header = '📋 АНКЕТА: РАЗДЕЛ ИМУЩЕСТВА\n'
     + '👤 ' + (answers['name'] || '—') + '\n'
     + '📞 ' + (answers['phone'] || '—') + '\n'
     + '──────────────────\n';
-  var body = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  var body = text;
   // Разбиваем на части если длинно
   var fullMsg = header + body;
   for (var i = 0; i < fullMsg.length; i += chunkSize) {
@@ -1081,7 +1091,7 @@ function submitForm() {
 
   // Добавляем расчёт госпошлины последним сообщением
   var dutyMsg = buildDutyText();
-  if (dutyMsg) chunks.push('💰 <b>РАСЧЁТ ГОСПОШЛИНЫ — ' + (answers['name'] || '—') + '</b>\n──────────────────\n' + dutyMsg);
+  if (dutyMsg) chunks.push('💰 РАСЧЁТ ГОСПОШЛИНЫ\n👤 ' + (answers['name'] || '—') + '\n──────────────────\n' + dutyMsg);
 
   function sendChunk(idx) {
     if (idx >= chunks.length) { showThankYou(); return; }
@@ -1089,9 +1099,8 @@ function submitForm() {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        chat_id:    TG_CHAT,
-        text:       chunks[idx],
-        parse_mode: 'HTML'
+        chat_id: TG_CHAT,
+        text:    chunks[idx]
       })
     })
     .then(function(r) { return r.json(); })
