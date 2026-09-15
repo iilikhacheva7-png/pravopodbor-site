@@ -225,6 +225,16 @@ body {
 .radio-option label, .checkbox-option label { font-size: 14px; color: var(--ink); cursor: pointer; line-height: 1.4; }
 
 .clarify-wrap { margin-top: 8px; }
+.field-hint {
+  font-size: 11px;
+  color: var(--ink-soft);
+  margin-bottom: 4px;
+  line-height: 1.5;
+  padding: 5px 8px;
+  background: rgba(201,168,76,0.08);
+  border-radius: 5px;
+  border-left: 2px solid var(--accent);
+}
 .clarify-label { font-size: 11px; color: var(--ink-soft); margin-bottom: 4px; text-transform: uppercase; letter-spacing: 0.06em; }
 
 .clarify-input, .text-input, .textarea-input {
@@ -769,10 +779,13 @@ function renderStep(step) {
       const isDate = (q.id.includes('date') || q.id === 'marriage_date') && q.id !== 'divorce_date';
       const maskType = isPhone ? 'phone' : isDate ? 'date' : '';
       const inputmode = isPhone ? 'inputmode="tel"' : isDate ? 'inputmode="numeric"' : '';
-      html += `<input class="text-input" data-mask="${maskType}" data-qid="${q.id}" placeholder="${q.placeholder||''}" value="${v}" ${inputmode}>`;
+      const showHint = !isPhone && !isDate && q.placeholder;
+      if (showHint) html += `<div class="field-hint">${q.placeholder}</div>`;
+      html += `<input class="text-input" data-mask="${maskType}" data-qid="${q.id}" placeholder="${showHint ? 'Ваш ответ...' : (q.placeholder||'')} " value="${v}" ${inputmode}>`;
     } else if (q.type === 'textarea') {
       const v = (answers[q.id] || '').replace(/</g,'&lt;');
-      html += `<textarea class="textarea-input" placeholder="${q.placeholder||''}" oninput="answers['${q.id}']=this.value">${v}</textarea>`;
+      if (q.placeholder) html += `<div class="field-hint">${q.placeholder.replace(/\n/g, ' · ')}</div>`;
+      html += `<textarea class="textarea-input" placeholder="Ваш ответ..." oninput="answers['${q.id}']=this.value">${v}</textarea>`;
     } else if (q.type === 'linked_detail') {
       const linked = answers[q.linkedTo] || [];
       const items = linked.filter(o => !(q.excludeOptions||[]).includes(o));
@@ -819,7 +832,8 @@ function renderStep(step) {
       if (q.clarify) {
         const cv = (clarifyAnswers[q.id]||'').replace(/"/g,'&quot;');
         html += `<div class="clarify-wrap"><div class="clarify-label">Уточнение или свой вариант</div>
-          <input class="clarify-input" placeholder="${q.clarifyPlaceholder||'Опишите подробнее или добавьте свой ответ...'}" value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
+          ${q.clarifyPlaceholder ? `<div class="field-hint">${q.clarifyPlaceholder}</div>` : ''}
+          <input class="clarify-input" placeholder="${q.clarifyPlaceholder ? 'Ваш ответ...' : 'Опишите подробнее или добавьте свой ответ...'}" value="${cv}" oninput="clarifyAnswers['${q.id}']=this.value"></div>`;
       }
     } else if (q.type === 'checkbox') {
       html += `<div class="checkbox-group">`;
