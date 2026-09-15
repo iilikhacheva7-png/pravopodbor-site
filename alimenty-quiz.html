@@ -171,7 +171,7 @@ function getSteps() {
   var notPaying = ['Не платит совсем','Раньше платил, сейчас перестал'].includes(answers['paying_status']);
   var hasBailiff = answers['bailiff_submitted'] === 'Да, дело у приставов';
 
-  var steps = ['contacts','main_question'];
+  var steps = ['contacts','main_question','relations'];
 
   if (collected) {
     steps.push('collected_details');
@@ -185,11 +185,10 @@ function getSteps() {
     }
   } else {
     steps.push('not_collected_details');
-    steps.push('paternity');
+    if (answers['was_married'] !== 'Да') steps.push('paternity');
   }
 
   steps.push('children');
-  steps.push('relations');
   steps.push('extra_grounds');
   if (hasChildUnder3 && wasMarried) steps.push('alimony_mother');
   if (hasDisabledChild) steps.push('disabled_child');
