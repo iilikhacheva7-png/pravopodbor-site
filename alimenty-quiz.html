@@ -681,11 +681,16 @@ function buildResult(){
     h+='После работы: потенциально <b>'+main.toLocaleString('ru-RU')+' ₽/мес</b><br>';
     h+='Прибавка: <b>+'+diff.toLocaleString('ru-RU')+' ₽ в месяц</b>';
     if(monthsTo18!==null&&monthsTo18>0){
-      h+='<br>За оставшийся срок до 18 лет ребёнка (~'+monthsTo18+' мес.): <b>+'+(diff*monthsTo18).toLocaleString('ru-RU')+' ₽</b>';
+      h+='<br>Прибавка за оставшийся срок до 18 лет (~'+monthsTo18+' мес.): <b>+'+(diff*monthsTo18).toLocaleString('ru-RU')+' ₽</b><br><span style="font-size:11px;opacity:0.8;">(при условии регулярных выплат)</span>';
     }
     h+='</div>';
   } else if(currentReal===0&&main>0&&monthsTo18!==null&&monthsTo18>0){
-    h+='<div class="result-benefit">Потенциально за оставшийся срок до 18 лет ребёнка (~'+monthsTo18+' мес.): <b>'+(totalMonthly*monthsTo18).toLocaleString('ru-RU')+' ₽</b></div>';
+    h+='<div class="result-benefit">'+
+      'Если взыщем сейчас и всё будет платиться исправно:<br>'+
+      '<b>'+totalMonthly.toLocaleString('ru-RU')+' ₽/мес × ~'+monthsTo18+' мес. до 18 лет = '+
+      (totalMonthly*monthsTo18).toLocaleString('ru-RU')+' ₽</b><br>'+
+      '<span style="font-size:11px;opacity:0.8;">Это расчёт на весь оставшийся срок — при условии регулярных выплат</span>'+
+    '</div>';
   }
 
   h+='<div class="result-note">Расчёт предварительный. Основные алименты рассчитываются судом исходя из дохода должника. Подробности обсудим в личной переписке.</div>';
