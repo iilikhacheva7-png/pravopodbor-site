@@ -626,32 +626,35 @@ function buildResult(){
   var main=calcMainAlimony();
   var housing=calcHousing();
   var disabled=calcDisabled();
-  var exp=calcExpenses();
-  var momExp=calcMomExpenses();
   var hasMom=answers['mom_job']&&answers['mom_job']!=='Работаю официально на полной ставке';
   var childAge=getChildAge();
   var monthsTo18=childAge!==null?Math.max(0,Math.round((18-childAge)*12)):null;
   var currentReal=gm('alimony_real')||gm('real_income')||0;
+  var totalMonthly=main+housing+disabled;
+  var unknownIncome=!answers['debtor_job']||answers['debtor_job']==='Не знаю'||answers['debtor_job']==='Работает неофициально'||answers['debtor_job']==='Не работает / безработный';
+  var fromExpenses=unknownIncome&&gm('debtor_income')===0&&answers['svo']!=='Да, на СВО / военная служба';
+
   var lines=[];
-  var totalMonthly=0;
 
   if(main>0){
-    var mainLabel=answers['debtor_job']==='Официально трудоустроен'||answers['svo']==='Да, на СВО / военная служба'?
-      'Алименты на ребёнка (доля от дохода)':'Алименты на ребёнка (исходя из расходов)';
-    lines.push({label:mainLabel,val:main,note:answers['svo']==='Да, на СВО / военная служба'?'Расчёт от ориентировочного дохода 55 000 ₽':'Расчёт от указанного дохода или расходов'});
-    totalMonthly+=main;
+    var mainNote=fromExpenses?
+      'Расчёт от ваших расходов на ребёнка ÷ 2 (доля второго родителя). Реальная сумма может быть больше — зависит от подготовки к суду':
+      (answers['svo']==='Да, на СВО / военная служба'?'Расчёт от ориентировочного дохода 55 000 ₽':'Расчёт от указанного официального дохода');
+    lines.push({label:'Алименты на ребёнка',val:main,note:mainNote});
   }
   if(hasMom){
-    lines.push({label:'Алименты на содержание мамы (ст. 90 СК РФ)',val:null,note:'Потенциально ½–1 прожиточный минимум взрослого по вашему региону — точный размер определяет суд'+(childAge!==null?' (до достижения ребёнком 3 лет)':'')});
+    lines.push({label:'Алименты на содержание мамы (ст. 90 СК РФ)',val:null,
+      note:'Потенциально ½–1 ПМ взрослого по вашему региону. Точный размер определяет суд'+(childAge!==null&&childAge<3?' (до достижения ребёнком 3 лет)':'')});
   }
   if(housing>0){
     var ppl=parseInt(answers['housing_people']||'2')||2;
-    lines.push({label:'Жилищные алименты (ст. 86 СК РФ)',val:housing,note:'Расходы '+gm('housing_cost').toLocaleString('ru-RU')+' ₽ ÷ '+ppl+' чел. ÷ 2 × '+(parseInt(answers['children_count'])||1)+' дет. = '+housing.toLocaleString('ru-RU')+' ₽'});
-    totalMonthly+=housing;
+    var cnt=parseInt(answers['children_count']||'1')||1;
+    lines.push({label:'Жилищные алименты (ст. 86 СК РФ)',val:housing,
+      note:'Расходы '+gm('housing_cost').toLocaleString('ru-RU')+' ₽ ÷ '+ppl+' чел. ÷ 2 × '+cnt+' дет. = '+housing.toLocaleString('ru-RU')+' ₽'});
   }
   if(disabled>0){
-    lines.push({label:'Доп. расходы на лечение / реабилитацию (ст. 86 СК РФ)',val:disabled,note:'Взыскиваются отдельно от основных алиментов'});
-    totalMonthly+=disabled;
+    lines.push({label:'Доп. расходы на лечение / реабилитацию (ст. 86 СК РФ)',val:disabled,
+      note:'Взыскиваются отдельно от основных алиментов'});
   }
 
   if(lines.length===0)return '';
@@ -662,78 +665,50 @@ function buildResult(){
     if(l.note)h+='<div class="result-subnote">'+l.note+'</div>';
   });
 
-  if(exp>0){
-    h+='<div class="result-row" style="margin-top:6px;"><span>Ваши расходы на ребёнка в месяц</span><span class="rv">'+exp.toLocaleString('ru-RU')+' ₽</span></div>';
-    h+='<div class="result-subnote">Аргумент для обоснования размера алиментов в суде</div>';
-  }
-  if(momExp>0){
-    h+='<div class="result-row"><span>Ваши расходы на себя (аргумент для алиментов на маму)</span><span class="rv">'+momExp.toLocaleString('ru-RU')+' ₽/мес</span></div>';
-  }
-
   if(totalMonthly>0){
     h+='<div class="result-total"><span>Потенциально можно взыскать</span><span>'+totalMonthly.toLocaleString('ru-RU')+' ₽/мес</span></div>';
   }
 
-  // Выгода клиента
-  if(currentReal>0&&main>0&&main>currentReal){
-    var diff=main-currentReal;
+  // ── Блок выгоды / цены бездействия ──
+  if(monthsTo18!==null&&monthsTo18>0&&totalMonthly>0){
+    var potentialTotal=totalMonthly*monthsTo18;
+    var currentTotal=currentReal*monthsTo18;
+    var diff=potentialTotal-currentTotal;
+    var costPerMonth=monthsTo18>0?Math.round(diff/monthsTo18):0;
+
     h+='<div class="result-benefit">';
-    h+='Сейчас получаете: <b>'+currentReal.toLocaleString('ru-RU')+' ₽/мес</b><br>';
-    h+='После работы: потенциально <b>'+main.toLocaleString('ru-RU')+' ₽/мес</b><br>';
-    h+='Прибавка: <b>+'+diff.toLocaleString('ru-RU')+' ₽ в месяц</b>';
-    if(monthsTo18!==null&&monthsTo18>0){
-      h+='<br>Прибавка за оставшийся срок до 18 лет (~'+monthsTo18+' мес.): <b>+'+(diff*monthsTo18).toLocaleString('ru-RU')+' ₽</b><br><span style="font-size:11px;opacity:0.8;">(при условии регулярных выплат)</span>';
+    h+='<div style="font-weight:700;margin-bottom:8px;">Два сценария до 18 лет ребёнка (~'+monthsTo18+' мес.)</div>';
+
+    h+='<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(46,125,82,0.2);">'+
+      '<span>✅ Займётесь сейчас:</span>'+
+      '<span style="font-weight:700;">'+potentialTotal.toLocaleString('ru-RU')+' ₽</span></div>';
+
+    if(currentReal>0){
+      h+='<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(46,125,82,0.2);">'+
+        '<span>⏳ Оставите как есть ('+currentReal.toLocaleString('ru-RU')+' ₽/мес):</span>'+
+        '<span style="font-weight:700;">'+currentTotal.toLocaleString('ru-RU')+' ₽</span></div>';
+    } else {
+      h+='<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(46,125,82,0.2);">'+
+        '<span>⏳ Оставите как есть (без алиментов):</span>'+
+        '<span style="font-weight:700;">0 ₽</span></div>';
+    }
+
+    if(diff>0){
+      h+='<div style="display:flex;justify-content:space-between;padding:8px 0 4px;font-weight:700;font-size:15px;">'+
+        '<span>💰 Ваша выгода:</span>'+
+        '<span style="color:#2e7d52;">+'+diff.toLocaleString('ru-RU')+' ₽</span></div>';
+      h+='<div style="font-size:12px;margin-top:4px;opacity:0.85;">Каждый месяц бездействия стоит: <b>'+costPerMonth.toLocaleString('ru-RU')+' ₽</b></div>';
     }
     h+='</div>';
-  } else if(currentReal===0&&main>0&&monthsTo18!==null&&monthsTo18>0){
-    h+='<div class="result-benefit">'+
-      'Если взыщем сейчас и всё будет платиться исправно:<br>'+
-      '<b>'+totalMonthly.toLocaleString('ru-RU')+' ₽/мес × ~'+monthsTo18+' мес. до 18 лет = '+
-      (totalMonthly*monthsTo18).toLocaleString('ru-RU')+' ₽</b><br>'+
-      '<span style="font-size:11px;opacity:0.8;">Это расчёт на весь оставшийся срок — при условии регулярных выплат</span>'+
-    '</div>';
   }
 
-  h+='<div class="result-note">Расчёт предварительный. Основные алименты рассчитываются судом исходя из дохода должника. Подробности обсудим в личной переписке.</div>';
+  // ── Дисклеймер ──
+  h+='<div class="result-note">'+
+    '⚠️ Расчёт предварительный. Реальный размер алиментов определяет суд — он зависит от подготовки документов, дохода должника и решения судьи.<br><br>'+
+    '<b>О гарантиях:</b> согласно ст. 9 Кодекса профессиональной этики адвоката и сложившейся практике, ни один юрист не вправе гарантировать конкретный результат по делу. Мы гарантируем качество подготовки документов и профессиональный подход — итоговое решение принимает суд.'+
+  '</div>';
   h+='</div>';
   return h;
-}
-
-// ── ОТПРАВКА ────────────────────────────────────────────────────
-function buildText(){
-  var t='АНКЕТА ПО АЛИМЕНТАМ\n══════════════════════════\n\n';
-  function row(label,val){if(!val||(Array.isArray(val)&&!val.length))return '';return label+': '+(Array.isArray(val)?val.join(', '):val)+'\n';}
-  t+='【Контакты】\n'+row('Имя',answers['name'])+row('Телефон',answers['phone'])+row('Регион',answers['city'])+'\n';
-  t+='【Отношения】\n'+row('Официальный брак',answers['was_married'])+row('Статус брака',answers['marriage_status'])+row('Помощь с разводом',answers['divorce_help'])+row('Раздел имущества',answers['property_dispute'])+'\n';
-  t+='【Главный вопрос】\n'+row('Взысканы алименты',answers['collected'])+'\n';
-  if(answers['collected']==='Да, есть исполнительный документ'){
-    t+='【Документ】\n'+row('Вид документа',answers['doc_type'])+row('Приставы',answers['bailiff'])+row('Форма взыскания',answers['alimony_form'])+row('Доля',answers['alimony_share'])+(answers['alimony_share']==='Другая доля'?row('Своя доля',answers['alimony_share_custom']):'')+row('ТДС в долях ПМ',answers['tds_pm'])+row('ТДС сумма',answers['tds_amount'])+row('Сумма по соглашению',answers['sogl_amount'])+row('Год взыскания',answers['alimony_year'])+row('Реально на руки',answers['alimony_real'])+'\n';
-    t+='【Выплаты】\n'+row('Статус выплат',answers['paying'])+row('Реально в месяц',answers['real_income'])+row('Устраивает сумма',answers['amount_ok'])+row('Почему мало',answers['amount_why'])+'\n';
-  } else {
-    t+='【Не взыскивала】\n'+row('Почему не взыскивала',answers['why_not'])+row('Как давно разошлись',answers['separation_time'])+row('Помощь добровольно',answers['voluntary_help'])+row('Добровольная сумма',answers['voluntary_amount'])+row('Отцовство',answers['paternity'])+'\n';
-  }
-  if(['Не платит совсем','Раньше платил, сейчас перестал'].includes(answers['paying'])||answers['collected']!=='Да, есть исполнительный документ'&&answers['voluntary_help']==='Нет, не помогает совсем'){
-    t+='【Долг】\n'+row('Как давно не платит',answers['debt_duration'])+row('Долг официальный',answers['debt_official'])+row('Долг по расчётам',answers['debt_own'])+row('Расхождение',answers['debt_diff'])+row('Неустойка',answers['penalty'])+'\n';
-    t+='【Приставы】\n'+row('Действия',answers['bailiff_actions'])+row('Арест',answers['assets_arrested'])+row('Запрет выезда',answers['travel_ban'])+'\n';
-  }
-  t+='【Должник】\n'+row('СВО',answers['svo'])+row('Занятость',answers['debtor_job'])+row('Доход должника',answers['debtor_income'])+row('Место работы',answers['work_place'])+row('Имущество',answers['debtor_property'])+row('Банкротство',answers['debtor_bankrupt'])+'\n';
-  var chStr=childrenData.filter(function(c){return c.age;}).map(function(c,i){return 'Ребёнок '+(i+1)+': '+c.age+' лет, '+c.gender;}).join(' | ');
-  t+='【Дети】\n'+row('Количество',answers['children_count'])+row('Дети живут',answers['children_live'])+row('Особенности здоровья',answers['child_disabled'])+row('Данные',chStr)+row('Другие дети должника',answers['other_kids'])+'\n';
-  t+='【Жильё】\n'+row('Ситуация',answers['housing'])+row('Стоимость',answers['housing_cost'])+row('Проживающих',answers['housing_people'])+row('Документы',answers['housing_docs'])+'\n';
-  if(answers['mom_job']){
-    var momExpStr='Питание: '+(gm('mom_exp_food')||'—')+' руб., Одежда: '+(gm('mom_exp_clothes')||'—')+' руб.';
-    extraMomExpenses.forEach(function(e){if(e.name)momExpStr+=', '+e.name+': '+(e.amount||'—')+' руб.';});
-    t+='【Алименты на маму】\n'+row('Занятость',answers['mom_job'])+row('Помощь мужа',answers['mom_help'])+row('Сумма помощи',answers['mom_help_amount'])+row('Расходы',momExpStr)+'\n';
-  }
-  if(answers['disabled_diagnosis']||gm('disabled_exp')){
-    t+='【Особые расходы】\n'+row('Диагноз',answers['disabled_diagnosis'])+row('Расходы',answers['disabled_exp'])+row('Документы',answers['disabled_docs'])+'\n';
-  }
-  var expStr='Питание: '+(gm('exp_food')||'—')+' руб., Одежда: '+(gm('exp_clothes')||'—')+' руб., Кружки: '+(gm('exp_education')||'—')+' руб., Лечение: '+(gm('exp_health')||'—')+' руб., Детсад/школа: '+(gm('exp_school')||'—')+' руб., Транспорт: '+(gm('exp_transport')||'—')+' руб.';
-  extraExpenses.forEach(function(e){if(e.name)expStr+=', '+e.name+': '+(e.amount||'—')+' руб.';});
-  t+='【Расходы на ребёнка】\n'+expStr+'\nИтого: '+calcExpenses().toLocaleString('ru-RU')+' руб./мес\n\n';
-  t+='【Желаемый результат】\n'+row('Цель',answers['desired_goal'])+row('Желаемая сумма',answers['desired_amount'])+row('Приоритет',answers['priority'])+'\n';
-  if(answers['extra'])t+='【Дополнительно】\n'+answers['extra']+'\n';
-  return t;
 }
 function buildDutyText(){
   var main=calcMainAlimony();
