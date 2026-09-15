@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Анкета по алиментам — По рекомендации</title>
+<meta name="robots" content="noindex, nofollow">
+<style>
+:root {
+  --bg:        #f7f4ef;
+  --bg-card:   #ffffff;
+  --bg-inner:  #f9f7f3;
+  --ink:       #1a1208;
+  --ink-soft:  #6b5f50;
+  --accent:    #c9a84c;
+  --accent-dim: rgba(201,168,76,0.12);
+  --accent-border: rgba(201,168,76,0.4);
+  --border:    rgba(26,18,8,0.10);
+  --border-strong: rgba(26,18,8,0.18);
+  --green:     #2e7d52;
+  --green-bg:  rgba(46,125,82,0.10);
+  --red-bg:    rgba(180,0,0,0.07);
+  --radius:    14px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem 4rem;
+}
+.site-header { width:100%;max-width:680px;display:flex;align-items:center;gap:10px;margin-bottom:1.75rem; }
+.logo-title { font-size:15px;font-weight:700;color:var(--ink); }
+.logo-sub { font-size:11px;color:var(--ink-soft);margin-top:1px; }
+.intro-card { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem 2rem 1.75rem;max-width:680px;width:100%; }
+.intro-badge { display:inline-block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);background:var(--accent-dim);border:1px solid var(--accent-border);border-radius:6px;padding:3px 10px;margin-bottom:1rem; }
+.intro-card h1 { font-size:22px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:0.75rem; }
+.intro-card .subtitle { font-size:15px;color:var(--ink-soft);line-height:1.6;margin-bottom:1rem; }
+.intro-stats { display:flex;gap:12px;margin-bottom:1.5rem;flex-wrap:wrap; }
+.stat-chip { display:flex;align-items:center;gap:7px;background:var(--bg-inner);border:1px solid var(--border);border-radius:8px;padding:8px 14px;font-size:13px;color:var(--ink); }
+.intro-note { font-size:13px;color:#5a6e4a;line-height:1.6;padding:10px 14px;background:var(--green-bg);border-radius:8px;border-left:2px solid var(--green);margin-bottom:1.5rem; }
+.btn-start { width:100%;padding:14px;font-size:15px;font-weight:700;border-radius:999px;background:var(--accent);color:#1a1306;border:none;cursor:pointer;transition:background 0.15s;font-family:inherit; }
+.btn-start:hover { background:#dbb84e; }
+.quiz-wrap { background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;max-width:680px;width:100%; }
+.progress-bar { background:rgba(26,18,8,0.08);border-radius:4px;height:3px;margin-bottom:0.75rem; }
+.progress-fill { background:var(--accent);border-radius:4px;height:3px;transition:width 0.35s ease; }
+.step-label { font-size:12px;color:var(--ink-soft);margin-bottom:1.25rem; }
+.section-title { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--accent);margin-bottom:1.25rem; }
+.question-card { background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.2rem 1rem;margin-bottom:0.875rem; }
+.question-text { font-size:14px;font-weight:600;color:var(--ink);margin-bottom:0.5rem;line-height:1.5; }
+.question-note { font-size:12px;color:#5a6e4a;margin-bottom:0.75rem;line-height:1.5;padding:6px 10px;background:var(--green-bg);border-radius:6px;border-left:2px solid var(--green); }
+.field-hint { font-size:11px;color:var(--ink-soft);margin-bottom:4px;line-height:1.5;padding:5px 8px;background:rgba(201,168,76,0.08);border-radius:5px;border-left:2px solid var(--accent); }
+.radio-group, .checkbox-group { display:flex;flex-direction:column;gap:6px; }
+.radio-option, .checkbox-option { display:flex;align-items:flex-start;gap:10px;cursor:pointer;padding:8px 11px;border-radius:8px;border:1px solid var(--border-strong);background:var(--bg-card);transition:border-color 0.15s,background 0.15s; }
+.radio-option { align-items:center; }
+.radio-option:hover,.checkbox-option:hover { border-color:var(--accent);background:var(--accent-dim); }
+.radio-option.selected,.checkbox-option.selected { border-color:var(--accent);background:var(--accent-dim); }
+.radio-option input,.checkbox-option input { accent-color:var(--accent);flex-shrink:0;margin-top:2px; }
+.radio-option input { margin-top:0; }
+.radio-option label,.checkbox-option label { font-size:14px;color:var(--ink);cursor:pointer;line-height:1.4; }
+.clarify-wrap { margin-top:8px; }
+.clarify-label { font-size:11px;color:var(--ink-soft);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.06em; }
+.clarify-input,.text-input,.textarea-input { width:100%;background:var(--bg-card);border:1px solid var(--border-strong);border-radius:8px;padding:9px 12px;font-size:14px;font-family:inherit;color:var(--ink);outline:none;transition:border-color 0.15s; }
+.clarify-input { font-size:13px;padding:7px 10px; }
+.clarify-input::placeholder,.text-input::placeholder,.textarea-input::placeholder { color:rgba(107,95,80,0.45); }
+.clarify-input:focus,.text-input:focus,.textarea-input:focus { border-color:var(--accent); }
+.textarea-input { min-height:80px;resize:vertical; }
+.btn-row { display:flex;gap:10px;margin-top:1.5rem;align-items:center; }
+.btn { padding:11px 24px;border-radius:999px;font-size:14px;font-weight:600;cursor:pointer;border:1px solid var(--border-strong);background:transparent;color:var(--ink-soft);transition:border-color 0.15s,background 0.15s;font-family:inherit; }
+.btn:hover { border-color:rgba(26,18,8,0.3);color:var(--ink);background:var(--bg-inner); }
+.btn-primary { background:var(--accent);color:#1a1306;border-color:var(--accent); }
+.btn-primary:hover { background:#dbb84e;border-color:#dbb84e; }
+.btn-primary:disabled { opacity:0.5;cursor:not-allowed; }
+.error-msg { font-size:13px;color:#b00;margin-top:10px;display:none;padding:8px 12px;background:var(--red-bg);border-radius:6px;border-left:2px solid #b00; }
+.consent-wrap { display:flex;align-items:flex-start;gap:10px;margin-top:1rem;padding:12px 14px;background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm); }
+.consent-wrap input { margin-top:2px;accent-color:var(--accent);flex-shrink:0;width:16px;height:16px;cursor:pointer; }
+.consent-wrap label { font-size:13px;color:var(--ink-soft);line-height:1.5;cursor:pointer; }
+.consent-wrap a { color:var(--accent);text-decoration:none; }
+.result-block { background:var(--bg-inner);border:1px solid var(--border);border-radius:var(--radius-sm);padding:1.1rem 1.25rem;margin-bottom:0.875rem; }
+.result-label { font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--accent);margin-bottom:0.75rem; }
+.result-row { display:flex;justify-content:space-between;font-size:13px;color:var(--ink-soft);padding:5px 0;border-bottom:1px solid var(--border); }
+.result-row:last-child { border-bottom:none; }
+.result-row span:last-child { color:var(--ink);font-weight:600; }
+.result-total { display:flex;justify-content:space-between;font-size:16px;font-weight:700;padding:10px 0 4px; }
+.result-total span:last-child { color:var(--accent); }
+.result-note { font-size:11px;color:var(--ink-soft);margin-top:6px;line-height:1.6; }
+.site-footer { width:100%;max-width:680px;margin-top:2.5rem;border-top:1px solid var(--border);padding-top:1.75rem; }
+.footer-brand-name { font-size:14px;font-weight:700;color:var(--ink);margin-bottom:3px; }
+.footer-brand-sub { font-size:12px;color:var(--ink-soft);line-height:1.6;margin-bottom:1rem; }
+.footer-contacts { display:flex;flex-wrap:wrap;gap:6px 16px;margin-bottom:1.25rem; }
+.footer-contacts a { font-size:13px;color:var(--accent);text-decoration:none; }
+.footer-contacts a:hover { text-decoration:underline; }
+.footer-links { display:flex;flex-wrap:wrap;gap:6px 14px;margin-bottom:1.25rem;padding-bottom:1.25rem;border-bottom:1px solid var(--border); }
+.footer-links a { font-size:12px;color:var(--ink-soft);text-decoration:underline; }
+.footer-copy { font-size:11px;color:var(--ink-soft);line-height:1.7; }
+@media(max-width:480px){body{padding:1rem 0.75rem 3rem;}.intro-card,.quiz-wrap{padding:1.25rem;}.btn-row{flex-direction:column-reverse;}.btn{width:100%;text-align:center;}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <div style="font-size:20px;line-height:1;">♡</div>
+  <div>
+    <div class="logo-title">По рекомендации</div>
+    <div class="logo-sub">Юридические документы</div>
+  </div>
+</header>
+
+<div class="intro-card" id="introCard">
+  <div class="intro-badge">Алименты</div>
+  <h1>Анкета по алиментам</h1>
+  <p class="subtitle">Чтобы не задавать вам вопросы в мессенджере по одному — заполните эту анкету. Займёт 10–15 минут. Ответы получу сразу и смогу сразу подготовить документы.</p>
+  <p class="subtitle" style="margin-top:0.75rem;">В конце вы получите предварительный расчёт потенциального размера алиментов, которые можно взыскать в вашей ситуации.</p>
+  <div class="intro-stats">
+    <div class="stat-chip"><span>🕐</span> 10–15 минут</div>
+    <div class="stat-chip"><span>📋</span> 8 разделов</div>
+    <div class="stat-chip"><span>🔒</span> Только мне</div>
+  </div>
+  <div class="intro-note">Отвечайте как знаете — если чего-то не знаете, пропустите или напишите «не знаю». Уточним в рабочем порядке.</div>
+  <button class="btn-start" onclick="startQuiz()">Начать заполнение →</button>
+</div>
+
+<div class="quiz-wrap" id="quizWrap" style="display:none;">
+  <div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+  <div class="step-label" id="stepLabel">Шаг 1 из 8</div>
+  <div id="quizContent"></div>
+  <div class="btn-row" id="btnRow">
+    <button class="btn" id="btnBack" onclick="goBack()" style="display:none">← Назад</button>
+    <button class="btn btn-primary" id="btnNext" onclick="goNext()">Далее →</button>
+  </div>
+  <div class="error-msg" id="errorMsg">Пожалуйста, заполните обязательные поля</div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-brand-name">♡ По рекомендации</div>
+  <div class="footer-brand-sub">Лихачева Анастасия Анатольевна · Самозанятая<br>Подбор юристов и юридические документы онлайн · По всей России</div>
+  <div class="footer-contacts">
+    <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank">💬 Написать в Max</a>
+    <a href="https://t.me/a_likhacheva2026" target="_blank">✈️ Telegram</a>
+    <a href="https://wa.me/79920011995" target="_blank">📱 WhatsApp</a>
+    <a href="mailto:alikhacheva7@yandex.ru">✉️ alikhacheva7@yandex.ru</a>
+  </div>
+  <div class="footer-links">
+    <a href="https://rekoyur.ru" target="_blank">Главная страница</a>
+    <a href="/privacy-policy.html" target="_blank">Политика конфиденциальности</a>
+    <a href="/offer.html" target="_blank">Публичная оферта</a>
+  </div>
+  <div class="footer-copy">© 2026 «По рекомендации» · Лихачева Анастасия Анатольевна · Самозанятая<br>Регистрационный номер оператора ПД: 66-26-087909</div>
+</footer>
+
+<script>
+const TG_TOKEN = '8877924330:AAF2VjYIjHiQLi7vBN6MoQmO3rtkGSYJFzI';
+const TG_CHAT  = '8091089728';
+const TG_URL   = 'https://api.telegram.org/bot' + TG_TOKEN + '/sendMessage';
+
+var answers = {};
+var clarifyAnswers = {};
+var currentStep = 0;
+
+// ── ОПРЕДЕЛЯЕМ ШАГИ ДИНАМИЧЕСКИ ──────────────────────────────────
+function getSteps() {
+  var wasMarried = answers['was_married'] === 'Да';
+  var hasChildUnder3 = ['до 1 года','1–3 года'].some(function(v){ return (answers['child_ages']||[]).includes(v); });
+  var hasDisabledChild = answers['child_disabled'] === 'Да';
+  var collected = answers['collected_alimony'] === 'Да';
+  var notPaying = ['Не платит совсем','Раньше платил, сейчас перестал'].includes(answers['paying_status']);
+  var hasBailiff = answers['bailiff_submitted'] === 'Да, дело у приставов';
+
+  var steps = ['contacts','main_question'];
+
+  if (collected) {
+    steps.push('collected_details');
+    steps.push('paying_status');
+    if (notPaying) {
+      steps.push('debt_details');
+      if (hasBailiff) steps.push('bailiff_details');
+      steps.push('debtor_info');
+    } else {
+      steps.push('amount_satisfaction');
+    }
+  } else {
+    steps.push('not_collected_details');
+    steps.push('paternity');
+  }
+
+  steps.push('children');
+  steps.push('relations');
+  steps.push('extra_grounds');
+  if (hasChildUnder3 && wasMarried) steps.push('alimony_mother');
+  if (hasDisabledChild) steps.push('disabled_child');
+  steps.push('housing');
+  steps.push('child_expenses');
+  steps.push('desired_result');
+  steps.push('final');
+  return steps;
+}
+
+function getTotalSteps() { return getSteps().length; }
+function getCurrentStepId() { return getSteps()[currentStep]; }
+
+// ── РЕНДЕР ───────────────────────────────────────────────────────
+function renderStep(step) {
+  var id = getSteps()[step];
+  var total = getTotalSteps();
+  document.getElementById('stepLabel').textContent = 'Шаг ' + (step+1) + ' из ' + total;
+  document.getElementById('progressFill').style.width = ((step/total)*100) + '%';
+  document.getElementById('btnBack').style.display = step > 0 ? 'inline-block' : 'none';
+  var btn = document.getElementById('btnNext');
+  btn.disabled = false;
+  document.getElementById('errorMsg').style.display = 'none';
+
+  var html = '';
+
+  if (id === 'contacts') {
+    btn.textContent = 'Далее →';
+    html = section('Контактная информация') +
+      qcard('Ваше имя',true) + textField('name','Например: Анна','Как к вам обращаться') +
+      qcard('Номер телефона',true) + phoneField('phone') +
+      qcard('Город / регион',true) + textField('city','Например: Екатеринбург, Свердловская область','Нужно для определения прожиточного минимума на ребёнка в вашем регионе');
+
+  } else if (id === 'main_question') {
+    btn.textContent = 'Далее →';
+    html = section('Главный вопрос') +
+      qcard('Взыскивались ли алименты?', true,
+        'Взыскивались — значит есть хотя бы один документ: судебный приказ (мировой суд), решение суда по алиментам или нотариальное соглашение. Если ничего из этого нет — муж платит устно, договорились сами или не платит вообще — выбирайте «Нет».') +
+      radioGroup('collected_alimony', ['Да, есть исполнительный документ','Нет, официально не взыскивала'], true);
+
+  } else if (id === 'collected_details') {
+    btn.textContent = 'Далее →';
+    html = section('Документ и условия взыскания') +
+      qcard('Какой документ есть на руках?', true) +
+      checkboxGroup('doc_type', ['Судебный приказ (мировой суд)','Решение суда по алиментам','Нотариальное соглашение об алиментах']) +
+      qcard('Подавали ли исполнительный документ судебным приставам?', true) +
+      radioGroup('bailiff_submitted', ['Да, дело у приставов','Нет, не подавала','Не знаю'], true) +
+      qcard('В чём взысканы алименты?', true) +
+      radioGroup('alimony_form', ['Доля от дохода (1/4, 1/3, 1/2)','Твёрдая денежная сумма (ТДС)','Смешанная форма (доля + ТДС)'], true) +
+      qcard('Размер по документу', false,
+        'Укажите долю или сумму из документа. Если ТДС — обычно устанавливается кратно прожиточному минимуму: ½ ПМ, 1 ПМ, 1,5 ПМ, 2 ПМ. Актуальный ПМ уточним по вашему региону.') +
+      textField('alimony_amount_doc','Например: 1/4 дохода или 15 000 руб.','Размер из документа') +
+      qcard('Когда взысканы алименты?') +
+      textField('alimony_year','Например: 2021','Хотя бы год') +
+      qcard('Сколько реально получаете на руки на одного ребёнка в месяц?') +
+      moneyField('alimony_real','Среднее за последние 3 месяца — не по документу, а фактически');
+
+  } else if (id === 'paying_status') {
+    btn.textContent = 'Далее →';
+    html = section('Платит или нет?') +
+      qcard('Как обстоит ситуация с выплатами сейчас?', true) +
+      radioGroup('paying_status', ['Платит регулярно','Платит нерегулярно / частями','Не платит совсем','Раньше платил, сейчас перестал'], true);
+    if (['Платит регулярно','Платит нерегулярно / частями'].includes(answers['paying_status'])) {
+      html += qcard('Сколько реально получаете в месяц?', false,
+        'Среднее за последние 3 месяца — фактически на руки, не по документу') +
+        moneyField('real_income_month','');
+    }
+
+  } else if (id === 'amount_satisfaction') {
+    btn.textContent = 'Далее →';
+    html = section('Устраивает ли сумма?') +
+      qcard('Устраивает ли вас текущая сумма алиментов?', true) +
+      radioGroup('amount_ok', ['Да, устраивает — просто нужна помощь с оформлением','Нет, хочу больше'], true);
+    if (answers['amount_ok'] === 'Нет, хочу больше') {
+      html += qcard('Почему сумма кажется недостаточной?') +
+        checkboxGroup('amount_why', [
+          'Он самозанятый / ИП — скрывает реальные доходы',
+          'Взыскана доля, но реальный доход выше официального',
+          'Взыскана доля — хочу перейти на твёрдую сумму (ТДС)',
+          'Выросли расходы на ребёнка',
+          'Просто маленькая сумма',
+          'Не знаю / затрудняюсь ответить'
+        ]);
+    }
+
+  } else if (id === 'debt_details') {
+    btn.textContent = 'Далее →';
+    html = section('Долг по алиментам') +
+      qcard('Как давно не платит?', true) +
+      radioGroup('debt_duration', ['Меньше 3 месяцев','3–6 месяцев','6–12 месяцев','Больше года','Больше 3 лет'], true,
+        'Это влияет на размер долга и целесообразность взыскания неустойки') +
+      qcard('Официальный долг по расчёту приставов') +
+      moneyField('debt_official','Сумма из постановления о расчёте задолженности — если знаете') +
+      qcard('Долг по вашим расчётам') +
+      moneyField('debt_own','Сумма по документу × количество месяцев без оплаты') +
+      qcard('Отличается ли официальный долг от вашего расчёта?') +
+      radioGroup('debt_diff', ['Совпадает','Официальный долг занижен','Не считала / не знаю']) +
+      qcard('Взыскивалась ли неустойка за просрочку?') +
+      radioGroup('penalty', ['Да, взыскивали','Нет, не взыскивали','Не знаю что это']);
+
+  } else if (id === 'bailiff_details') {
+    btn.textContent = 'Далее →';
+    html = section('Работа приставов') +
+      qcard('Что делали с приставами?') +
+      checkboxGroup('bailiff_actions', [
+        'Подавала заявление — дело ведётся',
+        'Писала жалобы на бездействие приставов',
+        'Ходила на приём, устно общалась',
+        'Ничего не делала',
+        'Не знаю как это делается'
+      ]) +
+      qcard('Арестованы ли счета или имущество должника приставами?') +
+      radioGroup('assets_arrested', ['Да','Нет','Не знаю']) +
+      qcard('Есть ли у должника запрет на выезд за границу?') +
+      radioGroup('travel_ban', ['Да','Нет','Не знаю']);
+
+  } else if (id === 'debtor_info') {
+    btn.textContent = 'Далее →';
+    html = section('Информация о должнике') +
+      qcard('Что знаете о должнике сейчас?') +
+      checkboxGroup('debtor_status', [
+        'Официально трудоустроен',
+        'Работает неофициально',
+        'Не работает / уволился',
+        'ИП или самозанятый',
+        'Скрывает доходы',
+        'Объявлен в розыск',
+        'Живёт за границей',
+        'Есть имущество (недвижимость, авто)',
+        'Ничего не знаю'
+      ]) +
+      qcard('Известно ли место работы?') +
+      radioGroup('work_known', ['Да, знаю','Нет, не знаю']);
+    if (answers['work_known'] === 'Да, знаю') {
+      html += qcard('Укажите место работы',false,'Название организации или ИП, адрес если знаете') +
+        textField('work_place','','Название организации или ИП');
+    }
+    html += qcard('Есть ли у должника другое имущество (недвижимость, авто)?') +
+      radioGroup('debtor_property', ['Да','Нет','Не знаю']) +
+      qcard('Есть ли информация о банкротстве должника?') +
+      radioGroup('debtor_bankrupt', ['Нет','Да, в процессе банкротства','Не знаю']);
+
+  } else if (id === 'not_collected_details') {
+    btn.textContent = 'Далее →';
+    html = section('Текущая ситуация') +
+      qcard('Почему до сих пор не взыскивали алименты?') +
+      checkboxGroup('why_not_collected', [
+        'Не знала что можно / как это сделать',
+        'Договорились устно — думала поможет',
+        'Боялась конфликта',
+        'Думала что не положено (не в браке и т.д.)',
+        'Другое'
+      ], false, true) +
+      qcard('Как давно разошлись / перестал помогать?') +
+      radioGroup('separation_time', ['Меньше 3 месяцев','3–6 месяцев','6–12 месяцев','1–3 года','Больше 3 лет','Никогда вместе не жили']) +
+      qcard('Помогает ли отец ребёнка сейчас добровольно?') +
+      radioGroup('voluntary_help', ['Да, помогает регулярно','Помогает иногда / нерегулярно','Нет, не помогает совсем']);
+    if (['Да, помогает регулярно','Помогает иногда / нерегулярно'].includes(answers['voluntary_help'])) {
+      html += qcard('Сколько в среднем в месяц?') + moneyField('voluntary_amount','');
+    }
+
+  } else if (id === 'paternity') {
+    btn.textContent = 'Далее →';
+    html = section('Установление отцовства') +
+      qcard('Установлено ли отцовство официально?', true,
+        'Без официального отцовства алименты взыскать невозможно. Если отцовство не установлено — сначала нужен иск об установлении отцовства.') +
+      radioGroup('paternity_status', [
+        'Да — отец записан в свидетельстве о рождении',
+        'Да — установлено через суд',
+        'Нет — в свидетельстве прочерк или другой человек',
+        'Не уверена'
+      ], true);
+
+  } else if (id === 'children') {
+    btn.textContent = 'Далее →';
+    html = section('Дети') +
+      qcard('Сколько совместных детей?', true) +
+      radioGroup('children_count', ['1','2','3','4 и более'], true) +
+      qcard('Возраст детей', true,
+        'Выберите все подходящие группы') +
+      checkboxGroup('child_ages', ['до 1 года','1–3 года','3–6 лет','6–11 лет','11–14 лет','15–17 лет','18 лет и старше'], true) +
+      qcard('С кем проживают дети?', true) +
+      radioGroup('children_live', ['Со мной','Попеременно / поровну','С другим родителем'], true) +
+      qcard('Есть ли у кого-то из детей особенности здоровья или инвалидность?', true) +
+      radioGroup('child_disabled', ['Нет','Да'], true) +
+      qcard('Есть ли у должника другие дети (от других отношений), на которых взысканы алименты?',false,
+        'Это влияет на размер доли — суд учитывает всех детей должника') +
+      radioGroup('other_kids', ['Нет / не знаю','Да']);
+
+  } else if (id === 'relations') {
+    btn.textContent = 'Далее →';
+    html = section('Статус отношений') +
+      qcard('Состояли ли в официальном браке?', true) +
+      radioGroup('was_married', ['Да','Нет'], true);
+    if (answers['was_married'] === 'Да') {
+      html += qcard('Статус брака сейчас?', true) +
+        radioGroup('marriage_status', ['В браке','В процессе развода','Разведены'], true);
+      if (answers['marriage_status'] === 'В браке') {
+        html += qcard('Нужна ли помощь с расторжением брака?') +
+          radioGroup('divorce_help', ['Да, хочу развестись как можно быстрее','Пока не думала об этом'],false,
+            'Развод и алименты — отдельные требования. Алименты можно взыскать и без развода, и в процессе.');
+      }
+      html += qcard('Есть ли спор по разделу совместно нажитого имущества?') +
+        radioGroup('property_dispute', ['Да','Нет']);
+    }
+
+  } else if (id === 'extra_grounds') {
+    btn.textContent = 'Далее →';
+    html = section('Дополнительные основания для взыскания') +
+      '<div style="font-size:13px;color:var(--ink-soft);margin-bottom:1rem;line-height:1.5;">Помимо основных алиментов на ребёнка есть дополнительные виды взыскания — проверим, применимы ли они в вашей ситуации.</div>';
+
+  } else if (id === 'alimony_mother') {
+    btn.textContent = 'Далее →';
+    html = section('Алименты на содержание мамы') +
+      '<div class="question-note" style="margin-bottom:1rem;">Так как у вас есть ребёнок до 3 лет и вы состояли в официальном браке — у вас есть право на алименты на собственное содержание (ст. 89, 90 СК РФ). Обычно суд присуждает ½ или 1 прожиточный минимум взрослого по региону.</div>' +
+      qcard('Ваш статус занятости сейчас?', true) +
+      radioGroup('mother_employment', [
+        'В декрете / отпуске по уходу до 3 лет, не работаю',
+        'В отпуске по уходу до 1,5 лет (получаю пособие)',
+        'Работаю официально на полной ставке',
+        'Работаю официально на неполной ставке'
+      ], true) +
+      qcard('Помогает ли супруг добровольно на ваше содержание?') +
+      radioGroup('mother_help', ['Да','Нет']);
+    if (answers['mother_help'] === 'Да') {
+      html += qcard('Сколько в месяц?') + moneyField('mother_help_amount','');
+    }
+
+  } else if (id === 'disabled_child') {
+    btn.textContent = 'Далее →';
+    html = section('Особые расходы — ребёнок с особенностями здоровья') +
+      '<div class="question-note" style="margin-bottom:1rem;">При инвалидности или особых потребностях здоровья ребёнка можно взыскать дополнительные расходы сверх основных алиментов (ст. 86 СК РФ). Если ребёнок — инвалид I или II группы, родитель, осуществляющий уход, имеет право на алименты на своё содержание бессрочно (ст. 89 СК РФ).</div>' +
+      qcard('Группа инвалидности или диагноз') +
+      textField('disabled_diagnosis','Например: ДЦП, I группа инвалидности','Диагноз или группа инвалидности') +
+      qcard('Ежемесячные расходы на лечение, реабилитацию, уход (₽)') +
+      moneyField('disabled_expenses','Лекарства, процедуры, специалисты, оборудование') +
+      qcard('Есть ли подтверждающие медицинские документы?') +
+      radioGroup('disabled_docs', ['Да, есть','Нет, нужно собирать','Частично есть']);
+
+  } else if (id === 'housing') {
+    btn.textContent = 'Далее →';
+    html = section('Жилищные алименты (ст. 86 СК РФ)') +
+      qcard('Какова ваша ситуация с жильём?', true,
+        'Жилищные алименты взыскиваются если у вас и ребёнка нет собственного жилья или вы вынуждены его арендовать / платить ипотеку после развода. Суд рассматривает это как исключительное обстоятельство по ст. 86 СК РФ.') +
+      radioGroup('housing_status', [
+        'Снимаю / арендую жильё',
+        'Плачу ипотеку, взятую после развода',
+        'Живу у родственников — своего жилья нет',
+        'Есть своё жильё'
+      ], true);
+    if (['Снимаю / арендую жильё','Плачу ипотеку, взятую после развода','Живу у родственников — своего жилья нет'].includes(answers['housing_status'])) {
+      html += qcard('Сколько стоит жильё в месяц?', false, 'Аренда или платёж по ипотеке') +
+        moneyField('housing_cost','') +
+        qcard('Сколько человек проживает в этом жилье?') +
+        radioGroup('housing_people', ['1','2','3','4 и более']) +
+        qcard('Есть ли договор аренды или кредитный договор по ипотеке?') +
+        radioGroup('housing_docs', ['Да, есть','Нет']);
+    }
+
+  } else if (id === 'child_expenses') {
+    btn.textContent = 'Далее →';
+    html = section('Расходы на ребёнка') +
+      '<div class="field-hint" style="margin-bottom:1rem;">Необязательно считать точно — укажите примерно. Это поможет нам определить прогнозируемый размер алиментов, который реально взыскать в вашей ситуации.</div>' +
+      qcard('Питание (₽/мес)') + moneyField('exp_food','') +
+      qcard('Одежда (₽/мес)') + moneyField('exp_clothes','') +
+      qcard('Кружки / секции / обучение (₽/мес)') + moneyField('exp_education','') +
+      qcard('Лечение / лекарства (₽/мес)') + moneyField('exp_health','') +
+      qcard('Детский сад / школа (₽/мес)') + moneyField('exp_school','') +
+      qcard('Другое (₽/мес)') + moneyField('exp_other','');
+
+  } else if (id === 'desired_result') {
+    btn.textContent = 'Далее →';
+    var notCollected = answers['collected_alimony'] === 'Нет, официально не взыскивала';
+    html = section('Желаемый результат');
+    if (notCollected) {
+      html += qcard('Что хотите получить?', true) +
+        radioGroup('desired_goal', [
+          'Взыскать алименты — помогите определить сумму',
+          'Хочу конкретную сумму — укажу сама',
+          'Хочу максимально возможное'
+        ], true);
+      if (answers['desired_goal'] === 'Хочу конкретную сумму — укажу сама') {
+        html += qcard('Желаемая сумма алиментов в месяц') + moneyField('desired_amount','');
+      }
+    } else {
+      html += qcard('Что хотите изменить / получить?', true) +
+        radioGroup('desired_goal', [
+          'Увеличить сумму алиментов',
+          'Изменить форму (доля → твёрдая сумма или наоборот)',
+          'Взыскать накопившийся долг',
+          'И увеличить сумму, и взыскать долг',
+          'Нужна помощь с оформлением — всё устраивает'
+        ], true);
+      if (answers['desired_goal'] === 'Увеличить сумму алиментов') {
+        html += qcard('Желаемая сумма в месяц') + moneyField('desired_amount','');
+      }
+    }
+    html += qcard('Что важнее?') +
+      radioGroup('priority', ['Скорость — хочу результат как можно быстрее','Размер — готова подождать ради большей суммы']);
+
+  } else if (id === 'final') {
+    btn.textContent = 'Отправить анкету →';
+    btn.disabled = true;
+    html = section('Финальный шаг') +
+      qcard('Есть ли что-то важное, что не вошло в вопросы выше?') +
+      '<textarea class="textarea-input" placeholder="Любая информация, которую считаете нужным добавить" oninput="answers[\'extra\']=this.value">' + (answers['extra']||'') + '</textarea>' +
+      '<div class="consent-wrap" style="margin-top:1rem;">' +
+      '<input type="checkbox" id="consent_pd" onchange="document.getElementById(\'btnNext\').disabled=!this.checked">' +
+      '<label for="consent_pd">Я соглашаюсь с <a href="/privacy-policy.html" target="_blank">Политикой конфиденциальности</a> и даю согласие на обработку моих персональных данных</label>' +
+      '</div>';
+  }
+
+  document.getElementById('quizContent').innerHTML = html;
+  document.getElementById('btnNext').textContent = (id === 'final') ? 'Отправить анкету →' : 'Далее →';
+}
+
+// ── ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ РЕНДЕРА ─────────────────────────────
+function section(title) {
+  return '<div class="section-title">' + title + '</div>';
+}
+function qcard(label, required, note) {
+  var req = required ? ' <span style="color:var(--accent)">*</span>' : '';
+  var noteHtml = note ? '<div class="question-note">' + note + '</div>' : '';
+  return '<div class="question-card"><div class="question-text">' + label + req + '</div>' + noteHtml;
+}
+// Закрывающий тег добавляется в конце каждого поля — упрощённо через innerHTML
+
+function radioGroup(id, options, required, note) {
+  var html = '<div class="radio-group">';
+  options.forEach(function(opt) {
+    var checked = answers[id] === opt ? 'checked' : '';
+    var sel = answers[id] === opt ? ' selected' : '';
+    var eid = 'r_' + id + '_' + opt.replace(/\W/g,'_');
+    html += '<div class="radio-option' + sel + '" onclick="if(event.target.tagName!==\'INPUT\'){var inp=this.querySelector(\'input\');inp.checked=true;inp.dispatchEvent(new Event(\'change\',{bubbles:true}));}" style="cursor:pointer;user-select:none;">' +
+      '<input type="radio" name="r_' + id + '" id="' + eid + '" value="' + opt.replace(/"/g,'&quot;') + '" ' + checked +
+      ' onclick="event.stopPropagation()"' +
+      ' onchange="answers[\'' + id + '\']=this.value;document.querySelectorAll(\'[name=r_' + id + ']\').forEach(function(r){r.closest(\'.radio-option\').classList.toggle(\'selected\',r.checked)});var sv=window.scrollY;renderStep(currentStep);window.scrollTo(0,sv);">' +
+      '<label for="' + eid + '">' + opt + '</label></div>';
+  });
+  html += '</div></div>';
+  return html;
+}
+
+function checkboxGroup(id, options, required, hasClarify) {
+  var html = '<div class="checkbox-group">';
+  options.forEach(function(opt) {
+    var arr = answers[id] || [];
+    var checked = arr.includes(opt) ? 'checked' : '';
+    var sel = arr.includes(opt) ? ' selected' : '';
+    var eid = 'cb_' + id + '_' + opt.replace(/\W/g,'_');
+    html += '<div class="checkbox-option' + sel + '" id="' + eid + '" onclick="if(event.target.tagName!==\'INPUT\'){this.querySelector(\'input\').click();}" style="cursor:pointer;user-select:none;">' +
+      '<input type="checkbox" id="inp_' + eid + '" value="' + opt.replace(/"/g,'&quot;') + '" ' + checked +
+      ' onclick="event.stopPropagation()"' +
+      ' onchange="toggleCb(\'' + id + '\',\'' + opt.replace(/'/g,"\\'") + '\',this.checked);document.getElementById(\'' + eid + '\').classList.toggle(\'selected\',this.checked);">' +
+      '<label for="inp_' + eid + '">' + opt + '</label></div>';
+  });
+  html += '</div>';
+  if (hasClarify) {
+    var cv = clarifyAnswers[id] || '';
+    html += '<div class="clarify-wrap"><div class="clarify-label">Добавьте своё</div><input class="clarify-input" placeholder="Укажите что-то, чего нет в списке..." value="' + cv.replace(/"/g,'&quot;') + '" oninput="clarifyAnswers[\'' + id + '\']=this.value"></div>';
+  }
+  html += '</div>';
+  return html;
+}
+
+function textField(id, placeholder, hint) {
+  var v = (answers[id] || '').replace(/"/g,'&quot;');
+  var hintHtml = hint ? '<div class="field-hint">' + hint + '</div>' : '';
+  return hintHtml + '<input class="text-input" data-qid="' + id + '" placeholder="' + (placeholder||'Ваш ответ...') + '" value="' + v + '" oninput="answers[\'' + id + '\']=this.value"></div>';
+}
+
+function phoneField(id) {
+  var v = (answers[id] || '').replace(/"/g,'&quot;');
+  return '<div class="field-hint">Формат: +7 (___) ___-__-__</div><input class="text-input" data-mask="phone" data-qid="' + id + '" inputmode="tel" placeholder="+7 (___) ___-__-__" value="' + v + '"></div>';
+}
+
+function moneyField(id, hint) {
+  var v = (answers[id] || '').replace(/"/g,'&quot;');
+  var hintHtml = hint ? '<div class="field-hint">' + hint + '</div>' : '';
+  return hintHtml + '<input class="text-input" data-mask="money" data-qid="' + id + '" inputmode="numeric" placeholder="Сумма в ₽" value="' + v + '"></div>';
+}
+
+function toggleCb(id, val, checked) {
+  if (!answers[id]) answers[id] = [];
+  if (checked) answers[id].push(val);
+  else answers[id] = answers[id].filter(function(v){return v!==val;});
+}
+
+// ── МАСКИ ────────────────────────────────────────────────────────
+function phoneMask(el) {
+  var v = el.value.replace(/\D/g,'');
+  if (v.startsWith('8')) v = '7' + v.slice(1);
+  if (!v.startsWith('7')) v = '7' + v;
+  v = v.slice(0,11);
+  var r = '+7';
+  if (v.length>1) r+=' ('+v.slice(1,4);
+  if (v.length>=4) r+=') '+v.slice(4,7);
+  if (v.length>=7) r+='-'+v.slice(7,9);
+  if (v.length>=9) r+='-'+v.slice(9,11);
+  el.value = r;
+  answers[el.dataset.qid] = r;
+}
+function moneyMask(el) {
+  var v = el.value.replace(/[^0-9]/g,'');
+  if (v) v = parseInt(v,10).toLocaleString('ru-RU');
+  el.value = v;
+  answers[el.dataset.qid] = v.replace(/\s/g,'');
+}
+document.addEventListener('input', function(e) {
+  var el = e.target;
+  if (!el.dataset || !el.dataset.mask) return;
+  if (el.dataset.mask==='phone') phoneMask(el);
+  else if (el.dataset.mask==='money') moneyMask(el);
+});
+document.addEventListener('input', function(e) {
+  var el = e.target;
+  if (el.classList && el.classList.contains('text-input') && el.dataset.qid && !el.dataset.mask) {
+    answers[el.dataset.qid] = el.value;
+  }
+});
+
+// ── НАВИГАЦИЯ ────────────────────────────────────────────────────
+function startQuiz() {
+  document.getElementById('introCard').style.display = 'none';
+  document.getElementById('quizWrap').style.display = 'block';
+  renderStep(0);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function validateStep(stepId) {
+  if (stepId === 'contacts') return !!(answers['name'] && answers['phone'] && answers['city']);
+  if (stepId === 'main_question') return !!answers['collected_alimony'];
+  if (stepId === 'collected_details') return !!(answers['doc_type'] && answers['doc_type'].length && answers['bailiff_submitted'] && answers['alimony_form']);
+  if (stepId === 'paying_status') return !!answers['paying_status'];
+  if (stepId === 'paternity') return !!answers['paternity_status'];
+  if (stepId === 'children') return !!(answers['children_count'] && answers['child_ages'] && answers['child_ages'].length && answers['children_live'] && answers['child_disabled']);
+  if (stepId === 'relations') return !!(answers['was_married'] && (answers['was_married']==='Нет' || answers['marriage_status']));
+  if (stepId === 'housing') return !!answers['housing_status'];
+  if (stepId === 'desired_result') return !!answers['desired_goal'];
+  return true;
+}
+
+function goNext() {
+  var stepId = getCurrentStepId();
+  if (!validateStep(stepId)) {
+    document.getElementById('errorMsg').style.display = 'block';
+    return;
+  }
+  if (currentStep < getTotalSteps()-1) {
+    currentStep++;
+    renderStep(currentStep);
+    window.scrollTo({top:0,behavior:'smooth'});
+  } else {
+    submitForm();
+  }
+}
+function goBack() {
+  if (currentStep>0) {
+    currentStep--;
+    renderStep(currentStep);
+    window.scrollTo({top:0,behavior:'smooth'});
+  }
+}
+
+// ── РАСЧЁТ ───────────────────────────────────────────────────────
+function getMoney(key) {
+  return parseInt((answers[key]||'').replace(/[^0-9]/g,''),10)||0;
+}
+function calcResult() {
+  var lines = [];
+  var total = 0;
+
+  // Расходы на ребёнка
+  var exp = getMoney('exp_food')+getMoney('exp_clothes')+getMoney('exp_education')+getMoney('exp_health')+getMoney('exp_school')+getMoney('exp_other');
+  if (exp>0) {
+    lines.push({label:'Расходы на ребёнка (аргумент для суда)',val:exp,note:'Дополнительный аргумент для обоснования размера алиментов'});
+  }
+
+  // Жилищные
+  var housing = getMoney('housing_cost');
+  var people = parseInt(answers['housing_people']||'1',10)||1;
+  if (housing>0 && answers['housing_status'] && answers['housing_status']!=='Есть своё жильё') {
+    var childShare = Math.round(housing/people);
+    var housingAlimony = Math.round(childShare/2);
+    total += housingAlimony;
+    lines.push({label:'Жилищные алименты (ст. 86 СК РФ)',val:housingAlimony,note:'Аренда/ипотека ' + housing.toLocaleString('ru-RU') + ' ₽ ÷ ' + people + ' чел. = доля ребёнка ' + childShare.toLocaleString('ru-RU') + ' ₽ → половина к взысканию'});
+  }
+
+  // Алименты на маму
+  if (answers['mother_employment'] && answers['mother_employment']!=='Работаю официально на полной ставке') {
+    lines.push({label:'Алименты на содержание мамы (ст. 90 СК РФ)',val:null,note:'Потенциально ½ или 1 прожиточный минимум взрослого по региону. Точный размер определит суд.'});
+  }
+
+  // Доп. расходы на ребёнка с инвалидностью
+  var disabled = getMoney('disabled_expenses');
+  if (disabled>0) {
+    total += disabled;
+    lines.push({label:'Доп. расходы на лечение / реабилитацию (ст. 86 СК РФ)',val:disabled,note:'Дополнительные расходы — взыскиваются отдельно от основных алиментов'});
+  }
+
+  return {lines:lines, total:total, exp:exp};
+}
+
+function buildResultHtml() {
+  var r = calcResult();
+  if (r.lines.length===0 && r.total===0) return '';
+  var html = '<div class="result-block"><div class="result-label">Предварительный расчёт</div>';
+  r.lines.forEach(function(l) {
+    html += '<div class="result-row"><span>' + l.label + '</span>';
+    if (l.val!==null) html += '<span>' + l.val.toLocaleString('ru-RU') + ' ₽/мес</span>';
+    else html += '<span>уточним</span>';
+    html += '</div>';
+    if (l.note) html += '<div style="font-size:11px;color:var(--ink-soft);padding:3px 0 6px;line-height:1.5;">' + l.note + '</div>';
+  });
+  if (r.total>0) {
+    html += '<div class="result-total"><span>Дополнительно можно взыскать</span><span>' + r.total.toLocaleString('ru-RU') + ' ₽/мес</span></div>';
+  }
+  html += '<div class="result-note">Расчёт предварительный. Основные алименты (доля или ТДС) рассчитываются отдельно исходя из дохода должника. Подробности обсудим в личной переписке.</div>';
+  html += '</div>';
+  return html;
+}
+
+function buildText() {
+  var t = 'АНКЕТА ПО АЛИМЕНТАМ\n══════════════════════════\n\n';
+  var sections = [
+    {name:'Контакты', keys:['name','phone','city']},
+    {name:'Статус взыскания', keys:['collected_alimony','doc_type','bailiff_submitted','alimony_form','alimony_amount_doc','alimony_year','alimony_real']},
+    {name:'Выплаты', keys:['paying_status','real_income_month','amount_ok','amount_why']},
+    {name:'Долг и приставы', keys:['debt_duration','debt_official','debt_own','debt_diff','penalty','bailiff_actions','assets_arrested','travel_ban']},
+    {name:'Должник', keys:['debtor_status','work_known','work_place','debtor_property','debtor_bankrupt']},
+    {name:'Не взыскивала', keys:['why_not_collected','separation_time','voluntary_help','voluntary_amount','paternity_status']},
+    {name:'Дети', keys:['children_count','child_ages','children_live','child_disabled','other_kids']},
+    {name:'Статус отношений', keys:['was_married','marriage_status','divorce_help','property_dispute']},
+    {name:'Алименты на маму', keys:['mother_employment','mother_help','mother_help_amount']},
+    {name:'Ребёнок с особенностями', keys:['disabled_diagnosis','disabled_expenses','disabled_docs']},
+    {name:'Жильё', keys:['housing_status','housing_cost','housing_people','housing_docs']},
+    {name:'Расходы на ребёнка', keys:['exp_food','exp_clothes','exp_education','exp_health','exp_school','exp_other']},
+    {name:'Желаемый результат', keys:['desired_goal','desired_amount','priority']},
+    {name:'Дополнительно', keys:['extra']}
+  ];
+  var keyLabels = {
+    name:'ФИО',phone:'Телефон',city:'Город/регион',
+    collected_alimony:'Взыскивались алименты',doc_type:'Документ',bailiff_submitted:'Подан приставам',
+    alimony_form:'Форма взыскания',alimony_amount_doc:'Размер по документу',alimony_year:'Год взыскания',alimony_real:'Реально на руки',
+    paying_status:'Статус выплат',real_income_month:'Реальная сумма в месяц',amount_ok:'Устраивает сумма',amount_why:'Почему мало',
+    debt_duration:'Как давно не платит',debt_official:'Долг официальный',debt_own:'Долг по расчёту',debt_diff:'Расхождение',penalty:'Неустойка',
+    bailiff_actions:'Действия с приставами',assets_arrested:'Арест счетов/имущества',travel_ban:'Запрет на выезд',
+    debtor_status:'О должнике',work_known:'Место работы известно',work_place:'Место работы',debtor_property:'Имущество должника',debtor_bankrupt:'Банкротство',
+    why_not_collected:'Почему не взыскивала',separation_time:'Как давно разошлись',voluntary_help:'Помогает добровольно',voluntary_amount:'Сумма добровольно',
+    paternity_status:'Отцовство',
+    children_count:'Детей',child_ages:'Возраст детей',children_live:'Дети живут с',child_disabled:'Особенности здоровья',other_kids:'Другие дети должника',
+    was_married:'Официальный брак',marriage_status:'Статус брака',divorce_help:'Помощь с разводом',property_dispute:'Спор по имуществу',
+    mother_employment:'Занятость мамы',mother_help:'Помощь на маму',mother_help_amount:'Сумма на маму',
+    disabled_diagnosis:'Диагноз/инвалидность',disabled_expenses:'Расходы на лечение',disabled_docs:'Медицинские документы',
+    housing_status:'Ситуация с жильём',housing_cost:'Стоимость жилья',housing_people:'Проживающих',housing_docs:'Документы на жильё',
+    exp_food:'Питание',exp_clothes:'Одежда',exp_education:'Кружки/секции',exp_health:'Лечение',exp_school:'Детсад/школа',exp_other:'Другое',
+    desired_goal:'Цель',desired_amount:'Желаемая сумма',priority:'Приоритет',extra:'Дополнительно'
+  };
+  sections.forEach(function(sec) {
+    var rows = '';
+    sec.keys.forEach(function(k) {
+      var v = answers[k];
+      if (!v || (Array.isArray(v) && !v.length)) return;
+      var line = (keyLabels[k]||k) + ': ';
+      line += Array.isArray(v) ? v.join(', ') : v;
+      rows += line + '\n';
+    });
+    if (rows) t += '【' + sec.name + '】\n' + rows + '\n';
+  });
+  // Расходы итого
+  var exp = getMoney('exp_food')+getMoney('exp_clothes')+getMoney('exp_education')+getMoney('exp_health')+getMoney('exp_school')+getMoney('exp_other');
+  if (exp>0) t += 'ИТОГО расходов на ребёнка: ' + exp.toLocaleString('ru-RU') + ' руб./мес\n\n';
+  return t;
+}
+
+function buildDutyText() {
+  var r = calcResult();
+  if (r.lines.length===0) return '';
+  var lines = ['ПРЕДВАРИТЕЛЬНЫЙ РАСЧЁТ:'];
+  r.lines.forEach(function(l) {
+    lines.push((l.val!==null ? l.label + ': ' + l.val.toLocaleString('ru-RU') + ' руб./мес' : l.label + ': уточним'));
+    if (l.note) lines.push('  ' + l.note);
+  });
+  if (r.total>0) lines.push('\nДополнительно можно взыскать: ' + r.total.toLocaleString('ru-RU') + ' руб./мес');
+  lines.push('\nРасчёт предварительный. Основные алименты рассчитываются отдельно.');
+  return lines.join('\n');
+}
+
+function submitForm() {
+  var btn = document.getElementById('btnNext');
+  btn.textContent = 'Отправляем...';
+  btn.disabled = true;
+  var fullText = buildText();
+  var chunkSize = 3800;
+  var header = 'АНКЕТА: АЛИМЕНТЫ\n' + '👤 ' + (answers['name']||'—') + '\n' + '📞 ' + (answers['phone']||'—') + '\n' + '📍 ' + (answers['city']||'—') + '\n──────────────────\n';
+  var chunks = [];
+  var full = header + fullText;
+  for (var i=0; i<full.length; i+=chunkSize) chunks.push(full.slice(i,i+chunkSize));
+  var dutyMsg = buildDutyText();
+  if (dutyMsg) chunks.push('РАСЧЁТ — ' + (answers['name']||'—') + '\n──────────────────\n' + dutyMsg);
+
+  function sendChunk(idx) {
+    if (idx>=chunks.length) { showThankYou(); return; }
+    fetch(TG_URL, {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:TG_CHAT,text:chunks[idx]})
+    })
+    .then(function(r){return r.json();})
+    .then(function(d){if(d.ok){sendChunk(idx+1);}else{showError();}})
+    .catch(function(){showError();});
+  }
+  sendChunk(0);
+}
+
+function showThankYou() {
+  document.getElementById('progressFill').style.width='100%';
+  document.getElementById('stepLabel').textContent='Готово!';
+  document.getElementById('quizContent').innerHTML =
+    '<div style="text-align:center;padding:1rem 0 0.75rem;">' +
+    '<div style="font-size:32px;margin-bottom:0.5rem;">✅</div>' +
+    '<h2 style="font-size:18px;font-weight:700;color:var(--ink);margin-bottom:0.4rem;">Анкета получена!</h2>' +
+    '<p style="font-size:13px;color:var(--ink-soft);line-height:1.5;margin-bottom:1rem;">Изучу вашу ситуацию и свяжусь в течение рабочего дня.</p>' +
+    '<div style="display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:1rem;">' +
+    '<a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--accent);color:#1a1306;border-radius:999px;font-size:13px;font-weight:700;text-decoration:none;">💬 Max</a>' +
+    '<a href="https://t.me/a_likhacheva2026" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">✈️ Telegram</a>' +
+    '<a href="https://wa.me/79920011995" target="_blank" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--bg-inner);border:1px solid var(--border-strong);color:var(--ink);border-radius:999px;font-size:13px;font-weight:600;text-decoration:none;">📱 WhatsApp</a>' +
+    '</div></div>' +
+    '<div style="border-top:1px solid var(--border);padding-top:1rem;">' +
+    '<div style="font-size:13px;font-weight:700;color:var(--ink);margin-bottom:0.75rem;">Предварительный расчёт</div>' +
+    buildResultHtml() +
+    '</div>';
+  document.getElementById('btnRow').innerHTML='';
+  document.getElementById('errorMsg').style.display='none';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function showError() {
+  var btn = document.getElementById('btnNext');
+  btn.textContent = 'Отправить анкету →';
+  btn.disabled = false;
+  var e = document.getElementById('errorMsg');
+  e.textContent = 'Не удалось отправить. Попробуйте ещё раз или напишите напрямую: t.me/a_likhacheva2026';
+  e.style.display = 'block';
+}
+</script>
+</body>
+</html>
