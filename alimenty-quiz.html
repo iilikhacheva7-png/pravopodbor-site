@@ -607,7 +607,8 @@ function calcHousing(){
   if(!['Снимаю / арендую жильё','Плачу ипотеку, взятую после развода','Живу у родственников — своего жилья нет'].includes(answers['housing']))return 0;
   var cost=gm('housing_cost');if(!cost)return 0;
   var people=parseInt(answers['housing_people']||'2')||2;
-  return Math.round(cost/people/2);
+  var cnt=parseInt(answers['children_count']||'1')||1;
+  return Math.round(cost/people/2*cnt);
 }
 function calcExpenses(){
   var t=gm('exp_food')+gm('exp_clothes')+gm('exp_education')+gm('exp_health')+gm('exp_school')+gm('exp_transport');
@@ -645,7 +646,7 @@ function buildResult(){
   }
   if(housing>0){
     var ppl=parseInt(answers['housing_people']||'2')||2;
-    lines.push({label:'Жилищные алименты (ст. 86 СК РФ)',val:housing,note:'Расходы '+gm('housing_cost').toLocaleString('ru-RU')+' ₽ ÷ '+ppl+' чел. = доля ребёнка → ÷ 2 = '+housing.toLocaleString('ru-RU')+' ₽'});
+    lines.push({label:'Жилищные алименты (ст. 86 СК РФ)',val:housing,note:'Расходы '+gm('housing_cost').toLocaleString('ru-RU')+' ₽ ÷ '+ppl+' чел. ÷ 2 × '+(parseInt(answers['children_count'])||1)+' дет. = '+housing.toLocaleString('ru-RU')+' ₽'});
     totalMonthly+=housing;
   }
   if(disabled>0){
