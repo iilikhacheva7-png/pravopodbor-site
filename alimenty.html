@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Не платят алименты? Бесплатный разбор ситуации — По рекомендации</title>
-<meta name="description" content="Не платят алименты, пристав бездействует? Ответьте на 4 вопроса и получите понятный план действий. Бесплатно, онлайн.">
+<title>Алименты — подать на взыскание или добиться выплат · По рекомендации</title>
+<meta name="description" content="Ещё не взыскивали или уже взыскали, но не платит? Ответьте на несколько вопросов и получите понятный план действий. Бесплатно, онлайн.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Не платят алименты или пристав бездействует?">
-<meta property="og:description" content="Ответьте на 4 вопроса и получите понятный план действий. Бесплатно.">
+<meta property="og:title" content="Нужно взыскать алименты — или уже взыскала, но не платит?">
+<meta property="og:description" content="Ответьте на несколько вопросов и получите понятный план действий. Бесплатно.">
 <style>
 :root{--navy:#0f1a2b;--navy2:#16243b;--paper:#f6f1e8;--paper2:#eee6d8;--ink:#152033;--muted:#667085;--gold:#c9a24b;--line:#ded5c7;--white:#fff;--green:#557763;--radius:18px}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:"Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--paper);line-height:1.55}
@@ -81,6 +81,15 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3
 .option:hover,.option.selected{border-color:var(--gold);background:#fbf7ef}
 .option:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 
+/* CHECKBOXES */
+.check-options{display:grid;gap:9px}
+.check-option{display:flex;align-items:center;gap:11px;border:1.5px solid #ddd6ca;border-radius:12px;padding:13px 15px;cursor:pointer;background:#fff;font-size:14px;color:var(--ink);transition:border-color .12s,background .12s;user-select:none}
+.check-option:hover{border-color:var(--gold);background:#fbf7ef}
+.check-option.selected{border-color:var(--gold);background:#fbf7ef}
+.check-option input[type="checkbox"]{accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer}
+.check-next-btn{margin-top:16px;width:100%;min-height:46px;background:var(--navy);color:#fff;border:none;border-radius:12px;font:700 14px/1 inherit;cursor:pointer;transition:opacity .15s}
+.check-next-btn:hover{opacity:.86}
+
 /* NAV */
 .quiz-nav{display:flex;justify-content:space-between;align-items:center;margin-top:20px;min-height:36px}
 .back-btn{background:none;border:0;color:var(--muted);cursor:pointer;font:inherit;font-size:14px;padding:6px 0;display:flex;align-items:center;gap:4px}
@@ -90,12 +99,6 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3
 .final-screen{text-align:center}
 .final-screen h3{font:500 24px/1.2 Georgia;color:var(--navy);margin:0 0 10px}
 .final-screen .final-sub{font-size:15px;color:var(--muted);margin:0 0 28px;line-height:1.6}
-.msng-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
-.msng-btn{display:flex;align-items:center;gap:9px;justify-content:center;padding:14px 12px;border-radius:12px;font-size:14px;font-weight:600;text-decoration:none;color:#fff;border:none;cursor:pointer;font-family:inherit;transition:opacity .15s;width:100%}
-.msng-btn:hover{opacity:.88}
-.msng-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
-.msng-btn[aria-disabled="true"]{opacity:.35;cursor:not-allowed;pointer-events:none}
-.msng-tg{background:#2AABEE}.msng-wa{background:#25D366}.msng-max{background:#5B4FCF}.msng-ph{background:var(--navy)}
 
 /* PHONE INPUT */
 .phone-form{text-align:left;margin-top:4px}
@@ -109,10 +112,6 @@ h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3
 /* CONSENT */
 .consent-note{font-size:11px;color:var(--muted);line-height:1.55;margin-top:14px;text-align:center}
 .consent-note a{color:var(--gold)}
-
-.divider-or{text-align:center;color:var(--muted);font-size:13px;margin:16px 0;position:relative}
-.divider-or::before,.divider-or::after{content:'';position:absolute;top:50%;width:42%;height:1px;background:var(--line)}
-.divider-or::before{left:0}.divider-or::after{right:0}
 
 /* NATIVE FORM INPUTS */
 #al-contact-form input[type="text"]:focus,
@@ -154,7 +153,6 @@ footer{padding:30px 0;border-top:1px solid var(--line);background:var(--navy)}
   .sits{grid-template-columns:1fr 1fr}
   .pros{grid-template-columns:1fr}
   .trust{gap:16px;justify-content:center}
-  .msng-btns{grid-template-columns:1fr}
   .prices-block{padding:24px 18px}
 }
 @media(max-width:520px){
@@ -189,33 +187,33 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 <section class="hero">
   <div class="wrap">
     <div class="kicker">Алименты · Бесплатный разбор</div>
-    <h1>Не платит алименты<br>или пристав бездействует?</h1>
-    <p class="lead">Ответьте на 4 коротких вопроса и получите понятный план действий.</p>
+    <h1>Нужно взыскать алименты —<br>или уже взыскала, но не платит?</h1>
+    <p class="lead">Ответьте на несколько вопросов и получите понятный план действий. Бесплатно, онлайн.</p>
     <a class="btn btn-gold" href="#quiz" id="hero-cta">Получить план действий</a>
-    <p class="micro">Бесплатно&nbsp;•&nbsp;1 минута&nbsp;•&nbsp;Без документов и звонков</p>
+    <p class="micro">Бесплатно&nbsp;•&nbsp;2 минуты&nbsp;•&nbsp;Без документов и звонков</p>
   </div>
 </section>
 
-<!-- СИТУАЦИИ (3 вместо 6) -->
+<!-- СИТУАЦИИ -->
 <section class="section white" id="situations">
   <div class="wrap">
     <h2>Узнаёте свою ситуацию?</h2>
-    <p class="section-sub">Даже если проблема длится годами — варианты могут оставаться.</p>
+    <p class="section-sub">Помогаем и тем, кто только начинает, и тем, кто уже взыскал — но столкнулся с проблемами.</p>
     <div class="sits">
       <div class="sit">
+        <div class="sit-ico">📋</div>
+        <h3>Ещё не подавала на алименты</h3>
+        <p>Хочу подать судебный приказ или иск, но не знаю с чего начать.</p>
+      </div>
+      <div class="sit">
         <div class="sit-ico">🚫</div>
-        <h3>Алименты не платит совсем</h3>
+        <h3>Алименты взысканы, но не платит</h3>
         <p>Есть решение суда или соглашение, но деньги не поступают.</p>
       </div>
       <div class="sit">
-        <div class="sit-ico">📉</div>
-        <h3>Платит слишком мало</h3>
-        <p>Доход занижен, нестабилен или показывается только его часть.</p>
-      </div>
-      <div class="sit">
         <div class="sit-ico">⏳</div>
-        <h3>Пристав ничего не делает</h3>
-        <p>Производство открыто, задолженность растёт — реальных действий нет.</p>
+        <h3>Платит мало или пристав бездействует</h3>
+        <p>Сумма занижена, долг растёт, а реальных действий от приставов нет.</p>
       </div>
     </div>
 
@@ -230,93 +228,210 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
 </section>
 
 <!-- КВИЗ -->
-
 <section class="quiz-section" id="quiz">
   <div class="quiz-wrap">
     <div class="quiz-heading">
-      <h2>Ответьте на 4 вопроса</h2>
-      <p>Займёт около минуты. Паспортные данные и документы не нужны.</p>
+      <h2>Ответьте на несколько вопросов</h2>
+      <p>Займёт около 2 минут. Паспортные данные и документы не нужны.</p>
     </div>
 
     <div class="quiz-card" id="quiz-card">
       <!-- Прогресс -->
       <div class="prog-header">
-        <span class="prog-label" id="prog-label">Шаг 1 из 4</span>
-        <span class="prog-fraction" id="prog-fraction">1 / 4</span>
+        <span class="prog-label" id="prog-label">Шаг 1</span>
+        <span class="prog-fraction" id="prog-fraction">1 / ?</span>
       </div>
-      <div class="prog-bar"><i id="alBar" style="width:25%"></i></div>
+      <div class="prog-bar"><i id="alBar" style="width:10%"></i></div>
 
-      <!-- hidden-поля для накопления ответов -->
-      <input type="hidden" id="fSit">
+      <!-- Скрытые поля для сбора ответов -->
+      <input type="hidden" id="fBranch">
       <input type="hidden" id="fDoc">
-      <input type="hidden" id="fFSSP">
-      <input type="hidden" id="fDebt">
+      <input type="hidden" id="fPains">
+      <input type="hidden" id="fAmount">
+      <input type="hidden" id="fWhy">
+      <input type="hidden" id="fFather">
+      <input type="hidden" id="fWantSum">
+      <input type="hidden" id="fHelp">
 
-      <!-- ШАГ 1 -->
-      <div class="step-q" data-step="1" id="sq1">
-        <h3>Что сейчас происходит с алиментами?</h3>
+      <!-- ════════════════════════════════════════
+           ШАГ 1 — ОБЩИЙ: взысканы ли алименты?
+           ════════════════════════════════════════ -->
+      <div class="step-q active" data-step="1" id="sq1">
+        <h3>Взысканы ли у вас алименты официально?</h3>
         <div class="options" role="group" aria-label="Варианты ответа">
-          <button type="button" class="option" data-field="fSit" data-val="Ещё не взыскивала / не взыскивал">Ещё не взыскивала / не взыскивал</button>
-          <button type="button" class="option" data-field="fSit" data-val="Не платит совсем">Не платит совсем</button>
-          <button type="button" class="option" data-field="fSit" data-val="Платит нерегулярно или мало">Платит нерегулярно или мало</button>
-          <button type="button" class="option" data-field="fSit" data-val="Есть долг или пристав не действует">Есть долг или пристав не действует</button>
-          <button type="button" class="option" data-field="fSit" data-val="Другая ситуация">Другая ситуация</button>
-        </div>
-        <div class="quiz-nav"><span></span></div>
-      </div>
-
-      <!-- ШАГ 2 -->
-      <div class="step-q" data-step="2" id="sq2">
-        <h3>Есть решение суда, судебный приказ или нотариальное соглашение?</h3>
-        <div class="options" role="group" aria-label="Варианты ответа">
-          <button type="button" class="option" data-field="fDoc" data-val="Да, есть решение суда / судебный приказ">Да, есть решение суда / судебный приказ</button>
-          <button type="button" class="option" data-field="fDoc" data-val="Есть нотариальное соглашение">Есть нотариальное соглашение</button>
-          <button type="button" class="option" data-field="fDoc" data-val="Нет документа">Нет, ещё не оформляли</button>
-          <button type="button" class="option" data-field="fDoc" data-val="Не знаю">Не знаю</button>
-        </div>
-        <div class="quiz-nav">
-          <button type="button" class="back-btn" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
+          <button type="button" class="option" data-branch="yes" data-field="fBranch" data-val="yes">Да, взысканы</button>
+          <button type="button" class="option" data-branch="no" data-field="fBranch" data-val="no">Нет, не взысканы</button>
+          <button type="button" class="option" data-branch="unknown" data-field="fBranch" data-val="unknown">Не помню / не знаю</button>
         </div>
       </div>
 
-      <!-- ШАГ 3 -->
-      <div class="step-q" data-step="3" id="sq3">
-        <h3>Есть исполнительное производство у приставов?</h3>
-        <div class="options" role="group" aria-label="Варианты ответа">
-          <button type="button" class="option" data-field="fFSSP" data-val="Да, ИП открыто">Да, исполнительное производство открыто</button>
-          <button type="button" class="option" data-field="fFSSP" data-val="Нет, не обращались">Нет, к приставам не обращались</button>
-          <button type="button" class="option" data-field="fFSSP" data-val="Не знаю">Не знаю</button>
+      <!-- ════════════════════════════════════════
+           ВЕТКА А — ВЗЫСКАНЫ
+           ════════════════════════════════════════ -->
+
+      <!-- А: Шаг 2 — какой документ -->
+      <div class="step-q" data-step="a2" id="sq-a2">
+        <h3>Какой у вас исполнительный документ?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fDoc" data-val="Судебный приказ">Судебный приказ</button>
+          <button type="button" class="option" data-field="fDoc" data-val="Решение суда">Решение суда</button>
+          <button type="button" class="option" data-field="fDoc" data-val="Нотариальное соглашение">Нотариальное соглашение</button>
         </div>
-        <div class="quiz-nav">
-          <button type="button" class="back-btn" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
-        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
       </div>
 
-      <!-- ШАГ 4 -->
-      <div class="step-q" data-step="4" id="sq4">
-        <h3>Что известно о задолженности и доходах второго родителя?</h3>
-        <div class="options" role="group" aria-label="Варианты ответа">
-          <button type="button" class="option" data-field="fDebt" data-val="Долга нет, работает официально">Долга нет, работает официально</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Есть долг до 100 000 ₽">Есть долг до 100 000 ₽</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Есть долг более 100 000 ₽">Есть долг более 100 000 ₽</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют индивидуального обсуждения">Доходы скрывает / работает неофициально</button>
-          <button type="button" class="option" data-field="fDebt" data-val="Доходы и долг требуют индивидуального обсуждения">Не знаю / сложная ситуация</button>
+      <!-- А: Шаг 3 — с чем столкнулись (чекбоксы) -->
+      <div class="step-q" data-step="a3" id="sq-a3">
+        <h3>С чем столкнулись? <span style="font-size:13px;font-weight:400;color:var(--muted)">(можно выбрать несколько)</span></h3>
+        <div class="check-options" role="group" id="pains-group">
+          <label class="check-option"><input type="checkbox" value="Вообще ничего не платит"> Вообще ничего не платит</label>
+          <label class="check-option"><input type="checkbox" value="Платит слишком мало"> Платит слишком мало</label>
+          <label class="check-option"><input type="checkbox" value="Платит нерегулярно"> Платит нерегулярно</label>
+          <label class="check-option"><input type="checkbox" value="Накопился большой долг"> Накопился большой долг</label>
+          <label class="check-option"><input type="checkbox" value="Приставы бездействуют"> Приставы бездействуют</label>
+          <label class="check-option"><input type="checkbox" value="Хочу увеличить сумму"> Хочу увеличить сумму</label>
         </div>
-        <div class="quiz-nav">
-          <button type="button" class="back-btn" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
-        </div>
+        <button type="button" class="check-next-btn" id="pains-next">Продолжить →</button>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
       </div>
 
-      <!-- ФИНАЛЬНЫЙ ШАГ — нативная форма -->
-      <div class="step-q" data-step="5" id="sq5">
+      <!-- А: Шаг 4 — сколько получает фактически -->
+      <div class="step-q" data-step="a4" id="sq-a4">
+        <h3>Сколько фактически получаете на руки на одного ребёнка в месяц?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fAmount" data-val="Ничего не получаю">Ничего не получаю</button>
+          <button type="button" class="option" data-field="fAmount" data-val="До 5 000 ₽">До 5 000 ₽</button>
+          <button type="button" class="option" data-field="fAmount" data-val="5 000 – 10 000 ₽">5 000 – 10 000 ₽</button>
+          <button type="button" class="option" data-field="fAmount" data-val="10 000 – 20 000 ₽">10 000 – 20 000 ₽</button>
+          <button type="button" class="option" data-field="fAmount" data-val="Более 20 000 ₽">Более 20 000 ₽</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- А: Шаг 5 — какая помощь нужна -->
+      <div class="step-q" data-step="a5" id="sq-a5">
+        <h3>Какая помощь нужна?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fHelp" data-val="Подготовка документов">Подготовка документов</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Консультация — разобраться в ситуации">Консультация — разобраться в ситуации</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Помощь с приставами">Помощь с приставами</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Полное сопровождение дела с судами">Полное сопровождение дела с судами</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Не знаю, нужен совет">Не знаю, нужен совет</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           ВЕТКА Б — НЕ ВЗЫСКАНЫ
+           ════════════════════════════════════════ -->
+
+      <!-- Б: Шаг 2 — почему сейчас -->
+      <div class="step-q" data-step="b2" id="sq-b2">
+        <h3>Почему решили заняться этим именно сейчас?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fWhy" data-val="Только разошлись / разводимся">Только разошлись / разводимся</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Давно разошлись, но устала ждать">Давно разошлись, но устала ждать</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Перестал помогать деньгами">Перестал помогать деньгами</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Посоветовали / узнала что положено больше">Посоветовали / узнала что положено больше</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Другая причина">Другая причина</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Б: Шаг 3 — что известно об отце (чекбоксы) -->
+      <div class="step-q" data-step="b3" id="sq-b3">
+        <h3>Что известно об отце ребёнка? <span style="font-size:13px;font-weight:400;color:var(--muted)">(можно выбрать несколько)</span></h3>
+        <div class="check-options" role="group" id="father-group">
+          <label class="check-option"><input type="checkbox" value="Работает официально"> Работает официально</label>
+          <label class="check-option"><input type="checkbox" value="Работает неофициально"> Работает, но неофициально</label>
+          <label class="check-option"><input type="checkbox" value="ИП или самозанятый"> ИП или самозанятый</label>
+          <label class="check-option"><input type="checkbox" value="Не работает"> Не работает</label>
+          <label class="check-option"><input type="checkbox" value="Находится на СВО"> Находится на СВО</label>
+          <label class="check-option"><input type="checkbox" value="Есть имущество (квартира, машина)"> Есть имущество (квартира, машина)</label>
+          <label class="check-option"><input type="checkbox" value="Скрывается / не выходит на связь"> Скрывается / не выходит на связь</label>
+          <label class="check-option"><input type="checkbox" value="Ничего не знаю"> Ничего не знаю</label>
+        </div>
+        <button type="button" class="check-next-btn" id="father-next">Продолжить →</button>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Б: Шаг 4 — какую сумму хочет взыскать -->
+      <div class="step-q" data-step="b4" id="sq-b4">
+        <h3>Какую сумму хотели бы взыскать?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fWantSum" data-val="До 10 000 ₽ в месяц">До 10 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="10 000 – 20 000 ₽ в месяц">10 000 – 20 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="20 000 – 30 000 ₽ в месяц">20 000 – 30 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="Более 30 000 ₽ в месяц">Более 30 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="Не знаю, нужна помощь с расчётом">Не знаю, нужна помощь с расчётом</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- Б: Шаг 5 — какая помощь нужна -->
+      <div class="step-q" data-step="b5" id="sq-b5">
+        <h3>Какая помощь нужна?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fHelp" data-val="Подготовка документов">Подготовка документов</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Консультация — разобраться в ситуации">Консультация — разобраться в ситуации</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Полное сопровождение дела с судами">Полное сопровождение дела с судами</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Не знаю, нужен совет">Не знаю, нужен совет</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           ВЕТКА В — НЕ ПОМНЮ / НЕ ЗНАЮ
+           ════════════════════════════════════════ -->
+
+      <!-- В: Шаг 2 — почему сейчас -->
+      <div class="step-q" data-step="c2" id="sq-c2">
+        <h3>Почему решили заняться этим именно сейчас?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fWhy" data-val="Только разошлись / разводимся">Только разошлись / разводимся</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Давно разошлись, но устала ждать">Давно разошлись, но устала ждать</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Перестал помогать деньгами">Перестал помогать деньгами</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Посоветовали / узнала что положено больше">Посоветовали / узнала что положено больше</button>
+          <button type="button" class="option" data-field="fWhy" data-val="Другая причина">Другая причина</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- В: Шаг 3 — желаемая сумма -->
+      <div class="step-q" data-step="c3" id="sq-c3">
+        <h3>Какую сумму хотели бы получать?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fWantSum" data-val="До 10 000 ₽ в месяц">До 10 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="10 000 – 20 000 ₽ в месяц">10 000 – 20 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="20 000 – 30 000 ₽ в месяц">20 000 – 30 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="Более 30 000 ₽ в месяц">Более 30 000 ₽ в месяц</button>
+          <button type="button" class="option" data-field="fWantSum" data-val="Не знаю, нужна помощь с расчётом">Не знаю, нужна помощь с расчётом</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- В: Шаг 4 — какая помощь нужна -->
+      <div class="step-q" data-step="c4" id="sq-c4">
+        <h3>Какая помощь нужна?</h3>
+        <div class="options" role="group">
+          <button type="button" class="option" data-field="fHelp" data-val="Подготовка документов">Подготовка документов</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Консультация — разобраться в ситуации">Консультация — разобраться в ситуации</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Полное сопровождение дела с судами">Полное сопровождение дела с судами</button>
+          <button type="button" class="option" data-field="fHelp" data-val="Не знаю, нужен совет">Не знаю, нужен совет</button>
+        </div>
+        <div class="quiz-nav"><button type="button" class="back-btn">← Назад</button></div>
+      </div>
+
+      <!-- ════════════════════════════════════════
+           ФИНАЛЬНЫЙ ШАГ — контактная форма
+           ════════════════════════════════════════ -->
+      <div class="step-q" data-step="final" id="sq-final">
         <div id="al-form-header">
           <h3 style="font:500 20px/1.25 Georgia;margin:0 0 6px;color:var(--navy)">Почти готово!</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Оставьте имя и номер телефона, чтобы я могла найти вашу заявку после сообщения в мессенджере.</p>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 20px;line-height:1.6;">Оставьте имя, телефон и город — и я свяжусь с вами в течение рабочего дня.</p>
         </div>
 
-        <!-- Нативная форма заявки -->
         <div id="al-contact-form">
-          <!-- Honeypot — не заполнять -->
           <input type="text" name="website" id="al-honeypot" tabindex="-1" autocomplete="off"
             style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;" aria-hidden="true">
 
@@ -333,10 +448,14 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
                 placeholder="+7 (___) ___-__-__"
                 style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box;">
             </div>
-
+            <div>
+              <label for="al-city" style="display:block;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:5px;">Город *</label>
+              <input type="text" id="al-city" name="city" autocomplete="address-level2" maxlength="100" required
+                placeholder="Ваш город"
+                style="width:100%;padding:12px 14px;border:1.5px solid #ddd6ca;border-radius:11px;font:inherit;font-size:14px;color:var(--ink);background:#fff;outline:none;transition:border-color .12s;box-sizing:border-box;">
+            </div>
           </div>
 
-          <!-- Согласие на ПД -->
           <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:16px;">
             <input type="checkbox" id="al-consent-chk" name="consent"
               style="margin-top:3px;accent-color:var(--gold);width:16px;height:16px;flex-shrink:0;cursor:pointer;">
@@ -348,16 +467,14 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
             </label>
           </div>
 
-          <!-- Сообщение об ошибке -->
           <div id="al-error-msg" style="display:none;background:#fef2f2;border:1px solid #fca5a5;border-radius:10px;padding:12px 14px;font-size:13px;color:#b91c1c;margin-bottom:12px;line-height:1.5;"></div>
 
-          <!-- Кнопка отправки -->
           <button type="button" id="al-submit-btn"
             style="width:100%;min-height:50px;background:var(--navy);color:#fff;border:none;border-radius:12px;font:700 15px/1 inherit;cursor:pointer;transition:opacity .15s;">
             Отправить заявку
           </button>
           <p style="font-size:11px;color:var(--muted);text-align:center;margin:10px 0 0;line-height:1.5;">Данные передаются защищённо. Ответим в течение рабочего дня.</p>
-        </div><!-- /al-contact-form -->
+        </div>
 
         <!-- Экран успеха -->
         <div id="al-success-screen" style="display:none;text-align:center;padding:8px 0;">
@@ -365,29 +482,29 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
           <h3 style="font:500 26px/1.2 Georgia;color:var(--navy);margin:0 0 12px;">Напишите мне, чтобы получить бесплатный разбор</h3>
           <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;">Заявку я уже получила. Выберите удобный мессенджер и напишите мне — я найду вашу заявку по номеру телефона.</p>
           <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
-            <a id="ss-max" href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+            <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               ✉️ Написать в MAX
             </a>
-            <a id="ss-telegram" href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
+            <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               ✈️ Написать в Telegram
             </a>
-            <a id="ss-whatsapp" href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener"
+            <a href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#25D366;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               💬 Написать в WhatsApp
             </a>
           </div>
           <p style="font-size:13px;color:var(--muted);line-height:1.6;">Не знаете, что написать? Просто отправьте: «Я отправила заявку» — и я сразу пойму, откуда вы.</p>
-        </div><!-- /al-success-screen -->
+        </div>
 
         <div class="quiz-nav" style="margin-top:20px;">
-          <button type="button" class="back-btn" id="al-back-from-form" aria-label="Вернуться к предыдущему вопросу">← Назад</button>
+          <button type="button" class="back-btn" id="al-back-from-form">← Назад</button>
         </div>
-      </div><!-- /финал -->
+      </div>
 
     </div><!-- /quiz-card -->
   </div><!-- /quiz-wrap -->
@@ -487,13 +604,11 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
   </div>
 </footer>
 
-<!-- Floating chat widget (скрывается во время квиза) -->
 <div id="chat-widget">
   <div id="chat-popup"></div>
   <button class="trigger" onclick="var p=document.getElementById('chat-popup');p.style.display=p.style.display==='block'?'none':'block'" aria-label="Задать вопрос">💬</button>
 </div>
 
-<!-- COOKIE -->
 <div id="cookie-banner">
   <p>Мы используем файлы cookie. <a href="/privacy-policy.html" target="_blank" style="color:var(--gold)">Политика конфиденциальности</a>.</p>
   <button id="cookie-accept">Принять</button>
@@ -522,89 +637,176 @@ function collectUtm() {
   };
 }
 
-// ══ КВИЗ ═════════════════════════════════════════════════════════
-var TOTAL_STEPS = 4;
-var currentStep = 1;
-var answers     = {};
+// ══ КВИЗ — РАЗВЕТВЛЁННАЯ ЛОГИКА ══════════════════════════════════
+
+var answers = {};
+var branch = null; // 'yes' | 'no' | 'unknown'
+var stepHistory = ['1']; // история шагов для кнопки «Назад»
 var quizStarted = false;
-var quizDone    = false;
 var submitInProgress = false;
 
-function showStep(n) {
+// Маршруты по веткам
+var routes = {
+  yes:     ['1','a2','a3','a4','a5','final'],
+  no:      ['1','b2','b3','b4','b5','final'],
+  unknown: ['1','c2','c3','c4','final']
+};
+
+function getStepId(stepKey) {
+  if (stepKey === '1')     return 'sq1';
+  if (stepKey === 'final') return 'sq-final';
+  return 'sq-' + stepKey;
+}
+
+function getTotalSteps() {
+  if (!branch) return 5;
+  return routes[branch].length - 1; // не считаем финальный как номерной
+}
+
+function getStepNum(stepKey) {
+  if (!branch) return 1;
+  var r = routes[branch];
+  var idx = r.indexOf(stepKey);
+  return idx >= 0 ? idx + 1 : 1;
+}
+
+function showStep(stepKey) {
+  // Скрыть все шаги
   document.querySelectorAll('.step-q').forEach(function(s) {
     s.classList.remove('active');
     s.setAttribute('aria-hidden', 'true');
   });
-  var target = document.querySelector('.step-q[data-step="' + n + '"]');
-  if (target) {
-    target.classList.add('active');
-    target.removeAttribute('aria-hidden');
-    target.querySelectorAll('.option').forEach(function(btn) {
-      btn.classList.toggle('selected',
-        btn.dataset.field && answers[btn.dataset.field] === btn.dataset.val);
-    });
-  }
-  currentStep = n;
-  var isFinal = (n > TOTAL_STEPS);
 
-  var pct = isFinal ? 100 : Math.round(n / TOTAL_STEPS * 100);
+  var target = document.getElementById(getStepId(stepKey));
+  if (!target) return;
+  target.classList.add('active');
+  target.removeAttribute('aria-hidden');
+
+  // Прогресс
+  var isFinal = (stepKey === 'final');
+  var total = getTotalSteps();
+  var num = isFinal ? total : getStepNum(stepKey);
+  var pct = isFinal ? 100 : Math.round(num / total * 100);
+
   document.getElementById('alBar').style.width = pct + '%';
   document.getElementById('prog-label').textContent =
-    isFinal ? 'Готово!' : 'Шаг ' + n + ' из ' + TOTAL_STEPS;
+    isFinal ? 'Готово!' : 'Шаг ' + num + ' из ' + total;
   document.getElementById('prog-fraction').textContent =
-    isFinal ? '✓' : n + ' / ' + TOTAL_STEPS;
+    isFinal ? '✓' : num + ' / ' + total;
 
   var widget = document.getElementById('chat-widget');
-  if (widget) widget.classList.toggle('quiz-active', n > 1 && !isFinal);
+  if (widget) widget.classList.toggle('quiz-active', stepKey !== '1' && !isFinal);
 
-  if (isFinal && !quizDone) {
-    quizDone = true;
-  }
-
-  if (!isFinal) ymGoal('quiz_step_view', {step: n});
+  if (!isFinal) ymGoal('quiz_step_view', {step: stepKey});
 
   var card = document.getElementById('quiz-card');
   if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
-  if (target) {
-    var first = target.querySelector('.option, input, textarea, .back-btn, button');
-    if (first) setTimeout(function(){ first.focus(); }, 50);
+
+  var first = target.querySelector('.option, input[type="text"], input[type="tel"], .back-btn, button');
+  if (first) setTimeout(function(){ first.focus(); }, 50);
+}
+
+function goToStep(stepKey) {
+  stepHistory.push(stepKey);
+  showStep(stepKey);
+}
+
+function goBack() {
+  if (stepHistory.length <= 1) return;
+  stepHistory.pop();
+  var prev = stepHistory[stepHistory.length - 1];
+  showStep(prev);
+}
+
+function nextStep(currentKey) {
+  if (!branch) return;
+  var r = routes[branch];
+  var idx = r.indexOf(currentKey);
+  if (idx >= 0 && idx < r.length - 1) {
+    goToStep(r[idx + 1]);
   }
 }
 
-document.querySelectorAll('.option').forEach(function(btn) {
+// ШАГ 1 — определяем ветку
+document.querySelectorAll('#sq1 .option').forEach(function(btn) {
   btn.addEventListener('click', function() {
     if (!quizStarted) { quizStarted = true; ymGoal('quiz_start'); }
+    branch = btn.dataset.branch;
+    answers['fBranch'] = btn.dataset.val;
+    document.getElementById('fBranch').value = btn.dataset.val;
+    ymGoal('quiz_answer', {step: '1', branch: branch});
+    setTimeout(function(){ goToStep(routes[branch][1]); }, 200);
+  });
+});
+
+// Обычные кнопки-опции на всех шагах кроме 1 и чекбоксов
+document.querySelectorAll('.step-q:not(#sq1) .options .option').forEach(function(btn) {
+  btn.addEventListener('click', function() {
     var fid = btn.dataset.field;
     var val = btn.dataset.val;
-    if (fid === 'fDebt') {
-      val = 'Сведения о доходах требуют индивидуального обсуждения';
+    if (fid) {
+      answers[fid] = val;
+      var el = document.getElementById(fid);
+      if (el) el.value = val;
     }
-    answers[fid] = val;
-    var el = document.getElementById(fid);
-    if (el) el.value = val;
     btn.closest('.options').querySelectorAll('.option').forEach(function(x){
       x.classList.remove('selected');
     });
     btn.classList.add('selected');
-    ymGoal('quiz_answer', {step: currentStep});
-    setTimeout(function(){ showStep(currentStep + 1); }, 200);
+
+    // Определяем текущий шаг по родительскому div
+    var stepEl = btn.closest('.step-q');
+    var stepKey = stepEl ? stepEl.dataset.step : null;
+    ymGoal('quiz_answer', {step: stepKey});
+    setTimeout(function(){ nextStep(stepKey); }, 200);
   });
 });
 
-// «Назад» для шагов 2–4 (навешивается на существующие .back-btn)
-document.querySelectorAll('.back-btn').forEach(function(b) {
-  if (b.id === 'al-back-from-form') return; // обработан отдельно ниже
+// Чекбоксы — визуальное выделение
+document.querySelectorAll('.check-option').forEach(function(label) {
+  label.addEventListener('change', function() {
+    label.classList.toggle('selected', label.querySelector('input').checked);
+  });
+});
+
+// Кнопка «Продолжить» после чекбоксов — боли (шаг a3)
+document.getElementById('pains-next').addEventListener('click', function() {
+  var checked = [];
+  document.querySelectorAll('#pains-group input:checked').forEach(function(cb){
+    checked.push(cb.value);
+  });
+  var val = checked.length ? checked.join('; ') : 'не указано';
+  answers['fPains'] = val;
+  document.getElementById('fPains').value = val;
+  ymGoal('quiz_answer', {step: 'a3'});
+  goToStep('a4');
+});
+
+// Кнопка «Продолжить» после чекбоксов — отец (шаг b3)
+document.getElementById('father-next').addEventListener('click', function() {
+  var checked = [];
+  document.querySelectorAll('#father-group input:checked').forEach(function(cb){
+    checked.push(cb.value);
+  });
+  var val = checked.length ? checked.join('; ') : 'не указано';
+  answers['fFather'] = val;
+  document.getElementById('fFather').value = val;
+  ymGoal('quiz_answer', {step: 'b3'});
+  goToStep('b4');
+});
+
+// Кнопки «Назад» (все, кроме финального)
+document.querySelectorAll('.back-btn:not(#al-back-from-form)').forEach(function(b) {
   b.addEventListener('click', function() {
-    ymGoal('quiz_back', {step: currentStep});
-    showStep(Math.max(1, currentStep - 1));
+    ymGoal('quiz_back');
+    goBack();
   });
 });
 
-// «Назад» с финального шага — сброс состояния формы
+// «Назад» с финального шага
 var backFromForm = document.getElementById('al-back-from-form');
 if (backFromForm) {
   backFromForm.addEventListener('click', function() {
-    // Если успех уже показан — скрыть success, показать форму
     var ss = document.getElementById('al-success-screen');
     var cf = document.getElementById('al-contact-form');
     if (ss && ss.style.display !== 'none') {
@@ -612,11 +814,12 @@ if (backFromForm) {
       if (cf) cf.style.display = '';
       return;
     }
-    ymGoal('quiz_back', {step: currentStep});
-    showStep(Math.max(1, currentStep - 1));
+    ymGoal('quiz_back');
+    goBack();
   });
 }
 
+// Скролл к квизу по клику на hero-кнопку
 var heroCta = document.getElementById('hero-cta');
 if (heroCta) {
   heroCta.addEventListener('click', function(e) {
@@ -648,17 +851,16 @@ if (submitBtn) {
 
     var name     = (document.getElementById('al-name')        || {}).value || '';
     var rawPhone = (document.getElementById('al-contact')     || {}).value || '';
+    var city     = (document.getElementById('al-city')        || {}).value || '';
     var consent  = (document.getElementById('al-consent-chk') || {}).checked;
     var honeypot = (document.getElementById('al-honeypot')    || {}).value || '';
 
-    // Нормализация телефона: оставить только цифры, привести к +7XXXXXXXXXX
     var digits = rawPhone.replace(/\D/g, '');
     if (digits.length === 11 && (digits[0] === '7' || digits[0] === '8')) {
       digits = '7' + digits.slice(1);
     }
     var normalizedPhone = digits.length === 11 ? '+' + digits : '';
 
-    // Клиентская валидация
     if (!name.trim()) {
       showFormError('Пожалуйста, укажите ваше имя.');
       document.getElementById('al-name').focus();
@@ -667,6 +869,11 @@ if (submitBtn) {
     if (!normalizedPhone) {
       showFormError('Пожалуйста, введите корректный российский номер телефона (+7XXXXXXXXXX).');
       document.getElementById('al-contact').focus();
+      return;
+    }
+    if (!city.trim()) {
+      showFormError('Пожалуйста, укажите ваш город.');
+      document.getElementById('al-city').focus();
       return;
     }
     if (!consent) {
@@ -680,15 +887,20 @@ if (submitBtn) {
     submitBtn.textContent = 'Отправляем…';
 
     var payload = {
-      topic:          'Алименты',
-      source_page:    '/alimenty.html',
-      name:    name.trim(),
-      contact: normalizedPhone,
+      topic:       'Алименты',
+      source_page: '/alimenty.html',
+      name:        name.trim(),
+      contact:     normalizedPhone,
+      city:        city.trim(),
       answers: {
-        situation: answers['fSit'] || '',
-        document:  answers['fDoc'] || '',
-        fssp:      answers['fFSSP'] || '',
-        debt:      answers['fDebt'] || ''
+        branch:   answers['fBranch']  || '',
+        document: answers['fDoc']     || '',
+        pains:    answers['fPains']   || '',
+        amount:   answers['fAmount']  || '',
+        why:      answers['fWhy']     || '',
+        father:   answers['fFather']  || '',
+        want_sum: answers['fWantSum'] || '',
+        help:     answers['fHelp']    || ''
       },
       utm:          collectUtm(),
       consent:      true,
@@ -710,14 +922,12 @@ if (submitBtn) {
       if (data && data.ok) {
         ymGoal('quiz_complete');
         ymGoal('lead');
-        // Показываем success-screen, скрываем форму и заголовок шага
         var cf = document.getElementById('al-contact-form');
         var fh = document.getElementById('al-form-header');
         var ss = document.getElementById('al-success-screen');
         if (cf) cf.style.display = 'none';
         if (fh) fh.style.display = 'none';
         if (ss) ss.style.display = '';
-        // Скрыть кнопку «Назад» после успеха
         var bf = document.getElementById('al-back-from-form');
         if (bf) bf.style.display = 'none';
       } else {
@@ -735,15 +945,13 @@ if (submitBtn) {
 
 // ══ ИНИЦИАЛИЗАЦИЯ ════════════════════════════════════════════════
 document.addEventListener('DOMContentLoaded', function() {
-  var step1 = document.querySelector('#quiz-card .step-q[data-step="1"]');
-  if (step1) step1.classList.add('active');
+  showStep('1');
 
-  // Маска телефона +7 (XXX) XXX-XX-XX
+  // Маска телефона
   var phoneInput = document.getElementById('al-contact');
   if (phoneInput) {
-    phoneInput.addEventListener('input', function(e) {
+    phoneInput.addEventListener('input', function() {
       var digits = this.value.replace(/\D/g, '');
-      // Нормализуем начало: 8 или 7 → 7
       if (digits.length > 0 && (digits[0] === '8' || digits[0] === '7')) {
         digits = '7' + digits.slice(1);
       } else if (digits.length > 0) {
@@ -759,7 +967,6 @@ document.addEventListener('DOMContentLoaded', function() {
       this.value = result;
     });
     phoneInput.addEventListener('keydown', function(e) {
-      // Разрешить стирание даже если курсор на разделителе
       if (e.key === 'Backspace' && this.value.slice(-1).match(/[\s\(\)\-]/)) {
         this.value = this.value.slice(0, -1);
       }
