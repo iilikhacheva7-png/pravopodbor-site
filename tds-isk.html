@@ -404,19 +404,8 @@ document.addEventListener('click',function(e){
   if(w&&!w.contains(e.target))document.getElementById('chat-popup').style.display='none';
 });
 
-document.querySelectorAll('a[href="#shablony"],a[href="#instruktsiya"],a[href="#quiz"]').forEach(function(a){
-  a.addEventListener('click',function(e){
-    var id=this.getAttribute('href').slice(1);
-    var el=document.getElementById(id);
-    if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
-  });
-});
-
-document.querySelectorAll('.faq-q').forEach(function(q){
-  q.addEventListener('click',function(){this.closest('.faq-item').classList.toggle('open');});
-});
-
 var TOTAL_STEPS=3, answers={}, history=[], submitInProgress=false;
+var CF_ENDPOINT='https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
 
 function showStep(id){
   var qc=document.getElementById('quiz-card');
@@ -433,28 +422,46 @@ function showStep(id){
   var frc=document.getElementById('prog-fraction');
   if(frc) frc.textContent=(isFinal?TOTAL_STEPS:n)+' / '+TOTAL_STEPS;
 }
+function showFormError(msg){var el=document.getElementById('al-error-msg');if(el){el.textContent=msg;el.style.display='block';}}
+function hideFormError(){var el=document.getElementById('al-error-msg');if(el)el.style.display='none';}
 
 document.addEventListener('DOMContentLoaded',function(){
-  showStep('1');
-  var qc=document.getElementById('quiz-card');
-  if(!qc) return;
 
-  qc.querySelectorAll('.option').forEach(function(btn){
-    btn.addEventListener('click',function(){
-      var fid=this.dataset.field, val=this.dataset.val;
-      if(fid){answers[fid]=val;var el=document.getElementById(fid);if(el)el.value=val;}
-      ymGoal('quiz_step_answer');
-      var cur=this.closest('.step-q').dataset.step;
-      history.push(cur);
-      parseInt(cur)>=TOTAL_STEPS?showStep('final'):showStep(String(parseInt(cur)+1));
-      qc.scrollIntoView({behavior:'smooth',block:'nearest'});
+  // скролл-ссылки
+  document.querySelectorAll('a[href="#shablony"],a[href="#instruktsiya"],a[href="#quiz"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var id=this.getAttribute('href').slice(1);
+      var el=document.getElementById(id);
+      if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth'});}
     });
   });
 
-  qc.querySelectorAll('.back-btn').forEach(function(btn){
-    btn.addEventListener('click',function(){if(history.length>0)showStep(history.pop());});
+  // FAQ
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    q.addEventListener('click',function(){this.closest('.faq-item').classList.toggle('open');});
   });
 
+  // квиз
+  showStep('1');
+  var qc=document.getElementById('quiz-card');
+  if(qc){
+    qc.querySelectorAll('.option').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        var fid=this.dataset.field, val=this.dataset.val;
+        if(fid){answers[fid]=val;var el=document.getElementById(fid);if(el)el.value=val;}
+        ymGoal('quiz_step_answer');
+        var cur=this.closest('.step-q').dataset.step;
+        history.push(cur);
+        parseInt(cur)>=TOTAL_STEPS?showStep('final'):showStep(String(parseInt(cur)+1));
+        qc.scrollIntoView({behavior:'smooth',block:'nearest'});
+      });
+    });
+    qc.querySelectorAll('.back-btn').forEach(function(btn){
+      btn.addEventListener('click',function(){if(history.length>0)showStep(history.pop());});
+    });
+  }
+
+  // маска телефона
   var phoneInput=document.getElementById('al-contact');
   if(phoneInput){
     phoneInput.addEventListener('input',function(){
@@ -471,51 +478,49 @@ document.addEventListener('DOMContentLoaded',function(){
       this.value=r;
     });
   }
-});
 
-var CF_ENDPOINT='https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
-function showFormError(msg){var el=document.getElementById('al-error-msg');if(el){el.textContent=msg;el.style.display='block';}}
-function hideFormError(){var el=document.getElementById('al-error-msg');if(el)el.style.display='none';}
-
-var submitBtn=document.getElementById('al-submit-btn');
-if(submitBtn){
-  submitBtn.addEventListener('click',function(){
-    if(submitInProgress)return;
-    hideFormError();
-    var name=(document.getElementById('al-name')||{}).value||'';
-    var rawPhone=(document.getElementById('al-contact')||{}).value||'';
-    var consent=(document.getElementById('al-consent-chk')||{}).checked;
-    var honeypot=(document.getElementById('al-honeypot')||{}).value||'';
-    var digits=rawPhone.replace(/\D/g,'');
-    if(digits.length===11&&(digits[0]==='7'||digits[0]==='8'))digits='7'+digits.slice(1);
-    var phone=digits.length===11?'+'+digits:'';
-    if(!name.trim()){showFormError('Пожалуйста, укажите ваше имя.');document.getElementById('al-name').focus();return;}
-    if(!phone){showFormError('Пожалуйста, введите корректный номер телефона.');document.getElementById('al-contact').focus();return;}
-    if(!consent){showFormError('Необходимо согласие на обработку персональных данных.');return;}
-    submitInProgress=true;submitBtn.disabled=true;submitBtn.textContent='Отправляем…';
-    fetch(CF_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      topic:'ТДС — иск',source_page:'/tds-isk.html',
-      name:name.trim(),contact:phone,
-      answers:{dohod:answers['fDohod']||'',stage:answers['fStage']||'',pomosh:answers['fHelp']||''},
-      utm:collectUtm(),consent:true,website:honeypot,submitted_at:new Date().toISOString()
-    })})
-    .then(function(r){return r.json();})
-    .then(function(data){
-      submitInProgress=false;submitBtn.disabled=false;submitBtn.textContent='Отправить заявку';
-      if(data&&data.ok){
-        ymGoal('quiz_complete');ymGoal('lead');
-        document.getElementById('al-contact-form').style.display='none';
-        document.getElementById('al-form-header').style.display='none';
-        document.getElementById('al-success-screen').style.display='';
-        document.getElementById('al-back-from-form').style.display='none';
-      } else {showFormError('Не удалось отправить. Напишите напрямую в Telegram.');}
-    })
-    .catch(function(){
-      submitInProgress=false;submitBtn.disabled=false;submitBtn.textContent='Отправить заявку';
-      showFormError('Ошибка соединения. Напишите: t.me/a_likhacheva2026');
+  // отправка формы
+  var submitBtn=document.getElementById('al-submit-btn');
+  if(submitBtn){
+    submitBtn.addEventListener('click',function(){
+      if(submitInProgress)return;
+      hideFormError();
+      var name=(document.getElementById('al-name')||{}).value||'';
+      var rawPhone=(document.getElementById('al-contact')||{}).value||'';
+      var consent=(document.getElementById('al-consent-chk')||{}).checked;
+      var honeypot=(document.getElementById('al-honeypot')||{}).value||'';
+      var digits=rawPhone.replace(/\D/g,'');
+      if(digits.length===11&&(digits[0]==='7'||digits[0]==='8'))digits='7'+digits.slice(1);
+      var phone=digits.length===11?'+'+digits:'';
+      if(!name.trim()){showFormError('Пожалуйста, укажите ваше имя.');document.getElementById('al-name').focus();return;}
+      if(!phone){showFormError('Пожалуйста, введите корректный номер телефона.');document.getElementById('al-contact').focus();return;}
+      if(!consent){showFormError('Необходимо согласие на обработку персональных данных.');return;}
+      submitInProgress=true;submitBtn.disabled=true;submitBtn.textContent='Отправляем…';
+      fetch(CF_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+        topic:'ТДС — иск',source_page:'/tds-isk.html',
+        name:name.trim(),contact:phone,
+        answers:{dohod:answers['fDohod']||'',stage:answers['fStage']||'',pomosh:answers['fHelp']||''},
+        utm:collectUtm(),consent:true,website:honeypot,submitted_at:new Date().toISOString()
+      })})
+      .then(function(r){return r.json();})
+      .then(function(data){
+        submitInProgress=false;submitBtn.disabled=false;submitBtn.textContent='Отправить заявку';
+        if(data&&data.ok){
+          ymGoal('quiz_complete');ymGoal('lead');
+          document.getElementById('al-contact-form').style.display='none';
+          document.getElementById('al-form-header').style.display='none';
+          document.getElementById('al-success-screen').style.display='';
+          document.getElementById('al-back-from-form').style.display='none';
+        } else {showFormError('Не удалось отправить. Напишите напрямую в Telegram.');}
+      })
+      .catch(function(){
+        submitInProgress=false;submitBtn.disabled=false;submitBtn.textContent='Отправить заявку';
+        showFormError('Ошибка соединения. Напишите: t.me/a_likhacheva2026');
+      });
     });
-  });
-}
+  }
+
+});
 
 (function(){
   if(!localStorage.getItem('cookie_consent')){var b=document.getElementById('cookie-banner');if(b)b.style.display='flex';}
