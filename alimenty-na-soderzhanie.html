@@ -638,30 +638,34 @@ function showStep(n) {
   }
 }
 
-document.querySelectorAll('.option').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    if (!quizStarted) { quizStarted = true; ymGoal('quiz_start'); }
-    var fid = btn.dataset.field;
-    var val = btn.dataset.val;
-    // val уже задан через data-val
-    answers[fid] = val;
-    var el = document.getElementById(fid);
-    if (el) el.value = val;
-    btn.closest('.options').querySelectorAll('.option').forEach(function(x){
-      x.classList.remove('selected');
-    });
-    btn.classList.add('selected');
-    ymGoal('quiz_answer', {step: currentStep});
-    setTimeout(function(){ showStep(currentStep + 1); }, 200);
-  });
-});
+document.addEventListener('DOMContentLoaded', function() {
+  var qc = document.getElementById('quiz-card');
+  if (!qc) return;
 
-// «Назад» для шагов 2–4 (навешивается на существующие .back-btn)
-document.querySelectorAll('.back-btn').forEach(function(b) {
-  if (b.id === 'al-back-from-form') return; // обработан отдельно ниже
-  b.addEventListener('click', function() {
-    ymGoal('quiz_back', {step: currentStep});
-    showStep(Math.max(1, currentStep - 1));
+  qc.querySelectorAll('.option').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (!quizStarted) { quizStarted = true; ymGoal('quiz_start'); }
+      var fid = btn.dataset.field;
+      var val = btn.dataset.val;
+      answers[fid] = val;
+      var el = document.getElementById(fid);
+      if (el) el.value = val;
+      btn.closest('.options').querySelectorAll('.option').forEach(function(x){
+        x.classList.remove('selected');
+      });
+      btn.classList.add('selected');
+      ymGoal('quiz_answer', {step: currentStep});
+      setTimeout(function(){ showStep(currentStep + 1); }, 200);
+    });
+  });
+
+  // «Назад» для шагов 2–4
+  qc.querySelectorAll('.back-btn').forEach(function(b) {
+    if (b.id === 'al-back-from-form') return;
+    b.addEventListener('click', function() {
+      ymGoal('quiz_back', {step: currentStep});
+      showStep(Math.max(1, currentStep - 1));
+    });
   });
 });
 
