@@ -549,30 +549,40 @@ document.querySelectorAll('.faq-q').forEach(function(q){
 var TOTAL_STEPS=3, answers={}, history=[], submitInProgress=false;
 
 function showStep(id){
-  document.querySelectorAll('.step-q').forEach(function(s){s.classList.remove('active');});
+  var qc = document.getElementById('quiz-card');
+  if (!qc) return;
+  qc.querySelectorAll('.step-q').forEach(function(s){s.classList.remove('active');});
   var el=document.getElementById(id==='final'?'sq-final':'sq'+id);
   if(el) el.classList.add('active');
   var isFinal=id==='final';
   var n=isFinal?TOTAL_STEPS:parseInt(id);
-  document.getElementById('alBar').style.width=(isFinal?100:Math.round(n/TOTAL_STEPS*100))+'%';
-  document.getElementById('prog-label').textContent='Шаг '+(isFinal?TOTAL_STEPS:n)+' из '+TOTAL_STEPS;
-  document.getElementById('prog-fraction').textContent=(isFinal?TOTAL_STEPS:n)+' / '+TOTAL_STEPS;
+  var bar=document.getElementById('alBar');
+  if(bar) bar.style.width=(isFinal?100:Math.round(n/TOTAL_STEPS*100))+'%';
+  var lbl=document.getElementById('prog-label');
+  if(lbl) lbl.textContent='Шаг '+(isFinal?TOTAL_STEPS:n)+' из '+TOTAL_STEPS;
+  var frc=document.getElementById('prog-fraction');
+  if(frc) frc.textContent=(isFinal?TOTAL_STEPS:n)+' / '+TOTAL_STEPS;
 }
 
-document.querySelectorAll('.option').forEach(function(btn){
-  btn.addEventListener('click',function(){
-    var fid=this.dataset.field, val=this.dataset.val;
-    if(fid){answers[fid]=val;var el=document.getElementById(fid);if(el)el.value=val;}
-    ymGoal('quiz_step_answer');
-    var cur=this.closest('.step-q').dataset.step;
-    history.push(cur);
-    parseInt(cur)>=TOTAL_STEPS?showStep('final'):showStep(String(parseInt(cur)+1));
-    document.getElementById('quiz-card').scrollIntoView({behavior:'smooth',block:'nearest'});
-  });
-});
+document.addEventListener('DOMContentLoaded', function(){
+  var qc = document.getElementById('quiz-card');
+  if (!qc) return;
 
-document.querySelectorAll('.back-btn').forEach(function(btn){
-  btn.addEventListener('click',function(){if(history.length>0)showStep(history.pop());});
+  qc.querySelectorAll('.option').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var fid=this.dataset.field, val=this.dataset.val;
+      if(fid){answers[fid]=val;var el=document.getElementById(fid);if(el)el.value=val;}
+      ymGoal('quiz_step_answer');
+      var cur=this.closest('.step-q').dataset.step;
+      history.push(cur);
+      parseInt(cur)>=TOTAL_STEPS?showStep('final'):showStep(String(parseInt(cur)+1));
+      qc.scrollIntoView({behavior:'smooth',block:'nearest'});
+    });
+  });
+
+  qc.querySelectorAll('.back-btn').forEach(function(btn){
+    btn.addEventListener('click',function(){if(history.length>0)showStep(history.pop());});
+  });
 });
 
 var CF_ENDPOINT='https://functions.yandexcloud.net/d4edv2kovfk0aumqr376';
@@ -621,6 +631,7 @@ if(submitBtn){
 
 document.addEventListener('DOMContentLoaded',function(){
   showStep('1');
+  // квиз инициализирован выше
   var p=document.getElementById('al-contact');
   if(p){p.addEventListener('input',function(){
     var d=this.value.replace(/\D/g,'');
