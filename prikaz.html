@@ -288,7 +288,7 @@ footer a{color:var(--green-dark)}
 
 <footer><div class="wrap">
   <p class="disc">Информация носит справочный характер и не является индивидуальной юридической консультацией. Результат проверки не гарантирует исхода дела. Гарантируем качество подготовки документов, а не результат рассмотрения.</p>
-  <p><a href="/oferta.html">Оферта</a> · <a href="/privacy-policy.html">Политика конфиденциальности</a></p>
+  <p><a href="/offer.html">Оферта</a> · <a href="/privacy-policy.html">Политика конфиденциальности</a></p>
   <p class="sig">
     <a href="https://rekoyur.ru">🌐 rekoyur.ru</a>
     <a href="https://t.me/po_rekomendatsii">✈️ t.me/po_rekomendatsii</a>
@@ -365,49 +365,55 @@ function tip(kind){
   });
   d.appendChild(b);return d;
 }
-document.querySelectorAll('.msgrow').forEach(function(r){
-  var k=r.getAttribute('data-kind');
-  fillRow(r,k,k==='3000'?'cta_3000':'cta_free');
-  r.parentNode.insertBefore(tip(k),r.nextSibling);
-});
 
-/* ===== КНОПКА 590 ===== */
-var buy=document.getElementById('buy590'),ov=document.getElementById('ov');
-if(CFG.PAY_MODE==='payform'){
-  buy.href=CFG.PAYFORM_URL;buy.target='_blank';buy.rel='noopener';
-  buy.addEventListener('click',function(){goal('cta_590');goal('cta_click')});
-}else{
-  var sb=document.getElementById('sheetBtns');
-  msgLinks('590').forEach(function(l){
-    var a=document.createElement('a');a.className='btn';a.textContent=l.n;a.href=l.h;a.target='_blank';a.rel='noopener';
-    a.addEventListener('click',function(){goal('cta_590');goal('cta_click')});
-    sb.appendChild(a);
+document.addEventListener('DOMContentLoaded', function(){
+
+  document.querySelectorAll('.msgrow').forEach(function(r){
+    var k=r.getAttribute('data-kind');
+    fillRow(r,k,k==='3000'?'cta_3000':'cta_free');
+    r.parentNode.insertBefore(tip(k),r.nextSibling);
   });
-  sb.appendChild(tip('590'));
-  buy.addEventListener('click',function(e){e.preventDefault();ov.classList.add('open')});
-}
-document.getElementById('closeSheet').onclick=function(){ov.classList.remove('open')};
-ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open')});
 
-/* ===== ПРОВЕРКА ===== */
-var started=false;
-document.querySelectorAll('.c,input[name=other]').forEach(function(i){
-  i.addEventListener('change',function(){if(!started){started=true;goal('check_start')}});
-});
-document.getElementById('go').addEventListener('click',function(){
-  var other=document.querySelector('input[name=other]:checked');
-  var err=document.getElementById('err');
-  if(!other){err.style.display='block';return}
-  err.style.display='none';
-  var all=document.querySelectorAll('.c').length===document.querySelectorAll('.c:checked').length;
-  var ok=all&&other.value==='no';
-  var res=document.getElementById('result');
-  res.style.display='block';
-  document.getElementById('resA').style.display=ok?'block':'none';
-  document.getElementById('resB').style.display=ok?'none':'block';
-  document.getElementById('otherNote').style.display=other.value==='yes'?'inline':'none';
-  goal(ok?'result_ok':'result_check');
-  res.scrollIntoView({behavior:'smooth',block:'start'});
+  /* ===== КНОПКА 590 ===== */
+  var buy=document.getElementById('buy590'),ov=document.getElementById('ov');
+  if(CFG.PAY_MODE==='payform'){
+    buy.href=CFG.PAYFORM_URL;buy.target='_blank';buy.rel='noopener';
+    buy.addEventListener('click',function(){goal('cta_590');goal('cta_click')});
+  }else{
+    var sb=document.getElementById('sheetBtns');
+    msgLinks('590').forEach(function(l){
+      var a=document.createElement('a');a.className='btn';a.textContent=l.n;a.href=l.h;a.target='_blank';a.rel='noopener';
+      a.addEventListener('click',function(){goal('cta_590');goal('cta_click')});
+      sb.appendChild(a);
+    });
+    sb.appendChild(tip('590'));
+    buy.addEventListener('click',function(e){e.preventDefault();ov.classList.add('open')});
+  }
+  document.getElementById('closeSheet').onclick=function(){ov.classList.remove('open')};
+  ov.addEventListener('click',function(e){if(e.target===ov)ov.classList.remove('open')});
+
+  /* ===== ПРОВЕРКА ===== */
+  var started=false;
+  document.querySelectorAll('.c,input[name=other]').forEach(function(i){
+    i.addEventListener('change',function(){if(!started){started=true;goal('check_start')}});
+  });
+  var go=document.getElementById('go');
+  if(go) go.addEventListener('click',function(){
+    var other=document.querySelector('input[name=other]:checked');
+    var err=document.getElementById('err');
+    if(!other){err.style.display='block';return}
+    err.style.display='none';
+    var all=document.querySelectorAll('.c').length===document.querySelectorAll('.c:checked').length;
+    var ok=all&&other.value==='no';
+    var res=document.getElementById('result');
+    res.style.display='block';
+    document.getElementById('resA').style.display=ok?'block':'none';
+    document.getElementById('resB').style.display=ok?'none':'block';
+    document.getElementById('otherNote').style.display=other.value==='yes'?'inline':'none';
+    goal(ok?'result_ok':'result_check');
+    res.scrollIntoView({behavior:'smooth',block:'start'});
+  });
+
 });
 
 /* ===== COOKIE ===== */
