@@ -479,26 +479,48 @@ ym(110730303,"init",{clickmap:true,trackLinks:true,accurateTrackBounce:true,webv
         <!-- Экран успеха -->
         <div id="al-success-screen" style="display:none;text-align:center;padding:8px 0;">
           <div style="font-size:40px;margin-bottom:16px;">✅</div>
-          <h3 style="font:500 26px/1.2 Georgia;color:var(--navy);margin:0 0 12px;">Напишите мне, чтобы получить бесплатный разбор</h3>
-          <p style="font-size:14px;color:var(--muted);margin:0 0 24px;line-height:1.6;">Заявку я уже получила. Выберите удобный мессенджер и напишите мне — я найду вашу заявку по номеру телефона.</p>
-          <div style="display:grid;gap:10px;max-width:320px;margin:0 auto 20px;">
-            <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
+          <h3 style="font:500 26px/1.2 Georgia;color:var(--navy);margin:0 0 12px;">Заявка принята — напишите мне, и начнём разбор</h3>
+          <p style="font-size:14px;color:var(--muted);margin:0 0 18px;line-height:1.6;">Заявка у меня. Чтобы я начала разбирать вашу ситуацию, напишите мне в мессенджер — найду вас по номеру телефона.</p>
+
+          <div style="max-width:340px;margin:0 auto 20px;padding:12px 16px;background:var(--paper2);border-radius:12px;text-align:left;">
+            <p style="font-size:13px;color:var(--ink);margin:0;line-height:1.6;">
+              <strong>Почему в переписке?</strong> Так быстрее и спокойнее: вы пишете, когда вам удобно, а не подстраиваетесь под звонок. Можно сразу прислать фото документов, и вся переписка остаётся у вас под рукой.
+            </p>
+          </div>
+
+          <div style="display:grid;gap:10px;max-width:340px;margin:0 auto 14px;">
+            <a href="https://wa.me/79920011995?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%AF%20%D0%BE%D1%82%D0%BF%D1%80%D0%B0%D0%B2%D0%B8%D0%BB%D0%B0%20%D0%B7%D0%B0%D1%8F%D0%B2%D0%BA%D1%83%20%D0%BF%D0%BE%20%D0%B0%D0%BB%D0%B8%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D0%BC%20%D1%81%20%D1%81%D0%B0%D0%B9%D1%82%D0%B0" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
-              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#5B4FCF;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
-              ✉️ Написать в MAX
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:14px 20px;background:#25D366;color:#fff;border-radius:12px;font:600 15px/1 inherit;text-decoration:none;transition:opacity .15s;">
+              💬 Написать в WhatsApp
             </a>
             <a href="https://t.me/a_likhacheva2026" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
               style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#2AABEE;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
               ✈️ Написать в Telegram
             </a>
-            <a href="https://wa.clck.bar/c1c15b" target="_blank" rel="noopener"
+            <a href="https://max.ru/u/f9LHodD0cOI_VdCa1kUIw_U5N-pBKaiDfxpFEKr66AM9iU62rQhEcSWKw78" target="_blank" rel="noopener"
               onclick="ymGoal('messenger_click')"
-              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:#25D366;color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;transition:opacity .15s;">
-              💬 Написать в WhatsApp
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 20px;background:transparent;color:#5B4FCF;border:1px solid #5B4FCF;border-radius:12px;font:600 13px/1 inherit;text-decoration:none;transition:opacity .15s;">
+              ✉️ Написать в MAX
             </a>
           </div>
-          <p style="font-size:13px;color:var(--muted);line-height:1.6;">Не знаете, что написать? Просто отправьте: «Я отправила заявку» — и я сразу пойму, откуда вы.</p>
+
+          <p style="font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.6;">Не знаете, с чего начать? Просто напишите «Я отправила заявку» — я сразу пойму, кто вы.</p>
+
+          <div style="max-width:340px;margin:0 auto;padding-top:18px;border-top:1px solid var(--line);">
+            <a href="/files/anastasia-likhacheva.vcf" download
+              onclick="ymGoal('save_contact')"
+              style="display:flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;background:var(--navy);color:#fff;border-radius:12px;font:600 14px/1 inherit;text-decoration:none;">
+              📇 Сохранить мой контакт
+            </a>
+            <p style="font-size:12px;color:var(--muted);margin:8px 0 0;line-height:1.55;">Чтобы не потерять меня, если решите написать позже — номер сохранится в вашем телефоне.</p>
+
+            <p style="font-size:13px;color:var(--muted);margin:16px 0 0;line-height:1.6;">
+              Неудобно писать? Позвоните:<br>
+              <a href="tel:+79920011995" onclick="ymGoal('phone_click')" style="color:var(--navy);font-weight:600;font-size:15px;text-decoration:none;">+7 992 001-19-95</a>
+            </p>
+          </div>
         </div>
 
         <div class="quiz-nav" style="margin-top:20px;">
