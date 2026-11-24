@@ -1001,6 +1001,33 @@ footer { padding: 28px 40px; border-top: 1px solid rgba(255,255,255,.07); backgr
 </div>
 
 <script>
+/* ── Без автопрокрутки до первого действия посетителя ──────────────
+   Квиз при инициализации зовёт showStep(), а та — scrollIntoView() и
+   focus(). Из-за этого страница при открытии сама уезжала к анкете.
+   Ниже оба вызова глушатся, пока посетитель ничего не сделал. */
+(function () {
+  var acted = false;
+  function markActed() { acted = true; }
+  ['pointerdown', 'mousedown', 'touchstart', 'keydown', 'wheel'].forEach(function (ev) {
+    document.addEventListener(ev, markActed, { capture: true, once: true, passive: true });
+  });
+  // прокрутка самим посетителем тоже считается действием
+  window.addEventListener('scroll', function onScroll() {
+    if (window.pageYOffset > 0) { acted = true; window.removeEventListener('scroll', onScroll); }
+  }, { passive: true });
+
+  var origScroll = Element.prototype.scrollIntoView;
+  Element.prototype.scrollIntoView = function () {
+    if (!acted) return;
+    return origScroll.apply(this, arguments);
+  };
+  var origFocus = HTMLElement.prototype.focus;
+  HTMLElement.prototype.focus = function () {
+    if (!acted) return;
+    return origFocus.apply(this, arguments);
+  };
+})();
+
 // ══ АНАЛИТИКА ════════════════════════════════════════════════
 function ymGoal(goal, params) {
   try { if (typeof ym === 'function') { params ? ym(110730303,'reachGoal',goal,params) : ym(110730303,'reachGoal',goal); } } catch(e){}
